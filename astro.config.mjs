@@ -17,7 +17,9 @@ export default defineConfig({
   integrations: [
     preact({ compat: false }),
     icon({ include: { lucide: ['*'], 'simple-icons': ['*'] } }),
-    sitemap(),
+    sitemap({
+      filter: (page) => !page.includes('/dev/'),
+    }),
     mdx(),
   ],
   vite: { plugins: [tailwindcss()] },
