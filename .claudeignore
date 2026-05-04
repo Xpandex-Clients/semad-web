@@ -1,0 +1,29 @@
+# Dependencies (huge, never read directly)
+node_modules/
+
+# Build output
+dist/
+.astro/
+
+# Lockfiles (raw, ruidosos)
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Material crudo del cliente (PDF/imágenes pesadas)
+# El briefing canónico (briefing.md) sí se lee.
+client-input/briefing-original.txt
+client-input/briefing-original/
+client-input/assets/brand/*.pdf
+client-input/assets/brand/extracted/
+
+# Reports de auditoría
+lighthouse-*.html
+lighthouse-*.json
+.lighthouseci/
+playwright-report/
+test-results/
+stats.html
+
+# OS noise
+.DS_Store
