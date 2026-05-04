@@ -1,0 +1,81 @@
+/* =====================================================
+ * CEMAD — Design tokens
+ * Fuente: Manual de Identidad Corporativa CEMAD (39 pp)
+ * Cualquier valor aquí es decisión de marca, no estética arbitraria.
+ * ===================================================== */
+
+@theme {
+  /* ----------------- Color: matriz ----------------- */
+  --color-gold:        oklch(73% 0.085 78);   /* #bd9b5f — Pantone 7562 C */
+  --color-gold-light:  oklch(89% 0.085 82);   /* #ffd38d */
+  --color-gold-dark:   oklch(56% 0.075 76);   /* #8d7449 */
+
+  --color-teal:        oklch(72% 0.075 200);  /* #4cb8c3 — Pantone 319 C */
+  --color-teal-light:  oklch(87% 0.045 210);  /* #b5dfe7 */
+  --color-teal-dark:   oklch(53% 0.065 205);  /* #398087 */
+
+  /* ----------------- Color: submarcas ----------------- */
+  --color-rose:        oklch(82% 0.025 14);   /* #dfc2c4 — Anti-Aging Avanzado */
+  --color-silver:      oklch(74% 0   0);      /* #b1b1b1 — Hair Clinic */
+  --color-copper:      oklch(54% 0.06  50);   /* #8b634a — Láser Dermoestético */
+
+  /* ----------------- Neutros ----------------- */
+  --color-ink:         oklch(20% 0.005 90);   /* #1d1d1b */
+  --color-paper:       oklch(100% 0   0);     /* #ffffff */
+  --color-paper-soft:  oklch(96.6% 0  0);     /* #f4f4f4 */
+  --color-mute:        oklch(67% 0.005 90);   /* #9d9d9c */
+
+  /* ----------------- Tipografía ----------------- */
+  --font-display:  "Cormorant Garamond", "Erstoria", Georgia, serif;
+  --font-body:     "Inter Variable", "Inter", "Gotham Book", system-ui, sans-serif;
+  --font-script:   "Pinyon Script", "Corinthia", cursive;
+
+  /* ----------------- Escala tipográfica (modular 1.250) ----------------- */
+  --text-xs:   0.75rem;   /* 12 */
+  --text-sm:   0.875rem;  /* 14 */
+  --text-base: 1rem;      /* 16 */
+  --text-lg:   1.125rem;  /* 18 */
+  --text-xl:   1.25rem;   /* 20 */
+  --text-2xl:  1.5rem;    /* 24 */
+  --text-3xl:  1.875rem;  /* 30 */
+  --text-4xl:  2.5rem;    /* 40 */
+  --text-5xl:  3.25rem;   /* 52 */
+  --text-6xl:  4.25rem;   /* 68 */
+
+  /* ----------------- Espaciado (canónico 4-step) ----------------- */
+  --spacing-1:  0.25rem;
+  --spacing-2:  0.5rem;
+  --spacing-3:  0.75rem;
+  --spacing-4:  1rem;
+  --spacing-6:  1.5rem;
+  --spacing-8:  2rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+  --spacing-24: 6rem;
+  --spacing-32: 8rem;
+
+  /* ----------------- Radii ----------------- */
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* ----------------- Shadows (sutiles, premium) ----------------- */
+  --shadow-card:   0 1px 2px rgb(0 0 0 / 0.04), 0 4px 12px rgb(0 0 0 / 0.06);
+  --shadow-hover:  0 2px 4px rgb(0 0 0 / 0.06), 0 12px 28px rgb(0 0 0 / 0.10);
+  --shadow-modal:  0 24px 60px rgb(0 0 0 / 0.18);
+
+  /* ----------------- Easings + duraciones ----------------- */
+  --ease-out:      cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out:   cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 150ms;
+  --duration-base: 240ms;
+  --duration-slow: 400ms;
+
+  /* ----------------- Container ----------------- */
+  --container-narrow: 64rem;   /* 1024 */
+  --container-default: 76rem;  /* 1216 */
+  --container-wide:    90rem;  /* 1440 */
+}

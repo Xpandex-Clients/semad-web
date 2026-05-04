@@ -1,0 +1,55 @@
+@import "tailwindcss";
+@import "./theme.css";
+
+/* =====================================================
+ * CEMAD — base globals
+ * ===================================================== */
+
+@layer base {
+  html {
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    color: var(--color-ink);
+  }
+
+  /* Focus-visible canónico (WCAG 2.2 AA) */
+  :focus-visible {
+    outline: 2px solid var(--color-gold-dark);
+    outline-offset: 3px;
+    border-radius: var(--radius-xs);
+  }
+
+  /* Selection con dorado de marca */
+  ::selection {
+    background: var(--color-gold-light);
+    color: var(--color-ink);
+  }
+
+  /* Honor prefers-reduced-motion globalmente */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
