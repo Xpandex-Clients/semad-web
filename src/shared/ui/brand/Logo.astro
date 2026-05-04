@@ -1,0 +1,75 @@
+---
+/**
+ * Logo CEMAD — versiones (manual de identidad p. 27).
+ *
+ * Por ahora usa PNGs interim extraídos del PDF. Cuando la cliente
+ * aporte SVG vectorial, sustituir por <svg> inline (ver TODO en
+ * design-system.md y CONTEXT-project.md).
+ */
+
+type Variant = "principal" | "vertical" | "isotipo" | "sello";
+type Tone = "color" | "white" | "ink";
+
+interface Props {
+  variant?: Variant;
+  tone?: Tone;
+  /** Anchos mínimos del manual (p.28): principal 140px, vertical 165px, isotipo 35px. */
+  width?: number;
+  /** Hace que el ancho sea fluido hasta el max width. */
+  fluid?: boolean;
+  /** Texto del alt accesible (default: nombre completo). */
+  alt?: string;
+  class?: string;
+}
+
+const {
+  variant = "principal",
+  tone = "color",
+  width,
+  fluid = false,
+  alt = "CEMAD — Aesthetic Anti-Aging Clinic",
+  class: className = "",
+} = Astro.props;
+
+const fileMap: Record<Variant, string> = {
+  principal: "/brand/cemad-logo-principal.png",
+  vertical: "/brand/cemad-logo-vertical.png",
+  isotipo: "/brand/cemad-isotipo-monograma.png",
+  sello: "/brand/cemad-isotipo-sello.png",
+};
+
+const minWidth: Record<Variant, number> = {
+  principal: 140,
+  vertical: 165,
+  isotipo: 35,
+  sello: 80,
+};
+
+const w = width ?? minWidth[variant] * 1.6;
+
+// Filtros para los tonos sobre PNG (interim). Cuando sea SVG se hace con currentColor.
+const toneFilter: Record<Tone, string | undefined> = {
+  color: undefined,
+  white: "brightness(0) invert(1)",
+  ink: "brightness(0)",
+};
+
+const styleAttr = [
+  `width:${w}px`,
+  fluid ? "max-width:100%;height:auto" : "",
+  toneFilter[tone] ? `filter:${toneFilter[tone]}` : "",
+]
+  .filter(Boolean)
+  .join(";");
+---
+
+<img
+  src={fileMap[variant]}
+  alt={alt}
+  width={w}
+  height="auto"
+  loading="eager"
+  decoding="async"
+  style={styleAttr}
+  class={`block ${className}`}
+/>
