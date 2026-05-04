@@ -1,169 +1,119 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "@layouts/Layout.astro";
+import Section from "@shared/ui/primitives/Section.astro";
+import Heading from "@shared/ui/primitives/Heading.astro";
+import Button from "@shared/ui/primitives/Button.astro";
+import Card from "@shared/ui/primitives/Card.astro";
+import Badge from "@shared/ui/primitives/Badge.astro";
+import Logo from "@shared/ui/brand/Logo.astro";
 import { siteConfig } from "@shared/config/site";
 import { services } from "@shared/config/services";
 ---
 
 <Layout>
   <main id="main">
-    <section class="hero">
-      <p class="eyebrow">{siteConfig.legalName}</p>
-      <h1>
-        Donde la ciencia y el arte se unen para revelar
-        <em class="script">Tu Mejor Versión</em>
-      </h1>
-      <p class="lead">{siteConfig.description}</p>
-      <div class="ctas">
-        <a class="btn primary" href="/contacto">Reserva tu primera consulta</a>
-        <a class="btn ghost" href="#especialidades">Ver especialidades</a>
+    <!-- HERO -->
+    <Section tone="paper" spacing="loose">
+      <div class="text-center max-w-3xl mx-auto">
+        <Logo variant="principal" width={220} class="mx-auto mb-8" />
+        <Heading as={1} variant="display" align="center">
+          Donde la ciencia y el arte se unen para revelar
+          <span class="block mt-2 font-[family-name:var(--font-script)] text-[1.1em] text-[var(--color-gold-dark)]">
+            Tu Mejor Versión
+          </span>
+        </Heading>
+        <p class="mt-6 text-lg text-[var(--color-mute)] max-w-[60ch] mx-auto">
+          {siteConfig.description}
+        </p>
+        <div class="mt-10 flex gap-3 justify-center flex-wrap">
+          <Button href="/contacto" variant="primary" size="lg">
+            Reserva tu primera consulta
+          </Button>
+          <Button href="#especialidades" variant="ghost" size="lg">
+            Ver especialidades
+          </Button>
+        </div>
       </div>
-    </section>
+    </Section>
 
-    <section id="especialidades" class="services">
-      <h2>Nuestras especialidades</h2>
-      <ul class="grid">
+    <!-- SUBMARCAS -->
+    <Section id="especialidades" tone="paper-soft" spacing="default">
+      <div class="text-center mb-10">
+        <Badge tone="gold">Especialidades</Badge>
+        <Heading as={2} visual={2} align="center" class="mt-3">
+          Cinco caminos hacia <em class="not-italic font-[family-name:var(--font-script)] text-[1.2em] text-[var(--color-gold-dark)]">Tu Mejor Versión</em>
+        </Heading>
+      </div>
+      <ul class="grid gap-6 grid-cols-[repeat(auto-fit,minmax(260px,1fr))] list-none p-0 m-0">
         {services.map((s) => (
-          <li class="card" style={`--accent:${s.color}`}>
-            <span class="accent" aria-hidden="true"></span>
-            <h3>{s.fullName}</h3>
-            <p class="claim script">{s.shortClaim}</p>
-            <p>{s.longClaim}</p>
-            <a class="link" href={`/${s.slug}`}>Descubrir &rarr;</a>
-          </li>
+          <Card as="li" variant="elevated" accent={s.color} href={`/${s.slug}`}>
+            <Badge accent={s.color}>{s.name}</Badge>
+            <Heading as={3} visual={3} class="mt-3">{s.fullName}</Heading>
+            <p class="font-[family-name:var(--font-script)] text-2xl mt-1" style={`color:${s.ariaColor}`}>
+              {s.shortClaim}
+            </p>
+            <p class="text-[var(--color-mute)] mt-2 text-sm">{s.longClaim}</p>
+            <span class="block mt-4 text-[var(--color-ink)] font-medium border-b border-current pb-0.5 w-fit">
+              Descubrir →
+            </span>
+          </Card>
         ))}
       </ul>
-    </section>
+    </Section>
 
-    <footer class="footer">
-      <p>
-        <strong>{siteConfig.name}</strong> ·
-        {siteConfig.address.street}, {siteConfig.address.locality} ·
-        <a href={`tel:${siteConfig.contact.phone}`}>{siteConfig.contact.phoneDisplay}</a>
-        · <a href={siteConfig.contact.instagram}>{siteConfig.contact.instagramHandle}</a>
-      </p>
-      <p class="microcopy">
-        Página inicial provisional — el diseño definitivo se construye en las fases 2-7 del checklist.
-      </p>
-    </footer>
+    <!-- DOCTORA TEASER (placeholder fase 5) -->
+    <Section tone="paper" spacing="default">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <Badge tone="gold">La doctora</Badge>
+          <Heading as={2} visual={2} class="mt-3">
+            La medicina estética es una ciencia de detalles.
+          </Heading>
+          <p class="mt-4 text-[var(--color-mute)]">
+            CEMAD es la clínica de la <strong>{siteConfig.doctor.name}</strong>,
+            especialista en {siteConfig.doctor.role.toLowerCase()} en el centro de Valencia.
+            <em class="text-[var(--color-mute)]">
+              [TODO: bio profesional confirmada por la cliente]
+            </em>
+          </p>
+          <Button href="/dra-abigail-cevallos" variant="outline" class="mt-6">
+            Conoce a la doctora
+          </Button>
+        </div>
+        <div class="aspect-[4/5] bg-[var(--color-paper-soft)] rounded-[var(--radius-lg)] flex items-center justify-center text-[var(--color-mute)] text-sm">
+          [Foto de la Dra. Cevallos · pendiente de cliente]
+        </div>
+      </div>
+    </Section>
+
+    <!-- CONTACTO TEASER -->
+    <Section tone="ink" spacing="default">
+      <div class="text-center max-w-2xl mx-auto">
+        <Badge tone="gold">Contacto</Badge>
+        <Heading as={2} visual={2} tone="invert" align="center" class="mt-3">
+          Empieza por una conversación.
+        </Heading>
+        <p class="mt-4 text-[var(--color-paper)]/80">
+          {siteConfig.address.street}, {siteConfig.address.locality}.
+        </p>
+        <div class="mt-8 flex gap-3 justify-center flex-wrap">
+          <Button href={`tel:${siteConfig.contact.phone}`} variant="primary" size="lg">
+            {siteConfig.contact.phoneDisplay}
+          </Button>
+          <Button
+            href={`https://wa.me/${siteConfig.contact.whatsapp.replace(/[^0-9]/g, '')}`}
+            variant="outline"
+            size="lg"
+            target="_blank"
+            class="text-[var(--color-paper)] border-[var(--color-paper)]/40 hover:border-[var(--color-paper)]"
+          >
+            WhatsApp
+          </Button>
+          <Button href="/contacto" variant="ghost" size="lg" class="text-[var(--color-paper)] hover:bg-white/10">
+            Formulario
+          </Button>
+        </div>
+      </div>
+    </Section>
   </main>
 </Layout>
-
-<style>
-  main {
-    max-width: var(--container-default);
-    margin-inline: auto;
-    padding-inline: clamp(1rem, 4vw, 2rem);
-  }
-  .hero {
-    padding-block: clamp(3rem, 10vw, 7rem);
-    text-align: center;
-  }
-  .eyebrow {
-    font-size: var(--text-xs);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--color-gold-dark);
-    margin-bottom: var(--spacing-4);
-  }
-  h1 {
-    font-size: clamp(2.5rem, 6vw, 4.25rem);
-    max-width: 22ch;
-    margin-inline: auto;
-  }
-  .script {
-    font-family: var(--font-script);
-    font-style: normal;
-    color: var(--color-gold-dark);
-    font-size: 1.1em;
-  }
-  .lead {
-    max-width: 60ch;
-    margin: var(--spacing-6) auto 0;
-    color: var(--color-mute);
-  }
-  .ctas {
-    display: flex;
-    gap: var(--spacing-4);
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: var(--spacing-8);
-  }
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--radius-sm);
-    font-weight: 500;
-    text-decoration: none;
-    transition: transform var(--duration-fast) var(--ease-out),
-                background var(--duration-base) var(--ease-out);
-  }
-  .btn.primary {
-    background: var(--color-gold);
-    color: var(--color-paper);
-  }
-  .btn.primary:hover { background: var(--color-gold-dark); }
-  .btn.ghost {
-    background: transparent;
-    color: var(--color-ink);
-    border: 1px solid var(--color-mute);
-  }
-  .btn.ghost:hover { border-color: var(--color-ink); }
-
-  .services {
-    padding-block: clamp(3rem, 8vw, 6rem);
-  }
-  .services h2 {
-    font-size: var(--text-4xl);
-    text-align: center;
-    margin-bottom: var(--spacing-12);
-  }
-  .grid {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: var(--spacing-6);
-  }
-  .card {
-    background: var(--color-paper-soft);
-    border-radius: var(--radius-md);
-    padding: var(--spacing-6);
-    box-shadow: var(--shadow-card);
-    position: relative;
-    overflow: hidden;
-  }
-  .accent {
-    position: absolute; inset: 0 0 auto 0;
-    height: 4px; background: var(--accent);
-  }
-  .card h3 {
-    font-size: var(--text-2xl);
-    margin: 0 0 var(--spacing-2);
-  }
-  .card .claim {
-    color: var(--accent);
-    font-size: var(--text-xl);
-    margin: 0 0 var(--spacing-3);
-  }
-  .card p { color: var(--color-mute); margin: 0; }
-  .link {
-    display: inline-block;
-    margin-top: var(--spacing-4);
-    color: var(--color-ink);
-    font-weight: 500;
-    text-decoration: none;
-    border-bottom: 1px solid currentColor;
-  }
-
-  .footer {
-    text-align: center;
-    padding-block: var(--spacing-12);
-    color: var(--color-mute);
-    font-size: var(--text-sm);
-  }
-  .footer a { color: var(--color-ink); }
-  .microcopy { font-size: var(--text-xs); margin-top: var(--spacing-2); }
-</style>
