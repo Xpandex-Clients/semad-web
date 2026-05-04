@@ -58,6 +58,8 @@
 - [ ] 5 landings de submarca: hero color propio, claim, listado de tratamientos, FAQ, CTA
 - [ ] `/dra-abigail-cevallos`: bio `[TODO]`, formación, valores, foto `[TODO]`
 - [ ] `/contacto`: formulario, mapa, horarios, redes, WhatsApp
+- [ ] **Blog v1**: schema Zod en `src/content/blog/`, índice `/blog`, página individual `/blog/[slug]`, RSS, internal linking desde submarcas
+- [ ] Plan editorial seed: 5 artículos arranque (1 por submarca + 1 sobre la doctora) `[TODO: redactar con cliente]`
 - [ ] Microcopy de estados (loading/success/error formulario)
 - [ ] 404 + 500 con marca
 
@@ -94,9 +96,9 @@
 
 ## Fase 9 — Backend / formularios
 
-- [ ] Astro Action `contact.submit` con validación Zod
+- [ ] Astro Action `contact.submit` con validación Zod (provider abstraído para swap fácil)
 - [ ] Anti-bot (Turnstile o honeypot mínimo)
-- [ ] Email transaccional (Resend o Brevo) → `info@cemadclinic.com` `[TODO: confirmar destinatario]`
+- [ ] Email transaccional **Resend** (default) → `info@cemadclinic.com` `[TODO: confirmar destinatario]`. Migración a Brevo en 1 archivo si la cliente lo prefiere
 - [ ] Confirmación al usuario (auto-reply con datos)
 - [ ] Logs estructurados (sin datos PII más allá del estrictamente necesario)
 - [ ] Mensajes de error i18n (ES)

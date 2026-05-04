@@ -40,6 +40,8 @@
 /hair-clinic               Submarca plata
 /laser-dermoestetico       Submarca cobre
 /dra-abigail-cevallos      Sobre la doctora
+/blog                      Índice del blog
+/blog/[slug]               Artículo individual
 /contacto                  Form + WhatsApp + mapa
 /aviso-legal
 /politica-privacidad
@@ -47,7 +49,7 @@
 404                        Estado de error con marca
 ```
 
-> [TODO: validar con cliente] ¿Catálogo de tratamientos individuales por submarca? ¿Blog?
+> [TODO: validar con cliente] ¿Catálogo de tratamientos individuales por submarca? ¿Categorías y tags del blog?
 
 ---
 
@@ -145,7 +147,41 @@ Cada submarca usa su color como acento en hero, botones y badges. Estructura:
 
 ---
 
-## 7. 404 y 500
+## 7. Blog (v1)
+
+> Confirmado por la cliente como parte del v1. Función dual: SEO temático + autoridad médica.
+
+### 7.1 Estructura técnica
+
+- `src/content/blog/*.mdx` con schema Zod: `title`, `description`, `pubDate`, `updatedDate?`, `author`, `submarca?` (slug de la submarca relacionada), `tags?`, `cover` (imagen), `draft?`.
+- Índice `/blog` con paginación 9 por página, filtro por submarca.
+- Página individual `/blog/[slug]` con TOC, share, "lecturas relacionadas" (misma submarca o tag).
+- RSS feed en `/rss.xml`.
+- Schema JSON-LD `Article` por post.
+
+### 7.2 Plan editorial seed (5 artículos para arrancar)
+
+> Borradores pendientes de redactar con el subagente `copy-writer-es` y validar con la cliente. **Cero claims sin verificar**.
+
+| # | Submarca | Tema (intención) | Keyword principal aprox |
+|---|---|---|---|
+| 1 | Medicina Estética | "Qué esperar de tu primera consulta de medicina estética" (informacional, baja fricción) | `primera consulta medicina estética` |
+| 2 | Anti-Aging Avanzado | "Anti-aging real vs marketing: cómo distinguir un tratamiento serio" (informacional, autoridad) | `tratamiento antiaging serio` |
+| 3 | IV Therapy | "Vitaminoterapia intravenosa: para qué sí, para qué no" (informacional + filtro de leads) | `vitaminoterapia intravenosa beneficios` |
+| 4 | Hair Clinic | "Caída del cabello en mujeres: causas, diagnóstico y tratamientos posibles" (informacional, alta intención) | `caída cabello mujeres tratamiento` |
+| 5 | Sobre la doctora | "Por qué fundé CEMAD: mi visión de la medicina estética" (autoridad personal) | `medicina estética con criterio Valencia` |
+
+### 7.3 Voz del blog
+
+Misma voz general (confianza médica + calidez), con un punto más didáctico — se permite explicar conceptos médicos siempre con vocabulario accesible. Cada post cierra con un CTA suave a su submarca relacionada.
+
+### 7.4 Frecuencia
+
+> [TODO: confirmar con cliente] Propuesta: 1 artículo cada 3 semanas tras el lanzamiento. Mantiene SEO vivo sin forzar producción.
+
+---
+
+## 8. 404 y 500
 
 ### 404
 - **H1:** "Esta página se ha tomado un descanso de belleza."

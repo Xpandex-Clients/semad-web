@@ -62,10 +62,10 @@
 
 | Rol | Familia oficial (manual) | Web (implementación) | Notas |
 |---|---|---|---|
-| Display / títulos | **Erstoria Regular** (serif elegante) | **Cormorant Garamond** (Google Fonts) — `@fontsource/cormorant-garamond` | Visual muy similar (didone con serif refinada). Migrar a Erstoria si la cliente aporta licencia web (woff2). [TODO: licencia] |
-| Cuerpo / UI | **Gotham Book Regular** | **Inter Variable** — `@fontsource-variable/inter` | Sans humanista, alta legibilidad. Subset latin. |
-| Subtítulo con peso | **Gotham Bold** | **Inter Bold** (mismo paquete) | weight 700 |
-| Script decorativa | **Corinthia Regular** | **Pinyon Script** (Google Fonts) — `@fontsource/pinyon-script` | Para "Tu Mejor Versión" y claims estilizados |
+| Display / títulos | **Erstoria Regular** (serif didone) | **Playfair Display** (Google Fonts) — `@fontsource/playfair-display` | Sustituto prácticamente idéntico (didone con alto contraste). Migrar a Erstoria cuando la cliente aporte licencia web (woff2). |
+| Cuerpo / UI | **Gotham Book Regular** | **Montserrat Variable** — `@fontsource-variable/montserrat` | Geométrica como Gotham, alta legibilidad. Subset latin. Migrar a Gotham cuando la cliente aporte licencia web. |
+| Subtítulo con peso | **Gotham Bold** | **Montserrat 600/700** (mismo paquete) | |
+| Script decorativa | **Corinthia Regular** | **Corinthia** (Google Fonts) — `@fontsource/corinthia` | Familia OFICIAL, disponible directamente. Para "Tu Mejor Versión" y claims estilizados. |
 
 ### 3.2 Escala (modular 1.250)
 
@@ -187,7 +187,8 @@ Ubicación: `src/shared/ui/primitives/`.
 
 ## 10. Pendientes de validación
 
-- [ ] Confirmar visualmente que Cormorant Garamond es aceptable como fallback de Erstoria (mostrar comparativa a la cliente)
+- [ ] Validar visualmente con la cliente que Playfair Display + Montserrat son aceptables como sustitutos de Erstoria + Gotham (mostrar render lado a lado del logo y H1).
+- [ ] Solicitar a la cliente las licencias web de Erstoria y Gotham; si las aporta (woff2), migración 1-línea (cambiar `--font-display` y `--font-body` en `theme.css`).
 - [ ] Confirmar tono de copy ante la cliente: ¿más cálido/cercano o más técnico/médico?
 - [ ] Validar contraste de submarcas pastel (rose, silver) en headings — ¿usamos `--color-ink` o el dark de la submarca?
 - [ ] Aprobación del moodboard fotográfico (Fase 6) para definir filtro/tonalidad común

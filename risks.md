@@ -6,7 +6,7 @@
 
 | # | Riesgo | Impacto | Prob. | Mitigación | Owner |
 |---|---|---|---|---|---|
-| R1 | **Tipografías licenciadas (Erstoria, Gotham, Corinthia) sin licencia web** | Medio: visual no idéntica al manual de marca impreso | Alta | Usar fallbacks Google Fonts (Cormorant Garamond / Inter / Pinyon Script) hasta confirmar licencias. Documentar en `design-system.md` | Cliente / Carlos |
+| R1 | **Tipografías licenciadas (Erstoria, Gotham) sin licencia web confirmada** | Bajo-medio: render visual muy próximo con sustitutos | Alta | Sustitutos idénticos en Google Fonts: **Playfair Display** (didone como Erstoria) + **Montserrat Variable** (geométrica como Gotham). **Corinthia** sí está en Google Fonts → usamos la oficial. Migración a Erstoria/Gotham con cambio 1-línea cuando la cliente aporte woff2 con licencia web | Cliente / Carlos |
 | R2 | **No hay logo en SVG/AI** — solo en PDF de manual | Bajo si el PDF tiene calidad; alto si hay que redibujar | Media | Extraer del PDF como PNG/SVG mientras la cliente envía vectoriales. `[TODO: solicitar kit de marca]` | Cliente |
 | R3 | **Fotografía propia inexistente** — manual usa stock o fotos no contractuales | Alto en autenticidad y SEO local | Alta | Stock licenciado consistente con el mood del manual + sesión propia cuando se pueda agendar | Cliente |
 | R4 | **Cifras / claims cliente-verificables vacíos** (años de experiencia, nº pacientes, premios) | Medio: copy más débil | Alta | Dejar `[TODO: confirmar]` y usar copy emocional/conceptual hasta validar | Cliente |
@@ -18,4 +18,6 @@
 | R10 | **Texto de aviso legal / privacidad sin abogado** | Alto: riesgo legal | Media | Plantilla genérica RGPD-compliant + nota visible "borrador, validar con asesor legal" hasta firma | Cliente |
 | R11 | **Cara real de la doctora en imágenes hero** | Bajo: estándar en clínicas | Baja | Usar foto profesional con consentimiento firmado. Si no, ilustración conceptual | Cliente |
 | R12 | **Mezcla idiomas (ES + valenciano + inglés)** no decidida | Medio: rework si se decide tarde | Media | Default ES único. Si se confirma multilingüe, planificar i18n en Fase 5 antes de escribir copy | Cliente |
+| R14 | **Blog vacío en lanzamiento** sin línea editorial confirmada | Medio: SEO no se activa de inmediato | Alta | Lanzar con 3-5 artículos seed (1 por submarca + 1 sobre la doctora). Usar `seo-plan.md` para temas de bajo volumen / alta intención. Cliente valida tono y aprueba publicación | Cliente / Carlos |
+| R15 | **Resend vs Brevo decisión pendiente** | Bajo: integración aislada en Action `contact.submit` | Baja | Default Resend (DX simple). Migración a Brevo en 1 archivo si la cliente quiere panel propio de email marketing | Cliente |
 | R13 | **Stock fotográfico recurrente entre competidores** | Bajo-medio en diferenciación | Media | Combinar stock con elementos visuales propios (espirales áureas, patrones de marca) y micro-interacciones únicas | Carlos |

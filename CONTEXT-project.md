@@ -24,14 +24,21 @@
 
 ### 2026-05-05 — Stack
 
-- **Astro 6.x estático** (`output: 'static'`).
-  - Razón: catálogo + landing premium con poca edición frecuente. SEO + performance fuertes. Hosting barato (Hostinger plan single, FTPS).
-  - Alternativas descartadas: WordPress (la cliente no necesita editar diariamente; el coste de mantenimiento es mayor); Next.js (overkill, no hay app multi-rol).
+- **Astro 6.x estático** (`output: 'static'`). Confirmado por usuario: nadie del lado cliente edita la web → no necesitamos CMS.
 - **Tailwind 4** vía `@tailwindcss/vite` con tokens CEMAD en `src/shared/styles/theme.css`.
 - **Preact** (`compat: false`) para islas interactivas (menú móvil, FAQ, formularios). React no.
-- **Tipografías:** licencias Erstoria/Gotham/Corinthia no confirmadas → fallback Cormorant Garamond / Inter Variable / Pinyon Script (Google Fonts vía `@fontsource*`). [TODO: confirmar licencias]
+- **Tipografías:** Erstoria y Gotham son comerciales sin licencia web confirmada → uso sustitutos prácticamente idénticos en Google Fonts: **Playfair Display** (didone como Erstoria) + **Montserrat Variable** (geométrica como Gotham). **Corinthia** sí está en Google Fonts → usamos la oficial. Migración 1-línea cuando la cliente aporte licencias web de Erstoria/Gotham.
 - **Iconos:** `astro-icon` + Lucide + Simple Icons.
 - **Tests:** Vitest + Playwright.
+
+### 2026-05-05 — Confirmaciones de la cliente (kickoff)
+
+- **Plazo:** sin prisa → priorizamos calidad sobre velocidad. No comprometemos hito en `risks.md`.
+- **Conversión principal:** reservas de primera consulta. Flujo: formulario corto + WhatsApp como vía paralela. CTA persistente.
+- **Edición:** la cliente no editará habitualmente. Stack estático confirmado.
+- **Logo:** vectorial oficial pendiente; uso PNG/SVG trazado desde el PDF como interim.
+- **Blog:** SÍ entra en v1. Content Collection `src/content/blog/` con MDX. Estrategia editorial en `seo-plan.md` y `content-plan.md`.
+- **Forms:** integración con **Resend** por defecto (DX simple, transaccional limpio). Decisión swappable a Brevo si la cliente quiere panel propio de email marketing.
 
 ### 2026-05-05 — Identidad visual
 
@@ -50,11 +57,13 @@
 /hair-clinic
 /laser-dermoestetico
 /dra-abigail-cevallos      → Sobre la doctora
+/blog                      → Índice del blog (MDX content collection)
+/blog/[slug]               → Artículo individual
 /contacto                  → Form + mapa + WhatsApp
 /aviso-legal · /politica-privacidad · /politica-cookies
 ```
 
-> [TODO: validar AI con cliente — ¿blog?, ¿catálogo de tratamientos individuales por submarca?, ¿precios públicos?]
+> [TODO: validar AI con cliente — ¿catálogo de tratamientos individuales por submarca?, ¿precios públicos?, ¿categorías y tags del blog?]
 
 ---
 

@@ -92,6 +92,22 @@
 **Secondary:**
 - `mejor médica estética Valencia` (long-tail aspiracional)
 
+### 2.8 `/blog` y `/blog/[slug]` (v1)
+
+> Estrategia: contenido informacional medio-alto + autoridad médica. Cada artículo enlaza a su submarca y al CTA de reserva.
+
+**Categorías iniciales** (alineadas con submarcas):
+- `medicina-estetica`, `iv-therapy`, `anti-aging`, `hair-clinic`, `laser`, `clinica` (general).
+
+**Pillar topics seed:**
+- "Primera consulta medicina estética" (informacional / awareness)
+- "Tratamiento antiaging serio vs marketing" (autoridad)
+- "Vitaminoterapia intravenosa: beneficios y mitos" (informacional)
+- "Caída del cabello en mujeres: causas y tratamientos" (alta intención)
+- "Visión de la medicina estética con criterio" (Dra. Cevallos, autoridad personal)
+
+Cada post incluirá `Article` JSON-LD con `author` Person, `mainEntityOfPage`, `image`, `datePublished`, `inLanguage es-ES`.
+
 ---
 
 ## 3. Schemas JSON-LD
@@ -137,7 +153,11 @@ Cada landing publica un `Service` con `provider` referenciando la `MedicalClinic
 
 En cada subpágina (Home › Especialidades › [Submarca]).
 
-### 3.5 `WebSite` con `SearchAction`
+### 3.5 `Article` (cada post del blog)
+
+En cada `/blog/[slug]`. Incluye `headline`, `image`, `author` (referencia a `Person` Dra. Cevallos), `publisher` (referencia a `MedicalClinic`), `datePublished`, `dateModified`, `mainEntityOfPage`, `inLanguage` es-ES.
+
+### 3.6 `WebSite` con `SearchAction`
 
 Solo si añadimos buscador interno (probablemente no en v1).
 
