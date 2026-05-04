@@ -25,10 +25,18 @@
   --color-paper-soft:  oklch(96.6% 0  0);     /* #f4f4f4 */
   --color-mute:        oklch(67% 0.005 90);   /* #9d9d9c */
 
-  /* ----------------- Tipografía ----------------- */
-  --font-display:  "Cormorant Garamond", "Erstoria", Georgia, serif;
-  --font-body:     "Inter Variable", "Inter", "Gotham Book", system-ui, sans-serif;
-  --font-script:   "Pinyon Script", "Corinthia", cursive;
+  /* ----------------- Tipografía -----------------
+   * Familias oficiales del manual CEMAD: Erstoria (display),
+   * Gotham (body), Corinthia (script). Las dos primeras son comerciales
+   * sin licencia web confirmada; usamos sustitutos prácticamente
+   * idénticos en Google Fonts: Playfair Display (didone refinada como
+   * Erstoria) y Montserrat (geométrica como Gotham). Corinthia sí está
+   * disponible en Google Fonts y se usa con la familia oficial.
+   * Migrar a Erstoria/Gotham cuando la cliente aporte licencia web.
+   * --------------------------------------------- */
+  --font-display:  "Erstoria", "Playfair Display", Georgia, serif;
+  --font-body:     "Gotham", "Montserrat Variable", "Montserrat", system-ui, sans-serif;
+  --font-script:   "Corinthia", cursive;
 
   /* ----------------- Escala tipográfica (modular 1.250) ----------------- */
   --text-xs:   0.75rem;   /* 12 */
