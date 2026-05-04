@@ -39,6 +39,7 @@ const canonical = new URL(Astro.url.pathname, siteConfig.url).toString();
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_ES" />
     <meta name="twitter:card" content="summary_large_image" />
+    <slot name="head" />
   </head>
   <body>
     <slot />

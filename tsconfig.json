@@ -11,7 +11,8 @@
       "@shared/*": ["src/shared/*"],
       "@assets/*": ["src/assets/*"],
       "@content/*": ["src/content/*"],
-      "@actions/*": ["src/actions/*"]
+      "@actions/*": ["src/actions/*"],
+      "@layouts/*": ["src/layouts/*"]
     }
   }
 }
