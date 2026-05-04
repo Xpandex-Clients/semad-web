@@ -20,19 +20,19 @@
 - [x] Estructura de carpetas `src/{features,shared,content,actions}`
 - [x] Tokens CEMAD en `src/shared/styles/theme.css`
 - [x] `siteConfig.ts` y `services.ts` en `src/shared/config/`
-- [ ] Primer commit del scaffold premium
+- [x] Primer commit del scaffold premium
 
 ## Fase 2 — Sistema de diseño
 
-- [ ] `design-system.md` documentado (paleta, tipo, escalas, easings)
-- [ ] `src/shared/ui/primitives/Button.astro` (variantes: primary/ghost/outline; sizes sm/md/lg)
-- [ ] `Container.astro` (narrow/default/wide)
-- [ ] `Section.astro` (variants tone: paper, paper-soft, ink)
-- [ ] `Heading.astro` (display, levels h1-h4)
-- [ ] `Card.astro` (variant elevated, flat)
-- [ ] `Badge.astro` (variants: gold, teal, rose, silver, copper)
-- [ ] `Logo.astro` brand component (vertical + horizontal + isotipo)
-- [ ] Test visual de primitives (storyboard rudimentario en `/_dev/`)
+- [x] `design-system.md` documentado (paleta, tipo, escalas, easings)
+- [x] `src/shared/ui/primitives/Button.astro` (primary/secondary/ghost/outline/submarca; sm/md/lg; min-44px target)
+- [x] `Container.astro` (narrow/default/wide)
+- [x] `Section.astro` (tone paper/paper-soft/ink/gold/submarca; spacing tight/default/loose/none)
+- [x] `Heading.astro` (display/title/subtitle; h1-h4 + visual independiente)
+- [x] `Card.astro` (flat/elevated/outline; con accent line top)
+- [x] `Badge.astro` (gold/teal/rose/silver/copper/ink/muted; accent custom)
+- [x] `Logo.astro` brand component (principal/vertical/sello/isotipo; tone color/white/ink)
+- [x] Storyboard visual en `/dev/styleguide` (noindex + excluido de sitemap + Disallow en robots.txt)
 
 ## Fase 3 — Layout y navegación
 
