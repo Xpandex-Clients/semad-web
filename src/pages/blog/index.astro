@@ -1,0 +1,48 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Section from "@shared/ui/primitives/Section.astro";
+import Heading from "@shared/ui/primitives/Heading.astro";
+import Badge from "@shared/ui/primitives/Badge.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => +b.data.pubDate - +a.data.pubDate,
+);
+---
+
+<Layout
+  title="Blog | CEMAD Valencia"
+  description="Medicina estética, anti-aging, cuidado capilar y dermoestética: artículos con criterio médico de la Dra. Abigail Cevallos Madrid."
+>
+  <main id="main">
+    <Section tone="paper" spacing="loose">
+      <div class="text-center max-w-2xl mx-auto">
+        <Badge tone="gold">Blog</Badge>
+        <Heading as={1} variant="display" align="center" class="mt-4">
+          Medicina estética con criterio
+        </Heading>
+        <p class="mt-6 text-[var(--color-mute)]">
+          Artículos sobre lo que hacemos, cómo lo hacemos y por qué.
+          Sin promesas vacías, sin claims sin verificar.
+        </p>
+      </div>
+
+      {posts.length === 0 ? (
+        <p class="mt-12 text-center text-sm text-[var(--color-mute)]">
+          [TODO Fase 5 — primeros 5 artículos seed: 1 por submarca + 1 sobre la doctora]
+        </p>
+      ) : (
+        <ul class="mt-12 grid gap-8 grid-cols-[repeat(auto-fit,minmax(280px,1fr))] list-none p-0">
+          {posts.map((post) => (
+            <li>
+              <a href={`/blog/${post.id}`} class="block group">
+                <Heading as={2} visual={3}>{post.data.title}</Heading>
+                <p class="mt-2 text-[var(--color-mute)] text-sm">{post.data.description}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </Section>
+  </main>
+</Layout>

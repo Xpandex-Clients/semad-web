@@ -1,0 +1,38 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Section from "@shared/ui/primitives/Section.astro";
+import Heading from "@shared/ui/primitives/Heading.astro";
+import Badge from "@shared/ui/primitives/Badge.astro";
+import Button from "@shared/ui/primitives/Button.astro";
+import { siteConfig } from "@shared/config/site";
+---
+
+<Layout
+  title={`${siteConfig.doctor.name} | CEMAD Valencia`}
+  description={`${siteConfig.doctor.name}, ${siteConfig.doctor.role}, lidera CEMAD en Valencia. Conoce su trayectoria y enfoque.`}
+>
+  <main id="main">
+    <Section tone="paper" spacing="loose">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <Badge tone="gold">La doctora</Badge>
+          <Heading as={1} variant="display" class="mt-3">
+            {siteConfig.doctor.name}
+          </Heading>
+          <p class="mt-3 text-[var(--color-mute)] uppercase tracking-[0.12em] text-xs">
+            {siteConfig.doctor.role}
+          </p>
+          <p class="mt-6 max-w-[60ch] text-[var(--color-mute)]">
+            <em>[TODO Fase 5 — bio profesional confirmada por la cliente: trayectoria, formación, especialidades, congresos, colegiación.]</em>
+          </p>
+          <Button href="/contacto" variant="primary" class="mt-8">
+            Reserva una consulta
+          </Button>
+        </div>
+        <div class="aspect-[4/5] bg-[var(--color-paper-soft)] rounded-[var(--radius-lg)] flex items-center justify-center text-[var(--color-mute)] text-sm">
+          [Foto profesional · pendiente de cliente]
+        </div>
+      </div>
+    </Section>
+  </main>
+</Layout>

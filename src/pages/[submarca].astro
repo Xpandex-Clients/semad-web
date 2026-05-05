@@ -1,0 +1,56 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "@layouts/Layout.astro";
+import Section from "@shared/ui/primitives/Section.astro";
+import Heading from "@shared/ui/primitives/Heading.astro";
+import Button from "@shared/ui/primitives/Button.astro";
+import Badge from "@shared/ui/primitives/Badge.astro";
+import { services } from "@shared/config/services";
+
+export const getStaticPaths: GetStaticPaths = () =>
+  services.map((s) => ({ params: { submarca: s.slug }, props: { service: s } }));
+
+const { service } = Astro.props;
+---
+
+<Layout
+  title={`${service.fullName} en Valencia | CEMAD`}
+  description={`${service.longClaim} En CEMAD, clínica de la Dra. Abigail Cevallos Madrid en Valencia.`}
+>
+  <main id="main">
+    <Section tone="submarca" accent={service.color} spacing="loose">
+      <div class="text-center max-w-3xl mx-auto">
+        <Badge tone="ink">{service.name}</Badge>
+        <Heading as={1} variant="display" tone="invert" align="center" class="mt-4">
+          <span class="block">{service.fullName}</span>
+          <span class="block mt-2 font-[family-name:var(--font-script)] text-[1.1em] text-[var(--color-paper)]">
+            {service.shortClaim}
+          </span>
+        </Heading>
+        <p class="mt-6 text-lg text-[var(--color-paper)]/90 max-w-[60ch] mx-auto">
+          {service.longClaim}
+        </p>
+        <Button href="/contacto" variant="submarca" accent="var(--color-paper)" accentText={service.color} size="lg" class="mt-8">
+          Reservar consulta
+        </Button>
+      </div>
+    </Section>
+
+    <Section tone="paper" spacing="default">
+      <div class="max-w-2xl mx-auto text-center">
+        <Heading as={2} visual={3} align="center">Página en construcción</Heading>
+        <p class="mt-4 text-[var(--color-mute)]">
+          Estamos terminando el contenido detallado de <strong>{service.name}</strong>:
+          tratamientos, indicaciones, primera consulta y FAQ. Mientras tanto,
+          puedes pedir cita directamente.
+        </p>
+        <p class="mt-2 text-xs text-[var(--color-mute)]">
+          [TODO Fase 5 — copy validado médicamente con la cliente]
+        </p>
+        <div class="mt-6 flex justify-center">
+          <Button href="/contacto" variant="primary" size="md">Hablar con la clínica</Button>
+        </div>
+      </div>
+    </Section>
+  </main>
+</Layout>
