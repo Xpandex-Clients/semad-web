@@ -39,6 +39,8 @@ screenshots/
 # contenido sensible del cliente — no se commitea fuente raw
 client-input/assets/brand/*.pdf
 client-input/assets/brand/extracted/embed-*.png
+# raw page dumps del manual; usamos en su lugar los renders curados ya commiteados
+client-input/assets/brand/extracted/all/
 client-input/briefing-original.txt
 
 # perf reports
