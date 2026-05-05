@@ -1,4 +1,5 @@
 User-agent: *
 Disallow: /dev/
+Disallow: /_astro/
 
 Sitemap: https://cemadclinic.com/sitemap-index.xml

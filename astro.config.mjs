@@ -18,7 +18,18 @@ export default defineConfig({
     preact({ compat: false }),
     icon({ include: { lucide: ['*'], 'simple-icons': ['*'] } }),
     sitemap({
-      filter: (page) => !page.includes('/dev/'),
+      filter: (page) => {
+        // Excluir styleguide interna y páginas legales (thin content,
+        // no aportan al posicionamiento; permanecen indexables si Google las encuentra
+        // por enlace, pero no las priorizamos en el sitemap).
+        if (page.includes('/dev/')) return false;
+        if (page.includes('/aviso-legal')) return false;
+        if (page.includes('/politica-privacidad')) return false;
+        if (page.includes('/politica-cookies')) return false;
+        return true;
+      },
+      changefreq: 'weekly',
+      lastmod: new Date(),
     }),
     mdx(),
   ],
