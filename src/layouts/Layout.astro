@@ -11,6 +11,7 @@ import { ClientRouter } from "astro:transitions";
 import { siteConfig } from "@shared/config/site";
 import Header from "@shared/ui/layout/Header.astro";
 import Footer from "@shared/ui/layout/Footer.astro";
+import WhatsAppFAB from "@shared/ui/islands/WhatsAppFAB.tsx";
 
 interface Props {
   title?: string;
@@ -53,5 +54,12 @@ const canonical = new URL(Astro.url.pathname, siteConfig.url).toString();
     {!bare && <Header />}
     <slot />
     {!bare && <Footer />}
+    {!bare && (
+      <WhatsAppFAB
+        client:idle
+        phone={siteConfig.contact.whatsapp}
+        prefilledMessage={`Hola, me gustaría reservar una consulta en ${siteConfig.name}.`}
+      />
+    )}
   </body>
 </html>
