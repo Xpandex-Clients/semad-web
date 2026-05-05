@@ -5,12 +5,32 @@ import Section from "@shared/ui/primitives/Section.astro";
 import Heading from "@shared/ui/primitives/Heading.astro";
 import Button from "@shared/ui/primitives/Button.astro";
 import Badge from "@shared/ui/primitives/Badge.astro";
-import { services } from "@shared/config/services";
+import FaqAccordion, { type FaqItem } from "@shared/ui/islands/FaqAccordion.tsx";
+import { services, type ServiceLine } from "@shared/config/services";
+
+const faqProvisional: FaqItem[] = [
+  {
+    q: "¿Cómo es la primera consulta?",
+    a: "Una valoración personalizada con la doctora donde escuchamos tus objetivos, exploramos antecedentes y diseñamos un plan a tu medida. Sin compromiso de tratamiento.",
+  },
+  {
+    q: "¿Cuánto duran los resultados?",
+    a: "Depende del tratamiento, tu fisiología y el plan de mantenimiento. En tu primera consulta te damos un horizonte realista para cada opción que valoremos. [TODO Fase 5: validar por la cliente]",
+  },
+  {
+    q: "¿Puedo combinar varios tratamientos?",
+    a: "Sí, y en muchos casos lo recomendamos. La doctora prioriza un enfoque integral en lugar de tratamientos aislados, siempre respetando tiempos de recuperación. [TODO Fase 5: validar]",
+  },
+];
 
 export const getStaticPaths: GetStaticPaths = () =>
   services.map((s) => ({ params: { submarca: s.slug }, props: { service: s } }));
 
-const { service } = Astro.props;
+interface Props {
+  service: ServiceLine;
+}
+
+const { service } = Astro.props as unknown as Props;
 ---
 
 <Layout
@@ -51,6 +71,17 @@ const { service } = Astro.props;
           <Button href="/contacto" variant="primary" size="md">Hablar con la clínica</Button>
         </div>
       </div>
+    </Section>
+
+    <Section tone="paper-soft" spacing="default" width="narrow">
+      <Badge tone="gold">Preguntas frecuentes</Badge>
+      <Heading as={2} visual={2} class="mt-3 mb-6">
+        Resolvemos lo que más nos preguntan.
+      </Heading>
+      <FaqAccordion client:visible items={faqProvisional} />
+      <p class="mt-6 text-xs text-[var(--color-mute)]">
+        [TODO Fase 5 — FAQ específicas de {service.name} validadas por la doctora]
+      </p>
     </Section>
   </main>
 </Layout>
