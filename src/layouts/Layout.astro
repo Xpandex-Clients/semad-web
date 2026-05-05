@@ -18,15 +18,26 @@ interface Props {
   description?: string;
   /** Oculta header/footer (404, styleguide). */
   bare?: boolean;
+  /** Sobreescribe og:type por página (ej. "article" en blog post). */
+  ogType?: "website" | "article" | "profile";
+  /** URL absoluta de la imagen OG; cae a /og/default.jpg si se omite. */
+  ogImage?: string;
+  /** Bloquea indexación (stub pages, sandbox). */
+  noindex?: boolean;
 }
 
 const {
   title = `${siteConfig.name} — ${siteConfig.tagline}`,
   description = siteConfig.description,
   bare = false,
+  ogType = "website",
+  ogImage,
+  noindex = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, siteConfig.url).toString();
+const ogImageUrl = ogImage ?? `${siteConfig.url}/og/default.jpg`;
+const twitterHandle = siteConfig.contact.instagramHandle;
 ---
 
 <!doctype html>
@@ -34,18 +45,34 @@ const canonical = new URL(Astro.url.pathname, siteConfig.url).toString();
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#bd9b5f" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="canonical" href={canonical} />
     <meta name="generator" content={Astro.generator} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <title>{title}</title>
     <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content={siteConfig.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:locale" content="es_ES" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${siteConfig.name} — ${siteConfig.tagline}`} />
+
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={twitterHandle} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
     <ClientRouter />
     <slot name="head" />
   </head>
