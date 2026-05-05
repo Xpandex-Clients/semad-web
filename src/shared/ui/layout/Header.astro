@@ -1,0 +1,108 @@
+---
+import Logo from "@shared/ui/brand/Logo.astro";
+import Button from "@shared/ui/primitives/Button.astro";
+import MobileMenu from "@shared/ui/islands/MobileMenu.tsx";
+import { primaryNav, submarcasNav, legalNav } from "@shared/config/navigation";
+import { siteConfig } from "@shared/config/site";
+
+interface Props {
+  /** Para resaltar el item activo en la nav. */
+  pathname?: string;
+}
+
+const { pathname = Astro.url.pathname } = Astro.props;
+
+const isActive = (href: string) =>
+  href === "/" ? pathname === "/" : pathname.startsWith(href.split("#")[0]);
+---
+
+<header
+  id="site-header"
+  class="sticky top-0 z-40 bg-[var(--color-paper)]/95 border-b border-[var(--color-paper-soft)]"
+>
+  <div class="mx-auto max-w-[var(--container-wide)] px-[clamp(1rem,4vw,2rem)] py-3 flex items-center justify-between gap-6">
+    <a
+      href="/"
+      class="inline-flex items-center focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-gold-dark)] rounded-[var(--radius-xs)]"
+      aria-label={`${siteConfig.name} — inicio`}
+    >
+      <Logo variant="principal" width={150} alt={`${siteConfig.name} — inicio`} />
+    </a>
+
+    <!-- Nav desktop -->
+    <nav aria-label="Principal" class="hidden lg:flex items-center gap-1">
+      {
+        primaryNav.map((item) =>
+          item.hasChildren ? (
+            <details class="group relative">
+              <summary
+                class={[
+                  "list-none cursor-pointer select-none px-4 py-2 rounded-[var(--radius-xs)] inline-flex items-center gap-1 text-sm font-medium",
+                  "hover:bg-[var(--color-paper-soft)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-gold-dark)]",
+                  isActive(item.href) ? "text-[var(--color-gold-dark)]" : "text-[var(--color-ink)]",
+                ].join(" ")}
+                aria-haspopup="menu"
+              >
+                {item.label}
+                <svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true" class="transition-transform group-open:rotate-180">
+                  <path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </summary>
+              <ul
+                role="menu"
+                class="absolute right-0 top-full mt-2 min-w-[280px] rounded-[var(--radius-md)] bg-[var(--color-paper)] shadow-[var(--shadow-modal)] p-2 list-none"
+              >
+                {submarcasNav.map((sub) => (
+                  <li role="none">
+                    <a
+                      role="menuitem"
+                      href={sub.href}
+                      class="flex items-center gap-3 px-3 py-2.5 rounded-[var(--radius-xs)] hover:bg-[var(--color-paper-soft)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-gold-dark)]"
+                    >
+                      <span class="size-2 rounded-full shrink-0" style={`background:${sub.color}`} aria-hidden="true"></span>
+                      <span class="flex flex-col">
+                        <span class="text-sm font-medium">{sub.shortLabel}</span>
+                        <span class="text-xs text-[var(--color-mute)]">{sub.shortClaim}</span>
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          ) : (
+            <a
+              href={item.href}
+              aria-current={isActive(item.href) ? "page" : undefined}
+              class={[
+                "px-4 py-2 rounded-[var(--radius-xs)] text-sm font-medium",
+                "hover:bg-[var(--color-paper-soft)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-gold-dark)]",
+                isActive(item.href) ? "text-[var(--color-gold-dark)]" : "text-[var(--color-ink)]",
+              ].join(" ")}
+            >
+              {item.label}
+            </a>
+          )
+        )
+      }
+    </nav>
+
+    <!-- CTA desktop -->
+    <div class="hidden lg:flex items-center gap-2">
+      <Button href="/contacto" variant="primary" size="sm">Reservar consulta</Button>
+    </div>
+
+    <!-- Trigger móvil (hidratado por Preact) -->
+    <MobileMenu
+      client:load
+      primaryNav={[...primaryNav]}
+      submarcas={[...submarcasNav]}
+      legalNav={[...legalNav]}
+      contact={{
+        phone: siteConfig.contact.phone,
+        phoneDisplay: siteConfig.contact.phoneDisplay,
+        whatsapp: siteConfig.contact.whatsapp,
+        instagram: siteConfig.contact.instagram,
+      }}
+    />
+  </div>
+</header>
