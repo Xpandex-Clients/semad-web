@@ -4,15 +4,28 @@ import Section from "@shared/ui/primitives/Section.astro";
 import Heading from "@shared/ui/primitives/Heading.astro";
 import Badge from "@shared/ui/primitives/Badge.astro";
 import Button from "@shared/ui/primitives/Button.astro";
+import JsonLd from "@shared/ui/seo/JsonLd.astro";
+import { jsonLdGraph, medicalClinicSchema, breadcrumbSchema } from "@shared/seo/schemas";
 import { siteConfig } from "@shared/config/site";
 
 const waNumber = siteConfig.contact.whatsapp.replace(/[^0-9]/g, "");
+
+const contactoGraph = jsonLdGraph(
+  medicalClinicSchema(),
+  breadcrumbSchema([
+    { name: "Inicio", url: "/" },
+    { name: "Contacto", url: "/contacto" },
+  ]),
+);
 ---
 
 <Layout
   title="Contacto | CEMAD Valencia"
   description={`Reserva tu consulta en CEMAD: ${siteConfig.address.street}, ${siteConfig.address.locality}. Llamada, WhatsApp o formulario.`}
 >
+  <Fragment slot="head">
+    <JsonLd data={contactoGraph} />
+  </Fragment>
   <main id="main">
     <Section tone="paper" spacing="loose">
       <div class="text-center max-w-2xl mx-auto">

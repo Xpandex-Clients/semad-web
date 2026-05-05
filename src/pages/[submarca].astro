@@ -6,6 +6,12 @@ import Heading from "@shared/ui/primitives/Heading.astro";
 import Button from "@shared/ui/primitives/Button.astro";
 import Badge from "@shared/ui/primitives/Badge.astro";
 import FaqAccordion, { type FaqItem } from "@shared/ui/islands/FaqAccordion.tsx";
+import JsonLd from "@shared/ui/seo/JsonLd.astro";
+import {
+  jsonLdGraph,
+  serviceSchema,
+  breadcrumbSchema,
+} from "@shared/seo/schemas";
 import { services, type ServiceLine } from "@shared/config/services";
 
 const faqProvisional: FaqItem[] = [
@@ -31,12 +37,24 @@ interface Props {
 }
 
 const { service } = Astro.props as unknown as Props;
+
+const submarcaGraph = jsonLdGraph(
+  serviceSchema(service),
+  breadcrumbSchema([
+    { name: "Inicio", url: "/" },
+    { name: service.name, url: `/${service.slug}` },
+  ]),
+);
 ---
 
 <Layout
   title={`${service.fullName} en Valencia | CEMAD`}
   description={`${service.longClaim} En CEMAD, clínica de la Dra. Abigail Cevallos Madrid en Valencia.`}
+  noindex
 >
+  <Fragment slot="head">
+    <JsonLd data={submarcaGraph} />
+  </Fragment>
   <main id="main">
     <Section tone="submarca" accent={service.color} spacing="loose">
       <div class="text-center max-w-3xl mx-auto">

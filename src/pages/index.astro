@@ -7,11 +7,27 @@ import Card from "@shared/ui/primitives/Card.astro";
 import Badge from "@shared/ui/primitives/Badge.astro";
 import Logo from "@shared/ui/brand/Logo.astro";
 import Reveal from "@shared/ui/islands/Reveal.tsx";
+import JsonLd from "@shared/ui/seo/JsonLd.astro";
+import {
+  jsonLdGraph,
+  medicalClinicSchema,
+  websiteSchema,
+  physicianRefSchema,
+} from "@shared/seo/schemas";
 import { siteConfig } from "@shared/config/site";
 import { services } from "@shared/config/services";
+
+const homeGraph = jsonLdGraph(
+  medicalClinicSchema(),
+  websiteSchema(),
+  physicianRefSchema(),
+);
 ---
 
 <Layout>
+  <Fragment slot="head">
+    <JsonLd data={homeGraph} />
+  </Fragment>
   <main id="main">
     <!-- HERO -->
     <Section tone="paper" spacing="loose">

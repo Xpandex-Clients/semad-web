@@ -3,10 +3,20 @@ import Layout from "@layouts/Layout.astro";
 import Section from "@shared/ui/primitives/Section.astro";
 import Heading from "@shared/ui/primitives/Heading.astro";
 import Badge from "@shared/ui/primitives/Badge.astro";
+import JsonLd from "@shared/ui/seo/JsonLd.astro";
+import { jsonLdGraph, blogIndexSchema, breadcrumbSchema } from "@shared/seo/schemas";
 import { getCollection } from "astro:content";
 
 const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
   (a, b) => +b.data.pubDate - +a.data.pubDate,
+);
+
+const blogGraph = jsonLdGraph(
+  blogIndexSchema(),
+  breadcrumbSchema([
+    { name: "Inicio", url: "/" },
+    { name: "Blog", url: "/blog" },
+  ]),
 );
 ---
 
@@ -14,6 +24,9 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
   title="Blog | CEMAD Valencia"
   description="Medicina estética, anti-aging, cuidado capilar y dermoestética: artículos con criterio médico de la Dra. Abigail Cevallos Madrid."
 >
+  <Fragment slot="head">
+    <JsonLd data={blogGraph} />
+  </Fragment>
   <main id="main">
     <Section tone="paper" spacing="loose">
       <div class="text-center max-w-2xl mx-auto">

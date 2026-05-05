@@ -4,13 +4,31 @@ import Section from "@shared/ui/primitives/Section.astro";
 import Heading from "@shared/ui/primitives/Heading.astro";
 import Badge from "@shared/ui/primitives/Badge.astro";
 import Button from "@shared/ui/primitives/Button.astro";
+import JsonLd from "@shared/ui/seo/JsonLd.astro";
+import {
+  jsonLdGraph,
+  physicianFullSchema,
+  breadcrumbSchema,
+} from "@shared/seo/schemas";
 import { siteConfig } from "@shared/config/site";
+
+const doctoraGraph = jsonLdGraph(
+  physicianFullSchema(),
+  breadcrumbSchema([
+    { name: "Inicio", url: "/" },
+    { name: siteConfig.doctor.name, url: "/dra-abigail-cevallos" },
+  ]),
+);
 ---
 
 <Layout
   title={`${siteConfig.doctor.name} | CEMAD Valencia`}
   description={`${siteConfig.doctor.name}, ${siteConfig.doctor.role}, lidera CEMAD en Valencia. Conoce su trayectoria y enfoque.`}
+  ogType="profile"
 >
+  <Fragment slot="head">
+    <JsonLd data={doctoraGraph} />
+  </Fragment>
   <main id="main">
     <Section tone="paper" spacing="loose">
       <div class="grid lg:grid-cols-2 gap-10 items-center">
