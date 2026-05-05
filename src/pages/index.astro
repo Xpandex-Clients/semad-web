@@ -86,31 +86,28 @@ import { services } from "@shared/config/services";
       </div>
     </Section>
 
-    <!-- CONTACTO TEASER -->
-    <Section tone="ink" spacing="default">
+    <!-- CTA principal antes del footer -->
+    <Section tone="gold" spacing="default">
       <div class="text-center max-w-2xl mx-auto">
-        <Badge tone="gold">Contacto</Badge>
-        <Heading as={2} visual={2} tone="invert" align="center" class="mt-3">
+        <Heading as={2} visual={2} tone="invert" align="center">
           Empieza por una conversación.
         </Heading>
-        <p class="mt-4 text-[var(--color-paper)]/80">
-          {siteConfig.address.street}, {siteConfig.address.locality}.
+        <p class="mt-4 text-[var(--color-paper)]/90">
+          La primera consulta con la {siteConfig.doctor.name} es donde
+          empezamos a definir tu plan personalizado.
         </p>
         <div class="mt-8 flex gap-3 justify-center flex-wrap">
-          <Button href={`tel:${siteConfig.contact.phone}`} variant="primary" size="lg">
-            {siteConfig.contact.phoneDisplay}
+          <Button href="/contacto" variant="submarca" accent="var(--color-paper)" accentText="var(--color-gold-dark)" size="lg">
+            Reservar consulta
           </Button>
           <Button
             href={`https://wa.me/${siteConfig.contact.whatsapp.replace(/[^0-9]/g, '')}`}
             variant="outline"
             size="lg"
             target="_blank"
-            class="text-[var(--color-paper)] border-[var(--color-paper)]/40 hover:border-[var(--color-paper)]"
+            class="text-[var(--color-paper)] border-[var(--color-paper)]/40 hover:border-[var(--color-paper)] hover:bg-white/10"
           >
             WhatsApp
-          </Button>
-          <Button href="/contacto" variant="ghost" size="lg" class="text-[var(--color-paper)] hover:bg-white/10">
-            Formulario
           </Button>
         </div>
       </div>
