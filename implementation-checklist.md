@@ -4,7 +4,7 @@
 
 Última actualización: 2026-05-05.
 
-> **Estado:** Fases 1, 2, 3, 4 y 7 completadas (ContactForm aplazado a Fase 9). Fase 5 con stubs de páginas. **Fase 6 BLOQUEADA por material del cliente** (logo SVG vectorial, foto profesional doctora, fotos clínica). Próximo: **Fase 8 — SEO técnico** (`seo-strategist` + JSON-LD schemas).
+> **Estado:** Fases 1, 2, 3, 4, 7 y 8 completadas (ContactForm aplazado a Fase 9; SEO con TODOs cliente documentados). Fase 5 con stubs `noindex,follow`. **Fase 6 BLOQUEADA por material del cliente**. Próximo: **Fase 9 — backend/formularios** (Astro Action contact.submit + Resend + anti-bot).
 
 ---
 
@@ -88,14 +88,23 @@
 
 ## Fase 8 — SEO técnico
 
-- [ ] `seo-plan.md` con keywords + intención por página
-- [ ] `<head>` canónico, OG, Twitter card por página
-- [ ] Schema JSON-LD: `LocalBusiness` (Home), `MedicalBusiness`/`MedicalClinic`, `Person` (doctora), `Service` por submarca, `BreadcrumbList`, `WebSite` con SearchAction
-- [ ] `robots.txt` + `sitemap.xml` (vía `@astrojs/sitemap`)
-- [ ] hreflang `es-ES` + `og:locale`
-- [ ] Internal linking entre submarcas y home
-- [ ] Slugs limpios sin acentos (`/medicina-estetica`)
-- [ ] Auditoría SEO con `/vibe-seo-audit`
+- [x] `seo-plan.md` con keywords + intención por página + apéndice §9 con review del seo-strategist
+- [x] `<head>` enriquecido: og:site_name, og:image fallback (1200×630), twitter card completa, theme-color brand, prop `noindex` por página
+- [x] Schema JSON-LD vía `@graph`:
+  - Home: `MedicalClinic`+`LocalBusiness` + `WebSite` + `Physician` (ref) cruzados por `@id`
+  - `[submarca]`: `Service` + `BreadcrumbList`
+  - `/dra-abigail-cevallos`: `Physician` (full) + `BreadcrumbList`, `og:type=profile`
+  - `/contacto`: `MedicalClinic` (compact, principalmente horarios+dirección) + `BreadcrumbList`
+  - `/blog`: `Blog` + `BreadcrumbList` (funciona con colección vacía)
+- [x] `medicalSpecialty` corregido: `["Dermatology","PlasticSurgery"]`
+- [x] `robots.txt` con `Disallow: /_astro/` + sitemap-index referenced
+- [x] Sitemap: filtra `/dev/` y páginas legales; `lastmod` + `changefreq=weekly` (9 URLs)
+- [x] `og:locale=es_ES` (hreflang aplazado hasta confirmar idiomas extra; aún no hay)
+- [x] Internal linking: anchor texts documentados en seo-plan §9.2 — pendiente aplicar en copy (Fase copy)
+- [x] Slugs limpios sin acentos
+- [~] Submarcas marcadas `noindex,follow` hasta tener copy validado (riesgo YMYL thin-content)
+- [ ] `/vibe-seo-audit` post-launch sobre BUILD producción
+- [ ] `[cliente]` Foto OG por página, GBP, nº colegiada para `Person.memberOf`, geo coords exactas
 
 ## Fase 9 — Backend / formularios
 
