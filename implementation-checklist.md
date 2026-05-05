@@ -4,7 +4,7 @@
 
 Última actualización: 2026-05-05.
 
-> **Estado:** Fases 1, 2, 3 y 4 completadas (ContactForm aplazado a Fase 9). Fase 5 con stubs de páginas (rutas vivas, copy `[TODO]` por bloque). Próximo: **Fase 6 — imágenes** con `image-art-director` + `/vibe-image-pipeline`.
+> **Estado:** Fases 1, 2, 3, 4 y 7 completadas (ContactForm aplazado a Fase 9). Fase 5 con stubs de páginas. **Fase 6 BLOQUEADA por material del cliente** (logo SVG vectorial, foto profesional doctora, fotos clínica). Próximo: **Fase 8 — SEO técnico** (`seo-strategist` + JSON-LD schemas).
 
 ---
 
@@ -80,11 +80,11 @@
 
 ## Fase 7 — Animaciones
 
-- [ ] Hero: fade-in suave del display + script (CSS, 400ms ease-out)
-- [ ] Cards de submarca: hover sutil (transform + shadow, 240ms)
-- [ ] Reveal on scroll en secciones secundarias (IntersectionObserver, 1 vez)
-- [ ] Honor `prefers-reduced-motion` en cada animación (verificado en QA)
-- [ ] Transiciones entre páginas con ViewTransitions (opt-in, fallback graceful)
+- [x] Hero: fade-in + 8px rise con stagger por elemento (logo/h1/p/CTAs), CSS keyframe `hero-rise` 600ms `var(--ease-out)`
+- [x] Cards de submarca: hover lift + shadow ya provistos por `Card.astro` (sin código duplicado)
+- [x] Reveal on scroll: utilidad `.reveal/.is-visible` + isla Preact `Reveal` (IntersectionObserver, una sola vez, `unobserve` tras dispararse)
+- [x] `prefers-reduced-motion`: doble guarda — global `@layer base` + override explícito en cada utilidad de motion; isla Reveal detecta `matchMedia` y revela inmediatamente
+- [x] ViewTransitions: `<ClientRouter />` activado en Layout (Fase 3)
 
 ## Fase 8 — SEO técnico
 
