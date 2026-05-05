@@ -2,7 +2,7 @@
 
 > Estrategia SEO: keywords, intención, schemas, internal linking. La validación detallada se hace en Fase 8 con el subagente `seo-strategist` y la skill `/vibe-seo-audit`.
 
-Última actualización: 2026-05-05.
+Última actualización: 2026-05-05 (apéndice §9 con revisión seo-strategist).
 
 ---
 
@@ -135,7 +135,7 @@ Cada post incluirá `Article` JSON-LD con `author` Person, `mainEntityOfPage`, `
   "openingHoursSpecification": [
     { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Mo","Tu","We","Th","Fr"], "opens": "10:00", "closes": "20:00" }
   ],
-  "medicalSpecialty": "CosmeticDentistry",
+  "medicalSpecialty": ["Dermatology", "PlasticSurgery"],
   "priceRange": "€€€",
   "sameAs": [ "https://instagram.com/cemadclinic" ]
 }
@@ -212,10 +212,60 @@ Pattern:
 
 ## 8. Pendientes Fase 8
 
-- [ ] Search intent validation con datos reales (ahrefs/semrush)
+- [x] Search intent validation parcial (revisión seo-strategist 2026-05-05; volúmenes a verificar con SEMrush/Ahrefs antes del calendario editorial)
 - [ ] Coordenadas GPS exactas para schema
 - [ ] Lista oficial de tratamientos por submarca (impacta `Service.hasOfferCatalog`)
 - [ ] Foto OG por página (ver `images-plan.md`)
 - [ ] Confirmar nº colegiada + colegios profesionales para `Person.memberOf`
 - [ ] Verificar si la web previa tiene URLs indexadas → plan de redirecciones 301
 - [ ] Google Search Console + Bing Webmaster setup post-launch
+- [ ] Google Business Profile (creación/reclamación) — prioridad 1 SEO local
+- [ ] Citaciones NAP coherentes (Doctoralia, Top Doctors, Páginas Amarillas, etc.)
+
+---
+
+## 9. Apéndice — Revisión seo-strategist (2026-05-05)
+
+> Refinamientos sobre el plan base. Las acciones críticas/altas que dependen sólo de implementación ya están aplicadas en el repo en este commit.
+
+### 9.1 Schemas — correcciones aplicadas
+
+- `medicalSpecialty`: `CosmeticDentistry` ❌ → `["Dermatology", "PlasticSurgery"]` ✅
+- `Person` → preferir subtipo `Physician` (señal E-E-A-T más fuerte que `Person` plano).
+- `@id` absolutos para todas las entidades — habilita referencias cruzadas (`MedicalClinic.employee` referencia a doctora por `@id` en lugar de duplicar).
+- `Service` se mantiene; `MedicalProcedure` requeriría validación clínica del catálogo.
+- `FAQPage` schema queda **bloqueado** hasta que las FAQs estén validadas médicamente (Fase 5). Las provisionales no emiten schema.
+- Páginas legales: sin schema (anti-patrón).
+
+### 9.2 Internal linking — anchor texts
+
+Reemplazar el "Descubrir →" genérico de las cards de Home por anchors específicos que incluyan keyword + ciudad (queda para Fase copy con copywriter):
+
+| Destino | Anchor recomendado |
+|---|---|
+| `/medicina-estetica` | "Medicina Estética en Valencia" |
+| `/iv-therapy` | "IV Therapy Valencia" |
+| `/anti-aging-avanzado` | "Anti-Aging Avanzado Valencia" |
+| `/hair-clinic` | "Hair Clinic Valencia" |
+| `/laser-dermoestetico` | "Láser Dermoestético Valencia" |
+| `/dra-abigail-cevallos` | "Conoce a la Dra. Abigail Cevallos Madrid" |
+| `/contacto` (CTA) | "Reserva tu primera consulta en CEMAD" |
+
+### 9.3 Keywords adicionales (sin volúmenes — verificar)
+
+- Diferenciador médico vs. centro estético: `clínica médica estética Valencia`, `medicina estética con médico Valencia`, `consulta medicina estética Valencia`.
+- IV Therapy: usar paralelamente `terapia intravenosa vitaminas Valencia`, `nutrición intravenosa Valencia`, `suero vitaminas Valencia` (mercado ES busca menos en inglés que en cierre premium).
+- Hair Clinic: `caída capilar tratamiento Valencia`, `alopecia androgenética Valencia`, `PRP capilar Valencia`.
+- Láser: `manchas solares láser Valencia`, `cicatrices láser Valencia`, **evitar competir** con cadenas de bajo coste por "depilación láser Valencia" salvo posicionar como "depilación láser médica Valencia".
+- Doctora: evitar superlativos ("mejor médica…") — riesgo YMYL. Preferir `médica especialista en medicina estética Valencia`.
+- Blog informacional (alcance nacional): `qué es la mesoterapia facial`, `diferencia entre medicina estética y cirugía plástica`, `cuánto dura el bótox`, `pérdida de cabello en mujeres tratamiento`.
+
+`[TODO Fase 8 verify]` — todas las anteriores requieren validación de volumen y dificultad antes de priorizar el calendario editorial.
+
+### 9.4 Riesgos críticos
+
+- **Thin content en submarcas stub**: aplicado `noindex, follow` en `[submarca].astro` hasta que llegue copy validado. Retirar página a página tras Fase 5.
+- **E-E-A-T débil en `/dra-abigail-cevallos`**: foto, bio, nº colegiada y formación son **prioridad 1 cliente** — sin esto el schema `Physician` carece de sustento verificable.
+- **JSON-LD + ViewTransitions**: verificar con DevTools tras `npm run build && npm run preview` que el `<head>` se reemplaza correctamente al navegar entre páginas (Astro maneja swap automático del head, pero confirmamos).
+- **Google Business Profile**: para una clínica con dirección física en Valencia, GBP es igual o más importante que el SEO orgánico (Map Pack domina las SERPs locales).
+
