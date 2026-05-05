@@ -4,7 +4,7 @@
 
 Última actualización: 2026-05-05.
 
-> **Estado:** Fases 1, 2 y 3 completadas. Fase 5 con stubs de páginas (rutas vivas, copy `[TODO]` por bloque). Próximo: Fase 4 — islas Preact restantes (FAQ, carousel, FAB, ContactForm en Fase 9).
+> **Estado:** Fases 1, 2, 3 y 4 completadas (ContactForm aplazado a Fase 9). Fase 5 con stubs de páginas (rutas vivas, copy `[TODO]` por bloque). Próximo: **Fase 6 — imágenes** con `image-art-director` + `/vibe-image-pipeline`.
 
 ---
 
@@ -48,11 +48,11 @@
 
 ## Fase 4 — Interactividad (islas Preact)
 
-- [ ] `MobileMenu` (ya en Fase 3)
-- [ ] `FaqAccordion` (radix-style, ARIA expanded, animado con CSS)
-- [ ] `ServiceCarousel` (5 submarcas, embla-carousel si aporta)
-- [ ] `WhatsAppFAB` (botón flotante con teléfono `siteConfig.contact.whatsapp`)
-- [ ] `ContactForm` (Preact + Astro Action backend en Fase 9)
+- [x] `MobileMenu` (cerrado en Fase 3)
+- [x] `FaqAccordion` — ARIA expanded/controls, role=region, single-open default, hidratado `client:visible`
+- [~] `ServiceCarousel` — **decisión: NO se implementa.** Grid responsive ya funciona en Home, embla añadiría ~12kb gz sin valor real para 5 items. Reabrir si UX-UI senior lo pide tras review.
+- [x] `WhatsAppFAB` — FAB flotante, dismissible por sesión, hidratado `client:idle`, oculto en `bare` layouts
+- [ ] `ContactForm` — pospuesto a Fase 9 (depende de Astro Action + Resend)
 
 ## Fase 5 — Contenido
 
