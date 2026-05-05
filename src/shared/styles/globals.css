@@ -66,6 +66,36 @@
   .motion-safe\:animate-fadein  { animation: fadein  var(--duration-base) var(--ease-out) }
   .motion-safe\:animate-slidein { animation: slidein var(--duration-base) var(--ease-out) }
 
+  /* Hero rise: opacidad + 8px sutil; staggers via inline animation-delay */
+  @keyframes hero-rise {
+    from { opacity: 0; transform: translateY(8px) }
+    to   { opacity: 1; transform: translateY(0) }
+  }
+  .hero-rise {
+    opacity: 0;
+    animation: hero-rise 600ms var(--ease-out) forwards;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-rise { animation: none; opacity: 1; transform: none; }
+  }
+
+  /* Reveal-on-scroll: pintado por la isla Reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 500ms var(--ease-out),
+      transform 500ms var(--ease-out);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+
   /* Skip link visible solo al recibir focus */
   .skip-link {
     position: absolute;

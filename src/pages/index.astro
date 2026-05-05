@@ -6,6 +6,7 @@ import Button from "@shared/ui/primitives/Button.astro";
 import Card from "@shared/ui/primitives/Card.astro";
 import Badge from "@shared/ui/primitives/Badge.astro";
 import Logo from "@shared/ui/brand/Logo.astro";
+import Reveal from "@shared/ui/islands/Reveal.tsx";
 import { siteConfig } from "@shared/config/site";
 import { services } from "@shared/config/services";
 ---
@@ -15,17 +16,21 @@ import { services } from "@shared/config/services";
     <!-- HERO -->
     <Section tone="paper" spacing="loose">
       <div class="text-center max-w-3xl mx-auto">
-        <Logo variant="principal" width={220} class="mx-auto mb-8" />
-        <Heading as={1} variant="display" align="center">
-          Donde la ciencia y el arte se unen para revelar
-          <span class="block mt-2 font-[family-name:var(--font-script)] text-[1.1em] text-[var(--color-gold-dark)]">
-            Tu Mejor Versión
-          </span>
-        </Heading>
-        <p class="mt-6 text-lg text-[var(--color-mute)] max-w-[60ch] mx-auto">
+        <div class="hero-rise" style="animation-delay:0ms">
+          <Logo variant="principal" width={220} class="mx-auto mb-8" />
+        </div>
+        <div class="hero-rise" style="animation-delay:120ms">
+          <Heading as={1} variant="display" align="center">
+            Donde la ciencia y el arte se unen para revelar
+            <span class="block mt-2 font-[family-name:var(--font-script)] text-[1.1em] text-[var(--color-gold-dark)]">
+              Tu Mejor Versión
+            </span>
+          </Heading>
+        </div>
+        <p class="mt-6 text-lg text-[var(--color-mute)] max-w-[60ch] mx-auto hero-rise" style="animation-delay:260ms">
           {siteConfig.description}
         </p>
-        <div class="mt-10 flex gap-3 justify-center flex-wrap">
+        <div class="mt-10 flex gap-3 justify-center flex-wrap hero-rise" style="animation-delay:380ms">
           <Button href="/contacto" variant="primary" size="lg">
             Reserva tu primera consulta
           </Button>
@@ -45,25 +50,27 @@ import { services } from "@shared/config/services";
         </Heading>
       </div>
       <ul class="grid gap-6 grid-cols-[repeat(auto-fit,minmax(260px,1fr))] list-none p-0 m-0">
-        {services.map((s) => (
-          <Card as="li" variant="elevated" accent={s.color} href={`/${s.slug}`}>
-            <Badge accent={s.color}>{s.name}</Badge>
-            <Heading as={3} visual={3} class="mt-3">{s.fullName}</Heading>
-            <p class="font-[family-name:var(--font-script)] text-2xl mt-1" style={`color:${s.ariaColor}`}>
-              {s.shortClaim}
-            </p>
-            <p class="text-[var(--color-mute)] mt-2 text-sm">{s.longClaim}</p>
-            <span class="block mt-4 text-[var(--color-ink)] font-medium border-b border-current pb-0.5 w-fit">
-              Descubrir →
-            </span>
-          </Card>
+        {services.map((s, i) => (
+          <Reveal client:visible as="li" delay={i * 80}>
+            <Card variant="elevated" accent={s.color} href={`/${s.slug}`}>
+              <Badge accent={s.color}>{s.name}</Badge>
+              <Heading as={3} visual={3} class="mt-3">{s.fullName}</Heading>
+              <p class="font-[family-name:var(--font-script)] text-2xl mt-1" style={`color:${s.ariaColor}`}>
+                {s.shortClaim}
+              </p>
+              <p class="text-[var(--color-mute)] mt-2 text-sm">{s.longClaim}</p>
+              <span class="block mt-4 text-[var(--color-ink)] font-medium border-b border-current pb-0.5 w-fit">
+                Descubrir →
+              </span>
+            </Card>
+          </Reveal>
         ))}
       </ul>
     </Section>
 
     <!-- DOCTORA TEASER (placeholder fase 5) -->
     <Section tone="paper" spacing="default">
-      <div class="grid lg:grid-cols-2 gap-10 items-center">
+      <Reveal client:visible class="grid lg:grid-cols-2 gap-10 items-center">
         <div>
           <Badge tone="gold">La doctora</Badge>
           <Heading as={2} visual={2} class="mt-3">
@@ -83,7 +90,7 @@ import { services } from "@shared/config/services";
         <div class="aspect-[4/5] bg-[var(--color-paper-soft)] rounded-[var(--radius-lg)] flex items-center justify-center text-[var(--color-mute)] text-sm">
           [Foto de la Dra. Cevallos · pendiente de cliente]
         </div>
-      </div>
+      </Reveal>
     </Section>
 
     <!-- CTA principal antes del footer -->
