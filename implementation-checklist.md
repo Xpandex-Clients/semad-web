@@ -4,6 +4,8 @@
 
 Última actualización: 2026-05-05.
 
+> **Estado:** Fases 1, 2 y 3 completadas. Fase 5 con stubs de páginas (rutas vivas, copy `[TODO]` por bloque). Próximo: Fase 4 — islas Preact restantes (FAQ, carousel, FAB, ContactForm en Fase 9).
+
 ---
 
 ## Fase 1 — Fundamentos
@@ -36,12 +38,13 @@
 
 ## Fase 3 — Layout y navegación
 
-- [ ] `src/shared/ui/layout/Header.astro` (logo + nav + CTA contacto)
-- [ ] `src/shared/ui/layout/Footer.astro` (contacto + submarcas + legales + IG)
-- [ ] `MobileMenu.tsx` (Preact island, focus trap, close on Esc, target ≥ 44×44)
-- [ ] `BaseLayout.astro` con `<head>` SEO + ViewTransitions opt-in
-- [ ] Skip-link a `#main` (WCAG)
-- [ ] Smoke test en dev: navegación funciona, no hay overflows
+- [x] `src/shared/ui/layout/Header.astro` (logo + nav + CTA contacto + dropdown desktop submarcas)
+- [x] `src/shared/ui/layout/Footer.astro` (contacto + submarcas + legales + IG + horarios)
+- [x] `MobileMenu.tsx` (Preact island, focus trap, close on Esc, body scroll lock, restore focus, target ≥ 44×44)
+- [x] `Layout.astro` con `<head>` SEO + ViewTransitions (`ClientRouter`) + slot `head` + prop `bare`
+- [x] Skip-link a `#main` (WCAG)
+- [x] `src/shared/config/navigation.ts` (single source of truth para Header/MobileMenu/Footer)
+- [x] Build passes sobre las 13 rutas (incl. 5 submarcas dinámicas, blog, legales, contacto, doctora)
 
 ## Fase 4 — Interactividad (islas Preact)
 
@@ -53,12 +56,12 @@
 
 ## Fase 5 — Contenido
 
-- [ ] `content-plan.md` con copy concreto por página
-- [ ] Home: hero (display + script + CTA), submarcas grid, sobre la doctora teaser, testimonios `[TODO]`, contacto
-- [ ] 5 landings de submarca: hero color propio, claim, listado de tratamientos, FAQ, CTA
-- [ ] `/dra-abigail-cevallos`: bio `[TODO]`, formación, valores, foto `[TODO]`
-- [ ] `/contacto`: formulario, mapa, horarios, redes, WhatsApp
-- [ ] **Blog v1**: schema Zod en `src/content/blog/`, índice `/blog`, página individual `/blog/[slug]`, RSS, internal linking desde submarcas
+- [x] `content-plan.md` con copy concreto por página (versión inicial)
+- [~] Home: CTA gold antes del footer + submarcas grid + bloque doctora; testimonios `[TODO]`
+- [~] 5 landings de submarca dinámicas: hero color propio, claim, CTA. Falta listado tratamientos + FAQ + copy validado
+- [~] `/dra-abigail-cevallos`: layout listo; falta bio + foto `[TODO con cliente]`
+- [~] `/contacto`: hero + canales (tel/WhatsApp/IG); formulario en Fase 9
+- [~] **Blog v1**: schema Zod commiteado, índice `/blog` con estado vacío. Falta `/blog/[slug]`, RSS, internal linking
 - [ ] Plan editorial seed: 5 artículos arranque (1 por submarca + 1 sobre la doctora) `[TODO: redactar con cliente]`
 - [ ] Microcopy de estados (loading/success/error formulario)
 - [ ] 404 + 500 con marca
