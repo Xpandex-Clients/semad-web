@@ -96,6 +96,25 @@
     .reveal { opacity: 1; transform: none; transition: none; }
   }
 
+  /* Link-reveal: subrayado dorado que crece en hover/focus */
+  .link-reveal {
+    background-image: linear-gradient(var(--color-gold), var(--color-gold));
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    padding-bottom: 2px;
+    transition: background-size 400ms var(--ease-out);
+  }
+  .link-reveal:hover,
+  .link-reveal:focus-visible,
+  a:hover .link-reveal,
+  a:focus-visible .link-reveal {
+    background-size: 100% 1px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .link-reveal { transition: none; }
+  }
+
   /* Skip link visible solo al recibir focus */
   .skip-link {
     position: absolute;

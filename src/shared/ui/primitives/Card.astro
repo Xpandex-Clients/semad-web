@@ -44,7 +44,7 @@ const baseClasses =
   "relative block rounded-[var(--radius-md)] overflow-hidden transition-[box-shadow,transform] duration-[var(--duration-base)] ease-[var(--ease-out)]";
 
 const linkClasses = isLink
-  ? "no-underline text-inherit hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-gold-dark)]"
+  ? "card-link no-underline text-inherit hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-gold-dark)]"
   : "";
 
 const finalClass = [
@@ -60,9 +60,23 @@ const finalClass = [
   {accent && (
     <span
       aria-hidden="true"
-      class="absolute inset-x-0 top-0 h-[3px]"
+      class="card-accent absolute inset-x-0 top-0 h-[3px] origin-left"
       style={`background:${accent}`}
     />
   )}
   <slot />
 </Tag>
+
+<style>
+  .card-accent {
+    transform: scaleX(0.3);
+    transition: transform 400ms var(--ease-out);
+  }
+  .card-link:hover .card-accent,
+  .card-link:focus-visible .card-accent {
+    transform: scaleX(1);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card-accent { transition: none; transform: scaleX(1); }
+  }
+</style>

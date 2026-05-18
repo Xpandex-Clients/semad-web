@@ -43,7 +43,12 @@ const spacingClasses: Record<NonNullable<Props["spacing"]>, string> = {
   none: "",
 };
 
-const styleAttr = tone === "submarca" && accent ? `background:${accent}` : "";
+// Submarca: aplica un overlay sutil oscuro para garantizar contraste 4.5:1
+// del texto blanco sobre los acentos claros (rose, silver).
+const styleAttr =
+  tone === "submarca" && accent
+    ? `background-color:${accent};background-image:linear-gradient(to bottom, rgb(0 0 0 / 0.18), rgb(0 0 0 / 0.32))`
+    : "";
 ---
 
 <Tag
