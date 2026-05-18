@@ -11,7 +11,7 @@ import { ClientRouter } from "astro:transitions";
 import { siteConfig } from "@shared/config/site";
 import Header from "@shared/ui/layout/Header.astro";
 import Footer from "@shared/ui/layout/Footer.astro";
-import WhatsAppFAB from "@shared/ui/islands/WhatsAppFAB.tsx";
+import FloatingWhatsApp from "@shared/ui/layout/FloatingWhatsApp.astro";
 
 interface Props {
   title?: string;
@@ -22,6 +22,8 @@ interface Props {
   ogType?: "website" | "article" | "profile";
   /** URL absoluta de la imagen OG; cae a /og/default.jpg si se omite. */
   ogImage?: string;
+  /** Alt de la imagen OG por página (describe la imagen específica). */
+  ogImageAlt?: string;
   /** Bloquea indexación (stub pages, sandbox). */
   noindex?: boolean;
 }
@@ -32,12 +34,14 @@ const {
   bare = false,
   ogType = "website",
   ogImage,
+  ogImageAlt,
   noindex = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, siteConfig.url).toString();
 const ogImageUrl = ogImage ?? `${siteConfig.url}/og/default.jpg`;
-const twitterHandle = siteConfig.contact.instagramHandle;
+const ogImageAltText = ogImageAlt ?? `${siteConfig.name} — ${siteConfig.tagline}`;
+const twitterHandle: string | null = null;
 ---
 
 <!doctype html>
@@ -49,6 +53,8 @@ const twitterHandle = siteConfig.contact.instagramHandle;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="es-ES" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
     <meta name="generator" content={Astro.generator} />
     {noindex && <meta name="robots" content="noindex, follow" />}
     <title>{title}</title>
@@ -64,11 +70,11 @@ const twitterHandle = siteConfig.contact.instagramHandle;
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={`${siteConfig.name} — ${siteConfig.tagline}`} />
+    <meta property="og:image:alt" content={ogImageAltText} />
 
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content={twitterHandle} />
+    {twitterHandle && <meta name="twitter:site" content={twitterHandle} />}
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
@@ -81,12 +87,6 @@ const twitterHandle = siteConfig.contact.instagramHandle;
     {!bare && <Header />}
     <slot />
     {!bare && <Footer />}
-    {!bare && (
-      <WhatsAppFAB
-        client:idle
-        phone={siteConfig.contact.whatsapp}
-        prefilledMessage={`Hola, me gustaría reservar una consulta en ${siteConfig.name}.`}
-      />
-    )}
+    {!bare && <FloatingWhatsApp />}
   </body>
 </html>
