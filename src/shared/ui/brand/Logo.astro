@@ -7,7 +7,12 @@
  * design-system.md y CONTEXT-project.md).
  */
 
-type Variant = "principal" | "vertical" | "isotipo" | "sello";
+type Variant =
+  | "principal"           // A: logotipo principal con tagline (lockup horizontal)
+  | "vertical"            // versión vertical (legacy interim)
+  | "isotipo"             // H: sólo isotipo (monograma circular)
+  | "sello"               // sello redondo decorativo (legacy interim)
+  | "lockup-isotipo";     // F: isotipo + logotipo horizontal (manual p. 27 var. F)
 type Tone = "color" | "white" | "ink";
 
 interface Props {
@@ -46,14 +51,16 @@ const fileMap: Record<Variant, string> =
     ? {
         principal: principalByTone[tone],
         vertical: "/brand/cemad-logo-vertical.png",
-        isotipo: "/brand/cemad-isotipo-monograma.png",
+        isotipo: "/brand/cemad-isotipo.png",
         sello: "/brand/cemad-isotipo-sello.png",
+        "lockup-isotipo": "/brand/cemad-lockup-isotipo.png",
       }
     : {
         principal: "/brand/cemad-logo-gold.png",
         vertical: "/brand/cemad-logo-vertical.png",
-        isotipo: "/brand/cemad-isotipo-monograma.png",
+        isotipo: "/brand/cemad-isotipo.png",
         sello: "/brand/cemad-isotipo-sello.png",
+        "lockup-isotipo": "/brand/cemad-lockup-isotipo.png",
       };
 
 const minWidth: Record<Variant, number> = {
@@ -61,11 +68,13 @@ const minWidth: Record<Variant, number> = {
   vertical: 165,
   isotipo: 35,
   sello: 80,
+  "lockup-isotipo": 180,
 };
 
 const w = width ?? minWidth[variant] * 1.6;
 
-// Para vertical/isotipo/sello mantenemos los filtros como interim si tone≠color.
+// Para los assets sobre transparente (isotipo, sello, lockup-isotipo) aplicamos
+// filter para tonos invertidos. El principal usa archivo por tono.
 const toneFilter: Record<Tone, string | undefined> = {
   color: undefined,
   white: variant === "principal" ? undefined : "brightness(0) invert(1)",
