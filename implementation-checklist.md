@@ -162,12 +162,19 @@
 
 ## Fase 15 — Deploy
 
-- [ ] `/vibe-deploy-hostinger` configurado (GitHub Actions → FTPS Hostinger)
-- [ ] Subdominio staging (ej. `staging.cemadclinic.com` o `dev.cemadclinic.com`) `[TODO: confirmar]`
-- [ ] `.htaccess` con headers de seguridad y rewrite a HTTPS
-- [ ] DNS apuntando al servidor `187.124.60.15`
-- [ ] HTTPS con cert válido (Let's Encrypt en Hostinger)
-- [ ] Test desde producción: smoke + Lighthouse
+- [x] `.github/workflows/deploy.yml` — push a `main` → prod; push a `staging` → staging. SSH+rsync, health check con hash, concurrency group
+- [x] `.github/workflows/ci.yml` — lint + typecheck + build en PRs a `main`/`staging`
+- [x] `.github/dependabot.yml` — npm + github-actions, semanal lunes 06:00 CET, target `staging`
+- [x] `public/.htaccess` — HTTPS forzado, security headers (HSTS/X-Frame-Options/nosniff/Referrer-Policy/Permissions-Policy), cache inmutable para assets, no-cache HTML, gzip
+- [x] `docs/deploy.md` — pasos manuales, comandos exactos `gh secret set`, DNS records, rollback, rotación de clave
+- [~] Secrets configurados en GitHub `[PENDIENTE: ejecutar comandos en docs/deploy.md §2]`
+- [~] Variables configuradas en GitHub `[PENDIENTE: ejecutar comandos en docs/deploy.md §3]`
+- [ ] Crear rama `staging` y push inicial `[PENDIENTE: git checkout -b staging && git push -u origin staging]`
+- [ ] Subdominio staging creado en hPanel `[BLOQUEADO: confirmar nombre con cliente]`
+- [ ] `DEPLOY_PATH_PROD` confirmado `[BLOQUEADO: cliente debe contratar dominio cemadclinic.com]`
+- [ ] DNS apuntando al servidor `187.124.60.15` `[BLOQUEADO: cliente]`
+- [ ] HTTPS con cert válido (Let's Encrypt — se activa solo en Hostinger cuando DNS apunta)
+- [ ] Primer deploy staging verificado: curl health.json + 200 home + 200 ruta profunda + cache headers
 - [ ] PR a `main` → producción (con go del usuario)
 
 ## Fase 16 — Release-ready
