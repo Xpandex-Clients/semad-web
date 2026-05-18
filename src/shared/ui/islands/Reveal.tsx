@@ -26,19 +26,17 @@ export default function Reveal({
     const el = ref.current;
     if (!el) return;
 
-    // Reduced motion: se revela inmediatamente vía CSS, no observamos.
     const prefersReduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    if (prefersReduced) {
-      el.classList.add("is-visible");
+    if (prefersReduced || !("IntersectionObserver" in window)) {
+      el.dataset.reveal = "visible";
       return;
     }
 
-    if (!("IntersectionObserver" in window)) {
-      el.classList.add("is-visible");
-      return;
-    }
+    // JS-enhanced reveal: el HTML SSR muestra el contenido sin opacity:0.
+    // Solo escondemos cuando JS ya está disponible y puede revelar al scroll.
+    el.dataset.reveal = "pending";
 
     const io = new IntersectionObserver(
       (entries) => {
@@ -46,9 +44,11 @@ export default function Reveal({
           if (entry.isIntersecting) {
             const target = entry.target as HTMLElement;
             if (delay > 0) {
-              window.setTimeout(() => target.classList.add("is-visible"), delay);
+              window.setTimeout(() => {
+                target.dataset.reveal = "visible";
+              }, delay);
             } else {
-              target.classList.add("is-visible");
+              target.dataset.reveal = "visible";
             }
             io.unobserve(target);
           }

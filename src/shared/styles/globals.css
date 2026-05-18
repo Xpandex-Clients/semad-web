@@ -79,21 +79,32 @@
     .hero-rise { animation: none; opacity: 1; transform: none; }
   }
 
-  /* Reveal-on-scroll: pintado por la isla Reveal */
+  /* Reveal-on-scroll: el contenido es visible por defecto (SSR + sin-JS).
+     La isla Reveal añade data-reveal="pending" en mount para ocultar,
+     y luego intercambia a data-reveal="visible" al entrar en viewport. */
   .reveal {
-    opacity: 0;
-    transform: translateY(12px);
+    opacity: 1;
+    transform: none;
     transition:
       opacity 500ms var(--ease-out),
       transform 500ms var(--ease-out);
+  }
+  .reveal[data-reveal="pending"] {
+    opacity: 0;
+    transform: translateY(12px);
     will-change: opacity, transform;
   }
-  .reveal.is-visible {
+  .reveal[data-reveal="visible"] {
     opacity: 1;
     transform: translateY(0);
   }
   @media (prefers-reduced-motion: reduce) {
-    .reveal { opacity: 1; transform: none; transition: none; }
+    .reveal,
+    .reveal[data-reveal="pending"] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
   }
 
   /* Link-reveal: subrayado dorado que crece en hover/focus */
