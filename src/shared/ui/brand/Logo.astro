@@ -31,12 +31,30 @@ const {
   class: className = "",
 } = Astro.props;
 
-const fileMap: Record<Variant, string> = {
-  principal: "/brand/cemad-logo-principal.png",
-  vertical: "/brand/cemad-logo-vertical.png",
-  isotipo: "/brand/cemad-isotipo-monograma.png",
-  sello: "/brand/cemad-isotipo-sello.png",
+// El PNG `cemad-logo-principal.png` lleva el lockup blanco sobre placa dorada
+// (versión sobre fondo dorado del manual). Para uso sobre fondos claros/oscuros
+// elegimos directamente el archivo correcto en lugar de aplicar filtros sobre
+// el PNG con fondo de color.
+const principalByTone: Record<Tone, string> = {
+  color: "/brand/cemad-logo-gold.png",   // logotipo dorado sobre transparente
+  white: "/brand/cemad-logo-white.png",  // logotipo blanco sobre transparente
+  ink: "/brand/cemad-logo-ink.png",      // logotipo tinta sobre transparente
 };
+
+const fileMap: Record<Variant, string> =
+  variant === "principal"
+    ? {
+        principal: principalByTone[tone],
+        vertical: "/brand/cemad-logo-vertical.png",
+        isotipo: "/brand/cemad-isotipo-monograma.png",
+        sello: "/brand/cemad-isotipo-sello.png",
+      }
+    : {
+        principal: "/brand/cemad-logo-gold.png",
+        vertical: "/brand/cemad-logo-vertical.png",
+        isotipo: "/brand/cemad-isotipo-monograma.png",
+        sello: "/brand/cemad-isotipo-sello.png",
+      };
 
 const minWidth: Record<Variant, number> = {
   principal: 140,
@@ -47,11 +65,11 @@ const minWidth: Record<Variant, number> = {
 
 const w = width ?? minWidth[variant] * 1.6;
 
-// Filtros para los tonos sobre PNG (interim). Cuando sea SVG se hace con currentColor.
+// Para vertical/isotipo/sello mantenemos los filtros como interim si tone≠color.
 const toneFilter: Record<Tone, string | undefined> = {
   color: undefined,
-  white: "brightness(0) invert(1)",
-  ink: "brightness(0)",
+  white: variant === "principal" ? undefined : "brightness(0) invert(1)",
+  ink: variant === "principal" ? undefined : "brightness(0)",
 };
 
 const styleAttr = [
