@@ -1,10 +1,12 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 import Section from "@shared/ui/primitives/Section.astro";
 import Heading from "@shared/ui/primitives/Heading.astro";
 import Badge from "@shared/ui/primitives/Badge.astro";
 import Button from "@shared/ui/primitives/Button.astro";
 import JsonLd from "@shared/ui/seo/JsonLd.astro";
+import doctoraPortrait from "@assets/images/doctora-cevallos-portrait.png";
 import {
   jsonLdGraph,
   physicianFullSchema,
@@ -47,8 +49,18 @@ const doctoraGraph = jsonLdGraph(
             Reserva una consulta
           </Button>
         </div>
-        <div class="aspect-[4/5] bg-[var(--color-paper-soft)] rounded-[var(--radius-lg)] flex items-center justify-center text-[var(--color-mute)] text-sm">
-          [Foto profesional · pendiente de cliente]
+        <div class="aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] bg-[var(--color-paper-soft)]">
+          <Image
+            src={doctoraPortrait}
+            alt={`Retrato profesional de la ${siteConfig.doctor.name}`}
+            widths={[480, 768, 1024]}
+            sizes="(min-width: 1024px) 480px, 90vw"
+            formats={["avif", "webp"]}
+            quality={82}
+            loading="eager"
+            fetchpriority="high"
+            class="h-full w-full object-cover object-[70%_center]"
+          />
         </div>
       </div>
     </Section>
