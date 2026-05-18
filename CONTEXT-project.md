@@ -104,3 +104,56 @@ Ver `risks.md` para detalle.
 ## Próximo paso
 
 **Fase 2 — Sistema de diseño:** documentar `design-system.md` con paleta, tipografía, escalas, easings y crear primitives (Button, Section, Container, Heading, Card, Badge) en `src/shared/ui/primitives/`.
+
+---
+
+## 2026-05-18 — Análisis competitivo cemadclinic.com (live)
+
+Sesión de refinamiento con agente de análisis sobre la web actual en producción.
+
+### Stack legacy detectado
+- WordPress 6.9.4 + OceanWP + Thrive Architect (page builder).
+- 5 familias tipográficas conviviendo (Cormorant Garamond, Manrope, Open Sans, Roboto, Kanit). Incoherente.
+- Sin AVIF/WebP, sin srcset serio. Logo PNG escalado.
+- jQuery + jQuery UI + jQuery Migrate + GTM + GA4.
+
+### Bugs graves en producción (oportunidad de superación)
+- 3 H1 vacíos en home.
+- Meta description ausente en home y `/endolaser/`.
+- `/endolaser/` con placeholder publicado: "Enter your text here..." y FAQs "Content Toggle Headline" sin rellenar.
+- Stack pesado → LCP ~2.5-3.5s en 4G.
+
+### Puntos fuertes a igualar
+1. Tagline diferenciadora: *"Construimos salud y estética. No marketing barato."* — postura clara.
+2. Concepto narrativo "Método Kintsugi" (territorio propio de marca).
+3. Paleta consistente dorado champagne + nude + carbón.
+4. Wordmark serif elegante.
+5. Form de captación simple visible en hero secundario.
+
+### Debilidades aprovechables
+1. Cero trust signals reales above-fold (sin nº colegiado visible, sin años, sin Doctoralia, sin reseñas Google).
+2. Fotografía 100% stock-like, genérica. Sin retratos médicos, sin instalaciones, sin equipamiento, sin antes/después.
+3. SEO técnico roto (H1 múltiples vacíos + meta description null + página con Lorem publicada).
+4. Testimonios anónimos solo con iniciales ("F. Ros", "T. Carrasco"). Baja credibilidad.
+5. Performance lastrada por Thrive/jQuery.
+
+### Movimientos aplicados en esta web para superarla
+- **Tipografía 3 familias coherentes** (Playfair Display + Montserrat + Corinthia) en lugar de 5.
+- **Schema JSON-LD completo**: MedicalClinic + LocalBusiness + Physician + Service + Breadcrumb + FAQ.
+- **Meta description y H1 únicos** por página vía `Layout.astro` + props.
+- **Hero con retrato editorial real** (extraído del manual de marca, AVIF+WebP, priority).
+- **Trust bar above-fold** con 4 micro-datos (años, especialidades, primera consulta, colegiada). Cifras [TODO confirmar].
+- **Card hover con accent dorado animado** (scaleX 0.3→1), link-reveal underline.
+- **Header con regla dorada al scroll**.
+- **Section submarca con overlay** para garantizar contraste 4.5:1 sobre rose/silver.
+- **Astro static + Preact islands selectivos** → JS shipped objetivo <60kb gz.
+- **hreflang es-ES + x-default** + canonical absoluto.
+- **`.htaccess` con HSTS, X-Frame-Options DENY, cache immutable para `/_astro/`**.
+
+### Estrategia pendiente (requiere material cliente)
+1. **Sesión de fotografía propia**: retrato Dra., clínica vacía iluminada, equipamiento real, manos detalle. Reemplaza el 100% stock que la live usa.
+2. **Trust signals reales**: nº colegiada, años exactos, rating Google, embed Doctoralia, casos antes/después con consentimiento.
+3. **Páginas servicio con contenido validado médicamente** (mínimo 800 palabras por submarca, FAQ específica).
+4. **Testimonios con foto y nombre completo** (con consentimiento), embeds Doctoralia/Google reviews.
+5. **Sticky CTA móvil "Reservar valoración"**.
+6. **Galería antes/después con lightbox y consentimiento**.
