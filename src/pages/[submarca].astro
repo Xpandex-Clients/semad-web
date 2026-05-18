@@ -1,5 +1,7 @@
 ---
 import type { GetStaticPaths } from "astro";
+import { Picture } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import Layout from "@layouts/Layout.astro";
 import Section from "@shared/ui/primitives/Section.astro";
 import Heading from "@shared/ui/primitives/Heading.astro";
@@ -15,6 +17,41 @@ import {
 } from "@shared/seo/schemas";
 import { services, type ServiceLine } from "@shared/config/services";
 import { serviceContent } from "@shared/config/serviceContent";
+import imgMedicina from "@assets/images/submarca-medicina-estetica.png";
+import imgIv from "@assets/images/submarca-iv-therapy.jpg";
+import imgAntiAging from "@assets/images/submarca-anti-aging-avanzado.jpg";
+import imgHair from "@assets/images/submarca-hair-clinic.png";
+import imgLaser from "@assets/images/submarca-laser-dermoestetico.png";
+
+type SubmarcaVisual = { src: ImageMetadata; alt: string; focal?: string };
+
+const submarcaVisuals: Record<string, SubmarcaVisual> = {
+  "medicina-estetica": {
+    src: imgMedicina,
+    alt: "Primer plano de rostro femenino con marcas de armonización facial sobre fondo beige neutro",
+    focal: "center",
+  },
+  "iv-therapy": {
+    src: imgIv,
+    alt: "Enfermera con guantes rosados sosteniendo un equipo de sueroterapia intravenosa junto a una paciente",
+    focal: "center",
+  },
+  "anti-aging-avanzado": {
+    src: imgAntiAging,
+    alt: "Especialista médica preparando un tratamiento estético, fotografía editorial",
+    focal: "center top",
+  },
+  "hair-clinic": {
+    src: imgHair,
+    alt: "Tratamiento de mesoterapia capilar con microinyección en cuero cabelludo",
+    focal: "center",
+  },
+  "laser-dermoestetico": {
+    src: imgLaser,
+    alt: "Mano enguantada aplicando dispositivo láser CO2 sobre la piel de una paciente",
+    focal: "center",
+  },
+};
 
 export const getStaticPaths: GetStaticPaths = () =>
   services.map((s) => ({ params: { submarca: s.slug }, props: { service: s } }));
@@ -25,6 +62,7 @@ interface Props {
 
 const { service } = Astro.props as unknown as Props;
 const content = serviceContent[service.slug];
+const visual = submarcaVisuals[service.slug];
 
 const submarcaGraph = jsonLdGraph(
   serviceSchema(service),
@@ -43,29 +81,54 @@ const submarcaGraph = jsonLdGraph(
     <JsonLd data={submarcaGraph} />
   </Fragment>
   <main id="main">
-    <!-- HERO submarca -->
+    <!-- HERO submarca (con imagen + accent color) -->
     <Section tone="submarca" accent={service.color} spacing="loose">
-      <div class="text-center max-w-3xl mx-auto">
-        <Badge tone="ink">{service.name}</Badge>
-        <Heading as={1} variant="display" tone="invert" align="center" class="mt-4">
-          <span class="block">{service.fullName}</span>
-          <span class="block mt-2 font-[family-name:var(--font-script)] text-[1.1em] text-[var(--color-paper)]">
-            {service.shortClaim}
-          </span>
-        </Heading>
-        <p class="mt-6 text-lg text-[var(--color-paper)]/95 max-w-[60ch] mx-auto">
-          {service.longClaim}
-        </p>
-        <Button
-          href="/contacto"
-          variant="submarca"
-          accent="var(--color-paper)"
-          accentText={service.color}
-          size="lg"
-          class="mt-8"
-        >
-          Reservar consulta
-        </Button>
+      <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-center">
+        <div class="text-center lg:text-left">
+          <Badge tone="ink">{service.name}</Badge>
+          <Heading as={1} variant="display" tone="invert" align="left" class="mt-4 text-center lg:text-left">
+            <span class="block">{service.fullName}</span>
+            <span class="block mt-2 font-[family-name:var(--font-script)] text-[1.1em] text-[var(--color-paper)]">
+              {service.shortClaim}
+            </span>
+          </Heading>
+          <p class="mt-6 text-lg text-[var(--color-paper)]/95 max-w-[58ch] mx-auto lg:mx-0">
+            {service.longClaim}
+          </p>
+          <div class="mt-8 flex gap-3 justify-center lg:justify-start flex-wrap">
+            <Button
+              href="/contacto"
+              variant="submarca"
+              accent="var(--color-paper)"
+              accentText={service.color}
+              size="lg"
+            >
+              Reservar consulta
+            </Button>
+            <Button href="#tratamientos" variant="outline" size="lg" class="text-[var(--color-paper)] border-[var(--color-paper)]/70 hover:bg-white/10 hover:border-[var(--color-paper)]">
+              Ver tratamientos
+            </Button>
+          </div>
+        </div>
+        <div class="relative aspect-[4/5] lg:aspect-[3/4] overflow-hidden rounded-[var(--radius-lg)] shadow-[var(--shadow-modal)]">
+          <Picture
+            src={visual.src}
+            alt={visual.alt}
+            widths={[480, 768, 1024, 1280]}
+            sizes="(min-width: 1024px) 540px, 92vw"
+            formats={["avif", "webp"]}
+            quality={80}
+            loading="eager"
+            fetchpriority="high"
+            class={`absolute inset-0 h-full w-full object-cover`}
+            style={`object-position:${visual.focal ?? "center"}`}
+          />
+          <div
+            aria-hidden="true"
+            class="pointer-events-none absolute inset-0 mix-blend-multiply"
+            style={`background:linear-gradient(135deg, ${service.color}00 35%, ${service.color}80 100%)`}
+          ></div>
+        </div>
       </div>
     </Section>
 
@@ -83,7 +146,7 @@ const submarcaGraph = jsonLdGraph(
     </Section>
 
     <!-- TRATAMIENTOS -->
-    <Section tone="paper-soft" spacing="default">
+    <Section id="tratamientos" tone="paper-soft" spacing="default">
       <div class="mb-10">
         <Badge accent={service.color}>Tratamientos</Badge>
         <Heading as={2} visual={2} class="mt-3">
