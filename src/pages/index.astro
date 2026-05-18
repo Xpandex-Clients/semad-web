@@ -38,7 +38,7 @@ const homeGraph = jsonLdGraph(
         <div class="hero-rise" style="animation-delay:120ms">
           <Heading as={1} variant="display" align="center">
             Donde la ciencia y el arte se unen para revelar
-            <span class="block mt-2 font-[family-name:var(--font-script)] text-[1.1em] text-[var(--color-gold-dark)]">
+            <span class="block font-[family-name:var(--font-script)] text-[1.4em] leading-[0.9] mt-[-0.05em] text-[var(--color-gold)] font-normal">
               Tu Mejor Versión
             </span>
           </Heading>
@@ -75,8 +75,8 @@ const homeGraph = jsonLdGraph(
                 {s.shortClaim}
               </p>
               <p class="text-[var(--color-mute)] mt-2 text-sm">{s.longClaim}</p>
-              <span class="block mt-4 text-[var(--color-ink)] font-medium border-b border-current pb-0.5 w-fit">
-                Descubrir →
+              <span class="link-reveal block mt-4 text-[var(--color-ink)] font-medium w-fit">
+                {s.fullName} en Valencia →
               </span>
             </Card>
           </Reveal>
@@ -128,7 +128,7 @@ const homeGraph = jsonLdGraph(
             variant="outline"
             size="lg"
             target="_blank"
-            class="text-[var(--color-paper)] border-[var(--color-paper)]/40 hover:border-[var(--color-paper)] hover:bg-white/10"
+            class="text-[var(--color-paper)] border-[var(--color-paper)]/70 hover:border-[var(--color-paper)] hover:bg-white/10"
           >
             WhatsApp
           </Button>
