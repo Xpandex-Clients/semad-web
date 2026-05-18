@@ -1,11 +1,193 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import { Picture } from "astro:assets";
+import Layout from "@layouts/Layout.astro";
+import Section from "@shared/ui/primitives/Section.astro";
+import Heading from "@shared/ui/primitives/Heading.astro";
+import Button from "@shared/ui/primitives/Button.astro";
+import Card from "@shared/ui/primitives/Card.astro";
+import Badge from "@shared/ui/primitives/Badge.astro";
+import Logo from "@shared/ui/brand/Logo.astro";
+import Reveal from "@shared/ui/islands/Reveal.tsx";
+import JsonLd from "@shared/ui/seo/JsonLd.astro";
+import {
+  jsonLdGraph,
+  medicalClinicSchema,
+  websiteSchema,
+  physicianRefSchema,
+} from "@shared/seo/schemas";
+import { siteConfig } from "@shared/config/site";
+import { services } from "@shared/config/services";
+import heroPortrait from "@assets/images/cemad-hero-portrait.png";
+import doctoraLegacy from "@assets/images/doctora-cevallos-portrait-legacy.jpg";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const homeGraph = jsonLdGraph(
+  medicalClinicSchema(),
+  websiteSchema(),
+  physicianRefSchema(),
+);
 ---
 
 <Layout>
-	<Welcome />
+  <Fragment slot="head">
+    <JsonLd data={homeGraph} />
+  </Fragment>
+  <main id="main">
+    <!-- HERO -->
+    <Section tone="paper" spacing="loose">
+      <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-center">
+        <div class="text-center lg:text-left max-w-2xl mx-auto lg:mx-0">
+          <div class="hero-rise" style="animation-delay:0ms">
+            <Logo variant="principal" width={200} class="mx-auto lg:mx-0 mb-8" />
+          </div>
+          <div class="hero-rise" style="animation-delay:120ms">
+            <Heading as={1} variant="display" align="left" class="text-center lg:text-left">
+              Donde la ciencia y el arte se unen para revelar
+              <span class="block font-[family-name:var(--font-script)] text-[1.4em] leading-[0.9] mt-[-0.05em] text-[var(--color-gold)] font-normal">
+                Tu Mejor Versión
+              </span>
+            </Heading>
+          </div>
+          <p class="mt-6 text-lg text-[var(--color-mute)] max-w-[58ch] mx-auto lg:mx-0 hero-rise" style="animation-delay:260ms">
+            {siteConfig.description}
+          </p>
+          <div class="mt-10 flex gap-3 justify-center lg:justify-start flex-wrap hero-rise" style="animation-delay:380ms">
+            <Button href="/contacto" variant="primary" size="lg">
+              Reserva tu primera consulta
+            </Button>
+            <Button href="#especialidades" variant="ghost" size="lg">
+              Ver especialidades
+            </Button>
+          </div>
+        </div>
+        <div class="hero-rise relative aspect-[4/5] lg:aspect-[3/4] overflow-hidden rounded-[var(--radius-lg)] shadow-[var(--shadow-card)]" style="animation-delay:200ms">
+          <Picture
+            src={heroPortrait}
+            alt="Retrato editorial de la propuesta CEMAD — medicina estética y antienvejecimiento"
+            widths={[480, 768, 1024, 1280]}
+            sizes="(min-width: 1024px) 540px, 92vw"
+            formats={["avif", "webp"]}
+            quality={82}
+            loading="eager"
+            fetchpriority="high"
+            class="absolute inset-0 h-full w-full object-cover object-[78%_center]"
+          />
+          <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[var(--color-ink)]/15 via-transparent to-transparent"></div>
+        </div>
+      </div>
+    </Section>
+
+    <!-- TRUST BAR -->
+    <Section tone="paper-soft" spacing="tight">
+      <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 list-none p-0 m-0 text-center lg:text-left">
+        <li>
+          <p class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-ink)] leading-none tracking-tight">+10</p>
+          <p class="mt-2 text-sm font-medium text-[var(--color-ink)]">Años en medicina estética</p>
+          <p class="text-xs text-[var(--color-mute)]/80">[TODO: confirmar cifra con la cliente]</p>
+        </li>
+        <li>
+          <p class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-ink)] leading-none tracking-tight">5</p>
+          <p class="mt-1 text-sm font-medium text-[var(--color-ink)]">Especialidades integradas</p>
+          <p class="text-xs text-[var(--color-mute)]">Medicina · IV · Anti-aging · Hair · Láser</p>
+        </li>
+        <li>
+          <p class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-ink)] leading-none tracking-tight">1ª</p>
+          <p class="mt-1 text-sm font-medium text-[var(--color-ink)]">Consulta sin compromiso</p>
+          <p class="text-xs text-[var(--color-mute)]">Valoración personalizada con la doctora</p>
+        </li>
+        <li>
+          <p class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-ink)] leading-none tracking-tight">Nº</p>
+          <p class="mt-1 text-sm font-medium text-[var(--color-ink)]">Colegiada en activo</p>
+          <p class="text-xs text-[var(--color-mute)]">[TODO: nº colegiada de la cliente]</p>
+        </li>
+      </ul>
+    </Section>
+
+    <!-- SUBMARCAS -->
+    <Section id="especialidades" tone="paper-soft" spacing="default">
+      <div class="text-center mb-10">
+        <Badge tone="gold">Especialidades</Badge>
+        <Heading as={2} visual={2} align="center" class="mt-3">
+          Cinco caminos hacia <em class="not-italic font-[family-name:var(--font-script)] text-[1.2em] text-[var(--color-gold-dark)]">Tu Mejor Versión</em>
+        </Heading>
+      </div>
+      <ul class="grid gap-6 grid-cols-[repeat(auto-fit,minmax(260px,1fr))] list-none p-0 m-0">
+        {services.map((s, i) => (
+          <Reveal client:visible as="li" delay={i * 80}>
+            <Card variant="elevated" accent={s.color} href={`/${s.slug}`}>
+              <Badge accent={s.color}>{s.name}</Badge>
+              <Heading as={3} visual={3} class="mt-3">{s.fullName}</Heading>
+              <p class="font-[family-name:var(--font-script)] text-2xl mt-1" style={`color:${s.ariaColor}`}>
+                {s.shortClaim}
+              </p>
+              <p class="text-[var(--color-mute)] mt-2 text-sm">{s.longClaim}</p>
+              <span class="link-reveal block mt-4 text-[var(--color-ink)] font-medium w-fit">
+                {s.fullName} en Valencia →
+              </span>
+            </Card>
+          </Reveal>
+        ))}
+      </ul>
+    </Section>
+
+    <!-- DOCTORA TEASER (placeholder fase 5) -->
+    <Section tone="paper" spacing="default">
+      <Reveal client:visible class="grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <Badge tone="gold">La doctora</Badge>
+          <Heading as={2} visual={2} class="mt-3">
+            La medicina estética es una ciencia de detalles.
+          </Heading>
+          <p class="mt-4 text-[var(--color-mute)]">
+            CEMAD es la clínica de la <strong>{siteConfig.doctor.name}</strong>,
+            especialista en {siteConfig.doctor.role.toLowerCase()} en el centro de Valencia.
+            <em class="text-[var(--color-mute)]">
+              [TODO: bio profesional confirmada por la cliente]
+            </em>
+          </p>
+          <Button href="/dra-abigail-cevallos" variant="outline" class="mt-6">
+            Conoce a la doctora
+          </Button>
+        </div>
+        <div class="aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] bg-[var(--color-paper-soft)] shadow-[var(--shadow-card)]">
+          <Picture
+            src={doctoraLegacy}
+            alt={`Retrato profesional de la ${siteConfig.doctor.name} en CEMAD Valencia`}
+            widths={[480, 768, 1024]}
+            sizes="(min-width: 1024px) 480px, 92vw"
+            formats={["avif", "webp"]}
+            quality={82}
+            loading="lazy"
+            class="h-full w-full object-cover object-[center_top]"
+          />
+        </div>
+      </Reveal>
+    </Section>
+
+    <!-- CTA principal antes del footer -->
+    <Section tone="gold" spacing="default">
+      <div class="text-center max-w-2xl mx-auto">
+        <Heading as={2} visual={2} tone="invert" align="center">
+          Empieza por una conversación.
+        </Heading>
+        <p class="mt-4 text-[var(--color-paper)]/90">
+          La primera consulta con la {siteConfig.doctor.name} es donde
+          empezamos a definir tu plan personalizado.
+        </p>
+        <div class="mt-8 flex gap-3 justify-center flex-wrap">
+          <Button href="/contacto" variant="submarca" accent="var(--color-paper)" accentText="var(--color-gold-dark)" size="lg">
+            Reservar consulta
+          </Button>
+          <Button
+            href={`https://wa.me/${siteConfig.contact.whatsapp.replace(/[^0-9]/g, '')}`}
+            variant="outline"
+            size="lg"
+            target="_blank"
+            class="text-[var(--color-paper)] border-[var(--color-paper)]/70 hover:border-[var(--color-paper)] hover:bg-white/10"
+          >
+            WhatsApp
+          </Button>
+        </div>
+      </div>
+    </Section>
+  </main>
 </Layout>

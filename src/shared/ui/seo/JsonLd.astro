@@ -1,0 +1,16 @@
+---
+/**
+ * Renderiza un objeto JSON-LD como `<script type="application/ld+json">`.
+ * Acepta el output de `jsonLdGraph()` o cualquier objeto serializable.
+ */
+interface Props {
+  data: Record<string, unknown>;
+}
+
+const { data } = Astro.props;
+// JSON.stringify sin indent — peso mínimo. `<` escapado por Astro automáticamente
+// dentro de set:html no es necesario porque inyectamos JSON puro.
+const json = JSON.stringify(data);
+---
+
+<script type="application/ld+json" set:html={json} />

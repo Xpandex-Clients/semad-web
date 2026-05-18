@@ -1,0 +1,105 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "@layouts/Layout.astro";
+import Section from "@shared/ui/primitives/Section.astro";
+import Heading from "@shared/ui/primitives/Heading.astro";
+import Button from "@shared/ui/primitives/Button.astro";
+import Badge from "@shared/ui/primitives/Badge.astro";
+import FaqAccordion, { type FaqItem } from "@shared/ui/islands/FaqAccordion.tsx";
+import JsonLd from "@shared/ui/seo/JsonLd.astro";
+import {
+  jsonLdGraph,
+  serviceSchema,
+  breadcrumbSchema,
+} from "@shared/seo/schemas";
+import { services, type ServiceLine } from "@shared/config/services";
+
+const faqProvisional: FaqItem[] = [
+  {
+    q: "¿Cómo es la primera consulta?",
+    a: "Una valoración personalizada con la doctora donde escuchamos tus objetivos, exploramos antecedentes y diseñamos un plan a tu medida. Sin compromiso de tratamiento.",
+  },
+  {
+    q: "¿Cuánto duran los resultados?",
+    a: "Depende del tratamiento, tu fisiología y el plan de mantenimiento. En tu primera consulta te damos un horizonte realista para cada opción que valoremos. [TODO Fase 5: validar por la cliente]",
+  },
+  {
+    q: "¿Puedo combinar varios tratamientos?",
+    a: "Sí, y en muchos casos lo recomendamos. La doctora prioriza un enfoque integral en lugar de tratamientos aislados, siempre respetando tiempos de recuperación. [TODO Fase 5: validar]",
+  },
+];
+
+export const getStaticPaths: GetStaticPaths = () =>
+  services.map((s) => ({ params: { submarca: s.slug }, props: { service: s } }));
+
+interface Props {
+  service: ServiceLine;
+}
+
+const { service } = Astro.props as unknown as Props;
+
+const submarcaGraph = jsonLdGraph(
+  serviceSchema(service),
+  breadcrumbSchema([
+    { name: "Inicio", url: "/" },
+    { name: service.name, url: `/${service.slug}` },
+  ]),
+);
+---
+
+<Layout
+  title={`${service.fullName} en Valencia | CEMAD`}
+  description={`${service.longClaim} En CEMAD, clínica de la Dra. Abigail Cevallos Madrid en Valencia.`}
+  noindex
+>
+  <Fragment slot="head">
+    <JsonLd data={submarcaGraph} />
+  </Fragment>
+  <main id="main">
+    <Section tone="submarca" accent={service.color} spacing="loose">
+      <div class="text-center max-w-3xl mx-auto">
+        <Badge tone="ink">{service.name}</Badge>
+        <Heading as={1} variant="display" tone="invert" align="center" class="mt-4">
+          <span class="block">{service.fullName}</span>
+          <span class="block mt-2 font-[family-name:var(--font-script)] text-[1.1em] text-[var(--color-paper)]">
+            {service.shortClaim}
+          </span>
+        </Heading>
+        <p class="mt-6 text-lg text-[var(--color-paper)]/90 max-w-[60ch] mx-auto">
+          {service.longClaim}
+        </p>
+        <Button href="/contacto" variant="submarca" accent="var(--color-paper)" accentText={service.color} size="lg" class="mt-8">
+          Reservar consulta
+        </Button>
+      </div>
+    </Section>
+
+    <Section tone="paper" spacing="default">
+      <div class="max-w-2xl mx-auto text-center">
+        <Heading as={2} visual={3} align="center">Página en construcción</Heading>
+        <p class="mt-4 text-[var(--color-mute)]">
+          Estamos terminando el contenido detallado de <strong>{service.name}</strong>:
+          tratamientos, indicaciones, primera consulta y FAQ. Mientras tanto,
+          puedes pedir cita directamente.
+        </p>
+        <p class="mt-2 text-xs text-[var(--color-mute)]">
+          [TODO Fase 5 — copy validado médicamente con la cliente]
+        </p>
+        <div class="mt-6 flex justify-center">
+          <Button href="/contacto" variant="primary" size="md">Hablar con la clínica</Button>
+        </div>
+      </div>
+    </Section>
+
+    <Section tone="paper-soft" spacing="default" width="narrow">
+      <Badge tone="gold">Preguntas frecuentes</Badge>
+      <Heading as={2} visual={2} class="mt-3 mb-6">
+        Resolvemos lo que más nos preguntan.
+      </Heading>
+      <FaqAccordion client:visible items={faqProvisional} />
+      <p class="mt-6 text-xs text-[var(--color-mute)]">
+        [TODO Fase 5 — FAQ específicas de {service.name} validadas por la doctora]
+      </p>
+    </Section>
+  </main>
+</Layout>

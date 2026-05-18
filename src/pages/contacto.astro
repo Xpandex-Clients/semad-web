@@ -1,0 +1,61 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Section from "@shared/ui/primitives/Section.astro";
+import Heading from "@shared/ui/primitives/Heading.astro";
+import Badge from "@shared/ui/primitives/Badge.astro";
+import Button from "@shared/ui/primitives/Button.astro";
+import JsonLd from "@shared/ui/seo/JsonLd.astro";
+import { jsonLdGraph, medicalClinicSchema, breadcrumbSchema } from "@shared/seo/schemas";
+import { siteConfig } from "@shared/config/site";
+
+const waNumber = siteConfig.contact.whatsapp.replace(/[^0-9]/g, "");
+
+const contactoGraph = jsonLdGraph(
+  medicalClinicSchema(),
+  breadcrumbSchema([
+    { name: "Inicio", url: "/" },
+    { name: "Contacto", url: "/contacto" },
+  ]),
+);
+---
+
+<Layout
+  title="Contacto | CEMAD Valencia"
+  description={`Reserva tu consulta en CEMAD: ${siteConfig.address.street}, ${siteConfig.address.locality}. Llamada, WhatsApp o formulario.`}
+>
+  <Fragment slot="head">
+    <JsonLd data={contactoGraph} />
+  </Fragment>
+  <main id="main">
+    <Section tone="paper" spacing="loose">
+      <div class="text-center max-w-2xl mx-auto">
+        <Badge tone="gold">Contacto</Badge>
+        <Heading as={1} variant="display" align="center" class="mt-4">
+          Empieza por una conversación.
+        </Heading>
+        <p class="mt-6 text-[var(--color-mute)]">
+          {siteConfig.address.street}, {siteConfig.address.postalCode} {siteConfig.address.locality}.
+        </p>
+      </div>
+      <div class="mt-10 grid sm:grid-cols-3 gap-3 max-w-xl mx-auto">
+        <Button href={`tel:${siteConfig.contact.phone}`} variant="primary" size="lg">
+          Llamar
+        </Button>
+        <Button
+          href={`https://wa.me/${waNumber}`}
+          variant="outline"
+          size="lg"
+          target="_blank"
+        >
+          WhatsApp
+        </Button>
+        <Button href={siteConfig.contact.instagram} variant="ghost" size="lg" target="_blank">
+          Instagram
+        </Button>
+      </div>
+      <p class="text-center mt-10 text-xs text-[var(--color-mute)]">
+        [TODO Fase 9 — formulario con Astro Action + Resend + Turnstile]
+      </p>
+    </Section>
+  </main>
+</Layout>

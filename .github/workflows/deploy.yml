@@ -1,0 +1,90 @@
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    environment: ${{ github.ref_name == 'main' && 'production' || 'staging' }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        env:
+          PUBLIC_SITE_URL: ${{ vars.PUBLIC_SITE_URL }}
+          PUBLIC_PLAUSIBLE_DOMAIN: ${{ vars.PUBLIC_PLAUSIBLE_DOMAIN }}
+        run: pnpm run build
+
+      - name: Verify build output & inject health check
+        run: |
+          test -f dist/index.html
+          BUILD_HASH=$(git rev-parse --short HEAD)
+          echo "{\"hash\":\"$BUILD_HASH\",\"builtAt\":\"$(date -u +%FT%TZ)\",\"branch\":\"${{ github.ref_name }}\"}" > dist/health.json
+
+      - uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add Hostinger to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -p ${{ secrets.SSH_PORT }} -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Resolve deploy path
+        id: path
+        env:
+          DEPLOY_PATH_PROD: ${{ vars.DEPLOY_PATH_PROD }}
+          DEPLOY_PATH_STAGING: ${{ vars.DEPLOY_PATH_STAGING }}
+        run: |
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            DEPLOY_PATH="$(echo -n "$DEPLOY_PATH_PROD" | xargs)"
+          else
+            DEPLOY_PATH="$(echo -n "$DEPLOY_PATH_STAGING" | xargs)"
+          fi
+          echo "path=$DEPLOY_PATH" >> "$GITHUB_OUTPUT"
+
+      - name: Ensure remote directory exists
+        run: |
+          ssh -p ${{ secrets.SSH_PORT }} \
+            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" \
+            "mkdir -p '${{ steps.path.outputs.path }}'"
+
+      - name: Deploy via rsync
+        run: |
+          rsync -avz --delete --human-readable \
+            --exclude='.well-known/' \
+            -e "ssh -p ${{ secrets.SSH_PORT }}" \
+            dist/ \
+            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ steps.path.outputs.path }}"
+
+      - name: Health check
+        run: |
+          BUILD_HASH=$(git rev-parse --short HEAD)
+          sleep 5
+          REMOTE_HASH=$(curl -fsS --max-time 15 "${{ vars.PUBLIC_SITE_URL }}/health.json" | jq -r .hash)
+          echo "Expected: $BUILD_HASH | Got: $REMOTE_HASH"
+          test "$BUILD_HASH" = "$REMOTE_HASH"

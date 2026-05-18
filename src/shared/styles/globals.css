@@ -1,0 +1,145 @@
+@import "tailwindcss";
+@import "./theme.css";
+
+/* =====================================================
+ * CEMAD — base globals
+ * ===================================================== */
+
+@layer base {
+  html {
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    color: var(--color-ink);
+  }
+
+  /* Focus-visible canónico (WCAG 2.2 AA) */
+  :focus-visible {
+    outline: 2px solid var(--color-gold-dark);
+    outline-offset: 3px;
+    border-radius: var(--radius-xs);
+  }
+
+  /* Selection con dorado de marca */
+  ::selection {
+    background: var(--color-gold-light);
+    color: var(--color-ink);
+  }
+
+  /* Honor prefers-reduced-motion globalmente */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  @keyframes fadein {
+    from { opacity: 0 }
+    to   { opacity: 1 }
+  }
+  @keyframes slidein {
+    from { transform: translateX(100%) }
+    to   { transform: translateX(0) }
+  }
+  .motion-safe\:animate-fadein  { animation: fadein  var(--duration-base) var(--ease-out) }
+  .motion-safe\:animate-slidein { animation: slidein var(--duration-base) var(--ease-out) }
+
+  /* Hero rise: opacidad + 8px sutil; staggers via inline animation-delay */
+  @keyframes hero-rise {
+    from { opacity: 0; transform: translateY(8px) }
+    to   { opacity: 1; transform: translateY(0) }
+  }
+  .hero-rise {
+    opacity: 0;
+    animation: hero-rise 600ms var(--ease-out) forwards;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-rise { animation: none; opacity: 1; transform: none; }
+  }
+
+  /* Reveal-on-scroll: el contenido es visible por defecto (SSR + sin-JS).
+     La isla Reveal añade data-reveal="pending" en mount para ocultar,
+     y luego intercambia a data-reveal="visible" al entrar en viewport. */
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 500ms var(--ease-out),
+      transform 500ms var(--ease-out);
+  }
+  .reveal[data-reveal="pending"] {
+    opacity: 0;
+    transform: translateY(12px);
+    will-change: opacity, transform;
+  }
+  .reveal[data-reveal="visible"] {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .reveal[data-reveal="pending"] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  /* Link-reveal: subrayado dorado que crece en hover/focus */
+  .link-reveal {
+    background-image: linear-gradient(var(--color-gold), var(--color-gold));
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    padding-bottom: 2px;
+    transition: background-size 400ms var(--ease-out);
+  }
+  .link-reveal:hover,
+  .link-reveal:focus-visible,
+  a:hover .link-reveal,
+  a:focus-visible .link-reveal {
+    background-size: 100% 1px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .link-reveal { transition: none; }
+  }
+
+  /* Skip link visible solo al recibir focus */
+  .skip-link {
+    position: absolute;
+    top: 0;
+    left: 1rem;
+    transform: translateY(-200%);
+    transition: transform var(--duration-fast) var(--ease-out);
+    background: var(--color-gold);
+    color: var(--color-paper);
+    padding: 0.5rem 1rem;
+    border-radius: 0 0 var(--radius-xs) var(--radius-xs);
+    z-index: 100;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .skip-link:focus { transform: translateY(0); outline: none; }
+}

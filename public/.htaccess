@@ -1,0 +1,87 @@
+# ============================================================
+# CEMAD — semad-web
+# Apache config para sitio estático Astro en Hostinger
+# ============================================================
+
+# Forzar HTTPS
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+# ============================================================
+# Cache headers
+# ============================================================
+<IfModule mod_headers.c>
+  # Assets estáticos con hash en nombre (Astro los genera con hash en /_astro/)
+  <FilesMatch "\.(js|css|woff2?|ttf|eot|otf|svg|png|jpe?g|webp|avif|gif|ico|mp4|webm)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # HTML: no cachear (Astro genera HTML estático, pero puede regenerarse)
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+
+  # Health check: nunca cachear
+  <FilesMatch "health\.json$">
+    Header set Cache-Control "no-store"
+  </FilesMatch>
+
+  # ============================================================
+  # Security headers
+  # ============================================================
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=()"
+  Header always set X-XSS-Protection "1; mode=block"
+
+  # Content-Security-Policy — ajustar si se añaden terceros (Plausible, Google Fonts, etc.)
+  # Pendiente refinar tras añadir analytics/formularios. Por ahora permisivo.
+  # Header always set Content-Security-Policy "default-src 'self'; ..."
+</IfModule>
+
+# ============================================================
+# Compresión gzip / deflate
+# ============================================================
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE \
+    text/html \
+    text/plain \
+    text/xml \
+    text/css \
+    text/javascript \
+    application/javascript \
+    application/json \
+    application/xml \
+    application/rss+xml \
+    image/svg+xml \
+    font/woff \
+    font/woff2
+</IfModule>
+
+# ============================================================
+# MIME types modernos
+# ============================================================
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType image/avif .avif
+  AddType font/woff2 .woff2
+  AddType font/woff  .woff
+  AddType application/manifest+json .webmanifest
+</IfModule>
+
+# ============================================================
+# Directory listing desactivado
+# ============================================================
+Options -Indexes
+
+# ============================================================
+# Errores personalizados (una vez existan las páginas)
+# ============================================================
+# ErrorDocument 404 /404.html
+# ErrorDocument 500 /500.html

@@ -1,0 +1,101 @@
+---
+type Variant = "primary" | "secondary" | "ghost" | "outline" | "submarca";
+type Size = "sm" | "md" | "lg";
+
+interface Props {
+  href?: string;
+  type?: "button" | "submit" | "reset";
+  variant?: Variant;
+  size?: Size;
+  /** Para variant="submarca": color hex o var. */
+  accent?: string;
+  /** Color sobre el accent (texto). Default: paper. */
+  accentText?: string;
+  fullWidth?: boolean;
+  ariaLabel?: string;
+  class?: string;
+  disabled?: boolean;
+  rel?: string;
+  target?: "_blank" | "_self";
+}
+
+const {
+  href,
+  type = "button",
+  variant = "primary",
+  size = "md",
+  accent,
+  accentText = "var(--color-paper)",
+  fullWidth = false,
+  ariaLabel,
+  class: className = "",
+  disabled = false,
+  rel,
+  target,
+} = Astro.props;
+
+const isLink = !!href;
+const Tag = isLink ? "a" : "button";
+
+const baseClasses =
+  "inline-flex items-center justify-center gap-2 font-[family-name:var(--font-body)] font-medium rounded-[var(--radius-sm)] transition-[background,color,border-color,transform] duration-[var(--duration-fast)] ease-[var(--ease-out)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-gold-dark)] disabled:opacity-50 disabled:cursor-not-allowed";
+
+const sizeMap: Record<Size, string> = {
+  sm: "min-h-[36px] px-4 text-[var(--text-sm)]",
+  md: "min-h-[44px] px-6 text-[var(--text-base)]", // a11y target
+  lg: "min-h-[52px] px-8 text-[var(--text-lg)]",
+};
+
+const variantMap: Record<Variant, string> = {
+  primary:
+    "bg-[var(--color-gold)] text-[var(--color-paper)] hover:bg-[var(--color-gold-dark)] active:translate-y-px",
+  secondary:
+    "bg-[var(--color-ink)] text-[var(--color-paper)] hover:bg-black active:translate-y-px",
+  ghost:
+    "bg-transparent text-[var(--color-ink)] hover:bg-[var(--color-paper-soft)]",
+  outline:
+    "bg-transparent text-[var(--color-ink)] border border-[var(--color-mute)] hover:border-[var(--color-ink)]",
+  submarca: "active:translate-y-px",
+};
+
+const submarcaStyle =
+  variant === "submarca" && accent
+    ? `background:${accent};color:${accentText}`
+    : undefined;
+
+const finalClass = [
+  baseClasses,
+  sizeMap[size],
+  variantMap[variant],
+  fullWidth ? "w-full" : "",
+  className,
+].join(" ");
+
+const linkRel =
+  target === "_blank" ? `${rel ?? ""} noopener noreferrer`.trim() : rel;
+---
+
+{
+  isLink ? (
+    <a
+      href={href}
+      class={finalClass}
+      style={submarcaStyle}
+      aria-label={ariaLabel}
+      rel={linkRel}
+      target={target}
+    >
+      <slot />
+    </a>
+  ) : (
+    <button
+      type={type}
+      class={finalClass}
+      style={submarcaStyle}
+      aria-label={ariaLabel}
+      disabled={disabled}
+    >
+      <slot />
+    </button>
+  )
+}

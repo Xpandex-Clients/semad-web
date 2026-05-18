@@ -1,0 +1,184 @@
+---
+/**
+ * Styleguide interno (no indexar). Excluido de robots.txt y de la
+ * indexación con noindex en <head>. Solo para QA visual de primitives
+ * y tokens.
+ */
+import Layout from "@layouts/Layout.astro";
+import Section from "@shared/ui/primitives/Section.astro";
+import Container from "@shared/ui/primitives/Container.astro";
+import Heading from "@shared/ui/primitives/Heading.astro";
+import Button from "@shared/ui/primitives/Button.astro";
+import Card from "@shared/ui/primitives/Card.astro";
+import Badge from "@shared/ui/primitives/Badge.astro";
+import Logo from "@shared/ui/brand/Logo.astro";
+import { services } from "@shared/config/services";
+
+const tokens = [
+  { token: "--color-gold", desc: "Matriz" },
+  { token: "--color-gold-light", desc: "Tint" },
+  { token: "--color-gold-dark", desc: "Contraste" },
+  { token: "--color-teal", desc: "IV Therapy" },
+  { token: "--color-teal-light", desc: "Tint" },
+  { token: "--color-teal-dark", desc: "Contraste" },
+  { token: "--color-rose", desc: "Anti-Aging" },
+  { token: "--color-silver", desc: "Hair Clinic" },
+  { token: "--color-copper", desc: "Láser" },
+  { token: "--color-ink", desc: "Texto" },
+  { token: "--color-paper", desc: "Fondo" },
+  { token: "--color-paper-soft", desc: "Fondo 2" },
+  { token: "--color-mute", desc: "Texto sec." },
+];
+---
+
+<Layout title="Styleguide — interno" description="QA visual de tokens y primitives. No indexable." bare={true}>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, nofollow" />
+  </Fragment>
+
+  <Section tone="paper-soft" spacing="tight">
+    <Heading as={1} variant="display" align="center">CEMAD · Styleguide interno</Heading>
+    <p class="text-center text-[var(--color-mute)] mt-3">
+      QA visual de tokens y primitives. Esta página NO es para producción.
+    </p>
+  </Section>
+
+  <!-- COLOR TOKENS -->
+  <Section spacing="default">
+    <Heading as={2} visual={3}>Paleta cromática</Heading>
+    <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
+      {tokens.map(({ token, desc }) => (
+        <div class="rounded-[var(--radius-md)] overflow-hidden border border-[var(--color-paper-soft)]">
+          <div class="h-20" style={`background:var(${token})`} aria-hidden="true"></div>
+          <div class="p-2 text-xs">
+            <code class="font-mono">{token}</code>
+            <div class="text-[var(--color-mute)]">{desc}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </Section>
+
+  <!-- TIPOGRAFÍA -->
+  <Section tone="paper-soft" spacing="default">
+    <Heading as={2} visual={3}>Tipografía</Heading>
+    <div class="mt-6 space-y-6">
+      <div>
+        <Badge tone="gold">Display · Playfair Display (Erstoria)</Badge>
+        <Heading as={3} visual={1} class="mt-2">Donde la ciencia y el arte se unen</Heading>
+        <Heading as={3} visual={2} class="mt-2">Tu mejor versión empieza aquí</Heading>
+      </div>
+      <div>
+        <Badge tone="silver">Body · Montserrat (Gotham)</Badge>
+        <p class="mt-2 max-w-[60ch] leading-relaxed">
+          Texto cuerpo. Buscamos legibilidad y un ritmo cómodo de lectura. Las frases respiran;
+          las ideas avanzan sin atropellarse. La marca habla con confianza médica y calidez.
+        </p>
+      </div>
+      <div>
+        <Badge tone="rose">Script · Corinthia (oficial)</Badge>
+        <p class="mt-2 text-[clamp(2rem,4vw,3.5rem)]" style="font-family:var(--font-script);color:var(--color-gold-dark)">
+          Tu Mejor Versión
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <!-- BUTTONS -->
+  <Section spacing="default">
+    <Heading as={2} visual={3}>Botones</Heading>
+    <div class="mt-6 flex flex-wrap gap-3 items-center">
+      <Button variant="primary" size="sm">Primary sm</Button>
+      <Button variant="primary" size="md">Reservar consulta</Button>
+      <Button variant="primary" size="lg">Reservar consulta</Button>
+      <Button variant="secondary">Secundario</Button>
+      <Button variant="outline">Outline</Button>
+      <Button variant="ghost">Ghost</Button>
+    </div>
+    <Heading as={3} visual={4} class="mt-8">Submarca (color por prop)</Heading>
+    <div class="mt-3 flex flex-wrap gap-3">
+      {services.map((s) => (
+        <Button variant="submarca" accent={s.color}>{s.name}</Button>
+      ))}
+    </div>
+  </Section>
+
+  <!-- CARDS -->
+  <Section tone="paper-soft" spacing="default">
+    <Heading as={2} visual={3}>Tarjetas (5 submarcas)</Heading>
+    <ul class="mt-6 grid gap-5 grid-cols-[repeat(auto-fit,minmax(240px,1fr))] list-none p-0">
+      {services.map((s) => (
+        <Card as="li" variant="elevated" accent={s.color}>
+          <Badge accent={s.color}>{s.name}</Badge>
+          <Heading as={3} visual={3} class="mt-3">{s.fullName}</Heading>
+          <p class="font-[family-name:var(--font-script)] text-2xl mt-1" style={`color:${s.ariaColor}`}>
+            {s.shortClaim}
+          </p>
+          <p class="text-[var(--color-mute)] mt-2">{s.longClaim}</p>
+        </Card>
+      ))}
+    </ul>
+  </Section>
+
+  <!-- LOGOS -->
+  <Section spacing="default">
+    <Heading as={2} visual={3}>Logo (versiones)</Heading>
+    <div class="mt-6 grid gap-8 grid-cols-2 lg:grid-cols-4 items-center">
+      <div class="space-y-2">
+        <Badge>Principal</Badge>
+        <div class="bg-[var(--color-paper-soft)] p-6 rounded-[var(--radius-md)] flex justify-center">
+          <Logo variant="principal" width={220} />
+        </div>
+      </div>
+      <div class="space-y-2">
+        <Badge>Vertical</Badge>
+        <div class="bg-[var(--color-paper-soft)] p-6 rounded-[var(--radius-md)] flex justify-center">
+          <Logo variant="vertical" width={140} />
+        </div>
+      </div>
+      <div class="space-y-2">
+        <Badge>Sello</Badge>
+        <div class="bg-[var(--color-gold)] p-6 rounded-[var(--radius-md)] flex justify-center">
+          <Logo variant="sello" tone="white" width={120} />
+        </div>
+      </div>
+      <div class="space-y-2">
+        <Badge>Isotipo</Badge>
+        <div class="bg-[var(--color-ink)] p-6 rounded-[var(--radius-md)] flex justify-center">
+          <Logo variant="isotipo" tone="white" width={80} />
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <!-- BADGES -->
+  <Section tone="paper-soft" spacing="default">
+    <Heading as={2} visual={3}>Badges</Heading>
+    <div class="mt-6 flex flex-wrap gap-3">
+      <Badge tone="gold">Gold</Badge>
+      <Badge tone="teal">Teal</Badge>
+      <Badge tone="rose">Rose</Badge>
+      <Badge tone="silver">Silver</Badge>
+      <Badge tone="copper">Copper</Badge>
+      <Badge tone="ink">Ink</Badge>
+      <Badge tone="muted">Muted</Badge>
+    </div>
+  </Section>
+
+  <!-- SUBMARCA (Section tone="submarca") -->
+  {services.map((s) => (
+    <Section tone="submarca" accent={s.color} spacing="tight">
+      <div class="flex items-center justify-between gap-6 flex-wrap">
+        <div>
+          <Heading as={3} visual={2} tone="invert">{s.fullName}</Heading>
+          <p class="font-[family-name:var(--font-script)] text-3xl mt-1" style="color:var(--color-paper)">
+            {s.shortClaim}
+          </p>
+        </div>
+        <Button variant="submarca" accent="var(--color-paper)" accentText={s.color} size="lg">
+          Descubrir
+        </Button>
+      </div>
+    </Section>
+  ))}
+</Layout>

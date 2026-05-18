@@ -1,0 +1,42 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Section from "@shared/ui/primitives/Section.astro";
+import Heading from "@shared/ui/primitives/Heading.astro";
+import { siteConfig } from "@shared/config/site";
+---
+
+<Layout title="Aviso legal | CEMAD" description="Aviso legal del sitio web cemadclinic.com.">
+  <Fragment slot="head">
+    <meta name="robots" content="index, follow" />
+  </Fragment>
+  <main id="main">
+    <Section tone="paper" spacing="default" width="narrow">
+      <Heading as={1} variant="display">Aviso legal</Heading>
+      <div class="prose mt-8 max-w-[70ch] text-[var(--color-ink)] [&_p]:my-4 [&_h2]:mt-10 [&_h2]:font-[family-name:var(--font-display)] [&_h2]:text-2xl [&_h3]:mt-6 [&_h3]:font-medium">
+        <p class="text-[var(--color-mute)] text-sm">
+          [TODO Fase 13 — texto definitivo validado por asesor legal. Lo siguiente es plantilla provisional.]
+        </p>
+
+        <h2>Titularidad</h2>
+        <p>
+          El presente sitio web <strong>{siteConfig.url.replace("https://", "")}</strong>
+          es propiedad de <strong>[TODO razón social titular]</strong>, con domicilio en
+          {siteConfig.address.street}, {siteConfig.address.postalCode} {siteConfig.address.locality}, {siteConfig.address.countryName}.
+        </p>
+        <p>NIF/CIF: [TODO]. Email de contacto: <a href={`mailto:${siteConfig.contact.email}`}>{siteConfig.contact.email}</a>. Teléfono: {siteConfig.contact.phoneDisplay}.</p>
+
+        <h2>Objeto</h2>
+        <p>El sitio tiene como finalidad informar sobre los servicios de medicina estética y antienvejecimiento ofrecidos por CEMAD, sin que esta información sustituya en ningún caso al consejo médico personalizado.</p>
+
+        <h2>Propiedad intelectual</h2>
+        <p>Los contenidos, marcas, diseños y demás elementos de este sitio están protegidos por derechos de propiedad intelectual e industrial titularidad de CEMAD o de terceros licenciantes. Queda prohibida cualquier reproducción no autorizada.</p>
+
+        <h2>Responsabilidad</h2>
+        <p>CEMAD no se hace responsable del mal uso que los usuarios puedan hacer del contenido del sitio. La información clínica publicada es de carácter divulgativo y no sustituye una valoración médica.</p>
+
+        <h2>Legislación aplicable</h2>
+        <p>El presente Aviso Legal se rige por la legislación española.</p>
+      </div>
+    </Section>
+  </main>
+</Layout>

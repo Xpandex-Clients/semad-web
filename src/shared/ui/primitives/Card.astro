@@ -1,0 +1,82 @@
+---
+type Variant = "flat" | "elevated" | "outline";
+type Padding = "sm" | "md" | "lg";
+
+interface Props {
+  variant?: Variant;
+  padding?: Padding;
+  /** Color de acento (line top o border). hex o var. */
+  accent?: string;
+  /** Renderiza como <a> en lugar de <article> si href está. */
+  href?: string;
+  as?: "article" | "div" | "li";
+  class?: string;
+  ariaLabel?: string;
+}
+
+const {
+  variant = "flat",
+  padding = "md",
+  accent,
+  href,
+  as = "article",
+  class: className = "",
+  ariaLabel,
+} = Astro.props;
+
+const isLink = !!href;
+const Tag = isLink ? "a" : as;
+
+const variantMap: Record<Variant, string> = {
+  flat: "bg-[var(--color-paper-soft)]",
+  elevated:
+    "bg-[var(--color-paper)] shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-hover)]",
+  outline: "bg-[var(--color-paper)] border border-[var(--color-mute)]",
+};
+
+const paddingMap: Record<Padding, string> = {
+  sm: "p-4",
+  md: "p-6",
+  lg: "p-8",
+};
+
+const baseClasses =
+  "relative block rounded-[var(--radius-md)] overflow-hidden transition-[box-shadow,transform] duration-[var(--duration-base)] ease-[var(--ease-out)]";
+
+const linkClasses = isLink
+  ? "card-link no-underline text-inherit hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-gold-dark)]"
+  : "";
+
+const finalClass = [
+  baseClasses,
+  variantMap[variant],
+  paddingMap[padding],
+  linkClasses,
+  className,
+].join(" ");
+---
+
+<Tag class={finalClass} href={href} aria-label={ariaLabel}>
+  {accent && (
+    <span
+      aria-hidden="true"
+      class="card-accent absolute inset-x-0 top-0 h-[3px] origin-left"
+      style={`background:${accent}`}
+    />
+  )}
+  <slot />
+</Tag>
+
+<style>
+  .card-accent {
+    transform: scaleX(0.3);
+    transition: transform 400ms var(--ease-out);
+  }
+  .card-link:hover .card-accent,
+  .card-link:focus-visible .card-accent {
+    transform: scaleX(1);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card-accent { transition: none; transform: scaleX(1); }
+  }
+</style>

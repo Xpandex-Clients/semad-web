@@ -1,0 +1,60 @@
+---
+type Level = 1 | 2 | 3 | 4;
+type Variant = "display" | "title" | "subtitle";
+type Tone = "default" | "muted" | "invert" | "gold";
+
+interface Props {
+  /** Nivel semántico (h1-h4). */
+  as?: Level;
+  /** Tamaño visual, independiente del nivel. */
+  visual?: Level;
+  variant?: Variant;
+  tone?: Tone;
+  align?: "left" | "center";
+  class?: string;
+}
+
+const {
+  as = 2,
+  visual,
+  variant = "title",
+  tone = "default",
+  align = "left",
+  class: className = "",
+} = Astro.props;
+
+const Tag = `h${as}` as "h1" | "h2" | "h3" | "h4";
+const v = visual ?? as;
+
+const sizeMap: Record<Level, string> = {
+  1: "text-[clamp(2.5rem,6vw,4.25rem)] leading-[1.05]",
+  2: "text-[clamp(2rem,4vw,3rem)] leading-[1.1]",
+  3: "text-[var(--text-2xl)] leading-[1.2]",
+  4: "text-[var(--text-xl)] leading-[1.3]",
+};
+
+const toneMap: Record<Tone, string> = {
+  default: "text-[var(--color-ink)]",
+  muted: "text-[var(--color-mute)]",
+  invert: "text-[var(--color-paper)]",
+  gold: "text-[var(--color-gold-dark)]",
+};
+
+const variantMap: Record<Variant, string> = {
+  display: "font-[family-name:var(--font-display)] font-medium tracking-[-0.01em]",
+  title: "font-[family-name:var(--font-display)] font-medium tracking-[-0.01em]",
+  subtitle: "font-[family-name:var(--font-body)] font-medium tracking-normal",
+};
+---
+
+<Tag
+  class={[
+    sizeMap[v],
+    toneMap[tone],
+    variantMap[variant],
+    align === "center" ? "text-center" : "text-left",
+    className,
+  ].join(" ")}
+>
+  <slot />
+</Tag>

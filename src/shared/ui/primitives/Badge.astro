@@ -1,0 +1,48 @@
+---
+type Tone = "gold" | "teal" | "rose" | "silver" | "copper" | "ink" | "muted";
+
+interface Props {
+  tone?: Tone;
+  /** Acento custom (hex o var). Sobrescribe tone. */
+  accent?: string;
+  size?: "sm" | "md";
+  uppercase?: boolean;
+  class?: string;
+}
+
+const {
+  tone = "gold",
+  accent,
+  size = "sm",
+  uppercase = true,
+  class: className = "",
+} = Astro.props;
+
+const toneMap: Record<Tone, { bg: string; fg: string }> = {
+  gold:   { bg: "var(--color-gold-light)",   fg: "var(--color-gold-dark)" },
+  teal:   { bg: "var(--color-teal-light)",   fg: "var(--color-teal-dark)" },
+  rose:   { bg: "var(--color-rose)",         fg: "var(--color-copper)" },
+  silver: { bg: "var(--color-paper-soft)",   fg: "var(--color-ink)" },
+  copper: { bg: "color-mix(in oklch, var(--color-copper), white 70%)", fg: "var(--color-copper)" },
+  ink:    { bg: "var(--color-ink)",          fg: "var(--color-paper)" },
+  muted:  { bg: "var(--color-paper-soft)",   fg: "var(--color-mute)" },
+};
+
+const colors = accent
+  ? { bg: `color-mix(in oklch, ${accent}, white 70%)`, fg: accent }
+  : toneMap[tone];
+
+const sizeClass = size === "sm" ? "text-[11px] px-2 py-0.5" : "text-xs px-3 py-1";
+---
+
+<span
+  class={[
+    "inline-flex items-center font-[family-name:var(--font-body)] font-semibold tracking-[0.08em] rounded-[var(--radius-full)]",
+    sizeClass,
+    uppercase ? "uppercase" : "",
+    className,
+  ].join(" ")}
+  style={`background:${colors.bg};color:${colors.fg}`}
+>
+  <slot />
+</span>

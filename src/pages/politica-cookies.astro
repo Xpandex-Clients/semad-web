@@ -1,0 +1,28 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Section from "@shared/ui/primitives/Section.astro";
+import Heading from "@shared/ui/primitives/Heading.astro";
+---
+
+<Layout title="Política de cookies | CEMAD" description="Política de cookies de cemadclinic.com.">
+  <main id="main">
+    <Section tone="paper" spacing="default" width="narrow">
+      <Heading as={1} variant="display">Política de cookies</Heading>
+      <div class="mt-8 max-w-[70ch] text-[var(--color-ink)] [&_p]:my-4 [&_h2]:mt-10 [&_h2]:font-[family-name:var(--font-display)] [&_h2]:text-2xl">
+        <p class="text-[var(--color-mute)] text-sm">
+          [TODO Fase 13 — texto definitivo + CMP funcional. Lo siguiente es plantilla provisional.]
+        </p>
+
+        <h2>¿Qué son las cookies?</h2>
+        <p>Pequeños archivos que un sitio web guarda en tu dispositivo para recordar información sobre tu visita.</p>
+
+        <h2>¿Qué cookies usamos?</h2>
+        <p>Únicamente cookies técnicas estrictamente necesarias para el funcionamiento del sitio. No utilizamos cookies de terceros con fines publicitarios ni analíticos en el momento de redactar esta política.</p>
+        <p>[TODO si se añade Google Analytics u otros, ampliar tabla con nombre, finalidad, duración y proveedor, y exigir consentimiento previo vía CMP.]</p>
+
+        <h2>Gestión</h2>
+        <p>Puedes gestionar las cookies desde la configuración de tu navegador. Si decides bloquearlas, algunas funcionalidades del sitio pueden no estar disponibles.</p>
+      </div>
+    </Section>
+  </main>
+</Layout>
