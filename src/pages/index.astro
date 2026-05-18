@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 import Section from "@shared/ui/primitives/Section.astro";
 import Heading from "@shared/ui/primitives/Heading.astro";
@@ -18,6 +18,7 @@ import {
 import { siteConfig } from "@shared/config/site";
 import { services } from "@shared/config/services";
 import heroPortrait from "@assets/images/cemad-hero-portrait.png";
+import doctoraLegacy from "@assets/images/doctora-cevallos-portrait-legacy.jpg";
 
 const homeGraph = jsonLdGraph(
   medicalClinicSchema(),
@@ -59,7 +60,7 @@ const homeGraph = jsonLdGraph(
           </div>
         </div>
         <div class="hero-rise relative aspect-[4/5] lg:aspect-[3/4] overflow-hidden rounded-[var(--radius-lg)] shadow-[var(--shadow-card)]" style="animation-delay:200ms">
-          <Image
+          <Picture
             src={heroPortrait}
             alt="Retrato editorial de la propuesta CEMAD — medicina estética y antienvejecimiento"
             widths={[480, 768, 1024, 1280]}
@@ -79,22 +80,22 @@ const homeGraph = jsonLdGraph(
     <Section tone="paper-soft" spacing="tight">
       <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 list-none p-0 m-0 text-center lg:text-left">
         <li>
-          <p class="font-[family-name:var(--font-script)] text-3xl text-[var(--color-gold)] leading-none">+10</p>
-          <p class="mt-1 text-sm font-medium text-[var(--color-ink)]">Años en medicina estética</p>
-          <p class="text-xs text-[var(--color-mute)]">[TODO: confirmar cifra con la cliente]</p>
+          <p class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-ink)] leading-none tracking-tight">+10</p>
+          <p class="mt-2 text-sm font-medium text-[var(--color-ink)]">Años en medicina estética</p>
+          <p class="text-xs text-[var(--color-mute)]/80">[TODO: confirmar cifra con la cliente]</p>
         </li>
         <li>
-          <p class="font-[family-name:var(--font-script)] text-3xl text-[var(--color-gold)] leading-none">5</p>
+          <p class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-ink)] leading-none tracking-tight">5</p>
           <p class="mt-1 text-sm font-medium text-[var(--color-ink)]">Especialidades integradas</p>
           <p class="text-xs text-[var(--color-mute)]">Medicina · IV · Anti-aging · Hair · Láser</p>
         </li>
         <li>
-          <p class="font-[family-name:var(--font-script)] text-3xl text-[var(--color-gold)] leading-none">1ª</p>
+          <p class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-ink)] leading-none tracking-tight">1ª</p>
           <p class="mt-1 text-sm font-medium text-[var(--color-ink)]">Consulta sin compromiso</p>
           <p class="text-xs text-[var(--color-mute)]">Valoración personalizada con la doctora</p>
         </li>
         <li>
-          <p class="font-[family-name:var(--font-script)] text-3xl text-[var(--color-gold)] leading-none">Nº</p>
+          <p class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-ink)] leading-none tracking-tight">Nº</p>
           <p class="mt-1 text-sm font-medium text-[var(--color-ink)]">Colegiada en activo</p>
           <p class="text-xs text-[var(--color-mute)]">[TODO: nº colegiada de la cliente]</p>
         </li>
@@ -147,8 +148,17 @@ const homeGraph = jsonLdGraph(
             Conoce a la doctora
           </Button>
         </div>
-        <div class="aspect-[4/5] bg-[var(--color-paper-soft)] rounded-[var(--radius-lg)] flex items-center justify-center text-[var(--color-mute)] text-sm">
-          [Foto de la Dra. Cevallos · pendiente de cliente]
+        <div class="aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] bg-[var(--color-paper-soft)] shadow-[var(--shadow-card)]">
+          <Picture
+            src={doctoraLegacy}
+            alt={`Retrato profesional de la ${siteConfig.doctor.name} en CEMAD Valencia`}
+            widths={[480, 768, 1024]}
+            sizes="(min-width: 1024px) 480px, 92vw"
+            formats={["avif", "webp"]}
+            quality={82}
+            loading="lazy"
+            class="h-full w-full object-cover object-[center_top]"
+          />
         </div>
       </Reveal>
     </Section>
