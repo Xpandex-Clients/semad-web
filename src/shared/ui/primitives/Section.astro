@@ -32,7 +32,10 @@ const toneClasses: Record<Tone, string> = {
   paper: "bg-[var(--color-paper)] text-[var(--color-ink)]",
   "paper-soft": "bg-[var(--color-paper-soft)] text-[var(--color-ink)]",
   ink: "bg-[var(--color-ink)] text-[var(--color-paper)]",
-  gold: "bg-[var(--color-gold)] text-[var(--color-paper)]",
+  // Pattern de swirls del manual (pág. 22 "Marca Matriz") superpuesto sobre el dorado
+  // de marca con mix-blend-mode overlay, manteniendo la coherencia editorial.
+  gold:
+    "relative bg-[var(--color-gold)] text-[var(--color-paper)] bg-[url('/brand/cemad-pattern-swirls.jpg')] bg-cover bg-center bg-blend-overlay",
   submarca: "text-[var(--color-ink)]",
 };
 
