@@ -58,7 +58,7 @@
 
 - [x] `content-plan.md` con copy concreto por página (versión inicial)
 - [~] Home: CTA gold antes del footer + submarcas grid + bloque doctora; testimonios `[TODO]`
-- [~] 5 landings de submarca dinámicas: hero color propio, claim, CTA. Falta listado tratamientos + FAQ + copy validado
+- [x] 5 landings de submarca con contenido editorial completo (descripción larga, 6-8 tratamientos, indicaciones, proceso 4 pasos, FAQ 5, CTA). Fuente: catálogo legacy + manual + briefing. [TODO Fase 5b: validación clínica de la doctora]
 - [~] `/dra-abigail-cevallos`: layout listo; falta bio + foto `[TODO con cliente]`
 - [~] `/contacto`: hero + canales (tel/WhatsApp/IG); formulario en Fase 9
 - [~] **Blog v1**: schema Zod commiteado, índice `/blog` con estado vacío. Falta `/blog/[slug]`, RSS, internal linking

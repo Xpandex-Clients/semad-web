@@ -5,7 +5,8 @@ import Section from "@shared/ui/primitives/Section.astro";
 import Heading from "@shared/ui/primitives/Heading.astro";
 import Button from "@shared/ui/primitives/Button.astro";
 import Badge from "@shared/ui/primitives/Badge.astro";
-import FaqAccordion, { type FaqItem } from "@shared/ui/islands/FaqAccordion.tsx";
+import Card from "@shared/ui/primitives/Card.astro";
+import FaqAccordion from "@shared/ui/islands/FaqAccordion.tsx";
 import JsonLd from "@shared/ui/seo/JsonLd.astro";
 import {
   jsonLdGraph,
@@ -13,21 +14,7 @@ import {
   breadcrumbSchema,
 } from "@shared/seo/schemas";
 import { services, type ServiceLine } from "@shared/config/services";
-
-const faqProvisional: FaqItem[] = [
-  {
-    q: "¿Cómo es la primera consulta?",
-    a: "Una valoración personalizada con la doctora donde escuchamos tus objetivos, exploramos antecedentes y diseñamos un plan a tu medida. Sin compromiso de tratamiento.",
-  },
-  {
-    q: "¿Cuánto duran los resultados?",
-    a: "Depende del tratamiento, tu fisiología y el plan de mantenimiento. En tu primera consulta te damos un horizonte realista para cada opción que valoremos. [TODO Fase 5: validar por la cliente]",
-  },
-  {
-    q: "¿Puedo combinar varios tratamientos?",
-    a: "Sí, y en muchos casos lo recomendamos. La doctora prioriza un enfoque integral en lugar de tratamientos aislados, siempre respetando tiempos de recuperación. [TODO Fase 5: validar]",
-  },
-];
+import { serviceContent } from "@shared/config/serviceContent";
 
 export const getStaticPaths: GetStaticPaths = () =>
   services.map((s) => ({ params: { submarca: s.slug }, props: { service: s } }));
@@ -37,6 +24,7 @@ interface Props {
 }
 
 const { service } = Astro.props as unknown as Props;
+const content = serviceContent[service.slug];
 
 const submarcaGraph = jsonLdGraph(
   serviceSchema(service),
@@ -50,12 +38,12 @@ const submarcaGraph = jsonLdGraph(
 <Layout
   title={`${service.fullName} en Valencia | CEMAD`}
   description={`${service.longClaim} En CEMAD, clínica de la Dra. Abigail Cevallos Madrid en Valencia.`}
-  noindex
 >
   <Fragment slot="head">
     <JsonLd data={submarcaGraph} />
   </Fragment>
   <main id="main">
+    <!-- HERO submarca -->
     <Section tone="submarca" accent={service.color} spacing="loose">
       <div class="text-center max-w-3xl mx-auto">
         <Badge tone="ink">{service.name}</Badge>
@@ -65,41 +53,144 @@ const submarcaGraph = jsonLdGraph(
             {service.shortClaim}
           </span>
         </Heading>
-        <p class="mt-6 text-lg text-[var(--color-paper)]/90 max-w-[60ch] mx-auto">
+        <p class="mt-6 text-lg text-[var(--color-paper)]/95 max-w-[60ch] mx-auto">
           {service.longClaim}
         </p>
-        <Button href="/contacto" variant="submarca" accent="var(--color-paper)" accentText={service.color} size="lg" class="mt-8">
+        <Button
+          href="/contacto"
+          variant="submarca"
+          accent="var(--color-paper)"
+          accentText={service.color}
+          size="lg"
+          class="mt-8"
+        >
           Reservar consulta
         </Button>
       </div>
     </Section>
 
+    <!-- DESCRIPCIÓN larga -->
+    <Section tone="paper" spacing="default" width="narrow">
+      <div class="max-w-[68ch]">
+        <Badge accent={service.color}>Qué es</Badge>
+        <Heading as={2} visual={2} class="mt-3">
+          Una mirada médica al servicio de tu identidad.
+        </Heading>
+        <p class="mt-5 text-[var(--color-mute)] leading-relaxed text-[1.0625rem]">
+          {content.longDescription}
+        </p>
+      </div>
+    </Section>
+
+    <!-- TRATAMIENTOS -->
+    <Section tone="paper-soft" spacing="default">
+      <div class="mb-10">
+        <Badge accent={service.color}>Tratamientos</Badge>
+        <Heading as={2} visual={2} class="mt-3">
+          Lo que podemos hacer por ti.
+        </Heading>
+        <p class="mt-3 text-[var(--color-mute)] max-w-[60ch]">
+          Selección de tratamientos disponibles en esta línea. Cada plan se diseña tras la valoración médica.
+        </p>
+      </div>
+      <ul class="grid gap-6 grid-cols-[repeat(auto-fit,minmax(260px,1fr))] list-none p-0 m-0">
+        {content.treatments.map((t) => (
+          <li>
+            <Card variant="flat" accent={service.color}>
+              <Heading as={3} visual={4} class="text-[1.0625rem]">{t.name}</Heading>
+              <p class="mt-2 text-sm text-[var(--color-mute)] leading-relaxed">{t.summary}</p>
+            </Card>
+          </li>
+        ))}
+      </ul>
+    </Section>
+
+    <!-- INDICACIONES + PROCESO -->
     <Section tone="paper" spacing="default">
-      <div class="max-w-2xl mx-auto text-center">
-        <Heading as={2} visual={3} align="center">Página en construcción</Heading>
-        <p class="mt-4 text-[var(--color-mute)]">
-          Estamos terminando el contenido detallado de <strong>{service.name}</strong>:
-          tratamientos, indicaciones, primera consulta y FAQ. Mientras tanto,
-          puedes pedir cita directamente.
-        </p>
-        <p class="mt-2 text-xs text-[var(--color-mute)]">
-          [TODO Fase 5 — copy validado médicamente con la cliente]
-        </p>
-        <div class="mt-6 flex justify-center">
-          <Button href="/contacto" variant="primary" size="md">Hablar con la clínica</Button>
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
+        <div>
+          <Badge accent={service.color}>Indicaciones</Badge>
+          <Heading as={2} visual={3} class="mt-3">
+            ¿Es para mí?
+          </Heading>
+          <p class="mt-3 text-[var(--color-mute)]">
+            Esta línea está especialmente indicada para:
+          </p>
+          <ul class="mt-5 space-y-3 list-none p-0">
+            {content.indications.map((i) => (
+              <li class="flex gap-3 items-start">
+                <span
+                  aria-hidden="true"
+                  class="mt-1.5 inline-block size-2 rounded-full shrink-0"
+                  style={`background:${service.color}`}
+                ></span>
+                <span class="text-[var(--color-ink)]">{i}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <Badge accent={service.color}>Cómo trabajamos</Badge>
+          <Heading as={2} visual={3} class="mt-3">
+            Un proceso ordenado, sin sorpresas.
+          </Heading>
+          <ol class="mt-5 space-y-5 list-none p-0">
+            {content.process.map((p) => (
+              <li class="flex gap-4 items-start">
+                <span
+                  class="shrink-0 inline-flex items-center justify-center size-9 rounded-full font-[family-name:var(--font-display)] text-lg"
+                  style={`background:${service.color};color:var(--color-paper)`}
+                  aria-hidden="true"
+                >
+                  {p.step}
+                </span>
+                <div>
+                  <p class="font-[family-name:var(--font-display)] text-lg leading-tight">{p.title}</p>
+                  <p class="mt-1 text-sm text-[var(--color-mute)] leading-relaxed">{p.summary}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
     </Section>
 
+    <!-- FAQ -->
     <Section tone="paper-soft" spacing="default" width="narrow">
-      <Badge tone="gold">Preguntas frecuentes</Badge>
-      <Heading as={2} visual={2} class="mt-3 mb-6">
+      <Badge accent={service.color}>Preguntas frecuentes</Badge>
+      <Heading as={2} visual={2} class="mt-3 mb-8">
         Resolvemos lo que más nos preguntan.
       </Heading>
-      <FaqAccordion client:visible items={faqProvisional} />
-      <p class="mt-6 text-xs text-[var(--color-mute)]">
-        [TODO Fase 5 — FAQ específicas de {service.name} validadas por la doctora]
+      <FaqAccordion client:visible items={content.faqs.map((f) => ({ q: f.q, a: f.a }))} />
+      <p class="mt-6 text-xs text-[var(--color-mute)]/80">
+        El contenido editorial se basa en información del manual de identidad y del catálogo de la clínica. Algunos datos médicos concretos están marcados <code>[TODO: validar con la doctora]</code> y se actualizarán tras la revisión clínica.
       </p>
+    </Section>
+
+    <!-- CTA cierre -->
+    <Section tone="gold" spacing="default">
+      <div class="text-center max-w-2xl mx-auto">
+        <Heading as={2} visual={2} tone="invert" align="center">
+          {content.ctaCopy}
+        </Heading>
+        <p class="mt-3 text-[var(--color-paper)]/90">
+          La primera consulta con la Dra. Abigail Cevallos Madrid es donde empezamos a definir tu plan.
+        </p>
+        <div class="mt-8 flex gap-3 justify-center flex-wrap">
+          <Button href="/contacto" variant="submarca" accent="var(--color-paper)" accentText="var(--color-gold-dark)" size="lg">
+            Reservar consulta
+          </Button>
+          <Button
+            href="https://wa.me/34672300591?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20esta%20especialidad"
+            variant="outline"
+            size="lg"
+            target="_blank"
+            class="text-[var(--color-paper)] border-[var(--color-paper)]/70 hover:border-[var(--color-paper)] hover:bg-white/10"
+          >
+            WhatsApp
+          </Button>
+        </div>
+      </div>
     </Section>
   </main>
 </Layout>
