@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 import Section from "@shared/ui/primitives/Section.astro";
 import Heading from "@shared/ui/primitives/Heading.astro";
@@ -16,6 +17,7 @@ import {
 } from "@shared/seo/schemas";
 import { siteConfig } from "@shared/config/site";
 import { services } from "@shared/config/services";
+import heroPortrait from "@assets/images/cemad-hero-portrait.png";
 
 const homeGraph = jsonLdGraph(
   medicalClinicSchema(),
@@ -31,30 +33,72 @@ const homeGraph = jsonLdGraph(
   <main id="main">
     <!-- HERO -->
     <Section tone="paper" spacing="loose">
-      <div class="text-center max-w-3xl mx-auto">
-        <div class="hero-rise" style="animation-delay:0ms">
-          <Logo variant="principal" width={220} class="mx-auto mb-8" />
+      <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-center">
+        <div class="text-center lg:text-left max-w-2xl mx-auto lg:mx-0">
+          <div class="hero-rise" style="animation-delay:0ms">
+            <Logo variant="principal" width={200} class="mx-auto lg:mx-0 mb-8" />
+          </div>
+          <div class="hero-rise" style="animation-delay:120ms">
+            <Heading as={1} variant="display" align="left" class="text-center lg:text-left">
+              Donde la ciencia y el arte se unen para revelar
+              <span class="block font-[family-name:var(--font-script)] text-[1.4em] leading-[0.9] mt-[-0.05em] text-[var(--color-gold)] font-normal">
+                Tu Mejor Versión
+              </span>
+            </Heading>
+          </div>
+          <p class="mt-6 text-lg text-[var(--color-mute)] max-w-[58ch] mx-auto lg:mx-0 hero-rise" style="animation-delay:260ms">
+            {siteConfig.description}
+          </p>
+          <div class="mt-10 flex gap-3 justify-center lg:justify-start flex-wrap hero-rise" style="animation-delay:380ms">
+            <Button href="/contacto" variant="primary" size="lg">
+              Reserva tu primera consulta
+            </Button>
+            <Button href="#especialidades" variant="ghost" size="lg">
+              Ver especialidades
+            </Button>
+          </div>
         </div>
-        <div class="hero-rise" style="animation-delay:120ms">
-          <Heading as={1} variant="display" align="center">
-            Donde la ciencia y el arte se unen para revelar
-            <span class="block font-[family-name:var(--font-script)] text-[1.4em] leading-[0.9] mt-[-0.05em] text-[var(--color-gold)] font-normal">
-              Tu Mejor Versión
-            </span>
-          </Heading>
-        </div>
-        <p class="mt-6 text-lg text-[var(--color-mute)] max-w-[60ch] mx-auto hero-rise" style="animation-delay:260ms">
-          {siteConfig.description}
-        </p>
-        <div class="mt-10 flex gap-3 justify-center flex-wrap hero-rise" style="animation-delay:380ms">
-          <Button href="/contacto" variant="primary" size="lg">
-            Reserva tu primera consulta
-          </Button>
-          <Button href="#especialidades" variant="ghost" size="lg">
-            Ver especialidades
-          </Button>
+        <div class="hero-rise relative aspect-[4/5] lg:aspect-[3/4] overflow-hidden rounded-[var(--radius-lg)] shadow-[var(--shadow-card)]" style="animation-delay:200ms">
+          <Image
+            src={heroPortrait}
+            alt="Retrato editorial de la propuesta CEMAD — medicina estética y antienvejecimiento"
+            widths={[480, 768, 1024, 1280]}
+            sizes="(min-width: 1024px) 540px, 92vw"
+            formats={["avif", "webp"]}
+            quality={82}
+            loading="eager"
+            fetchpriority="high"
+            class="absolute inset-0 h-full w-full object-cover object-[78%_center]"
+          />
+          <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[var(--color-ink)]/15 via-transparent to-transparent"></div>
         </div>
       </div>
+    </Section>
+
+    <!-- TRUST BAR -->
+    <Section tone="paper-soft" spacing="tight">
+      <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 list-none p-0 m-0 text-center lg:text-left">
+        <li>
+          <p class="font-[family-name:var(--font-script)] text-3xl text-[var(--color-gold)] leading-none">+10</p>
+          <p class="mt-1 text-sm font-medium text-[var(--color-ink)]">Años en medicina estética</p>
+          <p class="text-xs text-[var(--color-mute)]">[TODO: confirmar cifra con la cliente]</p>
+        </li>
+        <li>
+          <p class="font-[family-name:var(--font-script)] text-3xl text-[var(--color-gold)] leading-none">5</p>
+          <p class="mt-1 text-sm font-medium text-[var(--color-ink)]">Especialidades integradas</p>
+          <p class="text-xs text-[var(--color-mute)]">Medicina · IV · Anti-aging · Hair · Láser</p>
+        </li>
+        <li>
+          <p class="font-[family-name:var(--font-script)] text-3xl text-[var(--color-gold)] leading-none">1ª</p>
+          <p class="mt-1 text-sm font-medium text-[var(--color-ink)]">Consulta sin compromiso</p>
+          <p class="text-xs text-[var(--color-mute)]">Valoración personalizada con la doctora</p>
+        </li>
+        <li>
+          <p class="font-[family-name:var(--font-script)] text-3xl text-[var(--color-gold)] leading-none">Nº</p>
+          <p class="mt-1 text-sm font-medium text-[var(--color-ink)]">Colegiada en activo</p>
+          <p class="text-xs text-[var(--color-mute)]">[TODO: nº colegiada de la cliente]</p>
+        </li>
+      </ul>
     </Section>
 
     <!-- SUBMARCAS -->
