@@ -24,15 +24,47 @@ export const primaryNav: readonly NavItem[] = [
   { label: "Dra. Abigail y Equipo", href: "/dra-abigail-y-equipo" },
 ] as const;
 
-/** Submarcas legacy: ahora se redirigen / consolidan. Mantenido para Footer
- *  hasta que el contenido editorial se reubique. */
-export const submarcasNav = services.map((s) => ({
-  label: s.fullName,
-  shortLabel: s.name,
-  href: `/${s.slug}`,
-  color: s.color,
-  shortClaim: s.shortClaim,
-}));
+/** Áreas/especialidades para el footer (Figma 2025-12-02).
+ *  Sustituye al submarcasNav legacy: ahora apunta a las páginas dedicadas
+ *  creadas según el Figma. Mantiene `submarcasNav` como alias para no
+ *  romper imports históricos. */
+export const submarcasNav = [
+  {
+    label: "Método Kintsugi",
+    shortLabel: "Método Kintsugi",
+    href: "/metodo-kintsugi",
+    color: services[0].color,
+    shortClaim: "Filosofía clínica",
+  },
+  {
+    label: "Centro Capilar",
+    shortLabel: "Centro Capilar",
+    href: "/centro-capilar",
+    color: services[3].color,
+    shortClaim: "Tricología y cirugía",
+  },
+  {
+    label: "Medicina Estética",
+    shortLabel: "Medicina Estética",
+    href: "/medicina-estetica",
+    color: services[0].color,
+    shortClaim: "Armonía y belleza",
+  },
+  {
+    label: "Medicina Integrativa",
+    shortLabel: "Medicina Integrativa",
+    href: "/medicina-integrativa",
+    color: services[1].color,
+    shortClaim: "Longevidad",
+  },
+  {
+    label: "Musas CEMAD",
+    shortLabel: "Musas CEMAD",
+    href: "/musas-cemad",
+    color: services[2].color,
+    shortClaim: "Historias reales",
+  },
+] as const;
 
 /** Enlaces legales (footer). */
 export const legalNav: readonly NavItem[] = [
