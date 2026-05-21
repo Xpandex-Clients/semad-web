@@ -5,38 +5,45 @@
  * ===================================================== */
 
 @theme {
-  /* ----------------- Color: matriz ----------------- */
-  --color-gold:        oklch(73% 0.085 78);   /* #bd9b5f — Pantone 7562 C */
-  --color-gold-light:  oklch(89% 0.085 82);   /* #ffd38d */
-  --color-gold-dark:   oklch(56% 0.075 76);   /* #8d7449 */
+  /* ----------------- Color: matriz (extraídos del Figma 2025-12-02) ----------------- */
+  --color-gold:        #BD9B5F;   /* Pantone 7562 C — primary brand */
+  --color-gold-light:  #F7DEB2;   /* champagne suave (Figma) — fondos y acentos */
+  --color-gold-dark:   #8d7449;   /* gold oscuro — texto sobre cream */
 
-  --color-teal:        oklch(72% 0.075 200);  /* #4cb8c3 — Pantone 319 C */
-  --color-teal-light:  oklch(87% 0.045 210);  /* #b5dfe7 */
-  --color-teal-dark:   oklch(53% 0.065 205);  /* #398087 */
+  --color-cream:       #F7DEB2;   /* alias semántico — bloques cálidos */
+  --color-cream-soft:  #E9DAC0;   /* cream desaturado */
 
-  /* ----------------- Color: submarcas ----------------- */
-  --color-rose:        oklch(82% 0.025 14);   /* #dfc2c4 — Anti-Aging Avanzado */
-  --color-silver:      oklch(74% 0   0);      /* #b1b1b1 — Hair Clinic */
-  --color-copper:      oklch(54% 0.06  50);   /* #8b634a — Láser Dermoestético */
+  /* ----------------- Color: secundarios Figma ----------------- */
+  --color-teal:        #08242C;   /* dark teal editorial (no Pantone 319) */
+  --color-teal-light:  #8CA4AB;   /* blue-grey suave — bloques medicina integrativa */
+  --color-teal-dark:   #0D343F;
 
-  /* ----------------- Neutros ----------------- */
-  --color-ink:         oklch(20% 0.005 90);   /* #1d1d1b */
-  --color-paper:       oklch(100% 0   0);     /* #ffffff */
-  --color-paper-soft:  oklch(96.6% 0  0);     /* #f4f4f4 */
-  --color-mute:        oklch(67% 0.005 90);   /* #9d9d9c */
+  --color-wine:        #660033;   /* wine — método Kintsugi, acentos editoriales */
 
-  /* ----------------- Tipografía -----------------
-   * Familias oficiales del manual CEMAD: Erstoria (display),
-   * Gotham (body), Corinthia (script). Las dos primeras son comerciales
-   * sin licencia web confirmada; usamos sustitutos prácticamente
-   * idénticos en Google Fonts: Playfair Display (didone refinada como
-   * Erstoria) y Montserrat (geométrica como Gotham). Corinthia sí está
-   * disponible en Google Fonts y se usa con la familia oficial.
-   * Migrar a Erstoria/Gotham cuando la cliente aporte licencia web.
+  /* ----------------- Sub-líneas (mantenemos algunos legacy) ----------------- */
+  --color-rose:        oklch(82% 0.025 14);   /* #dfc2c4 — legacy submarca rose */
+  --color-silver:      oklch(74% 0   0);      /* #b1b1b1 — legacy submarca silver */
+  --color-copper:      oklch(54% 0.06  50);   /* #8b634a — legacy submarca copper */
+
+  /* ----------------- Neutros (Figma) ----------------- */
+  --color-ink:         #000000;   /* black puro Figma */
+  --color-ink-soft:    #1A1A1A;   /* charcoal — texto cuerpo principal */
+  --color-paper:       #FFFFFF;
+  --color-paper-soft:  #F7F7F7;   /* off-white Figma */
+  --color-paper-warm:  #EEEEEE;   /* warm grey Figma */
+  --color-mute:        #444444;   /* gris secundario texto */
+  --color-mute-soft:   #1A1A1A60; /* charcoal @ 38% — leyendas */
+
+  /* ----------------- Tipografía (Figma 2025-12-02) -----------------
+   * Display:  Playfair Display (cubre Fraunces alt del Figma con misma proporción didone)
+   * Body:     Sarabun (Google Fonts, oficial en el Figma) — pesos 300/400/500/700
+   * UI label: Sarabun en uppercase con tracking, sustituye a Gotham (no-libre)
+   * Script:   Playfair Display Italic peso 300 (Figma usa Playfair italic para palabras
+   *           emblema como "Restauración", no Corinthia). Corinthia queda como fallback.
    * --------------------------------------------- */
-  --font-display:  "Erstoria", "Playfair Display", Georgia, serif;
-  --font-body:     "Gotham", "Montserrat Variable", "Montserrat", system-ui, sans-serif;
-  --font-script:   "Corinthia", cursive;
+  --font-display:  "Playfair Display", "Fraunces", "Erstoria", Georgia, serif;
+  --font-body:     "Sarabun", "Gotham", system-ui, -apple-system, sans-serif;
+  --font-script:   "Playfair Display", "Corinthia", cursive;
 
   /* ----------------- Escala tipográfica (modular 1.250) ----------------- */
   --text-xs:   0.75rem;   /* 12 */
