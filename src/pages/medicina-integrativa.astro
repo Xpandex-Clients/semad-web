@@ -1,42 +1,178 @@
 ---
+import { Picture } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 import Section from "@shared/ui/primitives/Section.astro";
-import Heading from "@shared/ui/primitives/Heading.astro";
 import Badge from "@shared/ui/primitives/Badge.astro";
 import Button from "@shared/ui/primitives/Button.astro";
+import heroImg from "@assets/images/page-integrativa-hero.png";
+import diag1 from "@assets/images/integrativa-1.png";
+import diag2 from "@assets/images/integrativa-2.png";
+import diag3 from "@assets/images/integrativa-3.png";
+import legadoImg from "@assets/images/integrativa-legado.png";
+
+const triada = [
+  {
+    n: "01",
+    title: "Oligoscan",
+    sub: "Análisis de Minerales y Metales Pesados",
+    body:
+      "Medición no invasiva del nivel de minerales esenciales (zinc, magnesio, selenio) y detección de metales pesados tóxicos (mercurio, plomo, aluminio). Identifica déficits que impactan energía, piel, cabello y sistema inmune.",
+    img: diag1,
+  },
+  {
+    n: "02",
+    title: "Biopsia Digital",
+    sub: "Evaluación Celular Integral",
+    body:
+      "Análisis del estado de tus sistemas mediante tecnología no invasiva: sistema cardiovascular, función digestiva, estrés oxidativo celular, balance hormonal y calidad del sueño.",
+    img: diag2,
+  },
+  {
+    n: "03",
+    title: "Analíticas Funcionales",
+    sub: "Marcadores de Salud Profunda",
+    body:
+      "Perfil hormonal completo, marcadores de inflamación, niveles de vitaminas (D, B12, ácido fólico), función tiroidea avanzada y marcadores de salud metabólica.",
+    img: diag3,
+  },
+];
 ---
 
 <Layout
   title="Medicina Integrativa y Longevidad — CEMAD"
-  description="Medicina Integrativa CEMAD: diagnóstico hormonal y nutricional, IV therapy, anti-aging avanzado y programas de longevidad en Valencia."
+  description="Medicina Integrativa CEMAD: tríada diagnóstica (Oligoscan, Biopsia Digital, analíticas funcionales), sueroterapia y programa Legado y Plenitud para vivir con vitalidad en cada década."
 >
   <main id="main">
+    <!-- HERO -->
     <Section tone="paper" spacing="loose">
-      <div class="text-center max-w-3xl mx-auto">
-        <Badge tone="gold">Medicina Integrativa</Badge>
-        <Heading as={1} variant="display" align="center" class="mt-3">
-          Medicina Integrativa y <em class="not-italic font-[family-name:var(--font-script)] text-[1.2em] text-[var(--color-gold)] font-normal">Longevidad</em>
-        </Heading>
-        <p class="mt-6 text-lg text-[var(--color-mute)] leading-relaxed">
-          Salud desde la raíz: diagnóstico hormonal y nutricional, sueroterapia IV
-          y planes anti-aging que tratan la causa, no el síntoma.
+      <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
+        <div>
+          <Badge tone="gold">Medicina Integrativa</Badge>
+          <h1 class="mt-6 font-[family-name:var(--font-display)] leading-[1.02]">
+            <span class="block text-[var(--color-ink)] text-[clamp(2rem,4vw,3rem)] font-light">
+              Construye tu Mejor Versión,
+            </span>
+            <em class="block mt-2 not-italic italic text-[var(--color-gold)] text-[clamp(3rem,7vw,6rem)] font-normal">
+              a Cualquier Edad
+            </em>
+          </h1>
+          <div class="mt-8 w-[100px] h-[2px] bg-[var(--color-gold)]"></div>
+        </div>
+        <div class="aspect-[4/5] overflow-hidden rounded-[var(--radius-md)] shadow-[var(--shadow-card)]">
+          <Picture
+            src={heroImg}
+            alt="Medicina integrativa CEMAD — composición editorial"
+            widths={[480, 768, 1024]}
+            sizes="(min-width: 1024px) 540px, 92vw"
+            formats={["avif", "webp"]}
+            quality={82}
+            loading="eager"
+            fetchpriority="high"
+            class="h-full w-full object-cover"
+          />
+        </div>
+      </div>
+    </Section>
+
+    <!-- INTRO -->
+    <Section tone="paper-soft" spacing="default" width="narrow">
+      <div class="max-w-[68ch] mx-auto">
+        <p class="text-[var(--color-mute)] leading-relaxed text-[1.0625rem]">
+          En CEMAD comprendemos que la belleza externa es reflejo de la salud
+          interna. No puedes tener piel radiante con déficits nutricionales. No
+          puedes tener energía sostenida con hormonas desequilibradas. No
+          puedes envejecer con vitalidad sin abordar las causas profundas del
+          deterioro.
+        </p>
+        <p class="mt-6 text-[var(--color-mute)] leading-relaxed">
+          Nuestra Medicina Integrativa fusiona dos mundos:
+          <strong class="text-[var(--color-ink)] font-medium">diagnóstico occidental de precisión</strong>
+          (analíticas funcionales avanzadas, tecnología Oligoscan y biopsia digital)
+          y la <strong class="text-[var(--color-ink)] font-medium">sabiduría de la Medicina Tradicional China</strong>
+          (equilibrio energético, acupuntura y fitoterapia).
+        </p>
+        <p class="mt-6 font-[family-name:var(--font-display)] italic text-[var(--color-ink)] text-xl leading-snug">
+          El resultado es un enfoque único que restaura el equilibrio profundo
+          de tu organismo para que vivas con vitalidad, claridad mental y
+          bienestar sostenido en cada década de tu vida.
         </p>
       </div>
     </Section>
 
-    <Section tone="paper-soft" spacing="default" width="narrow">
-      <div class="text-center">
-        <Badge tone="gold">En construcción</Badge>
-        <Heading as={2} visual={3} class="mt-3">
-          Página en preparación
-        </Heading>
-        <p class="mt-3 text-[var(--color-mute)]">
-          Contenido detallado en preparación: protocolos integrativos, IV therapy
-          y programas anti-aging.
+    <!-- TRÍADA DIAGNÓSTICA -->
+    <Section tone="paper" spacing="loose">
+      <div class="mb-12 max-w-3xl">
+        <h2 class="font-[family-name:var(--font-display)] text-[clamp(2.5rem,5vw,4rem)] text-[var(--color-ink)] leading-[1.05]">
+          <span class="block">La Tríada Diagnóstica</span>
+          <em class="block not-italic italic text-[var(--color-gold)]">CEMAD</em>
+        </h2>
+        <div class="mt-4 w-[100px] h-[2px] bg-[var(--color-gold)]"></div>
+        <p class="mt-6 text-[var(--color-mute)] leading-relaxed">
+          Antes de diseñar cualquier programa, realizamos una evaluación
+          completa de tu estado de salud profundo mediante tecnologías de
+          vanguardia.
         </p>
-        <Button href="/contacto" variant="primary" class="mt-6">
-          Reservar valoración
-        </Button>
+      </div>
+      <ul class="grid md:grid-cols-3 gap-8 list-none p-0">
+        {triada.map((t) => (
+          <li>
+            <div class="aspect-[4/5] overflow-hidden rounded-[var(--radius-sm)] mb-6">
+              <Picture src={t.img} alt={t.title} widths={[320, 480]} sizes="(min-width: 768px) 33vw, 92vw" formats={["avif","webp"]} quality={80} class="h-full w-full object-cover" />
+            </div>
+            <span class="font-[family-name:var(--font-display)] italic text-[var(--color-gold)] text-2xl">
+              {t.n}
+            </span>
+            <h3 class="mt-2 font-[family-name:var(--font-display)] text-[1.5rem] text-[var(--color-ink)] leading-tight">
+              {t.title}
+            </h3>
+            <p class="mt-1 font-[family-name:var(--font-display)] italic text-[var(--color-gold-dark)] text-sm">
+              {t.sub}
+            </p>
+            <p class="mt-4 text-sm text-[var(--color-mute)] leading-relaxed">{t.body}</p>
+          </li>
+        ))}
+      </ul>
+    </Section>
+
+    <!-- PROGRAMA LEGADO Y PLENITUD -->
+    <Section tone="paper-soft" spacing="loose">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div class="aspect-[4/5] overflow-hidden rounded-[var(--radius-sm)]">
+          <Picture src={legadoImg} alt="Programa Legado y Plenitud" widths={[480, 768, 1024]} sizes="(min-width: 1024px) 540px, 92vw" formats={["avif","webp"]} quality={80} class="h-full w-full object-cover" />
+        </div>
+        <div>
+          <h2 class="font-[family-name:var(--font-display)] text-[clamp(2.25rem,4.5vw,3.25rem)] text-[var(--color-ink)] leading-[1.1]">
+            Programa <em class="not-italic italic text-[var(--color-gold)]">Legado y Plenitud</em>
+          </h2>
+          <p class="mt-3 font-[family-name:var(--font-display)] italic text-[var(--color-gold)] text-lg">
+            Longevidad por Etapa Vital
+          </p>
+          <p class="mt-6 text-[var(--color-mute)] leading-relaxed">
+            El envejecimiento no es un declive inevitable. Es una etapa de
+            transformación que puede vivirse con vitalidad, propósito y
+            bienestar cuando abordas las causas profundas del deterioro.
+          </p>
+          <p class="mt-4 text-[var(--color-mute)] leading-relaxed">
+            Nuestro Programa <em>Legado y Plenitud</em> está diseñado por
+            décadas vitales, reconociendo que cada etapa tiene necesidades
+            fisiológicas y emocionales únicas.
+          </p>
+        </div>
+      </div>
+    </Section>
+
+    <!-- CTA -->
+    <Section tone="ink" spacing="loose">
+      <div class="text-center max-w-2xl mx-auto text-[var(--color-paper)]">
+        <img src="/brand/cemad-isotipo.png" alt="" aria-hidden="true" width="56" height="56" class="mx-auto mb-6 invert opacity-95" />
+        <h2 class="font-[family-name:var(--font-display)] font-light text-[clamp(2.25rem,4.8vw,3.5rem)] leading-[1.1]">
+          Empieza con tu
+          <em class="block mt-2 not-italic italic text-[var(--color-gold)] font-normal">Tríada Diagnóstica</em>
+        </h2>
+        <p class="mt-6 text-[var(--color-paper)]/85">Mapa completo de tu salud interna en una sola sesión.</p>
+        <div class="mt-10">
+          <Button href="/contacto" variant="primary" size="lg">Reserva tu cita →</Button>
+        </div>
       </div>
     </Section>
   </main>
