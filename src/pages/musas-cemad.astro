@@ -1,9 +1,62 @@
 ---
+import { Picture } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 import Section from "@shared/ui/primitives/Section.astro";
 import Heading from "@shared/ui/primitives/Heading.astro";
 import Badge from "@shared/ui/primitives/Badge.astro";
 import Button from "@shared/ui/primitives/Button.astro";
+import valentinaImg from "@assets/images/musa-valentina.png";
+import julianImg from "@assets/images/musa-julian.png";
+import camilaImg from "@assets/images/musa-camila.png";
+import andresImg from "@assets/images/musa-andres.png";
+
+const musas = [
+  {
+    name: "Valentina",
+    age: 42,
+    quote:
+      "Durante años escondí mi cabello detrás de pañuelos y moños apretados. La alopecia me quitó mucho más que volumen; me quitó la libertad de mirarme sin miedo. En CEMAD aprendí que no se trataba solo de recuperar folículos, sino de reconciliarme con mi reflejo. Hoy mi cabello vuelve a moverse con el viento… y con él, mi historia.",
+    treatments:
+      "Diagnóstico tricológico completo, bioestimulación capilar con plasma rico en plaquetas, mesoterapia regenerativa y trasplante capilar de precisión con enfoque restaurativo.",
+    img: valentinaImg,
+  },
+  {
+    name: "Julián",
+    age: 36,
+    quote:
+      "Creí que perder el cabello era parte del destino. Pero un día entendí que no tenía que resignarme. Vine a CEMAD buscando una solución estética, y encontré un equipo que entendió la raíz emocional de lo que estaba viviendo. Hoy me veo al espejo y me reconozco de nuevo: seguro, natural, completo.",
+    treatments:
+      "Diagnóstico con tricoscopia avanzada, injerto capilar FUE de precisión, terapia regenerativa con factores de crecimiento, y mantenimiento con bioestimulación capilar personalizada.",
+    img: julianImg,
+  },
+  {
+    name: "Camila",
+    age: 47,
+    quote:
+      "Siempre fui exigente conmigo misma. Cada línea en mi rostro era una batalla con el paso del tiempo… hasta que entendí que no debía borrarlas, sino suavizarlas con respeto. En CEMAD sentí que me devolvían armonía, no una nueva cara. Hoy mi rostro cuenta mi historia con más calma y coherencia.",
+    treatments:
+      "Armonización facial integral con ácido hialurónico, neuromoduladores estratégicos, estimulación de colágeno con biorevitalizantes, y protocolo Kintsugi de balance facial.",
+    img: camilaImg,
+  },
+  {
+    name: "Andrés",
+    age: 55,
+    quote:
+      "Pensé que la vitalidad era cosa de juventud. Pero cuando empecé a sentir el cansancio y el estrés reflejados en mi piel y mi ánimo, entendí que podía elegir un camino diferente. En CEMAD aprendí a tratar mi cuerpo como un sistema completo. Hoy me siento más claro, más fuerte y más presente.",
+    treatments:
+      "Diagnóstico integrativo completo (Oligoscan + analíticas funcionales), sueroterapia personalizada, equilibrio hormonal y programa Legado y Plenitud.",
+    img: andresImg,
+  },
+  {
+    name: "Lucía",
+    age: 38,
+    quote:
+      "Había perdido la energía sin saber por qué. Dormía bien, comía bien… pero algo en mí no brillaba. En CEMAD entendieron lo que ni yo sabía expresar: que el cansancio también tiene causas invisibles. Hoy mi piel tiene luz, mi cuerpo tiene ritmo y mi mente, calma. Recuperé mi energía… y mi poder.",
+    treatments:
+      "Evaluación funcional integral, programa de medicina integrativa con micronutrición y sueroterapia, acompañamiento dermoestético con bioestimulación.",
+    img: null,
+  },
+];
 ---
 
 <Layout
@@ -11,32 +64,96 @@ import Button from "@shared/ui/primitives/Button.astro";
   description="Pacientes reales que comparten su historia con CEMAD. Restauración, transformación y reencuentro con la propia identidad."
 >
   <main id="main">
-    <Section tone="ink" spacing="loose">
-      <div class="text-center max-w-3xl mx-auto text-[var(--color-paper)]">
+    <!-- HERO -->
+    <Section tone="paper" spacing="loose">
+      <div class="max-w-3xl mx-auto text-center">
         <Badge tone="gold">Musas CEMAD</Badge>
-        <Heading as={1} variant="display" tone="invert" align="center" class="mt-3">
-          Historias de <em class="not-italic font-[family-name:var(--font-script)] text-[1.2em] text-[var(--color-gold)] font-normal">Restauración</em>
-        </Heading>
-        <p class="mt-6 text-lg text-[var(--color-paper)]/85 leading-relaxed">
-          Las Musas CEMAD son las personas que han confiado en nosotros para volver
-          a habitar su imagen con coherencia y poder personal.
+        <h1 class="mt-6 font-[family-name:var(--font-display)] font-light leading-[1.04]">
+          <span class="block text-[var(--color-ink)] text-[clamp(2.5rem,5.2vw,4rem)]">Musas CEMAD:</span>
+          <em class="block mt-2 not-italic italic text-[var(--color-gold)] text-[clamp(2.5rem,5vw,3.75rem)] font-normal">
+            Historias de Restauración y Poder Personal
+          </em>
+        </h1>
+        <div class="mt-8 w-[100px] h-[2px] bg-[var(--color-gold)] mx-auto"></div>
+      </div>
+    </Section>
+
+    <!-- INTRO -->
+    <Section tone="paper-soft" spacing="default" width="narrow">
+      <div class="max-w-[68ch] mx-auto">
+        <h2 class="font-[family-name:var(--font-display)] text-[var(--color-gold)] italic font-normal text-[clamp(2rem,4vw,3rem)]">
+          Introducción
+        </h2>
+        <p class="mt-6 text-[var(--color-mute)] leading-relaxed text-[1.0625rem]">
+          En CEMAD no mostramos <em>"antes y después"</em> como si fueran trofeos.
+          Honramos el viaje emocional de cada paciente. Cada Musa CEMAD es una
+          persona real que confió en nosotros para restaurar algo más profundo
+          que su imagen: su relación consigo misma. Aquí compartimos sus
+          historias —con su permiso y su voz— para que comprendas que no estás
+          solo en tu proceso y que la transformación real es posible.
         </p>
       </div>
     </Section>
 
-    <Section tone="paper" spacing="default" width="narrow">
-      <div class="text-center">
-        <Badge tone="gold">En preparación</Badge>
-        <Heading as={2} visual={3} class="mt-3">
-          Próximamente: historias completas
-        </Heading>
-        <p class="mt-3 text-[var(--color-mute)] max-w-[60ch] mx-auto">
-          Estamos terminando de coordinar con cada Musa la publicación de su historia,
-          fotografía y consentimiento. Pronto encontrarás aquí los casos reales.
+    <!-- MUSAS -->
+    <Section tone="paper" spacing="loose">
+      <ul class="space-y-24 list-none p-0 m-0 max-w-5xl mx-auto">
+        {musas.map((m, i) => (
+          <li class={`grid lg:grid-cols-2 gap-10 items-center ${i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}>
+            <div class={`aspect-[3/4] overflow-hidden rounded-[var(--radius-sm)] shadow-[var(--shadow-card)] bg-[var(--color-paper-soft)]`}>
+              {m.img ? (
+                <Picture
+                  src={m.img}
+                  alt={`Retrato de ${m.name}, paciente CEMAD`}
+                  widths={[400, 600, 800]}
+                  sizes="(min-width: 1024px) 480px, 92vw"
+                  formats={["avif", "webp"]}
+                  quality={80}
+                  class="h-full w-full object-cover"
+                />
+              ) : (
+                <div class="h-full w-full flex items-center justify-center text-[var(--color-mute)] text-sm font-[family-name:var(--font-script)] italic">
+                  Retrato pendiente
+                </div>
+              )}
+            </div>
+            <div>
+              <h3 class="font-[family-name:var(--font-display)] text-[clamp(2.25rem,4.5vw,3.25rem)] text-[var(--color-ink)] leading-tight font-normal">
+                {m.name}, <span class="text-[var(--color-gold)] italic">{m.age} años</span>
+              </h3>
+              <blockquote class="mt-6 text-[var(--color-ink-soft)] leading-relaxed italic text-[1.0625rem]">
+                "{m.quote}"
+              </blockquote>
+              <div class="mt-6 pt-6 border-t border-[var(--color-paper-warm)]">
+                <p class="font-[family-name:var(--font-display)] italic text-lg text-[var(--color-gold-dark)]">
+                  Tratamientos realizados:
+                </p>
+                <p class="mt-2 text-sm text-[var(--color-mute)] leading-relaxed">
+                  {m.treatments}
+                </p>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </Section>
+
+    <!-- CTA FOOTER -->
+    <Section tone="ink" spacing="loose">
+      <div class="text-center max-w-2xl mx-auto text-[var(--color-paper)]">
+        <img src="/brand/cemad-isotipo.png" alt="" aria-hidden="true" width="56" height="56" class="mx-auto mb-6 invert opacity-95" />
+        <h2 class="font-[family-name:var(--font-display)] font-light text-[clamp(2.25rem,4.8vw,3.5rem)] leading-[1.1]">
+          ¿Lista para Convertirte en la
+          <em class="block mt-2 not-italic italic text-[var(--color-gold)] font-normal">Próxima Musa CEMAD?</em>
+        </h2>
+        <p class="mt-6 text-[var(--color-paper)]/85">
+          Cada Musa empieza con una conversación. Reserva la tuya.
         </p>
-        <Button href="/contacto" variant="primary" class="mt-6">
-          ¿Quieres ser la próxima Musa? Habla con la clínica
-        </Button>
+        <div class="mt-10">
+          <Button href="/contacto" variant="primary" size="lg">
+            Reserva tu cita →
+          </Button>
+        </div>
       </div>
     </Section>
   </main>
