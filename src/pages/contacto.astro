@@ -1,12 +1,13 @@
 ---
+import { Picture } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 import Section from "@shared/ui/primitives/Section.astro";
 import Heading from "@shared/ui/primitives/Heading.astro";
-import Badge from "@shared/ui/primitives/Badge.astro";
 import Button from "@shared/ui/primitives/Button.astro";
 import JsonLd from "@shared/ui/seo/JsonLd.astro";
 import { jsonLdGraph, medicalClinicSchema, breadcrumbSchema } from "@shared/seo/schemas";
 import { siteConfig } from "@shared/config/site";
+import contactoHero from "@assets/images/page-contacto-hero.png";
 
 const waNumber = siteConfig.contact.whatsapp.replace(/[^0-9]/g, "");
 
@@ -36,23 +37,39 @@ const especialidades = [
   </Fragment>
   <main id="main">
     <!-- HERO con título editorial (frame 217:1994) -->
-    <Section tone="ink" spacing="loose" class="relative overflow-hidden">
-      <div class="relative z-10 max-w-3xl">
-        <Heading as={1} variant="display" tone="invert" align="left" class="leading-[1.05]">
-          <span class="block text-[clamp(2.25rem,5vw,3.5rem)] font-[family-name:var(--font-display)] font-light text-[var(--color-paper)]">
-            Comienza tu Proceso de
-          </span>
-          <em class="block mt-1 not-italic font-[family-name:var(--font-script)] italic font-light text-[clamp(3rem,8vw,6rem)] text-[var(--color-gold)] leading-[0.95]">
-            Restauración
-          </em>
-        </Heading>
-        <p class="mt-8 max-w-[58ch] text-[var(--color-paper)]/85 leading-relaxed">
-          Queremos escucharte y diseñar contigo una estrategia personalizada
-          para tu imagen, tu salud y tu bienestar. El primer paso es siempre una
-          conversación.
-        </p>
+    <section class="relative isolate overflow-hidden">
+      <div class="absolute inset-0 -z-0">
+        <Picture
+          src={contactoHero}
+          alt=""
+          widths={[1024, 1440, 1920]}
+          sizes="100vw"
+          formats={["avif", "webp"]}
+          quality={80}
+          loading="eager"
+          fetchpriority="high"
+          class="h-full w-full object-cover object-[center_30%]"
+        />
+        <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-ink)]/40 via-[var(--color-ink)]/55 to-[var(--color-ink)]/80"></div>
       </div>
-    </Section>
+      <div class="relative z-10 mx-auto max-w-[var(--container-wide)] px-[clamp(1rem,4vw,2rem)] py-[clamp(6rem,14vw,11rem)]">
+        <div class="max-w-3xl">
+          <h1 class="font-[family-name:var(--font-display)] leading-[1.02]">
+            <span class="block text-[clamp(2rem,4.2vw,3rem)] font-light text-[var(--color-paper)]">
+              Comienza tu Proceso de
+            </span>
+            <em class="block not-italic italic text-[clamp(3.5rem,9vw,7rem)] text-[var(--color-gold)] font-normal -indent-[0.1em]">
+              <span class="inline-block w-[clamp(2rem,4vw,3rem)] h-[2px] bg-[var(--color-gold)] align-middle mr-3 mb-3"></span>Restauración
+            </em>
+          </h1>
+          <p class="mt-8 max-w-[58ch] text-[var(--color-paper)]/85 leading-relaxed">
+            Queremos escucharte y diseñar contigo una estrategia personalizada
+            para tu imagen, tu salud y tu bienestar. El primer paso es siempre
+            una conversación.
+          </p>
+        </div>
+      </div>
+    </section>
 
     <!-- BLOQUE INTRO: la consulta es el principio, no una venta -->
     <Section tone="paper" spacing="default" width="narrow">
@@ -90,7 +107,7 @@ const especialidades = [
     <!-- FORMULARIO + CANALES (Fase 9: form action funcional) -->
     <Section tone="paper-soft" spacing="default">
       <div class="max-w-3xl mx-auto">
-        <Heading as={2} visual={1} class="text-[clamp(2.5rem,6vw,4rem)]">
+        <Heading as={2} visual={1} class="text-[clamp(3rem,9vw,7.5rem)] font-light leading-[0.95]">
           Contáctanos
         </Heading>
         <p class="mt-3 text-[var(--color-mute)]">

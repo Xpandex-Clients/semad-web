@@ -72,21 +72,39 @@ const homeFaqs = [
   },
 ];
 
+import serviceCapilar from "@assets/images/capilar-pilar-2.png";
+import serviceAntiaging from "@assets/images/integrativa-1.png";
+import serviceEstetica from "@assets/images/cemad-service-feature.png";
+import serviceLaser from "@assets/images/cemad-method-3.png";
+
 const services = [
   {
-    title: "Medicina Estética",
-    summary: "Tratamientos faciales y corporales mínimamente invasivos: armonización, rellenos, neuromoduladores, bioestimulación.",
-    href: "/medicina-estetica",
-  },
-  {
-    title: "Centro Capilar",
-    summary: "Tricología, regeneración con PRP y cirugía de implante mediante micropunción FUE.",
+    title: "Medicina Capilar Avanzada",
+    summary: "Diagnóstico tricológico, terapias regenerativas y cirugía capilar de precisión.",
     href: "/centro-capilar",
+    img: serviceCapilar,
+    eyebrow: "Centro Capilar",
   },
   {
-    title: "Medicina Integrativa",
-    summary: "Diagnóstico hormonal y nutricional, sueroterapia IV y programas anti-aging que tratan la causa, no el síntoma.",
+    title: "Medicina Antiaging",
+    summary: "Diagnóstico hormonal y nutricional. Sueroterapia, longevidad por décadas.",
     href: "/medicina-integrativa",
+    img: serviceAntiaging,
+    eyebrow: "Medicina Integrativa",
+  },
+  {
+    title: "Medicina Estética de Precisión",
+    summary: "Armonización facial, lifting sin cirugía, calidad de piel y rejuvenecimiento.",
+    href: "/medicina-estetica",
+    img: serviceEstetica,
+    eyebrow: "Medicina Estética",
+  },
+  {
+    title: "Laserterapia",
+    summary: "Endoláser, fotorrejuvenecimiento, eliminación de manchas y depilación médica.",
+    href: "/medicina-estetica#laserterapia",
+    img: serviceLaser,
+    eyebrow: "Laserterapia",
   },
 ];
 ---
@@ -145,6 +163,62 @@ const services = [
         </div>
       </div>
     </Section>
+
+    <!-- SOMOS (Figma 03) =========================================== -->
+    <Section tone="paper-soft" spacing="loose">
+      <div class="grid lg:grid-cols-[1fr_1.1fr] gap-12 lg:gap-16 items-center">
+        <!-- collage 3 fotos -->
+        <div class="grid grid-cols-3 gap-3 lg:gap-4">
+          <div class="aspect-[3/4] overflow-hidden rounded-[var(--radius-sm)] mt-8">
+            <Picture src={method1} alt="" widths={[240, 360]} sizes="(min-width: 1024px) 220px, 30vw" formats={["avif","webp"]} quality={78} loading="lazy" class="h-full w-full object-cover" />
+          </div>
+          <div class="aspect-[3/4] overflow-hidden rounded-[var(--radius-sm)]">
+            <Picture src={method2} alt="" widths={[240, 360]} sizes="(min-width: 1024px) 220px, 30vw" formats={["avif","webp"]} quality={78} loading="lazy" class="h-full w-full object-cover" />
+          </div>
+          <div class="aspect-[3/4] overflow-hidden rounded-[var(--radius-sm)] mt-8">
+            <Picture src={method4} alt="" widths={[240, 360]} sizes="(min-width: 1024px) 220px, 30vw" formats={["avif","webp"]} quality={78} loading="lazy" class="h-full w-full object-cover" />
+          </div>
+        </div>
+        <div>
+          <h2 class="font-[family-name:var(--font-display)] text-[var(--color-ink)] font-light text-[clamp(3rem,7vw,6rem)] leading-[0.95]">
+            Somos
+          </h2>
+          <div class="mt-6 w-[100px] h-[2px] bg-[var(--color-gold)]"></div>
+          <p class="mt-8 text-[var(--color-mute)] leading-relaxed text-[1.0625rem] max-w-[52ch]">
+            CEMAD es la clínica liderada por la <strong class="text-[var(--color-ink)] font-medium">Dra. Abigail Cevallos</strong>,
+            pionera en la <em class="italic">Medicina de Precisión con Alma</em> y
+            creadora del <strong class="text-[var(--color-ink)] font-medium">Método Kintsugi</strong>.
+            Nuestra vocación no es borrar, sino restaurar. No ofrecemos estética
+            estándar, sino estrategias personalizadas que devuelven a cada
+            paciente el control absoluto sobre su identidad e imagen.
+          </p>
+        </div>
+      </div>
+    </Section>
+
+    <!-- CONOCE A LA DRA. CEVALLOS teaser (Figma 04) ================== -->
+    <section class="relative isolate overflow-hidden">
+      <div class="relative aspect-[16/7] w-full overflow-hidden">
+        <Picture
+          src={mirrorImg}
+          alt="Conoce a la Dra. Abigail Cevallos"
+          widths={[1024, 1440, 1920]}
+          sizes="100vw"
+          formats={["avif", "webp"]}
+          quality={78}
+          loading="lazy"
+          class="absolute inset-0 h-full w-full object-cover object-[center_30%] grayscale-[0.4]"
+        />
+        <div class="absolute inset-0 bg-gradient-to-r from-[var(--color-ink)]/55 via-[var(--color-ink)]/35 to-transparent"></div>
+        <div class="absolute inset-0 flex items-center">
+          <div class="mx-auto max-w-[var(--container-wide)] w-full px-[clamp(1rem,4vw,2rem)]">
+            <Button href="/dra-abigail-y-equipo" variant="outline" size="md" class="text-[var(--color-paper)] border-[var(--color-paper)]/80 hover:bg-white/10 hover:border-[var(--color-paper)] uppercase tracking-[0.18em] text-[11px]">
+              Conoce a la Dra. Cevallos →
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- PILAR: Método Kintsugi narrativo ========================== -->
     <Section tone="paper" spacing="loose">
@@ -219,30 +293,54 @@ const services = [
       </ul>
     </Section>
 
-    <!-- SERVICIOS PRINCIPALES ===================================== -->
-    <Section tone="paper-soft" spacing="loose">
-      <div class="mb-12 text-center">
-        <h2 class="font-[family-name:var(--font-display)] text-[clamp(2.5rem,5vw,4rem)] text-[var(--color-gold)] italic font-normal">
+    <!-- SERVICIOS PRINCIPALES (Figma 08): mosaico image + overlay text ==== -->
+    <Section tone="paper" spacing="loose">
+      <div class="flex flex-wrap items-end justify-between gap-6 mb-10">
+        <h2 class="font-[family-name:var(--font-display)] text-[clamp(2.5rem,5vw,4.25rem)] text-[var(--color-gold)] italic font-normal leading-[1] max-w-3xl">
           Servicios principales
         </h2>
-        <div class="mt-4 w-[100px] h-[2px] bg-[var(--color-gold)] mx-auto"></div>
+        <a
+          href="/contacto"
+          class="link-reveal inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] font-semibold text-[var(--color-ink)] hover:text-[var(--color-gold-dark)]"
+        >
+          Explora nuestros servicios →
+        </a>
       </div>
-      <ul class="grid md:grid-cols-3 gap-6 list-none p-0">
+      <ul class="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 list-none p-0">
         {services.map((s) => (
           <li>
             <a
               href={s.href}
-              class="group block rounded-[var(--radius-sm)] bg-[var(--color-paper)] p-8 h-full transition-shadow duration-300 ease-[var(--ease-out)] hover:shadow-[var(--shadow-hover)] border border-[var(--color-paper-warm)]"
+              class="group relative block aspect-[3/4] overflow-hidden rounded-[var(--radius-sm)] shadow-[var(--shadow-card)]"
             >
-              <h3 class="font-[family-name:var(--font-display)] text-[1.5rem] text-[var(--color-ink)] leading-tight transition-colors group-hover:text-[var(--color-gold-dark)]">
-                {s.title}
-              </h3>
-              <p class="mt-3 text-sm text-[var(--color-mute)] leading-relaxed">
-                {s.summary}
-              </p>
-              <span class="link-reveal mt-6 inline-block text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--color-ink)]">
-                Saber más →
-              </span>
+              <Picture
+                src={s.img}
+                alt={s.title}
+                widths={[300, 480, 640]}
+                sizes="(min-width: 1024px) 320px, 45vw"
+                formats={["avif", "webp"]}
+                quality={78}
+                loading="lazy"
+                class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.04]"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-ink)]/85 via-[var(--color-ink)]/30 to-transparent transition-opacity duration-300"></div>
+              <div class="absolute inset-x-0 bottom-0 p-5 lg:p-6 text-[var(--color-paper)]">
+                <span class="text-[10px] uppercase tracking-[0.22em] font-semibold text-[var(--color-gold)]">
+                  {s.eyebrow}
+                </span>
+                <h3 class="mt-1 font-[family-name:var(--font-display)] text-[1.25rem] lg:text-[1.4rem] leading-tight">
+                  {s.title}
+                </h3>
+                <p class="mt-2 text-xs text-[var(--color-paper)]/85 leading-relaxed hidden lg:block">
+                  {s.summary}
+                </p>
+                <span class="mt-3 inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] font-semibold">
+                  Leer más
+                  <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+                    <path d="M3 7h8M8 3l3 4-3 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
+              </div>
             </a>
           </li>
         ))}
