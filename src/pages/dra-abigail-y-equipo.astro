@@ -2,19 +2,20 @@
 import { Picture } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 import Section from "@shared/ui/primitives/Section.astro";
-import Heading from "@shared/ui/primitives/Heading.astro";
 import Badge from "@shared/ui/primitives/Badge.astro";
 import Button from "@shared/ui/primitives/Button.astro";
 import JsonLd from "@shared/ui/seo/JsonLd.astro";
-import doctoraPortrait from "@assets/images/doctora-cevallos-portrait-legacy.jpg";
-import {
-  jsonLdGraph,
-  physicianFullSchema,
-  breadcrumbSchema,
-} from "@shared/seo/schemas";
+import { jsonLdGraph, physicianFullSchema, breadcrumbSchema } from "@shared/seo/schemas";
 import { siteConfig } from "@shared/config/site";
+import heroImg from "@assets/images/page-doctora-hero.png";
+import doctora2 from "@assets/images/doctora-2.png";
+import doctora3 from "@assets/images/doctora-3.png";
+import doctora4 from "@assets/images/doctora-4.png";
+import doctoraFaceta from "@assets/images/doctora-faceta.png";
+import doctoraPersonal from "@assets/images/doctora-personal.png";
+import equipoImg from "@assets/images/doctora-equipo.png";
 
-const doctoraGraph = jsonLdGraph(
+const graph = jsonLdGraph(
   physicianFullSchema(),
   breadcrumbSchema([
     { name: "Inicio", url: "/" },
@@ -24,59 +25,184 @@ const doctoraGraph = jsonLdGraph(
 ---
 
 <Layout
-  title={`Dra. Abigail Cevallos y Equipo CEMAD`}
-  description={`Conoce a la Dra. Abigail Cevallos Madrid y al equipo médico de CEMAD en Valencia. Medicina estética, anti-aging y tricología bajo un mismo criterio.`}
+  title={`${siteConfig.doctor.name} y Equipo CEMAD`}
+  description="Conoce a la Dra. Abigail Cevallos y al equipo médico de CEMAD: trayectoria, filosofía y compromiso con la restauración de tu identidad."
   ogType="profile"
 >
-  <Fragment slot="head">
-    <JsonLd data={doctoraGraph} />
-  </Fragment>
+  <Fragment slot="head"><JsonLd data={graph} /></Fragment>
   <main id="main">
+    <!-- HERO -->
     <Section tone="paper" spacing="loose">
-      <div class="grid lg:grid-cols-2 gap-10 items-center">
+      <div class="grid lg:grid-cols-[1fr_0.9fr] gap-12 items-center">
         <div>
-          <img
-            src="/brand/cemad-isotipo.png"
-            alt=""
-            width="44"
-            height="44"
-            aria-hidden="true"
-            class="mb-5 opacity-90"
-          />
-          <Badge tone="gold">La doctora y el equipo</Badge>
-          <Heading as={1} variant="display" class="mt-3">
-            {siteConfig.doctor.name}
-          </Heading>
-          <p class="mt-3 text-[var(--color-mute)] uppercase tracking-[0.12em] text-xs">
-            {siteConfig.doctor.role}
-          </p>
-          <p class="mt-6 max-w-[60ch] text-[var(--color-mute)] leading-relaxed">
-            Médico estético con una mirada clínica y un criterio artístico personal:
-            cada plan se construye desde el diagnóstico, no desde el catálogo. Su
-            trabajo prioriza preservar la identidad del paciente y obtener resultados
-            naturales que se sostienen en el tiempo.
-          </p>
-          <p class="mt-3 max-w-[60ch] text-xs text-[var(--color-mute)]/70 italic">
-            Bio profesional completa y presentación del equipo próximamente.
-          </p>
-          {/* TODO Fase 5 — bio doctora + equipo médico (auxiliar de tricología,
-              ATC enfermería, recepción) confirmada con la cliente */}
-          <Button href="/contacto" variant="primary" class="mt-8">
-            Reserva una consulta
-          </Button>
+          <Badge tone="gold">Dra. Abigail y Equipo</Badge>
+          <h1 class="mt-6 font-[family-name:var(--font-display)] text-[var(--color-gold)] italic font-normal text-[clamp(2.5rem,5vw,4rem)] leading-[1.1]">
+            La Restauración como Arte.
+          </h1>
+          <div class="mt-6 w-[100px] h-[2px] bg-[var(--color-gold)]"></div>
         </div>
-        <div class="aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] bg-[var(--color-paper-soft)]">
+        <div class="aspect-[3/4] overflow-hidden rounded-[var(--radius-md)] shadow-[var(--shadow-card)]">
           <Picture
-            src={doctoraPortrait}
-            alt={`Retrato profesional de la ${siteConfig.doctor.name}`}
+            src={heroImg}
+            alt={`Retrato editorial de la ${siteConfig.doctor.name}`}
             widths={[480, 768, 1024]}
-            sizes="(min-width: 1024px) 480px, 90vw"
+            sizes="(min-width: 1024px) 540px, 92vw"
             formats={["avif", "webp"]}
             quality={82}
             loading="eager"
             fetchpriority="high"
-            class="h-full w-full object-cover object-[center_top]"
+            class="h-full w-full object-cover"
           />
+        </div>
+      </div>
+    </Section>
+
+    <!-- DRA. ABIGAIL ============================================ -->
+    <Section tone="paper" spacing="loose">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div class="aspect-[3/4] overflow-hidden rounded-[var(--radius-sm)] shadow-[var(--shadow-card)]">
+          <Picture
+            src={doctora2}
+            alt="Dra. Abigail Cevallos en consulta"
+            widths={[480, 768, 1024]}
+            sizes="(min-width: 1024px) 540px, 92vw"
+            formats={["avif", "webp"]}
+            quality={80}
+            class="h-full w-full object-cover"
+          />
+        </div>
+        <div>
+          <h2 class="font-[family-name:var(--font-display)] text-[var(--color-gold)] italic font-normal text-[clamp(2.5rem,5vw,4rem)] leading-[1.05]">
+            Dra. Abigail Cevallos
+          </h2>
+          <p class="mt-3 font-[family-name:var(--font-display)] italic text-lg text-[var(--color-ink-soft)]">
+            Fundadora y Directora Médica de CEMAD
+          </p>
+          <p class="mt-6 text-[var(--color-mute)] leading-relaxed text-[1.0625rem]">
+            La Dra. Abigail Cevallos no eligió la tricología y la medicina
+            estética por casualidad. Su propia experiencia con la alopecia areata
+            la llevó a comprender profundamente el impacto emocional de la
+            pérdida capilar y la necesidad urgente de un abordaje médico que
+            fuera más allá de lo superficial. Esa experiencia personal la
+            transformó en una misión profesional: crear un modelo de medicina
+            que honrara la identidad del paciente, comprendiera las causas raíz
+            y acompañara con rigor científico y empatía profunda.
+          </p>
+        </div>
+      </div>
+    </Section>
+
+    <!-- TRAYECTORIA / FILOSOFÍA / COMPROMISO -->
+    <Section tone="paper-soft" spacing="loose">
+      <div class="max-w-4xl mx-auto space-y-12">
+        <div class="grid md:grid-cols-[0.6fr_1fr] gap-8 items-start">
+          <div class="aspect-[3/4] overflow-hidden rounded-[var(--radius-sm)]">
+            <Picture src={doctora3} alt="Dra. Abigail" widths={[400, 600]} sizes="(min-width: 768px) 320px, 92vw" formats={["avif","webp"]} quality={80} class="h-full w-full object-cover" />
+          </div>
+          <div>
+            <h3 class="font-[family-name:var(--font-display)] text-[1.75rem] text-[var(--color-ink)]">Su Trayectoria</h3>
+            <ul class="mt-4 space-y-2 list-none p-0 text-[var(--color-mute)]">
+              <li class="flex gap-3"><span class="mt-2 size-1.5 rounded-full bg-[var(--color-gold)] shrink-0"></span>Más de 10 años de experiencia clínica especializada.</li>
+              <li class="flex gap-3"><span class="mt-2 size-1.5 rounded-full bg-[var(--color-gold)] shrink-0"></span>Más de 1.000 cirugías capilares con resultados naturales.</li>
+              <li class="flex gap-3"><span class="mt-2 size-1.5 rounded-full bg-[var(--color-gold)] shrink-0"></span>30 cursos de especialización en tricología, medicina estética y medicina integrativa.</li>
+              <li class="flex gap-3"><span class="mt-2 size-1.5 rounded-full bg-[var(--color-gold)] shrink-0"></span>12 másteres universitarios en áreas de medicina avanzada.</li>
+              <li class="flex gap-3"><span class="mt-2 size-1.5 rounded-full bg-[var(--color-gold)] shrink-0"></span>Creadora del Método Kintsugi: sistema exclusivo de medicina personalizada.</li>
+              <li class="flex gap-3"><span class="mt-2 size-1.5 rounded-full bg-[var(--color-gold)] shrink-0"></span>Pionera en Medicina de Precisión con Alma en Valencia.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-[1fr_0.6fr] gap-8 items-start">
+          <div>
+            <h3 class="font-[family-name:var(--font-display)] text-[1.75rem] text-[var(--color-ink)]">Su Filosofía</h3>
+            <p class="mt-4 italic text-[var(--color-ink-soft)] leading-relaxed text-[1.0625rem]">
+              "No transformar, sino revelar. No estandarizar, sino honrar la
+              identidad única de cada paciente. Cada persona que entra en CEMAD
+              merece ser comprendida en su totalidad: su historia, sus causas
+              internas, sus miedos y sus sueños. Solo desde esa comprensión
+              profunda podemos diseñar un plan que realmente tenga sentido."
+            </p>
+            <h3 class="mt-8 font-[family-name:var(--font-display)] text-[1.75rem] text-[var(--color-ink)]">Su Compromiso</h3>
+            <p class="mt-4 text-[var(--color-mute)] leading-relaxed">
+              La Dra. Cevallos lidera personalmente cada diagnóstico y cada
+              diseño de tratamiento en CEMAD. No delega la parte más importante:
+              comprender a la persona detrás del paciente.
+            </p>
+          </div>
+          <div class="aspect-[3/4] overflow-hidden rounded-[var(--radius-sm)]">
+            <Picture src={doctora4} alt="Dra. Abigail consultando" widths={[400, 600]} sizes="(min-width: 768px) 320px, 92vw" formats={["avif","webp"]} quality={80} class="h-full w-full object-cover" />
+          </div>
+        </div>
+      </div>
+    </Section>
+
+    <!-- FACETA PERSONAL -->
+    <Section tone="paper" spacing="loose">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="aspect-[3/4] overflow-hidden rounded-[var(--radius-sm)]">
+          <Picture src={doctoraFaceta} alt="Faceta personal de la doctora" widths={[480, 768, 1024]} sizes="(min-width: 1024px) 540px, 92vw" formats={["avif","webp"]} quality={80} class="h-full w-full object-cover" />
+        </div>
+        <div>
+          <h2 class="font-[family-name:var(--font-display)] text-[clamp(2.5rem,5vw,4rem)] text-[var(--color-ink)] leading-[1.05]">
+            <span class="block">Faceta</span>
+            <span class="block text-[var(--color-gold)] italic">Personal</span>
+          </h2>
+          <p class="mt-6 text-[var(--color-mute)] leading-relaxed text-[1.0625rem]">
+            "Más allá de la consulta, la Dra. Abigail es una mujer que comprende
+            el valor de la identidad porque tuvo que luchar por la suya. Esa
+            empatía nacida de la experiencia personal es lo que hace de CEMAD un
+            lugar donde los pacientes no solo reciben tratamiento, sino
+            comprensión y respaldo profundo."
+          </p>
+        </div>
+      </div>
+    </Section>
+
+    <!-- EQUIPO -->
+    <Section tone="paper-soft" spacing="loose">
+      <div class="max-w-4xl mx-auto">
+        <div class="aspect-[21/9] overflow-hidden rounded-[var(--radius-sm)] mb-10">
+          <Picture src={equipoImg} alt="Equipo CEMAD" widths={[768, 1024, 1440]} sizes="(min-width: 1024px) 1024px, 92vw" formats={["avif","webp"]} quality={78} class="h-full w-full object-cover" />
+        </div>
+        <h2 class="font-[family-name:var(--font-display)] text-[clamp(2.5rem,5vw,4rem)]">
+          <span class="block text-[var(--color-ink)]">El Equipo</span>
+          <span class="block text-[var(--color-gold)] italic">CEMAD</span>
+        </h2>
+        <div class="mt-4 w-[100px] h-[2px] bg-[var(--color-gold)]"></div>
+        <p class="mt-6 font-[family-name:var(--font-display)] italic text-2xl text-[var(--color-ink)]">
+          Un Equipo Comprometido con tu Bienestar Integral
+        </p>
+        <p class="mt-4 text-[var(--color-mute)] leading-relaxed max-w-[68ch]">
+          Cada miembro del equipo CEMAD comparte la misma filosofía: la medicina
+          debe ser personalizada, empática y excelente. Desde el equipo médico
+          hasta el personal de atención, todos están formados para acompañarte
+          con calidez profesional en cada etapa de tu proceso.
+        </p>
+        <h3 class="mt-12 font-[family-name:var(--font-display)] text-2xl text-[var(--color-ink)]">
+          Respaldados por la Excelencia Científica
+        </h3>
+        <ul class="mt-6 grid sm:grid-cols-2 gap-3 list-none p-0 text-sm text-[var(--color-mute)]">
+          <li class="flex gap-3"><span class="mt-1.5 size-1.5 rounded-full bg-[var(--color-gold)] shrink-0"></span>Miembro de la Sociedad Española de Medicina Estética (SEME).</li>
+          <li class="flex gap-3"><span class="mt-1.5 size-1.5 rounded-full bg-[var(--color-gold)] shrink-0"></span>Certificación en Cirugía Capilar FUE/DHI.</li>
+          <li class="flex gap-3"><span class="mt-1.5 size-1.5 rounded-full bg-[var(--color-gold)] shrink-0"></span>Certificación en Tricoscopia Avanzada.</li>
+          <li class="flex gap-3"><span class="mt-1.5 size-1.5 rounded-full bg-[var(--color-gold)] shrink-0"></span>Acreditación en Medicina Tradicional China.</li>
+        </ul>
+      </div>
+    </Section>
+
+    <!-- CTA -->
+    <Section tone="ink" spacing="loose">
+      <div class="text-center max-w-2xl mx-auto text-[var(--color-paper)]">
+        <img src="/brand/cemad-isotipo.png" alt="" aria-hidden="true" width="56" height="56" class="mx-auto mb-6 invert opacity-95" />
+        <h2 class="font-[family-name:var(--font-display)] font-light text-[clamp(2.25rem,4.8vw,3.5rem)] leading-[1.1]">
+          Conoce al equipo
+          <em class="block mt-2 not-italic italic text-[var(--color-gold)] font-normal">en consulta personal</em>
+        </h2>
+        <p class="mt-6 text-[var(--color-paper)]/85">
+          La primera consulta con la Dra. Cevallos es una conversación, no una venta.
+        </p>
+        <div class="mt-10">
+          <Button href="/contacto" variant="primary" size="lg">Reserva tu cita →</Button>
         </div>
       </div>
     </Section>
