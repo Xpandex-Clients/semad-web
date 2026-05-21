@@ -1,43 +1,185 @@
 ---
+import { Picture } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 import Section from "@shared/ui/primitives/Section.astro";
-import Heading from "@shared/ui/primitives/Heading.astro";
 import Badge from "@shared/ui/primitives/Badge.astro";
 import Button from "@shared/ui/primitives/Button.astro";
+import heroImg from "@assets/images/page-kintsugi-hero.png";
+import method1 from "@assets/images/cemad-method-1.png";
+import method2 from "@assets/images/cemad-method-2.png";
+import method3 from "@assets/images/cemad-method-3.png";
+import method4 from "@assets/images/cemad-method-4.png";
+
+const fases = [
+  {
+    n: 1,
+    title: "Revelar",
+    headline: "Diagnóstico Causal Profundo",
+    img: method1,
+    body:
+      "Identificamos las causas reales detrás de lo que ves en el espejo: clínicas, emocionales y estructurales. Solo cuando entendemos el origen podemos diseñar un plan que tenga sentido.",
+  },
+  {
+    n: 2,
+    title: "Restaurar",
+    headline: "Intervención Médica de Precisión",
+    img: method2,
+    body:
+      "Con el diagnóstico completo, diseñamos una estrategia de restauración 100% personalizada: tratamientos regenerativos (mesoterapia, bioestimulación, PRP), protocolos farmacológicos dirigidos, cirugía de alta definición cuando es necesaria. Cada intervención respeta tu identidad y busca resultados naturales, visibles y armónicos.",
+  },
+  {
+    n: 3,
+    title: "Reprogramar",
+    headline: "Protocolos Estratégicos",
+    img: method3,
+    body:
+      "Establecemos protocolos estratégicos que previenen recaídas y te ayudan a mantener el control de tu proceso en el tiempo. Cuidados, hábitos, mantenimiento médico — todo coordinado.",
+  },
+  {
+    n: 4,
+    title: "Reintegrar",
+    headline: "Tu Nueva Identidad",
+    img: method4,
+    body:
+      "La fase final es la más importante: que vuelvas a reconocerte con orgullo. Reintegrar es cuando tu imagen externa se alinea con tu identidad interna.",
+  },
+];
 ---
 
 <Layout
-  title="Método Kintsugi — CEMAD"
-  description="El Método Kintsugi de CEMAD: filosofía clínica de restauración basada en diagnóstico, precisión y acompañamiento. Inspirado en el arte japonés de honrar lo roto con oro."
+  title="Método Kintsugi — El Arte Médico de Restaurar tu Identidad"
+  description="El Método Kintsugi de CEMAD: sistema médico en 4 fases que fusiona diagnóstico causal, diseño estratégico, intervención de precisión y acompañamiento a largo plazo."
 >
   <main id="main">
+    <!-- HERO -->
     <Section tone="paper" spacing="loose">
-      <div class="text-center max-w-3xl mx-auto">
-        <Badge tone="gold">Método</Badge>
-        <Heading as={1} variant="display" align="center" class="mt-3">
-          Método <em class="not-italic font-[family-name:var(--font-script)] text-[1.2em] text-[var(--color-gold)] font-normal">Kintsugi</em>
-        </Heading>
-        <p class="mt-6 text-lg text-[var(--color-mute)] leading-relaxed">
-          Nos inspiramos en el arte japonés de restaurar con oro lo que se ha roto.
-          En CEMAD aplicamos la misma filosofía: cada plan parte del diagnóstico, no
-          del catálogo; restauramos tu identidad con rigor médico, no la transformamos.
+      <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
+        <div>
+          <Badge tone="gold">Método</Badge>
+          <h1 class="mt-6 font-[family-name:var(--font-display)] leading-[1.02]">
+            <em class="block not-italic italic text-[var(--color-gold)] text-[clamp(3rem,7vw,6.5rem)] font-normal">
+              Kintsugi:
+            </em>
+            <span class="block mt-2 text-[var(--color-ink)] text-[clamp(2rem,4vw,3rem)] font-light">
+              El Arte Médico de Restaurar tu Identidad
+            </span>
+          </h1>
+          <div class="mt-8 w-[100px] h-[2px] bg-[var(--color-gold)]"></div>
+        </div>
+        <div class="aspect-[4/5] overflow-hidden rounded-[var(--radius-md)] shadow-[var(--shadow-card)]">
+          <Picture
+            src={heroImg}
+            alt="Método Kintsugi — visual editorial CEMAD"
+            widths={[480, 768, 1024]}
+            sizes="(min-width: 1024px) 540px, 92vw"
+            formats={["avif", "webp"]}
+            quality={82}
+            loading="eager"
+            fetchpriority="high"
+            class="h-full w-full object-cover"
+          />
+        </div>
+      </div>
+    </Section>
+
+    <!-- INTRO MÉTODO -->
+    <Section tone="paper-soft" spacing="loose">
+      <div class="max-w-[68ch] mx-auto">
+        <h2 class="font-[family-name:var(--font-display)] text-[var(--color-gold)] italic font-normal text-[clamp(2.5rem,5vw,4rem)] leading-[1.05]">
+          Introducción<br />al método
+        </h2>
+        <div class="mt-4 w-[100px] h-[2px] bg-[var(--color-gold)]"></div>
+        <p class="mt-8 text-[var(--color-mute)] leading-relaxed text-[1.0625rem]">
+          El Kintsugi es el arte japonés de reparar cerámica rota con oro,
+          convirtiendo la fractura en parte de la belleza del objeto. En CEMAD,
+          aplicamos esta filosofía a la medicina: no ocultamos lo que te ha
+          marcado, lo integramos como parte de tu fortaleza.
+        </p>
+        <p class="mt-4 text-[var(--color-mute)] leading-relaxed text-[1.0625rem]">
+          Nuestro Método Kintsugi es un sistema médico en cuatro fases que
+          fusiona <strong class="text-[var(--color-ink)] font-medium">diagnóstico causal profundo, diseño estratégico personalizado, intervención de precisión y acompañamiento a largo plazo</strong>.
+          No es un protocolo estándar: es un camino único diseñado contigo y
+          para ti.
         </p>
       </div>
     </Section>
 
-    <Section tone="paper-soft" spacing="default" width="narrow">
-      <div class="text-center">
-        <Badge tone="gold">En construcción</Badge>
-        <Heading as={2} visual={3} class="mt-3">
-          Página en preparación
-        </Heading>
-        <p class="mt-3 text-[var(--color-mute)]">
-          Estamos integrando la pieza completa del Método Kintsugi: las 4 fases
-          (Restaurar, Reintegrar, Reprogramar, Revelar) y los protocolos clínicos asociados.
+    <!-- 4 FASES -->
+    <Section tone="paper" spacing="loose">
+      <ul class="space-y-24 list-none p-0 m-0 max-w-5xl mx-auto">
+        {fases.map((f, i) => (
+          <li class={`grid lg:grid-cols-2 gap-12 items-center ${i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}>
+            <div class="aspect-[4/5] overflow-hidden rounded-[var(--radius-sm)] shadow-[var(--shadow-card)]">
+              <Picture
+                src={f.img}
+                alt={`Fase ${f.n}: ${f.title}`}
+                widths={[400, 600, 800]}
+                sizes="(min-width: 1024px) 480px, 92vw"
+                formats={["avif", "webp"]}
+                quality={80}
+                class="h-full w-full object-cover"
+              />
+            </div>
+            <div>
+              <span class="font-[family-name:var(--font-display)] italic text-[var(--color-gold-dark)] text-xl">
+                Fase {f.n}
+              </span>
+              <h3 class="mt-2 font-[family-name:var(--font-display)] text-[var(--color-ink)] text-[clamp(2.5rem,5vw,4rem)] leading-[1.05] font-normal">
+                {f.title}
+              </h3>
+              <p class="mt-3 font-[family-name:var(--font-display)] italic text-[var(--color-gold)] text-2xl">
+                {f.headline}
+              </p>
+              <p class="mt-6 text-[var(--color-mute)] leading-relaxed">
+                {f.body}
+              </p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </Section>
+
+    <!-- LO QUE RECUPERAS -->
+    <Section tone="paper-soft" spacing="loose">
+      <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+        <div>
+          <h3 class="font-[family-name:var(--font-display)] text-[1.75rem] text-[var(--color-ink)]">
+            Lo que Recuperas
+          </h3>
+          <ul class="mt-6 space-y-3 list-none p-0 text-[var(--color-mute)]">
+            <li class="flex gap-3"><span class="mt-2 size-1.5 rounded-full bg-[var(--color-gold)] shrink-0"></span>Confianza frente al espejo y en tu vida social y profesional.</li>
+            <li class="flex gap-3"><span class="mt-2 size-1.5 rounded-full bg-[var(--color-gold)] shrink-0"></span>Control sobre tu proyección personal.</li>
+            <li class="flex gap-3"><span class="mt-2 size-1.5 rounded-full bg-[var(--color-gold)] shrink-0"></span>Paz con tu reflejo: una relación sana con tu imagen.</li>
+            <li class="flex gap-3"><span class="mt-2 size-1.5 rounded-full bg-[var(--color-gold)] shrink-0"></span>Una alianza médica a largo plazo con un equipo que te comprende.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-[family-name:var(--font-display)] text-[1.75rem] text-[var(--color-ink)]">
+            No Cerramos el Proceso
+          </h3>
+          <p class="mt-6 text-[var(--color-mute)] leading-relaxed">
+            Establecemos una relación médica continua. CEMAD no es una
+            transacción puntual, es un respaldo estratégico para que tu imagen
+            evolucione contigo en cada etapa de tu vida.
+          </p>
+        </div>
+      </div>
+    </Section>
+
+    <!-- CTA -->
+    <Section tone="ink" spacing="loose">
+      <div class="text-center max-w-2xl mx-auto text-[var(--color-paper)]">
+        <img src="/brand/cemad-isotipo.png" alt="" aria-hidden="true" width="56" height="56" class="mx-auto mb-6 invert opacity-95" />
+        <h2 class="font-[family-name:var(--font-display)] font-light text-[clamp(2.25rem,4.8vw,3.5rem)] leading-[1.1]">
+          Empieza tu propio
+          <em class="block mt-2 not-italic italic text-[var(--color-gold)] font-normal">camino Kintsugi</em>
+        </h2>
+        <p class="mt-6 text-[var(--color-paper)]/85">
+          La primera fase, <em>Revelar</em>, empieza con una conversación.
         </p>
-        <Button href="/contacto" variant="primary" class="mt-6">
-          Hablar con la clínica
-        </Button>
+        <div class="mt-10">
+          <Button href="/contacto" variant="primary" size="lg">Reserva tu cita →</Button>
+        </div>
       </div>
     </Section>
   </main>
