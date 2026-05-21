@@ -164,27 +164,27 @@ const services = [
       </div>
     </Section>
 
-    <!-- SOMOS (Figma 03) =========================================== -->
+    <!-- SOMOS (Figma 03): collage 3 fotos GRANDES + título lateral ==== -->
     <Section tone="paper-soft" spacing="loose">
-      <div class="grid lg:grid-cols-[1fr_1.1fr] gap-12 lg:gap-16 items-center">
-        <!-- collage 3 fotos -->
-        <div class="grid grid-cols-3 gap-3 lg:gap-4">
-          <div class="aspect-[3/4] overflow-hidden rounded-[var(--radius-sm)] mt-8">
-            <Picture src={method1} alt="" widths={[240, 360]} sizes="(min-width: 1024px) 220px, 30vw" formats={["avif","webp"]} quality={78} loading="lazy" class="h-full w-full object-cover" />
-          </div>
-          <div class="aspect-[3/4] overflow-hidden rounded-[var(--radius-sm)]">
-            <Picture src={method2} alt="" widths={[240, 360]} sizes="(min-width: 1024px) 220px, 30vw" formats={["avif","webp"]} quality={78} loading="lazy" class="h-full w-full object-cover" />
-          </div>
-          <div class="aspect-[3/4] overflow-hidden rounded-[var(--radius-sm)] mt-8">
-            <Picture src={method4} alt="" widths={[240, 360]} sizes="(min-width: 1024px) 220px, 30vw" formats={["avif","webp"]} quality={78} loading="lazy" class="h-full w-full object-cover" />
-          </div>
-        </div>
-        <div>
-          <h2 class="font-[family-name:var(--font-display)] text-[var(--color-ink)] font-light text-[clamp(3rem,7vw,6rem)] leading-[0.95]">
+      <div class="space-y-12">
+        <!-- banda horizontal de 3 fotos grandes -->
+        <ul class="grid grid-cols-3 gap-3 lg:gap-5 list-none p-0">
+          <li class="aspect-[3/4] overflow-hidden rounded-[var(--radius-sm)] shadow-[var(--shadow-card)]">
+            <Picture src={method1} alt="" widths={[360, 540, 720]} sizes="(min-width: 1024px) 32vw, 33vw" formats={["avif","webp"]} quality={80} loading="lazy" class="h-full w-full object-cover grayscale-[0.15]" />
+          </li>
+          <li class="aspect-[3/4] overflow-hidden rounded-[var(--radius-sm)] shadow-[var(--shadow-card)] mt-12">
+            <Picture src={method2} alt="" widths={[360, 540, 720]} sizes="(min-width: 1024px) 32vw, 33vw" formats={["avif","webp"]} quality={80} loading="lazy" class="h-full w-full object-cover grayscale-[0.15]" />
+          </li>
+          <li class="aspect-[3/4] overflow-hidden rounded-[var(--radius-sm)] shadow-[var(--shadow-card)]">
+            <Picture src={method4} alt="" widths={[360, 540, 720]} sizes="(min-width: 1024px) 32vw, 33vw" formats={["avif","webp"]} quality={80} loading="lazy" class="h-full w-full object-cover grayscale-[0.15]" />
+          </li>
+        </ul>
+        <div class="grid lg:grid-cols-[0.45fr_1fr] gap-10 lg:gap-16 items-start">
+          <h2 class="font-[family-name:var(--font-display)] text-[var(--color-ink)] font-light text-[clamp(4rem,9vw,8rem)] leading-[0.9]">
             Somos
+            <span class="block mt-3 w-[100px] h-[2px] bg-[var(--color-gold)]"></span>
           </h2>
-          <div class="mt-6 w-[100px] h-[2px] bg-[var(--color-gold)]"></div>
-          <p class="mt-8 text-[var(--color-mute)] leading-relaxed text-[1.0625rem] max-w-[52ch]">
+          <p class="text-[var(--color-mute)] leading-relaxed text-[1.0625rem] max-w-[58ch]">
             CEMAD es la clínica liderada por la <strong class="text-[var(--color-ink)] font-medium">Dra. Abigail Cevallos</strong>,
             pionera en la <em class="italic">Medicina de Precisión con Alma</em> y
             creadora del <strong class="text-[var(--color-ink)] font-medium">Método Kintsugi</strong>.
@@ -349,18 +349,19 @@ const services = [
 
     <!-- TRUST: 120 pacientes + testimonio 5-star (Figma 09-10) ====== -->
     <Section tone="ink" spacing="loose" class="relative overflow-hidden">
-      <div class="absolute inset-0 -z-0">
+      <!-- foto a la derecha 50% como en Figma -->
+      <div class="absolute inset-y-0 right-0 w-full lg:w-1/2 -z-0">
         <Picture
           src={faqImg}
           alt=""
-          widths={[1024, 1440, 1920]}
-          sizes="100vw"
+          widths={[768, 1024, 1440]}
+          sizes="(min-width: 1024px) 50vw, 100vw"
           formats={["avif", "webp"]}
-          quality={68}
+          quality={78}
           loading="lazy"
-          class="h-full w-full object-cover opacity-30"
+          class="h-full w-full object-cover opacity-90"
         />
-        <div class="absolute inset-0 bg-[var(--color-ink)]/70"></div>
+        <div class="absolute inset-0 bg-gradient-to-l from-transparent via-[var(--color-ink)]/30 to-[var(--color-ink)] lg:from-transparent lg:via-[var(--color-ink)]/10 lg:to-[var(--color-ink)]"></div>
       </div>
       <div class="relative z-10 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center text-[var(--color-paper)]">
         <div>

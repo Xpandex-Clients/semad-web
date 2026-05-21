@@ -89,54 +89,46 @@ const fases = [
       </div>
     </Section>
 
-    <!-- 4 FASES: imagen full-bleed + texto editorial debajo (Figma 03-11) -->
+    <!-- 4 FASES: imagen lateral + contenido editorial al lado (Figma 03-11) -->
     {fases.map((f, i) => (
-      <Fragment>
-        <section class="relative isolate overflow-hidden">
-          <div class="relative aspect-[16/8] w-full overflow-hidden">
+      <Section tone={i % 2 === 0 ? "paper" : "paper-soft"} spacing="loose">
+        <div class={`grid lg:grid-cols-2 gap-10 lg:gap-16 items-center ${i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}>
+          <div class="aspect-[3/4] overflow-hidden rounded-[var(--radius-sm)] shadow-[var(--shadow-card)]">
             <Picture
               src={f.img}
               alt={`Fase ${f.n}: ${f.title}`}
-              widths={[768, 1024, 1440, 1920]}
-              sizes="100vw"
+              widths={[480, 768, 1024]}
+              sizes="(min-width: 1024px) 540px, 92vw"
               formats={["avif", "webp"]}
               quality={80}
               loading="eager"
-              class="absolute inset-0 h-full w-full object-cover"
+              class="h-full w-full object-cover"
             />
-            <div class="absolute inset-x-0 bottom-0 p-8 lg:p-12 bg-gradient-to-t from-[var(--color-ink)]/65 to-transparent">
-              <div class="mx-auto max-w-[var(--container-wide)] text-[var(--color-paper)]">
-                <span class="text-[11px] uppercase tracking-[0.22em] font-semibold text-[var(--color-gold)]">
-                  Fase {f.n}
-                </span>
-                <h2 class="mt-2 font-[family-name:var(--font-display)] font-light text-[clamp(2.5rem,6vw,5rem)] leading-[1]">
-                  {f.title}
-                </h2>
-              </div>
-            </div>
           </div>
-        </section>
-        <Section tone={i % 2 === 0 ? "paper" : "paper-soft"} spacing="default">
-          <div class="grid lg:grid-cols-[0.45fr_1fr] gap-10 lg:gap-16 max-w-5xl mx-auto">
-            <p class="font-[family-name:var(--font-display)] italic text-[var(--color-gold)] text-[clamp(1.5rem,2.6vw,2.25rem)] leading-snug">
+          <div>
+            <span class="text-[11px] uppercase tracking-[0.22em] font-semibold text-[var(--color-gold-dark)]">
+              Fase {f.n}
+            </span>
+            <h2 class="mt-2 font-[family-name:var(--font-display)] font-normal text-[clamp(3rem,6vw,5rem)] leading-[0.95] text-[var(--color-ink)]">
+              {f.title}
+            </h2>
+            <p class="mt-4 font-[family-name:var(--font-display)] italic text-[var(--color-gold)] text-[clamp(1.25rem,2.2vw,1.875rem)] leading-snug">
               {f.headline}
             </p>
-            <div>
-              <p class="text-[var(--color-mute)] leading-relaxed text-[1.0625rem]">
-                {f.body}
+            <p class="mt-6 text-[var(--color-mute)] leading-relaxed text-[1.0625rem] max-w-[58ch]">
+              {f.body}
+            </p>
+            <div class="mt-8 bg-[var(--color-gold)]/95 text-[var(--color-ink)] p-6 lg:p-7 rounded-[var(--radius-sm)] shadow-[var(--shadow-card)] max-w-[58ch]">
+              <p class="font-[family-name:var(--font-display)] italic text-[var(--color-paper)] text-base">
+                El Resultado
               </p>
-              <div class="mt-8 bg-[var(--color-gold)]/95 text-[var(--color-ink)] p-6 lg:p-7 rounded-[var(--radius-sm)] shadow-[var(--shadow-card)]">
-                <p class="font-[family-name:var(--font-display)] italic text-[var(--color-paper)] text-base">
-                  El Resultado
-                </p>
-                <p class="mt-3 text-sm text-[var(--color-paper)]/95 leading-relaxed">
-                  {f.resultado}
-                </p>
-              </div>
+              <p class="mt-3 text-sm text-[var(--color-paper)]/95 leading-relaxed">
+                {f.resultado}
+              </p>
             </div>
           </div>
-        </Section>
-      </Fragment>
+        </div>
+      </Section>
     ))}
 
     <!-- LO QUE RECUPERAS -->
