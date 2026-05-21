@@ -50,3 +50,13 @@ lighthouse-*.json
 
 # bundle reports
 stats.html
+
+# Figma raw exports (assets pesados, fuente para inferir tokens)
+client-input/figma/tree.json
+client-input/figma/styles.json
+client-input/figma/frames/
+client-input/figma/assets/
+
+# Secretos sueltos
+.figma-token
+**/figma-token*
