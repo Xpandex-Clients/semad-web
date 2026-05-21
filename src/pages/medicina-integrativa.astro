@@ -1,0 +1,43 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Section from "@shared/ui/primitives/Section.astro";
+import Heading from "@shared/ui/primitives/Heading.astro";
+import Badge from "@shared/ui/primitives/Badge.astro";
+import Button from "@shared/ui/primitives/Button.astro";
+---
+
+<Layout
+  title="Medicina Integrativa y Longevidad — CEMAD"
+  description="Medicina Integrativa CEMAD: diagnóstico hormonal y nutricional, IV therapy, anti-aging avanzado y programas de longevidad en Valencia."
+>
+  <main id="main">
+    <Section tone="paper" spacing="loose">
+      <div class="text-center max-w-3xl mx-auto">
+        <Badge tone="gold">Medicina Integrativa</Badge>
+        <Heading as={1} variant="display" align="center" class="mt-3">
+          Medicina Integrativa y <em class="not-italic font-[family-name:var(--font-script)] text-[1.2em] text-[var(--color-gold)] font-normal">Longevidad</em>
+        </Heading>
+        <p class="mt-6 text-lg text-[var(--color-mute)] leading-relaxed">
+          Salud desde la raíz: diagnóstico hormonal y nutricional, sueroterapia IV
+          y planes anti-aging que tratan la causa, no el síntoma.
+        </p>
+      </div>
+    </Section>
+
+    <Section tone="paper-soft" spacing="default" width="narrow">
+      <div class="text-center">
+        <Badge tone="gold">En construcción</Badge>
+        <Heading as={2} visual={3} class="mt-3">
+          Página en preparación
+        </Heading>
+        <p class="mt-3 text-[var(--color-mute)]">
+          Contenido detallado en preparación: protocolos integrativos, IV therapy
+          y programas anti-aging.
+        </p>
+        <Button href="/contacto" variant="primary" class="mt-6">
+          Reservar valoración
+        </Button>
+      </div>
+    </Section>
+  </main>
+</Layout>

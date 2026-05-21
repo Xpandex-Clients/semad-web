@@ -1,0 +1,44 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Section from "@shared/ui/primitives/Section.astro";
+import Heading from "@shared/ui/primitives/Heading.astro";
+import Badge from "@shared/ui/primitives/Badge.astro";
+import Button from "@shared/ui/primitives/Button.astro";
+---
+
+<Layout
+  title="Método Kintsugi — CEMAD"
+  description="El Método Kintsugi de CEMAD: filosofía clínica de restauración basada en diagnóstico, precisión y acompañamiento. Inspirado en el arte japonés de honrar lo roto con oro."
+>
+  <main id="main">
+    <Section tone="paper" spacing="loose">
+      <div class="text-center max-w-3xl mx-auto">
+        <Badge tone="gold">Método</Badge>
+        <Heading as={1} variant="display" align="center" class="mt-3">
+          Método <em class="not-italic font-[family-name:var(--font-script)] text-[1.2em] text-[var(--color-gold)] font-normal">Kintsugi</em>
+        </Heading>
+        <p class="mt-6 text-lg text-[var(--color-mute)] leading-relaxed">
+          Nos inspiramos en el arte japonés de restaurar con oro lo que se ha roto.
+          En CEMAD aplicamos la misma filosofía: cada plan parte del diagnóstico, no
+          del catálogo; restauramos tu identidad con rigor médico, no la transformamos.
+        </p>
+      </div>
+    </Section>
+
+    <Section tone="paper-soft" spacing="default" width="narrow">
+      <div class="text-center">
+        <Badge tone="gold">En construcción</Badge>
+        <Heading as={2} visual={3} class="mt-3">
+          Página en preparación
+        </Heading>
+        <p class="mt-3 text-[var(--color-mute)]">
+          Estamos integrando la pieza completa del Método Kintsugi: las 4 fases
+          (Restaurar, Reintegrar, Reprogramar, Revelar) y los protocolos clínicos asociados.
+        </p>
+        <Button href="/contacto" variant="primary" class="mt-6">
+          Hablar con la clínica
+        </Button>
+      </div>
+    </Section>
+  </main>
+</Layout>

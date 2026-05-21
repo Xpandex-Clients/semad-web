@@ -1,0 +1,43 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Section from "@shared/ui/primitives/Section.astro";
+import Heading from "@shared/ui/primitives/Heading.astro";
+import Badge from "@shared/ui/primitives/Badge.astro";
+import Button from "@shared/ui/primitives/Button.astro";
+---
+
+<Layout
+  title="Musas CEMAD — Historias de Restauración y Poder Personal"
+  description="Pacientes reales que comparten su historia con CEMAD. Restauración, transformación y reencuentro con la propia identidad."
+>
+  <main id="main">
+    <Section tone="ink" spacing="loose">
+      <div class="text-center max-w-3xl mx-auto text-[var(--color-paper)]">
+        <Badge tone="gold">Musas CEMAD</Badge>
+        <Heading as={1} variant="display" tone="invert" align="center" class="mt-3">
+          Historias de <em class="not-italic font-[family-name:var(--font-script)] text-[1.2em] text-[var(--color-gold)] font-normal">Restauración</em>
+        </Heading>
+        <p class="mt-6 text-lg text-[var(--color-paper)]/85 leading-relaxed">
+          Las Musas CEMAD son las personas que han confiado en nosotros para volver
+          a habitar su imagen con coherencia y poder personal.
+        </p>
+      </div>
+    </Section>
+
+    <Section tone="paper" spacing="default" width="narrow">
+      <div class="text-center">
+        <Badge tone="gold">En preparación</Badge>
+        <Heading as={2} visual={3} class="mt-3">
+          Próximamente: historias completas
+        </Heading>
+        <p class="mt-3 text-[var(--color-mute)] max-w-[60ch] mx-auto">
+          Estamos terminando de coordinar con cada Musa la publicación de su historia,
+          fotografía y consentimiento. Pronto encontrarás aquí los casos reales.
+        </p>
+        <Button href="/contacto" variant="primary" class="mt-6">
+          ¿Quieres ser la próxima Musa? Habla con la clínica
+        </Button>
+      </div>
+    </Section>
+  </main>
+</Layout>
