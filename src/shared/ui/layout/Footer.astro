@@ -1,136 +1,179 @@
 ---
 import Logo from "@shared/ui/brand/Logo.astro";
+import { Icon } from "astro-icon/components";
 import { siteConfig } from "@shared/config/site";
-import { submarcasNav, legalNav } from "@shared/config/navigation";
+import { legalNav } from "@shared/config/navigation";
 
 const year = new Date().getFullYear();
 const waNumber = siteConfig.contact.whatsapp.replace(/[^0-9]/g, "");
 ---
 
 <footer class="bg-[var(--color-ink)] text-[var(--color-paper)]">
-  <div class="mx-auto max-w-[var(--container-wide)] px-[clamp(1rem,4vw,2rem)] py-[clamp(3rem,6vw,5rem)]">
-    <div class="grid gap-12 md:grid-cols-3">
-      <!-- Marca + dirección -->
-      <div>
-        <Logo variant="lockup-isotipo" tone="white" width={210} alt={`${siteConfig.name} — Aesthetic Anti-Aging Clinic`} />
-        <p class="mt-4 font-[family-name:var(--font-script)] text-2xl text-[var(--color-gold-light)]">
-          Tu Mejor Versión
-        </p>
-        <address class="not-italic mt-6 text-sm text-[var(--color-paper)]/80 leading-relaxed">
-          {siteConfig.address.street}<br />
-          {siteConfig.address.postalCode} · {siteConfig.address.locality}<br />
-          {siteConfig.address.countryName}
-        </address>
-        <div class="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-          <a
-            href={`tel:${siteConfig.contact.phone}`}
-            class="hover:text-[var(--color-gold-light)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-gold-light)] rounded-[var(--radius-xs)]"
-          >
-            {siteConfig.contact.phoneDisplay}
-          </a>
-          <a
-            href={`https://wa.me/${waNumber}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-[var(--color-gold-light)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-gold-light)] rounded-[var(--radius-xs)]"
-          >
-            WhatsApp
-          </a>
-          <a
-            href={siteConfig.contact.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-[var(--color-gold-light)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-gold-light)] rounded-[var(--radius-xs)]"
-          >
-            {siteConfig.contact.instagramHandle}
-          </a>
-        </div>
-      </div>
+  <div class="mx-auto max-w-[var(--container-wide)] px-[clamp(1rem,4vw,2rem)] pt-[clamp(3rem,6vw,5rem)] pb-8">
 
-      <!-- Especialidades -->
-      <nav aria-label="Especialidades">
-        <p class="text-xs uppercase tracking-[0.12em] text-[var(--color-mute)]">
-          Especialidades
-        </p>
-        <ul class="mt-3 space-y-2 list-none p-0">
-          {
-            submarcasNav.map((s) => (
-              <li>
-                <a
-                  href={s.href}
-                  class="inline-flex items-center gap-3 group focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-gold-light)] rounded-[var(--radius-xs)]"
-                >
-                  <span
-                    class="size-2 rounded-full shrink-0"
-                    style={`background:${s.color}`}
-                    aria-hidden="true"
-                  />
-                  <span class="text-sm group-hover:text-[var(--color-gold-light)] transition-colors">
-                    {s.shortLabel}
-                  </span>
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </nav>
-
-      <!-- CTA + horarios -->
-      <div>
-        <p class="text-xs uppercase tracking-[0.12em] text-[var(--color-mute)]">
-          Reserva tu consulta
-        </p>
-        <p class="mt-3 text-sm text-[var(--color-paper)]/80 max-w-[40ch]">
-          Empieza por una conversación con la {siteConfig.doctor.name}.
-          Te respondemos en menos de 24 horas.
-        </p>
-        <a
-          href="/contacto"
-          class="mt-4 inline-flex items-center justify-center min-h-[44px] px-6 rounded-[var(--radius-sm)] bg-[var(--color-gold)] text-[var(--color-paper)] font-medium hover:bg-[var(--color-gold-light)] hover:text-[var(--color-ink)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-gold-light)]"
-        >
-          Reservar consulta →
-        </a>
-
-        <p class="mt-8 text-xs uppercase tracking-[0.12em] text-[var(--color-mute)]">
-          Horarios
-        </p>
-        <p class="mt-2 text-sm text-[var(--color-paper)]/80">
-          L–V {siteConfig.hours.monday}<br />
-          Sábado {siteConfig.hours.saturday}<br />
-          Domingo {siteConfig.hours.sunday}
-        </p>
-        {/* TODO: confirmar horarios reales con la cliente */}
-      </div>
+    <!-- Wordmark central -->
+    <div class="flex justify-center pb-12">
+      <Logo variant="lockup-isotipo" tone="white" width={220} alt={`${siteConfig.name} — Aesthetic Anti-Aging Clinic`} />
     </div>
 
-    <div class="mt-12 pt-6 border-t border-white/10 flex flex-wrap gap-4 items-center justify-between text-xs text-[var(--color-mute)]">
-      <p>© {year} {siteConfig.legalName}. Todos los derechos reservados.</p>
-      <ul class="flex flex-wrap gap-x-5 gap-y-2 list-none p-0 m-0">
-        {
-          legalNav.map((item) => (
+    <hr class="border-white/10 mb-10" />
+
+    <!-- 4 cols Figma (Sobre Cemad / Legales / Nosotros / Contáctanos) -->
+    <div class="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
+      <!-- Sobre Cemad -->
+      <div>
+        <p class="text-xs uppercase tracking-[0.18em] text-[var(--color-paper)] font-semibold">
+          Sobre Cemad
+        </p>
+        <p class="mt-4 text-sm text-[var(--color-paper)]/70 leading-relaxed">
+          Clínica estética y capilar que restaura tu identidad con precisión
+          médica y alma.
+        </p>
+        <ul class="mt-6 flex items-center gap-3 list-none p-0">
+          <li>
+            <a
+              href={siteConfig.contact.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram CEMAD"
+              class="size-9 inline-flex items-center justify-center rounded-full border border-white/20 hover:bg-[var(--color-gold)] hover:border-[var(--color-gold)] transition-colors"
+            >
+              <Icon name="simple-icons:instagram" class="size-4" aria-hidden="true" />
+            </a>
+          </li>
+          <li>
+            <a
+              href={`https://wa.me/${waNumber}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp CEMAD"
+              class="size-9 inline-flex items-center justify-center rounded-full border border-white/20 hover:bg-[var(--color-gold)] hover:border-[var(--color-gold)] transition-colors"
+            >
+              <Icon name="simple-icons:whatsapp" class="size-4" aria-hidden="true" />
+            </a>
+          </li>
+          <li>
+            <a
+              href={`tel:${siteConfig.contact.phone}`}
+              aria-label={`Llamar a ${siteConfig.contact.phoneDisplay}`}
+              class="size-9 inline-flex items-center justify-center rounded-full border border-white/20 hover:bg-[var(--color-gold)] hover:border-[var(--color-gold)] transition-colors"
+            >
+              <Icon name="lucide:phone" class="size-4" aria-hidden="true" />
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Legales -->
+      <nav aria-label="Legales">
+        <p class="text-xs uppercase tracking-[0.18em] text-[var(--color-paper)] font-semibold">
+          Legales
+        </p>
+        <ul class="mt-4 space-y-3 list-none p-0">
+          {legalNav.map((item) => (
             <li>
               <a
                 href={item.href}
-                class="hover:text-[var(--color-paper)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-gold-light)] rounded-[var(--radius-xs)]"
+                class="text-sm text-[var(--color-paper)]/70 hover:text-[var(--color-gold-light)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-gold-light)] rounded-[var(--radius-xs)]"
               >
                 {item.label}
               </a>
             </li>
-          ))
-        }
-      </ul>
+          ))}
+          <li>
+            <a
+              href="/aviso-legal"
+              class="text-sm text-[var(--color-paper)]/70 hover:text-[var(--color-gold-light)]"
+            >
+              Términos y Condiciones
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Nosotros (dirección + contacto) -->
+      <div>
+        <p class="text-xs uppercase tracking-[0.18em] text-[var(--color-paper)] font-semibold">
+          Nosotros
+        </p>
+        <address class="not-italic mt-4 text-sm text-[var(--color-paper)]/70 leading-relaxed">
+          <span class="inline-flex items-start gap-2">
+            <Icon name="lucide:map-pin" class="size-4 mt-0.5 text-[var(--color-gold)]" aria-hidden="true" />
+            <span>
+              {siteConfig.address.street}<br />
+              {siteConfig.address.postalCode} · {siteConfig.address.locality}
+            </span>
+          </span>
+        </address>
+        <p class="mt-4 text-sm text-[var(--color-paper)]/70">
+          <a
+            href={`mailto:${siteConfig.contact.email}`}
+            class="inline-flex items-center gap-2 hover:text-[var(--color-gold-light)]"
+          >
+            <Icon name="lucide:mail" class="size-4 text-[var(--color-gold)]" aria-hidden="true" />
+            {siteConfig.contact.email}
+          </a>
+        </p>
+        <p class="mt-2 text-sm text-[var(--color-paper)]/70">
+          <a
+            href={`tel:${siteConfig.contact.phone}`}
+            class="inline-flex items-center gap-2 hover:text-[var(--color-gold-light)]"
+          >
+            <Icon name="lucide:phone" class="size-4 text-[var(--color-gold)]" aria-hidden="true" />
+            {siteConfig.contact.phoneDisplay}
+          </a>
+        </p>
+      </div>
+
+      <!-- Contáctanos (mini form) -->
+      <div>
+        <p class="text-xs uppercase tracking-[0.18em] text-[var(--color-paper)] font-semibold">
+          Contáctanos
+        </p>
+        <form
+          action="/contacto"
+          method="get"
+          class="mt-4"
+          aria-label="Empezar conversación con CEMAD"
+        >
+          <label class="sr-only" for="footer-msg">Escribe tu mensaje</label>
+          <div class="relative">
+            <input
+              id="footer-msg"
+              name="mensaje"
+              type="text"
+              placeholder="Escribe tu mensaje"
+              class="w-full bg-transparent border-b border-white/30 px-0 py-2 pr-10 text-sm text-[var(--color-paper)] placeholder-[var(--color-paper)]/40 focus:outline-none focus:border-[var(--color-gold)]"
+            />
+            <button
+              type="submit"
+              class="absolute right-0 top-1/2 -translate-y-1/2 size-8 inline-flex items-center justify-center rounded-full bg-[var(--color-gold)] text-[var(--color-paper)] hover:bg-[var(--color-gold-light)] hover:text-[var(--color-ink)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-gold-light)]"
+              aria-label="Enviar mensaje"
+            >
+              <Icon name="lucide:arrow-right" class="size-4" aria-hidden="true" />
+            </button>
+          </div>
+        </form>
+        <p class="mt-4 text-xs text-[var(--color-paper)]/50 leading-relaxed">
+          Te llevamos al formulario completo de Auditoría de Imagen.
+        </p>
+      </div>
     </div>
 
-    <p class="mt-4 text-[11px] text-[var(--color-mute)]/70">
-      Desarrollado por
-      <a
-        href="https://xpandex.es"
-        target="_blank"
-        rel="noopener external"
-        class="text-[var(--color-mute)] hover:text-[var(--color-paper)] underline-offset-2 hover:underline"
-      >
-        Xpandex
-      </a>
-    </p>
+    <!-- Bottom bar -->
+    <div class="mt-16 pt-6 border-t border-white/10 flex flex-wrap gap-4 items-center justify-between text-xs text-[var(--color-paper)]/50">
+      <p>© {year} {siteConfig.legalName}. Todos los derechos reservados.</p>
+      <p>
+        Desarrollado por
+        <a
+          href="https://xpandex.es"
+          target="_blank"
+          rel="noopener external"
+          class="hover:text-[var(--color-paper)] underline-offset-2 hover:underline"
+        >
+          Xpandex
+        </a>
+      </p>
+    </div>
   </div>
 </footer>
