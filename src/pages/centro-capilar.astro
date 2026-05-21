@@ -1,43 +1,141 @@
 ---
+import { Picture } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 import Section from "@shared/ui/primitives/Section.astro";
-import Heading from "@shared/ui/primitives/Heading.astro";
 import Badge from "@shared/ui/primitives/Badge.astro";
 import Button from "@shared/ui/primitives/Button.astro";
+import heroImg from "@assets/images/page-capilar-hero.png";
+import pilar1 from "@assets/images/capilar-pilar-1.png";
+import pilar2 from "@assets/images/capilar-pilar-2.png";
+import pilar3 from "@assets/images/capilar-pilar-3.png";
+
+const pilares = [
+  {
+    n: 1,
+    title: "Diagnóstico Tricológico Avanzado",
+    body:
+      "Trichoscan digital, historia clínica completa y, según el caso, estudio hormonal o genético. Identificamos la causa real de tu pérdida capilar antes de tratarla.",
+    img: pilar1,
+  },
+  {
+    n: 2,
+    title: "Tratamientos Médicos Personalizados",
+    body:
+      "Plan médico 100% personalizado: PRP, mesoterapia, fármacos dirigidos, programas Dra. AbiCapilar (mujeres), Control Androgenético, Reparación Post-Parto y protocolos para alopecias específicas (areata, frontal fibrosante, cicatriciales, tracción).",
+    img: pilar2,
+  },
+  {
+    n: 3,
+    title: "Cirugía Capilar de Precisión",
+    body:
+      "Extracción individual de folículos sin cicatriz lineal (FUE/DHI), implantación precisa controlando ángulo y profundidad, recuperación rápida (5-7 días), resultados naturales permanentes.",
+    img: pilar3,
+  },
+];
 ---
 
 <Layout
   title="Centro de Tricología y Cirugía Capilar — CEMAD"
-  description="Centro Capilar de CEMAD: diagnóstico tricológico, cirugía de implante FUE, regeneración con PRP, mesoterapia y tratamiento médico capilar en Valencia."
+  description="Centro Capilar de CEMAD: diagnóstico tricológico avanzado, tratamientos médicos personalizados y cirugía de implante FUE/DHI con la Dra. Abigail Cevallos en Valencia."
 >
   <main id="main">
+    <!-- HERO -->
     <Section tone="paper" spacing="loose">
-      <div class="text-center max-w-3xl mx-auto">
-        <Badge tone="gold">Centro Capilar</Badge>
-        <Heading as={1} variant="display" align="center" class="mt-3">
-          Centro de Tricología y <em class="not-italic font-[family-name:var(--font-script)] text-[1.2em] text-[var(--color-gold)] font-normal">Cirugía Capilar</em>
-        </Heading>
-        <p class="mt-6 text-lg text-[var(--color-mute)] leading-relaxed">
-          Salud capilar abordada desde la causa: diagnóstico médico, tratamientos
-          regenerativos y, cuando está indicado, injerto capilar mediante técnicas
-          de micropunción.
+      <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
+        <div>
+          <Badge tone="gold">Centro Capilar</Badge>
+          <h1 class="mt-6 font-[family-name:var(--font-display)] leading-[1.02]">
+            <span class="block text-[var(--color-ink)] text-[clamp(2rem,4vw,3rem)] font-light">
+              Centro de Excelencia en
+            </span>
+            <em class="block mt-2 not-italic italic text-[var(--color-gold)] text-[clamp(3rem,7vw,6.5rem)] font-normal">
+              Tricología:
+            </em>
+            <span class="block mt-2 text-[var(--color-ink)] text-[clamp(1.5rem,3vw,2.25rem)] font-light">
+              La Ciencia y el Arte de un Cabello Sano y Fuerte
+            </span>
+          </h1>
+          <div class="mt-8 w-[100px] h-[2px] bg-[var(--color-gold)]"></div>
+        </div>
+        <div class="aspect-[4/5] overflow-hidden rounded-[var(--radius-md)] shadow-[var(--shadow-card)]">
+          <Picture
+            src={heroImg}
+            alt="Centro Capilar CEMAD — composición editorial"
+            widths={[480, 768, 1024]}
+            sizes="(min-width: 1024px) 540px, 92vw"
+            formats={["avif", "webp"]}
+            quality={82}
+            loading="eager"
+            fetchpriority="high"
+            class="h-full w-full object-cover"
+          />
+        </div>
+      </div>
+    </Section>
+
+    <!-- INTRO -->
+    <Section tone="paper-soft" spacing="default" width="narrow">
+      <div class="max-w-[68ch] mx-auto">
+        <p class="text-[var(--color-mute)] leading-relaxed text-[1.0625rem]">
+          En CEMAD comprendemos profundamente el impacto emocional de la
+          alopecia. La <strong class="text-[var(--color-ink)] font-medium">Dra. Abigail Cevallos vivió en primera persona la alopecia areata</strong>,
+          y esa experiencia transformó su enfoque: la pérdida capilar no es solo
+          un problema estético, es una crisis de identidad que merece un
+          abordaje médico integral, empático y profundo.
+        </p>
+        <p class="mt-6 font-[family-name:var(--font-display)] italic text-[var(--color-ink)] text-2xl leading-snug">
+          No tratamos "calvicie". Restauramos armonía capilar.
+        </p>
+        <p class="mt-4 text-[var(--color-mute)] leading-relaxed">
+          No aplicamos protocolos estándar. Diseñamos estrategias personalizadas
+          que abordan la causa raíz de tu alopecia —hormonal, nutricional,
+          autoinmune, genética o por estrés— y te acompañamos en cada fase
+          hasta que vuelvas a reconocerte con orgullo.
         </p>
       </div>
     </Section>
 
-    <Section tone="paper-soft" spacing="default" width="narrow">
-      <div class="text-center">
-        <Badge tone="gold">En construcción</Badge>
-        <Heading as={2} visual={3} class="mt-3">
-          Página en preparación
-        </Heading>
-        <p class="mt-3 text-[var(--color-mute)]">
-          Contenido detallado en preparación: tratamientos, diagnóstico tricológico
-          y proceso de injerto.
-        </p>
-        <Button href="/contacto" variant="primary" class="mt-6">
-          Pedir diagnóstico capilar
-        </Button>
+    <!-- 3 PILARES -->
+    <Section tone="paper" spacing="loose">
+      <div class="mb-12">
+        <h2 class="font-[family-name:var(--font-display)] text-[clamp(2.5rem,5vw,4rem)] leading-[1.05]">
+          <span class="block text-[var(--color-ink)]">Los 3 pilares del</span>
+          <em class="block not-italic italic text-[var(--color-gold)]">centro capilar</em>
+        </h2>
+        <div class="mt-4 w-[100px] h-[2px] bg-[var(--color-gold)]"></div>
+      </div>
+      <ul class="space-y-20 list-none p-0 m-0">
+        {pilares.map((p, i) => (
+          <li class={`grid lg:grid-cols-2 gap-12 items-center ${i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}>
+            <div class="aspect-[4/5] overflow-hidden rounded-[var(--radius-sm)]">
+              <Picture src={p.img} alt={p.title} widths={[400, 600, 800]} sizes="(min-width: 1024px) 480px, 92vw" formats={["avif","webp"]} quality={80} class="h-full w-full object-cover" />
+            </div>
+            <div>
+              <span class="font-[family-name:var(--font-display)] italic text-[var(--color-gold-dark)] text-xl">
+                Pilar {p.n}
+              </span>
+              <h3 class="mt-2 font-[family-name:var(--font-display)] text-[clamp(1.75rem,3vw,2.5rem)] text-[var(--color-ink)] leading-tight font-normal">
+                {p.title}
+              </h3>
+              <p class="mt-4 text-[var(--color-mute)] leading-relaxed">{p.body}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </Section>
+
+    <!-- CTA -->
+    <Section tone="ink" spacing="loose">
+      <div class="text-center max-w-2xl mx-auto text-[var(--color-paper)]">
+        <img src="/brand/cemad-isotipo.png" alt="" aria-hidden="true" width="56" height="56" class="mx-auto mb-6 invert opacity-95" />
+        <h2 class="font-[family-name:var(--font-display)] font-light text-[clamp(2.25rem,4.8vw,3.5rem)] leading-[1.1]">
+          Empieza por tu
+          <em class="block mt-2 not-italic italic text-[var(--color-gold)] font-normal">diagnóstico capilar</em>
+        </h2>
+        <p class="mt-6 text-[var(--color-paper)]/85">Trichoscan + valoración con la doctora.</p>
+        <div class="mt-10">
+          <Button href="/contacto" variant="primary" size="lg">Reserva tu cita →</Button>
+        </div>
       </div>
     </Section>
   </main>
