@@ -2,8 +2,8 @@
 import { Picture } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 import Section from "@shared/ui/primitives/Section.astro";
-import Badge from "@shared/ui/primitives/Badge.astro";
 import Button from "@shared/ui/primitives/Button.astro";
+import PageHero from "@shared/ui/layout/PageHero.astro";
 import heroImg from "@assets/images/page-capilar-hero.png";
 import pilar1 from "@assets/images/capilar-pilar-1.png";
 import pilar2 from "@assets/images/capilar-pilar-2.png";
@@ -39,39 +39,14 @@ const pilares = [
   description="Centro Capilar de CEMAD: diagnóstico tricológico avanzado, tratamientos médicos personalizados y cirugía de implante FUE/DHI con la Dra. Abigail Cevallos en Valencia."
 >
   <main id="main">
-    <!-- HERO -->
-    <Section tone="paper" spacing="loose">
-      <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
-        <div>
-          <Badge tone="gold">Centro Capilar</Badge>
-          <h1 class="mt-6 font-[family-name:var(--font-display)] leading-[1.02]">
-            <span class="block text-[var(--color-ink)] text-[clamp(2rem,4vw,3rem)] font-light">
-              Centro de Excelencia en
-            </span>
-            <em class="block mt-2 not-italic italic text-[var(--color-gold)] text-[clamp(3rem,7vw,6.5rem)] font-normal">
-              Tricología:
-            </em>
-            <span class="block mt-2 text-[var(--color-ink)] text-[clamp(1.5rem,3vw,2.25rem)] font-light">
-              La Ciencia y el Arte de un Cabello Sano y Fuerte
-            </span>
-          </h1>
-          <div class="mt-8 w-[100px] h-[2px] bg-[var(--color-gold)]"></div>
-        </div>
-        <div class="aspect-[4/5] overflow-hidden rounded-[var(--radius-md)] shadow-[var(--shadow-card)]">
-          <Picture
-            src={heroImg}
-            alt="Centro Capilar CEMAD — composición editorial"
-            widths={[480, 768, 1024]}
-            sizes="(min-width: 1024px) 540px, 92vw"
-            formats={["avif", "webp"]}
-            quality={82}
-            loading="eager"
-            fetchpriority="high"
-            class="h-full w-full object-cover"
-          />
-        </div>
-      </div>
-    </Section>
+    <PageHero
+      image={heroImg}
+      alt="Centro Capilar CEMAD — composición editorial"
+      focal="center 35%"
+      eyebrow="Centro de Excelencia en"
+      title="Tricología:"
+      subtitle="La Ciencia y el Arte de un Cabello Sano y Fuerte"
+    />
 
     <!-- INTRO -->
     <Section tone="paper-soft" spacing="default" width="narrow">

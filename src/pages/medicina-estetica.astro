@@ -2,8 +2,8 @@
 import { Picture } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 import Section from "@shared/ui/primitives/Section.astro";
-import Badge from "@shared/ui/primitives/Badge.astro";
 import Button from "@shared/ui/primitives/Button.astro";
+import PageHero from "@shared/ui/layout/PageHero.astro";
 import heroImg from "@assets/images/page-estetica-hero.png";
 import method2 from "@assets/images/cemad-method-2.png";
 import method3 from "@assets/images/cemad-method-3.png";
@@ -48,42 +48,14 @@ const programas = [
   description="Medicina estética en CEMAD: armonización facial, lifting sin cirugía, calidad de piel y rejuvenecimiento láser bajo el Método Kintsugi de la Dra. Abigail Cevallos."
 >
   <main id="main">
-    <!-- HERO -->
-    <Section tone="paper" spacing="loose">
-      <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
-        <div>
-          <Badge tone="gold">Medicina Estética</Badge>
-          <h1 class="mt-6 font-[family-name:var(--font-display)] leading-[1.02]">
-            <span class="block text-[var(--color-ink)] text-[clamp(2rem,4vw,3rem)] font-light">
-              La Armonía que Nace del Interior.
-            </span>
-            <em class="block mt-2 not-italic italic text-[var(--color-gold)] text-[clamp(3rem,7vw,6rem)] font-normal">
-              La Belleza que Perdura.
-            </em>
-          </h1>
-          <div class="mt-8 w-[100px] h-[2px] bg-[var(--color-gold)]"></div>
-          <p class="mt-6 max-w-[58ch] text-[var(--color-mute)] leading-relaxed">
-            En CEMAD rechazamos la estética de moldes y tendencias. Aplicamos el
-            Método Kintsugi a la medicina facial: primero comprendemos las causas
-            de tu envejecimiento, después diseñamos planes personalizados que
-            devuelven luminosidad, firmeza y armonía sin borrar tu identidad.
-          </p>
-        </div>
-        <div class="aspect-[4/5] overflow-hidden rounded-[var(--radius-md)] shadow-[var(--shadow-card)]">
-          <Picture
-            src={heroImg}
-            alt="Medicina estética CEMAD — composición editorial"
-            widths={[480, 768, 1024]}
-            sizes="(min-width: 1024px) 540px, 92vw"
-            formats={["avif", "webp"]}
-            quality={82}
-            loading="eager"
-            fetchpriority="high"
-            class="h-full w-full object-cover"
-          />
-        </div>
-      </div>
-    </Section>
+    <PageHero
+      image={heroImg}
+      alt="Medicina estética CEMAD — composición editorial"
+      focal="center 28%"
+      eyebrow="La Armonía que Nace del Interior."
+      title="La Belleza"
+      subtitle="que Perdura."
+    />
 
     <!-- INTRO -->
     <Section tone="paper-soft" spacing="default" width="narrow">

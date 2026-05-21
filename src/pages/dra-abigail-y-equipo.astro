@@ -2,8 +2,8 @@
 import { Picture } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 import Section from "@shared/ui/primitives/Section.astro";
-import Badge from "@shared/ui/primitives/Badge.astro";
 import Button from "@shared/ui/primitives/Button.astro";
+import PageHero from "@shared/ui/layout/PageHero.astro";
 import JsonLd from "@shared/ui/seo/JsonLd.astro";
 import { jsonLdGraph, physicianFullSchema, breadcrumbSchema } from "@shared/seo/schemas";
 import { siteConfig } from "@shared/config/site";
@@ -31,31 +31,15 @@ const graph = jsonLdGraph(
 >
   <Fragment slot="head"><JsonLd data={graph} /></Fragment>
   <main id="main">
-    <!-- HERO -->
-    <Section tone="paper" spacing="loose">
-      <div class="grid lg:grid-cols-[1fr_0.9fr] gap-12 items-center">
-        <div>
-          <Badge tone="gold">Dra. Abigail y Equipo</Badge>
-          <h1 class="mt-6 font-[family-name:var(--font-display)] text-[var(--color-gold)] italic font-normal text-[clamp(2.5rem,5vw,4rem)] leading-[1.1]">
-            La Restauración como Arte.
-          </h1>
-          <div class="mt-6 w-[100px] h-[2px] bg-[var(--color-gold)]"></div>
-        </div>
-        <div class="aspect-[3/4] overflow-hidden rounded-[var(--radius-md)] shadow-[var(--shadow-card)]">
-          <Picture
-            src={heroImg}
-            alt={`Retrato editorial de la ${siteConfig.doctor.name}`}
-            widths={[480, 768, 1024]}
-            sizes="(min-width: 1024px) 540px, 92vw"
-            formats={["avif", "webp"]}
-            quality={82}
-            loading="eager"
-            fetchpriority="high"
-            class="h-full w-full object-cover"
-          />
-        </div>
-      </div>
-    </Section>
+    <PageHero
+      image={heroImg}
+      alt={`Retrato editorial de la ${siteConfig.doctor.name} y equipo médico`}
+      focal="center 25%"
+      eyebrow="La Medicina como Vocación."
+      title="La Restauración"
+      subtitle="como Arte."
+      intro="Conoce a la Dra. Abigail Cevallos y al equipo médico que ha hecho de la medicina personalizada, el rigor científico y la empatía profunda su razón de ser."
+    />
 
     <!-- DRA. ABIGAIL ============================================ -->
     <Section tone="paper" spacing="loose">

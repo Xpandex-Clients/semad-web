@@ -2,8 +2,8 @@
 import { Picture } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 import Section from "@shared/ui/primitives/Section.astro";
-import Badge from "@shared/ui/primitives/Badge.astro";
 import Button from "@shared/ui/primitives/Button.astro";
+import PageHero from "@shared/ui/layout/PageHero.astro";
 import heroImg from "@assets/images/page-kintsugi-hero.png";
 import method1 from "@assets/images/cemad-method-1.png";
 import method2 from "@assets/images/cemad-method-2.png";
@@ -51,36 +51,13 @@ const fases = [
   description="El Método Kintsugi de CEMAD: sistema médico en 4 fases que fusiona diagnóstico causal, diseño estratégico, intervención de precisión y acompañamiento a largo plazo."
 >
   <main id="main">
-    <!-- HERO -->
-    <Section tone="paper" spacing="loose">
-      <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
-        <div>
-          <Badge tone="gold">Método</Badge>
-          <h1 class="mt-6 font-[family-name:var(--font-display)] leading-[1.02]">
-            <em class="block not-italic italic text-[var(--color-gold)] text-[clamp(3rem,7vw,6.5rem)] font-normal">
-              Kintsugi:
-            </em>
-            <span class="block mt-2 text-[var(--color-ink)] text-[clamp(2rem,4vw,3rem)] font-light">
-              El Arte Médico de Restaurar tu Identidad
-            </span>
-          </h1>
-          <div class="mt-8 w-[100px] h-[2px] bg-[var(--color-gold)]"></div>
-        </div>
-        <div class="aspect-[4/5] overflow-hidden rounded-[var(--radius-md)] shadow-[var(--shadow-card)]">
-          <Picture
-            src={heroImg}
-            alt="Método Kintsugi — visual editorial CEMAD"
-            widths={[480, 768, 1024]}
-            sizes="(min-width: 1024px) 540px, 92vw"
-            formats={["avif", "webp"]}
-            quality={82}
-            loading="eager"
-            fetchpriority="high"
-            class="h-full w-full object-cover"
-          />
-        </div>
-      </div>
-    </Section>
+    <PageHero
+      image={heroImg}
+      alt="Textura kintsugi — cerámica reparada con oro"
+      eyebrow="No borramos tu historia."
+      title="Kintsugi:"
+      subtitle="El Arte Médico de Restaurar tu Identidad"
+    />
 
     <!-- INTRO MÉTODO -->
     <Section tone="paper-soft" spacing="loose">

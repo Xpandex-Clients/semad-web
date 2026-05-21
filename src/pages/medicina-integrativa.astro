@@ -2,8 +2,8 @@
 import { Picture } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 import Section from "@shared/ui/primitives/Section.astro";
-import Badge from "@shared/ui/primitives/Badge.astro";
 import Button from "@shared/ui/primitives/Button.astro";
+import PageHero from "@shared/ui/layout/PageHero.astro";
 import heroImg from "@assets/images/page-integrativa-hero.png";
 import diag1 from "@assets/images/integrativa-1.png";
 import diag2 from "@assets/images/integrativa-2.png";
@@ -43,36 +43,14 @@ const triada = [
   description="Medicina Integrativa CEMAD: tríada diagnóstica (Oligoscan, Biopsia Digital, analíticas funcionales), sueroterapia y programa Legado y Plenitud para vivir con vitalidad en cada década."
 >
   <main id="main">
-    <!-- HERO -->
-    <Section tone="paper" spacing="loose">
-      <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
-        <div>
-          <Badge tone="gold">Medicina Integrativa</Badge>
-          <h1 class="mt-6 font-[family-name:var(--font-display)] leading-[1.02]">
-            <span class="block text-[var(--color-ink)] text-[clamp(2rem,4vw,3rem)] font-light">
-              Construye tu Mejor Versión,
-            </span>
-            <em class="block mt-2 not-italic italic text-[var(--color-gold)] text-[clamp(3rem,7vw,6rem)] font-normal">
-              a Cualquier Edad
-            </em>
-          </h1>
-          <div class="mt-8 w-[100px] h-[2px] bg-[var(--color-gold)]"></div>
-        </div>
-        <div class="aspect-[4/5] overflow-hidden rounded-[var(--radius-md)] shadow-[var(--shadow-card)]">
-          <Picture
-            src={heroImg}
-            alt="Medicina integrativa CEMAD — composición editorial"
-            widths={[480, 768, 1024]}
-            sizes="(min-width: 1024px) 540px, 92vw"
-            formats={["avif", "webp"]}
-            quality={82}
-            loading="eager"
-            fetchpriority="high"
-            class="h-full w-full object-cover"
-          />
-        </div>
-      </div>
-    </Section>
+    <PageHero
+      image={heroImg}
+      alt="Medicina integrativa CEMAD — composición editorial"
+      focal="center 35%"
+      eyebrow="Construye tu Mejor Versión,"
+      title="a Cualquier"
+      subtitle="Edad"
+    />
 
     <!-- INTRO -->
     <Section tone="paper-soft" spacing="default" width="narrow">

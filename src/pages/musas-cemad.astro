@@ -2,8 +2,9 @@
 import { Picture } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 import Section from "@shared/ui/primitives/Section.astro";
-import Badge from "@shared/ui/primitives/Badge.astro";
 import Button from "@shared/ui/primitives/Button.astro";
+import PageHero from "@shared/ui/layout/PageHero.astro";
+import musasHero from "@assets/images/page-musas-hero.png";
 import valentinaImg from "@assets/images/musa-valentina.png";
 import julianImg from "@assets/images/musa-julian.png";
 import camilaImg from "@assets/images/musa-camila.png";
@@ -64,19 +65,14 @@ const musas = [
   description="Pacientes reales que comparten su historia con CEMAD. Restauración, transformación y reencuentro con la propia identidad."
 >
   <main id="main">
-    <!-- HERO -->
-    <Section tone="paper" spacing="loose">
-      <div class="max-w-3xl mx-auto text-center">
-        <Badge tone="gold">Musas CEMAD</Badge>
-        <h1 class="mt-6 font-[family-name:var(--font-display)] font-light leading-[1.04]">
-          <span class="block text-[var(--color-ink)] text-[clamp(2.5rem,5.2vw,4rem)]">Musas CEMAD:</span>
-          <em class="block mt-2 not-italic italic text-[var(--color-gold)] text-[clamp(2.5rem,5vw,3.75rem)] font-normal">
-            Historias de Restauración y Poder Personal
-          </em>
-        </h1>
-        <div class="mt-8 w-[100px] h-[2px] bg-[var(--color-gold)] mx-auto"></div>
-      </div>
-    </Section>
+    <PageHero
+      image={musasHero}
+      alt="Musas CEMAD — composición editorial"
+      focal="center 30%"
+      eyebrow="Musas"
+      title="CEMAD:"
+      subtitle="Historias de Restauración y Poder Personal"
+    />
 
     <!-- INTRO -->
     <Section tone="paper-soft" spacing="default" width="narrow">
