@@ -4,7 +4,6 @@ import Layout from "@layouts/Layout.astro";
 import Section from "@shared/ui/primitives/Section.astro";
 import Heading from "@shared/ui/primitives/Heading.astro";
 import Button from "@shared/ui/primitives/Button.astro";
-import Badge from "@shared/ui/primitives/Badge.astro";
 import FaqAccordion from "@shared/ui/islands/FaqAccordion.tsx";
 import JsonLd from "@shared/ui/seo/JsonLd.astro";
 import {
@@ -100,46 +99,51 @@ const services = [
   </Fragment>
 
   <main id="main">
-    <!-- HERO ====================================================== -->
-    <Section tone="paper" spacing="loose">
-      <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-20 items-center">
-        <div class="text-center lg:text-left max-w-2xl mx-auto lg:mx-0">
-          <Badge tone="gold">Método Kintsugi · CEMAD</Badge>
-          <h1 class="mt-6 font-[family-name:var(--font-display)] font-light leading-[1.02] text-[var(--color-ink)]">
-            <span class="block text-[clamp(2.5rem,5.2vw,4rem)]">
-              No transformamos tu imagen.
-            </span>
-            <em class="block mt-2 not-italic text-[clamp(3.5rem,8vw,7rem)] text-[var(--color-gold)] font-normal italic">
-              La revelamos.
-            </em>
-          </h1>
-          <div class="mt-8 w-[100px] h-[2px] bg-[var(--color-gold)] mx-auto lg:mx-0"></div>
-          <p class="mt-8 max-w-[58ch] mx-auto lg:mx-0 text-[var(--color-mute)] leading-relaxed text-[1.0625rem]">
+    <!-- HERO full-bleed (Figma 160:576) ============================== -->
+    <section class="relative isolate -mt-[var(--header-overlap,0)] overflow-hidden bg-[var(--color-paper)]">
+      <div class="relative aspect-[16/9] sm:aspect-[3/2] lg:aspect-[16/9] xl:aspect-[2/1] w-full overflow-hidden">
+        <Picture
+          src={heroPortrait}
+          alt="Retrato editorial CEMAD — mujer iluminada por un haz dorado"
+          widths={[768, 1024, 1440, 1920]}
+          sizes="100vw"
+          formats={["avif", "webp"]}
+          quality={84}
+          loading="eager"
+          fetchpriority="high"
+          class="absolute inset-0 h-full w-full object-cover object-[center_30%]"
+        />
+      </div>
+      <!-- Título overlay sobre fondo paper (debajo del image bleed) -->
+      <div class="mx-auto max-w-[var(--container-wide)] px-[clamp(1rem,4vw,2rem)] pt-8 pb-2">
+        <h1 class="font-[family-name:var(--font-display)] font-light leading-[0.95] text-[var(--color-ink)]">
+          <span class="block text-[clamp(1.75rem,3.6vw,3rem)]">
+            No transformamos tu imagen.
+          </span>
+          <em class="block not-italic italic text-[clamp(3.5rem,8.5vw,7.5rem)] font-normal mt-1 -indent-[0.1em]">
+            <span class="inline-block w-[clamp(2rem,4vw,3rem)] h-[2px] bg-[var(--color-gold)] align-middle mr-3 mb-3"></span>La revelamos.
+          </em>
+        </h1>
+      </div>
+    </section>
+
+    <!-- Hero copy block (Figma 02): 2-col split bajo el hero -->
+    <Section tone="paper" spacing="default">
+      <div class="grid lg:grid-cols-[0.85fr_1fr] gap-10 lg:gap-16 items-start">
+        <p class="text-sm text-[var(--color-mute)] leading-relaxed max-w-[40ch]">
+          <strong class="text-[var(--color-ink)] font-medium">Medicina de Precisión con Alma:</strong>
+          recupera el control estratégico de tu imagen, con resultados
+          naturales y un acompañamiento médico profundo.
+        </p>
+        <div>
+          <p class="text-[var(--color-ink-soft)] leading-relaxed text-[1.0625rem] max-w-[52ch]">
             Convierte tu imagen en tu activo más estratégico. Con el Método
             Kintsugi, restauramos tu identidad con rigor médico, precisión
             estética y respeto absoluto a tu esencia.
           </p>
-          <div class="mt-10 flex gap-3 justify-center lg:justify-start flex-wrap">
-            <Button href="/contacto" variant="primary" size="lg">
-              Reserva tu cita →
-            </Button>
-            <Button href="/metodo-kintsugi" variant="outline" size="lg">
-              Conoce el Método
-            </Button>
-          </div>
-        </div>
-        <div class="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-md)] shadow-[var(--shadow-modal)]">
-          <Picture
-            src={heroPortrait}
-            alt="Mujer iluminada por un haz dorado — propuesta editorial CEMAD"
-            widths={[480, 768, 1024, 1280]}
-            sizes="(min-width: 1024px) 540px, 92vw"
-            formats={["avif", "webp"]}
-            quality={82}
-            loading="eager"
-            fetchpriority="high"
-            class="absolute inset-0 h-full w-full object-cover"
-          />
+          <Button href="/contacto" variant="outline" size="md" class="mt-8 uppercase tracking-[0.18em] text-[11px]">
+            Reserva tu Auditoría de Imagen →
+          </Button>
         </div>
       </div>
     </Section>
@@ -301,7 +305,7 @@ const services = [
         </p>
         <div class="mt-10 flex gap-3 justify-center flex-wrap">
           <Button href="/contacto" variant="primary" size="lg">
-            Reserva tu cita →
+            Reserva tu Auditoría de Imagen →
           </Button>
           <Button href="/musas-cemad" variant="outline" size="lg" class="text-[var(--color-paper)] border-[var(--color-paper)]/70 hover:bg-white/10 hover:border-[var(--color-paper)]">
             Ver Musas CEMAD
