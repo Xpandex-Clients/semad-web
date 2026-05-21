@@ -20,6 +20,11 @@ const isActive = (href: string) =>
   id="site-header"
   class="site-header sticky top-0 z-40 bg-[var(--color-paper)]/95 border-b border-transparent transition-[border-color,box-shadow] duration-300 backdrop-blur-[2px]"
 >
+  <span
+    aria-hidden="true"
+    id="site-scroll-progress"
+    class="site-scroll-progress absolute inset-x-0 top-0 h-[2px] origin-left bg-[var(--color-gold)]/70 scale-x-0"
+  ></span>
   <div class="mx-auto max-w-[var(--container-wide)] px-[clamp(1rem,4vw,2rem)] py-3 flex items-center justify-between gap-6">
     <a
       href="/"
@@ -114,17 +119,43 @@ const isActive = (href: string) =>
                 0 8px 24px -16px color-mix(in oklch, var(--color-ink) 30%, transparent);
     background-color: color-mix(in oklch, var(--color-paper) 98%, transparent);
   }
+  .site-scroll-progress {
+    transform: scaleX(var(--scroll-progress, 0));
+    transition: transform 80ms linear, opacity 240ms var(--ease-out);
+    opacity: 0;
+  }
+  .site-header[data-scrolled="true"] .site-scroll-progress { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) {
+    .site-scroll-progress { transition: none; }
+  }
 </style>
 
 <script>
   function bindHeaderScroll() {
     const header = document.getElementById("site-header");
+    const bar = document.getElementById("site-scroll-progress");
     if (!header) return;
+    let ticking = false;
     const update = () => {
-      header.dataset.scrolled = window.scrollY > 8 ? "true" : "false";
+      const y = window.scrollY;
+      const max = Math.max(
+        1,
+        document.documentElement.scrollHeight - window.innerHeight,
+      );
+      header.dataset.scrolled = y > 120 ? "true" : "false";
+      if (bar) {
+        bar.style.setProperty("--scroll-progress", String(Math.min(1, y / max)));
+      }
+      ticking = false;
+    };
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
     };
     update();
-    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
   }
   bindHeaderScroll();
   document.addEventListener("astro:page-load", bindHeaderScroll);

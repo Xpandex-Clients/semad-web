@@ -41,9 +41,16 @@ const blogGraph = jsonLdGraph(
       </div>
 
       {posts.length === 0 ? (
-        <p class="mt-12 text-center text-sm text-[var(--color-mute)]">
-          [TODO Fase 5 — primeros 5 artículos seed: 1 por submarca + 1 sobre la doctora]
-        </p>
+        <div class="mt-16 text-center max-w-md mx-auto">
+          <p class="font-[family-name:var(--font-script)] text-3xl text-[var(--color-gold-dark)]">
+            Próximamente
+          </p>
+          <p class="mt-4 text-[var(--color-mute)]">
+            Estamos preparando contenido editorial sobre medicina estética,
+            anti-aging y bienestar. El primer artículo llegará pronto.
+          </p>
+        </div>
+        /* TODO Fase 5 — primeros 5 artículos seed: 1 por submarca + 1 sobre la doctora */
       ) : (
         <ul class="mt-12 grid gap-8 grid-cols-[repeat(auto-fit,minmax(280px,1fr))] list-none p-0">
           {posts.map((post) => (

@@ -80,13 +80,161 @@ const twitterHandle: string | null = null;
     <meta name="twitter:image" content={ogImageUrl} />
 
     <ClientRouter />
+
+    <!-- View Transitions extendidas (root crossfade + lift sutil). -->
+    <style is:global>
+      @keyframes vt-fade-in {
+        from { opacity: 0; transform: translateY(8px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes vt-fade-out {
+        from { opacity: 1; transform: translateY(0); }
+        to   { opacity: 0; transform: translateY(-4px); }
+      }
+      ::view-transition-old(root) {
+        animation: vt-fade-out 240ms var(--ease-out) both;
+      }
+      ::view-transition-new(root) {
+        animation: vt-fade-in 380ms var(--ease-out) both;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        ::view-transition-old(root),
+        ::view-transition-new(root) { animation: none; }
+      }
+
+      /* Splash screen (solo first paint sin caché de sesión). */
+      .cemad-splash {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--color-paper);
+        opacity: 1;
+        transition: opacity 380ms var(--ease-out);
+      }
+      .cemad-splash.is-leaving {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .cemad-splash[hidden] { display: none; }
+      .cemad-splash__mark {
+        width: 96px;
+        height: 96px;
+        opacity: 0;
+        transform: scale(0.96);
+        animation: splash-in 280ms var(--ease-out) forwards;
+      }
+      @keyframes splash-in {
+        to { opacity: 1; transform: scale(1); }
+      }
+      .cemad-splash__ring {
+        position: absolute;
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        border: 1px solid color-mix(in oklch, var(--color-gold) 65%, transparent);
+        clip-path: inset(0 50% 0 0);
+        animation: splash-ring 700ms 200ms var(--ease-out) forwards;
+        opacity: 0;
+      }
+      @keyframes splash-ring {
+        from { clip-path: inset(0 50% 0 0); opacity: 0; transform: rotate(0deg); }
+        to   { clip-path: inset(0 0 0 0);  opacity: 1; transform: rotate(360deg); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .cemad-splash__mark { animation: none; opacity: 1; transform: none; }
+        .cemad-splash__ring { display: none; }
+      }
+    </style>
+
     <slot name="head" />
   </head>
   <body>
+    <!-- Splash screen first-paint. JS lo desmonta cuando el doc está listo. -->
+    {!bare && (
+      <div id="cemad-splash" class="cemad-splash" aria-hidden="true">
+        <span class="cemad-splash__ring"></span>
+        <img
+          src="/brand/cemad-isotipo.png"
+          alt=""
+          width="96"
+          height="96"
+          class="cemad-splash__mark"
+        />
+      </div>
+    )}
+
     <a href="#main" class="skip-link">Saltar al contenido</a>
     {!bare && <Header />}
     <slot />
     {!bare && <Footer />}
     {!bare && <FloatingWhatsApp />}
+
+    <script>
+      // ---- Splash screen (solo first paint, una vez por sesión) ----
+      function handleSplash() {
+        const splash = document.getElementById("cemad-splash");
+        if (!splash || splash.dataset.bound === "1") return;
+        splash.dataset.bound = "1";
+        const KEY = "cemad:splash";
+        const seen = sessionStorage.getItem(KEY) === "1";
+        if (seen) {
+          splash.setAttribute("hidden", "");
+          return;
+        }
+        sessionStorage.setItem(KEY, "1");
+        const dismiss = () => {
+          if (splash.classList.contains("is-leaving")) return;
+          splash.classList.add("is-leaving");
+          window.setTimeout(() => splash.setAttribute("hidden", ""), 420);
+        };
+        // Splash mínimo 900ms, máximo 1600ms (cualquier hang sale por timeout).
+        window.setTimeout(dismiss, 900);
+        window.setTimeout(dismiss, 1600);
+      }
+      handleSplash();
+      document.addEventListener("astro:page-load", handleSplash);
+
+      // ---- Image shimmer skeleton: quita la clase cuando la imagen carga ----
+      function bindShimmer() {
+        const wrappers = document.querySelectorAll(".img-shimmer:not(.is-loaded)");
+        wrappers.forEach((w) => {
+          const img = w.querySelector("img");
+          if (!img) return;
+          const done = () => w.classList.add("is-loaded");
+          if (img.complete && img.naturalWidth > 0) done();
+          else img.addEventListener("load", done, { once: true });
+        });
+      }
+      bindShimmer();
+      document.addEventListener("astro:page-load", bindShimmer);
+
+      // ---- Hero portrait parallax (coef 0.06, solo si NO reduced-motion) ----
+      function bindParallax() {
+        const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduced) return;
+        const targets = document.querySelectorAll("[data-parallax]");
+        if (!targets.length) return;
+        let raf = 0;
+        const apply = () => {
+          const y = window.scrollY;
+          targets.forEach((t) => {
+            const el = t;
+            const coef = parseFloat(el.dataset.parallax || "0.06");
+            el.style.transform = `translate3d(0, ${(y * coef).toFixed(2)}px, 0)`;
+          });
+          raf = 0;
+        };
+        const onScroll = () => {
+          if (!raf) raf = requestAnimationFrame(apply);
+        };
+        apply();
+        window.addEventListener("scroll", onScroll, { passive: true });
+      }
+      bindParallax();
+      document.addEventListener("astro:page-load", bindParallax);
+    </script>
   </body>
 </html>

@@ -69,7 +69,8 @@ const homeGraph = jsonLdGraph(
             quality={82}
             loading="eager"
             fetchpriority="high"
-            class="absolute inset-0 h-full w-full object-cover object-[78%_center]"
+            data-parallax="0.06"
+            class="absolute inset-0 h-full w-full object-cover object-[78%_center] will-change-transform"
           />
           <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[var(--color-ink)]/15 via-transparent to-transparent"></div>
         </div>
@@ -80,12 +81,17 @@ const homeGraph = jsonLdGraph(
     <Section tone="paper-soft" spacing="tight">
       <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 list-none p-0 m-0 text-center lg:text-left">
         <li>
-          <p class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-ink)] leading-none tracking-tight">+10</p>
+          <p class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-ink)] leading-none tracking-tight">
+            <span data-count-prefix>+</span><span data-count-to="10">10</span>
+          </p>
           <p class="mt-2 text-sm font-medium text-[var(--color-ink)]">Años en medicina estética</p>
-          <p class="text-xs text-[var(--color-mute)]/80">[TODO: confirmar cifra con la cliente]</p>
+          <p class="text-xs text-[var(--color-mute)]">Experiencia médico-estética acumulada</p>
+          {/* TODO: confirmar cifra exacta con la cliente */}
         </li>
         <li>
-          <p class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-ink)] leading-none tracking-tight">5</p>
+          <p class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-ink)] leading-none tracking-tight">
+            <span data-count-to="5">5</span>
+          </p>
           <p class="mt-1 text-sm font-medium text-[var(--color-ink)]">Especialidades integradas</p>
           <p class="text-xs text-[var(--color-mute)]">Medicina · IV · Anti-aging · Hair · Láser</p>
         </li>
@@ -97,10 +103,54 @@ const homeGraph = jsonLdGraph(
         <li>
           <p class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-ink)] leading-none tracking-tight">Nº</p>
           <p class="mt-1 text-sm font-medium text-[var(--color-ink)]">Colegiada en activo</p>
-          <p class="text-xs text-[var(--color-mute)]">[TODO: nº colegiada de la cliente]</p>
+          <p class="text-xs text-[var(--color-mute)]">Práctica médica certificada</p>
+          {/* TODO: nº colegiada de la cliente para schema Physician */}
         </li>
       </ul>
     </Section>
+
+    <script>
+      // Number counter — anima [data-count-to] de 0 al target con easing out.
+      // Respeta prefers-reduced-motion. Una sola vez por elemento.
+      function bindCounters() {
+        const els = document.querySelectorAll<HTMLElement>("[data-count-to]");
+        if (!els.length) return;
+        const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduced || !("IntersectionObserver" in window)) return;
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
+              const el = entry.target as HTMLElement;
+              if (el.dataset.countDone) continue;
+              el.dataset.countDone = "1";
+              const target = parseInt(el.dataset.countTo || "0", 10);
+              if (entry.intersectionRatio > 0.6) {
+                el.textContent = String(target);
+                io.unobserve(el);
+                continue;
+              }
+              const duration = 1400;
+              const start = performance.now();
+              const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
+              const tick = (now: number) => {
+                const p = Math.min(1, (now - start) / duration);
+                el.textContent = String(Math.round(easeOut(p) * target));
+                if (p < 1) requestAnimationFrame(tick);
+              };
+              el.textContent = "0";
+              requestAnimationFrame(tick);
+              io.unobserve(el);
+            }
+          },
+          { threshold: [0.6] },
+        );
+        els.forEach((el) => io.observe(el));
+      }
+      bindCounters();
+      document.addEventListener("astro:page-load", bindCounters);
+    </script>
 
     <!-- SUBMARCAS -->
     <Section id="especialidades" tone="paper-soft" spacing="default">
@@ -113,14 +163,14 @@ const homeGraph = jsonLdGraph(
       <ul class="grid gap-6 grid-cols-[repeat(auto-fit,minmax(260px,1fr))] list-none p-0 m-0">
         {services.map((s, i) => (
           <Reveal client:visible as="li" delay={i * 80}>
-            <Card variant="elevated" accent={s.color} href={`/${s.slug}`}>
+            <Card variant="elevated" accent={s.color} href={`/${s.slug}`} class="submarca-card group">
               <Badge accent={s.color}>{s.name}</Badge>
-              <Heading as={3} visual={3} class="mt-3">{s.fullName}</Heading>
+              <Heading as={3} visual={3} class="mt-3 transition-transform duration-300 ease-[var(--ease-out)] group-hover:translate-x-[4px]">{s.fullName}</Heading>
               <p class="font-[family-name:var(--font-script)] text-2xl mt-1" style={`color:${s.ariaColor}`}>
                 {s.shortClaim}
               </p>
               <p class="text-[var(--color-mute)] mt-2 text-sm">{s.longClaim}</p>
-              <span class="link-reveal block mt-4 text-[var(--color-ink)] font-medium w-fit">
+              <span class="submarca-cta link-reveal block mt-4 text-[var(--color-ink)] font-medium w-fit">
                 {s.fullName} en Valencia →
               </span>
             </Card>
@@ -137,18 +187,18 @@ const homeGraph = jsonLdGraph(
           <Heading as={2} visual={2} class="mt-3">
             La medicina estética es una ciencia de detalles.
           </Heading>
-          <p class="mt-4 text-[var(--color-mute)]">
+          <p class="mt-4 text-[var(--color-mute)] leading-relaxed">
             CEMAD es la clínica de la <strong>{siteConfig.doctor.name}</strong>,
             especialista en {siteConfig.doctor.role.toLowerCase()} en el centro de Valencia.
-            <em class="text-[var(--color-mute)]">
-              [TODO: bio profesional confirmada por la cliente]
-            </em>
+            Cada plan se construye desde el diagnóstico médico, no desde el catálogo:
+            el objetivo es realzar tu identidad, no transformarla.
           </p>
+          {/* TODO: bio extendida y trayectoria por confirmar con la cliente */}
           <Button href="/dra-abigail-cevallos" variant="outline" class="mt-6">
             Conoce a la doctora
           </Button>
         </div>
-        <div class="aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] bg-[var(--color-paper-soft)] shadow-[var(--shadow-card)]">
+        <div class="img-shimmer aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] bg-[var(--color-paper-soft)] shadow-[var(--shadow-card)]">
           <Picture
             src={doctoraLegacy}
             alt={`Retrato profesional de la ${siteConfig.doctor.name} en CEMAD Valencia`}
@@ -156,7 +206,7 @@ const homeGraph = jsonLdGraph(
             sizes="(min-width: 1024px) 480px, 92vw"
             formats={["avif", "webp"]}
             quality={82}
-            loading="lazy"
+            loading="eager"
             class="h-full w-full object-cover object-[center_top]"
           />
         </div>

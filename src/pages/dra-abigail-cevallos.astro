@@ -50,14 +50,23 @@ const doctoraGraph = jsonLdGraph(
           <p class="mt-3 text-[var(--color-mute)] uppercase tracking-[0.12em] text-xs">
             {siteConfig.doctor.role}
           </p>
-          <p class="mt-6 max-w-[60ch] text-[var(--color-mute)]">
-            <em>[TODO Fase 5 — bio profesional confirmada por la cliente: trayectoria, formación, especialidades, congresos, colegiación.]</em>
+          <p class="mt-6 max-w-[60ch] text-[var(--color-mute)] leading-relaxed">
+            Médico estético con una mirada clínica y un criterio artístico
+            personal: cada plan se construye desde el diagnóstico, no desde el
+            catálogo. Su trabajo prioriza preservar la identidad del paciente y
+            obtener resultados naturales que se sostienen en el tiempo.
           </p>
+          <p class="mt-3 max-w-[60ch] text-xs text-[var(--color-mute)]/70 italic">
+            Bio profesional completa próximamente — formación, trayectoria y
+            colegiación verificadas se publicarán con la cliente.
+          </p>
+          {/* TODO Fase 5 — bio profesional confirmada con la cliente:
+              trayectoria, formación, especialidades, congresos, nº colegiada */}
           <Button href="/contacto" variant="primary" class="mt-8">
             Reserva una consulta
           </Button>
         </div>
-        <div class="aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] bg-[var(--color-paper-soft)]">
+        <div class="img-shimmer aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] bg-[var(--color-paper-soft)]">
           <Picture
             src={doctoraPortrait}
             alt={`Retrato profesional de la ${siteConfig.doctor.name}`}

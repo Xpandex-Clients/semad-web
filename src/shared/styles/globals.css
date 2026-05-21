@@ -59,12 +59,7 @@
     from { opacity: 0 }
     to   { opacity: 1 }
   }
-  @keyframes slidein {
-    from { transform: translateX(100%) }
-    to   { transform: translateX(0) }
-  }
   .motion-safe\:animate-fadein  { animation: fadein  var(--duration-base) var(--ease-out) }
-  .motion-safe\:animate-slidein { animation: slidein var(--duration-base) var(--ease-out) }
 
   /* Hero rise: opacidad + 8px sutil; staggers via inline animation-delay */
   @keyframes hero-rise {
@@ -101,6 +96,58 @@
   @media (prefers-reduced-motion: reduce) {
     .reveal,
     .reveal[data-reveal="pending"] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  /* Shimmer skeleton para wrappers de imágenes: el wrapper lleva `.img-shimmer`.
+     Cuando la imagen se carga, JS quita la clase con fade. */
+  @keyframes shimmer-sweep {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+  .img-shimmer {
+    background-image: linear-gradient(
+      100deg,
+      var(--color-paper-soft) 30%,
+      oklch(94% 0 0) 50%,
+      var(--color-paper-soft) 70%
+    );
+    background-size: 200% 100%;
+    /* Propiedades expandidas para no entrar en conflicto con animaciones
+       de otros utilities (e.g. hero-rise) cuando se combinan. */
+    animation-name: shimmer-sweep;
+    animation-duration: 1.8s;
+    animation-timing-function: var(--ease-in-out);
+    animation-iteration-count: infinite;
+  }
+  .img-shimmer.is-loaded {
+    animation-name: none;
+    background-image: none;
+    transition: background-image 240ms var(--ease-out);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .img-shimmer { animation-name: none; }
+  }
+
+  /* Submarca card signature: el CTA aparece al hover/focus (desktop hover-capable). */
+  @media (hover: hover) {
+    .submarca-card .submarca-cta {
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 320ms var(--ease-out), transform 320ms var(--ease-out);
+    }
+    .submarca-card:hover .submarca-cta,
+    .submarca-card:focus-visible .submarca-cta,
+    .submarca-card:focus-within .submarca-cta {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .submarca-card .submarca-cta {
       opacity: 1;
       transform: none;
       transition: none;

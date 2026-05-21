@@ -38,7 +38,7 @@ const isLink = !!href;
 const Tag = isLink ? "a" : "button";
 
 const baseClasses =
-  "inline-flex items-center justify-center gap-2 font-[family-name:var(--font-body)] font-medium rounded-[var(--radius-sm)] transition-[background,color,border-color,transform] duration-[var(--duration-fast)] ease-[var(--ease-out)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-gold-dark)] disabled:opacity-50 disabled:cursor-not-allowed";
+  "btn-base relative overflow-hidden inline-flex items-center justify-center gap-2 font-[family-name:var(--font-body)] font-medium rounded-[var(--radius-sm)] transition-[background,color,border-color,transform,box-shadow] duration-[var(--duration-fast)] ease-[var(--ease-out)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-gold-dark)] disabled:opacity-50 disabled:cursor-not-allowed";
 
 const sizeMap: Record<Size, string> = {
   sm: "min-h-[36px] px-4 text-[var(--text-sm)]",
@@ -48,7 +48,7 @@ const sizeMap: Record<Size, string> = {
 
 const variantMap: Record<Variant, string> = {
   primary:
-    "bg-[var(--color-gold)] text-[var(--color-paper)] hover:bg-[var(--color-gold-dark)] active:translate-y-px",
+    "btn-primary bg-[var(--color-gold)] text-[var(--color-paper)] hover:bg-[var(--color-gold-dark)] active:translate-y-px",
   secondary:
     "bg-[var(--color-ink)] text-[var(--color-paper)] hover:bg-black active:translate-y-px",
   ghost:
@@ -74,6 +74,46 @@ const finalClass = [
 const linkRel =
   target === "_blank" ? `${rel ?? ""} noopener noreferrer`.trim() : rel;
 ---
+
+<style>
+  /* Premium primary: gold shadow lift + sheen sweep on hover (desktop hover-capable only). */
+  .btn-primary {
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.08);
+  }
+  @media (hover: hover) {
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px oklch(56% 0.075 76 / 0.28);
+    }
+  }
+  .btn-primary::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgb(255 255 255 / 0.32) 50%,
+      transparent 60%
+    );
+    transform: translateX(-120%);
+    pointer-events: none;
+  }
+  @media (hover: hover) {
+    .btn-primary:hover::before {
+      transform: translateX(120%);
+      transition: transform 700ms var(--ease-out);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .btn-primary,
+    .btn-primary:hover {
+      transform: none;
+      transition: none;
+    }
+    .btn-primary::before { display: none; }
+  }
+</style>
 
 {
   isLink ? (
