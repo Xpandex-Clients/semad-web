@@ -53,8 +53,15 @@ const submarcaVisuals: Record<string, SubmarcaVisual> = {
   },
 };
 
-export const getStaticPaths: GetStaticPaths = () =>
-  services.map((s) => ({ params: { submarca: s.slug }, props: { service: s } }));
+export const getStaticPaths: GetStaticPaths = () => {
+  // Rutas /medicina-estetica, /centro-capilar y /medicina-integrativa tienen
+  // ahora páginas dedicadas según el Figma. Solo seguimos generando submarcas
+  // legacy aún no migradas (visibles si alguien tiene URL antigua).
+  const legacySlugs = new Set(["iv-therapy", "anti-aging-avanzado", "laser-dermoestetico"]);
+  return services
+    .filter((s) => legacySlugs.has(s.slug))
+    .map((s) => ({ params: { submarca: s.slug }, props: { service: s } }));
+};
 
 interface Props {
   service: ServiceLine;

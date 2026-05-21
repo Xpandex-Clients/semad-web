@@ -1,0 +1,166 @@
+---
+import { Picture } from "astro:assets";
+import Layout from "@layouts/Layout.astro";
+import Section from "@shared/ui/primitives/Section.astro";
+import Badge from "@shared/ui/primitives/Badge.astro";
+import Button from "@shared/ui/primitives/Button.astro";
+import heroImg from "@assets/images/page-estetica-hero.png";
+import method2 from "@assets/images/cemad-method-2.png";
+import method3 from "@assets/images/cemad-method-3.png";
+import method4 from "@assets/images/cemad-method-4.png";
+
+const programas = [
+  {
+    n: 1,
+    title: "Endoláser — Rejuvenecimiento Láser Avanzado",
+    body:
+      "Tecnología láser de última generación para renovación profunda de la piel: reducción de arrugas, eliminación de manchas, mejora de textura y estimulación de colágeno para firmeza natural.",
+    ideal: "Pieles con signos avanzados de fotoenvejecimiento, textura irregular y pérdida de luminosidad.",
+    programa: "3-6 sesiones según evaluación individual.",
+    resultados: "Visibles desde la primera sesión, óptimos a los 3 meses.",
+    img: method2,
+  },
+  {
+    n: 2,
+    title: "Lifting sin Cirugía",
+    body:
+      "Efecto lifting natural sin quirófano. Combinación estratégica de bioestimuladores de colágeno (Sculptra, Radiesse), hilos tensores PDO para redefinición de óvalo facial, neuromoduladores para líneas de expresión y técnicas de proyección con ácido hialurónico.",
+    ideal: "Personas que buscan revertir la flacidez facial sin cirugía.",
+    programa: "Duración 18-24 meses con mantenimientos estratégicos.",
+    resultados: "Recuperación mínima (3-5 días de posibles hematomas leves).",
+    img: method3,
+  },
+  {
+    n: 3,
+    title: "Calidad de Piel Experto",
+    body:
+      "Protocolos de renovación celular profunda para piel luminosa, uniforme y vital: peelings médicos, mesoterapia facial, microneedling con factores de crecimiento y tratamientos láser/IPL.",
+    ideal: "Pieles apagadas, con manchas, textura irregular o poros dilatados.",
+    programa: "6 sesiones en 3 meses + mantenimiento trimestral.",
+    resultados: "Luminosidad visible desde sesión 2, transformación completa a los 3 meses.",
+    img: method4,
+  },
+];
+---
+
+<Layout
+  title="Medicina Estética — CEMAD Valencia"
+  description="Medicina estética en CEMAD: armonización facial, lifting sin cirugía, calidad de piel y rejuvenecimiento láser bajo el Método Kintsugi de la Dra. Abigail Cevallos."
+>
+  <main id="main">
+    <!-- HERO -->
+    <Section tone="paper" spacing="loose">
+      <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
+        <div>
+          <Badge tone="gold">Medicina Estética</Badge>
+          <h1 class="mt-6 font-[family-name:var(--font-display)] leading-[1.02]">
+            <span class="block text-[var(--color-ink)] text-[clamp(2rem,4vw,3rem)] font-light">
+              La Armonía que Nace del Interior.
+            </span>
+            <em class="block mt-2 not-italic italic text-[var(--color-gold)] text-[clamp(3rem,7vw,6rem)] font-normal">
+              La Belleza que Perdura.
+            </em>
+          </h1>
+          <div class="mt-8 w-[100px] h-[2px] bg-[var(--color-gold)]"></div>
+          <p class="mt-6 max-w-[58ch] text-[var(--color-mute)] leading-relaxed">
+            En CEMAD rechazamos la estética de moldes y tendencias. Aplicamos el
+            Método Kintsugi a la medicina facial: primero comprendemos las causas
+            de tu envejecimiento, después diseñamos planes personalizados que
+            devuelven luminosidad, firmeza y armonía sin borrar tu identidad.
+          </p>
+        </div>
+        <div class="aspect-[4/5] overflow-hidden rounded-[var(--radius-md)] shadow-[var(--shadow-card)]">
+          <Picture
+            src={heroImg}
+            alt="Medicina estética CEMAD — composición editorial"
+            widths={[480, 768, 1024]}
+            sizes="(min-width: 1024px) 540px, 92vw"
+            formats={["avif", "webp"]}
+            quality={82}
+            loading="eager"
+            fetchpriority="high"
+            class="h-full w-full object-cover"
+          />
+        </div>
+      </div>
+    </Section>
+
+    <!-- INTRO -->
+    <Section tone="paper-soft" spacing="default" width="narrow">
+      <div class="max-w-[68ch] mx-auto">
+        <p class="text-[var(--color-mute)] leading-relaxed text-[1.0625rem]">
+          No buscamos que todas las mujeres tengan los mismos labios o el mismo
+          rostro. Nuestra guía es la proporción áurea y el respeto absoluto a
+          tu estructura facial única. Trabajamos con precisión médica para que
+          los resultados se vean naturales, frescos y auténticos.
+        </p>
+        <p class="mt-6 font-[family-name:var(--font-display)] italic text-[var(--color-ink)] text-2xl">
+          No transformamos. Revelamos tu mejor versión.
+        </p>
+      </div>
+    </Section>
+
+    <!-- 3 PROGRAMAS -->
+    <Section tone="paper" spacing="loose">
+      <div class="mb-12 max-w-3xl">
+        <h2 class="font-[family-name:var(--font-display)] text-[clamp(2.5rem,5vw,4rem)] text-[var(--color-ink)] leading-[1.05]">
+          <span class="block">Planes Completos de</span>
+          <em class="block not-italic italic text-[var(--color-gold)]">Transformación Facial</em>
+        </h2>
+        <div class="mt-4 w-[100px] h-[2px] bg-[var(--color-gold)]"></div>
+        <p class="mt-6 text-[var(--color-mute)] leading-relaxed">
+          No tratamos arrugas de forma aislada. Diseñamos estrategias integrales
+          que combinan múltiples tratamientos para resultados profundos,
+          armónicos y duraderos.
+        </p>
+      </div>
+      <ul class="space-y-20 list-none p-0 m-0">
+        {programas.map((p, i) => (
+          <li class={`grid lg:grid-cols-2 gap-12 items-center ${i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}>
+            <div class="aspect-[4/5] overflow-hidden rounded-[var(--radius-sm)]">
+              <Picture src={p.img} alt={p.title} widths={[400, 600, 800]} sizes="(min-width: 1024px) 480px, 92vw" formats={["avif","webp"]} quality={80} class="h-full w-full object-cover" />
+            </div>
+            <div>
+              <span class="font-[family-name:var(--font-display)] italic text-[var(--color-gold-dark)] text-xl">
+                Programa {p.n}
+              </span>
+              <h3 class="mt-2 font-[family-name:var(--font-display)] text-[clamp(1.75rem,3vw,2.5rem)] text-[var(--color-gold)] italic leading-tight">
+                {p.title}
+              </h3>
+              <p class="mt-4 text-[var(--color-mute)] leading-relaxed">{p.body}</p>
+              <dl class="mt-6 grid sm:grid-cols-3 gap-4 text-sm">
+                <div>
+                  <dt class="font-[family-name:var(--font-display)] italic text-[var(--color-ink)]">Ideal para:</dt>
+                  <dd class="mt-1 text-[var(--color-mute)] leading-relaxed">{p.ideal}</dd>
+                </div>
+                <div>
+                  <dt class="font-[family-name:var(--font-display)] italic text-[var(--color-ink)]">Programa:</dt>
+                  <dd class="mt-1 text-[var(--color-mute)] leading-relaxed">{p.programa}</dd>
+                </div>
+                <div>
+                  <dt class="font-[family-name:var(--font-display)] italic text-[var(--color-ink)]">Resultados:</dt>
+                  <dd class="mt-1 text-[var(--color-mute)] leading-relaxed">{p.resultados}</dd>
+                </div>
+              </dl>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </Section>
+
+    <!-- CTA -->
+    <Section tone="ink" spacing="loose">
+      <div class="text-center max-w-2xl mx-auto text-[var(--color-paper)]">
+        <img src="/brand/cemad-isotipo.png" alt="" aria-hidden="true" width="56" height="56" class="mx-auto mb-6 invert opacity-95" />
+        <h2 class="font-[family-name:var(--font-display)] font-light text-[clamp(2.25rem,4.8vw,3.5rem)] leading-[1.1]">
+          Reserva tu
+          <em class="block mt-2 not-italic italic text-[var(--color-gold)] font-normal">valoración facial</em>
+        </h2>
+        <p class="mt-6 text-[var(--color-paper)]/85">Sin compromiso, sin paquetes cerrados.</p>
+        <div class="mt-10">
+          <Button href="/contacto" variant="primary" size="lg">Reserva tu cita →</Button>
+        </div>
+      </div>
+    </Section>
+  </main>
+</Layout>
