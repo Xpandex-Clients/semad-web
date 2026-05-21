@@ -14,50 +14,200 @@ const contactoGraph = jsonLdGraph(
   medicalClinicSchema(),
   breadcrumbSchema([
     { name: "Inicio", url: "/" },
-    { name: "Contacto", url: "/contacto" },
+    { name: "Reservar cita", url: "/contacto" },
   ]),
 );
+
+const especialidades = [
+  "Método Kintsugi",
+  "Centro Capilar",
+  "Medicina Estética",
+  "Medicina Integrativa",
+  "Aún no lo sé",
+];
 ---
 
 <Layout
-  title="Contacto | CEMAD Valencia"
-  description={`Reserva tu consulta en CEMAD: ${siteConfig.address.street}, ${siteConfig.address.locality}. Llamada, WhatsApp o formulario.`}
+  title="Reservar cita | CEMAD Valencia"
+  description="Comienza tu proceso de restauración con CEMAD. Reserva tu valoración personalizada con la Dra. Abigail Cevallos en el centro de Valencia."
 >
   <Fragment slot="head">
     <JsonLd data={contactoGraph} />
   </Fragment>
   <main id="main">
-    <Section tone="paper" spacing="loose">
-      <div class="text-center max-w-2xl mx-auto">
-        <Badge tone="gold">Contacto</Badge>
-        <Heading as={1} variant="display" align="center" class="mt-4">
-          Empieza por una conversación.
+    <!-- HERO con título editorial (frame 217:1994) -->
+    <Section tone="ink" spacing="loose" class="relative overflow-hidden">
+      <div class="relative z-10 max-w-3xl">
+        <Heading as={1} variant="display" tone="invert" align="left" class="leading-[1.05]">
+          <span class="block text-[clamp(2.25rem,5vw,3.5rem)] font-[family-name:var(--font-display)] font-light text-[var(--color-paper)]">
+            Comienza tu Proceso de
+          </span>
+          <em class="block mt-1 not-italic font-[family-name:var(--font-script)] italic font-light text-[clamp(3rem,8vw,6rem)] text-[var(--color-gold)] leading-[0.95]">
+            Restauración
+          </em>
         </Heading>
-        <p class="mt-6 text-[var(--color-mute)]">
-          {siteConfig.address.street}, {siteConfig.address.postalCode} {siteConfig.address.locality}.
+        <p class="mt-8 max-w-[58ch] text-[var(--color-paper)]/85 leading-relaxed">
+          Queremos escucharte y diseñar contigo una estrategia personalizada
+          para tu imagen, tu salud y tu bienestar. El primer paso es siempre una
+          conversación.
         </p>
       </div>
-      <div class="mt-10 grid sm:grid-cols-3 gap-3 max-w-xl mx-auto">
-        <Button href={`tel:${siteConfig.contact.phone}`} variant="primary" size="lg">
-          Llamar
-        </Button>
-        <Button
-          href={`https://wa.me/${waNumber}`}
-          variant="outline"
-          size="lg"
-          target="_blank"
-        >
-          WhatsApp
-        </Button>
-        <Button href={siteConfig.contact.instagram} variant="ghost" size="lg" target="_blank">
-          Instagram
-        </Button>
+    </Section>
+
+    <!-- BLOQUE INTRO: la consulta es el principio, no una venta -->
+    <Section tone="paper" spacing="default" width="narrow">
+      <div class="text-center max-w-2xl mx-auto">
+        <img
+          src="/brand/cemad-isotipo.png"
+          alt=""
+          aria-hidden="true"
+          width="36"
+          height="36"
+          class="mx-auto mb-6 opacity-80"
+        />
+        <p class="text-[var(--color-mute)] leading-relaxed text-[1.0625rem]">
+          En CEMAD no hacemos consultas express. Dedicamos el tiempo necesario
+          para comprenderte: tu historia, tus preocupaciones, tus objetivos y
+          lo que realmente necesitas. Nuestro primer encuentro es una
+          <strong class="text-[var(--color-ink)] font-semibold">Auditoría de Imagen</strong>
+          (en casos estéticos/capilares) o una
+          <strong class="text-[var(--color-ink)] font-semibold">Evaluación Funcional</strong>
+          (en medicina integrativa) donde:
+        </p>
+        <ul class="mt-6 space-y-3 text-left max-w-[52ch] mx-auto list-none p-0">
+          <li class="flex gap-3"><span aria-hidden="true" class="mt-1.5 size-1.5 rounded-full bg-[var(--color-gold)] shrink-0"></span><span class="text-[var(--color-mute)]">Escuchamos tu historia completa.</span></li>
+          <li class="flex gap-3"><span aria-hidden="true" class="mt-1.5 size-1.5 rounded-full bg-[var(--color-gold)] shrink-0"></span><span class="text-[var(--color-mute)]">Realizamos una evaluación médica inicial.</span></li>
+          <li class="flex gap-3"><span aria-hidden="true" class="mt-1.5 size-1.5 rounded-full bg-[var(--color-gold)] shrink-0"></span><span class="text-[var(--color-mute)]">Explicamos las causas de lo que estás experimentando.</span></li>
+          <li class="flex gap-3"><span aria-hidden="true" class="mt-1.5 size-1.5 rounded-full bg-[var(--color-gold)] shrink-0"></span><span class="text-[var(--color-mute)]">Diseñamos tu hoja de ruta personalizada.</span></li>
+          <li class="flex gap-3"><span aria-hidden="true" class="mt-1.5 size-1.5 rounded-full bg-[var(--color-gold)] shrink-0"></span><span class="text-[var(--color-mute)]">Resolvemos todas tus dudas.</span></li>
+        </ul>
+        <p class="mt-10 font-[family-name:var(--font-display)] italic text-2xl text-[var(--color-ink)] leading-snug">
+          No es una venta. Es el inicio de una alianza médica a largo plazo.
+        </p>
       </div>
-      <p class="text-center mt-10 text-sm text-[var(--color-mute)]">
-        Formulario online disponible próximamente. Mientras tanto, los canales
-        directos están operativos 24/7.
-      </p>
-      {/* TODO Fase 9 — Astro Action contact.submit + Resend + Turnstile */}
+    </Section>
+
+    <!-- FORMULARIO + CANALES (Fase 9: form action funcional) -->
+    <Section tone="paper-soft" spacing="default">
+      <div class="max-w-3xl mx-auto">
+        <Heading as={2} visual={1} class="text-[clamp(2.5rem,6vw,4rem)]">
+          Contáctanos
+        </Heading>
+        <p class="mt-3 text-[var(--color-mute)]">
+          Rellena el formulario o usa los canales directos. Te respondemos
+          en menos de 24 horas laborables.
+        </p>
+
+        <form
+          class="mt-10 grid gap-5"
+          action="#"
+          method="post"
+          aria-label="Reservar cita en CEMAD"
+        >
+          <div class="grid sm:grid-cols-2 gap-5">
+            <label class="flex flex-col gap-2 text-xs uppercase tracking-[0.12em] text-[var(--color-mute)] font-semibold">
+              Nombre completo
+              <input
+                type="text"
+                name="nombre"
+                required
+                class="mt-1 px-4 py-3 rounded-[var(--radius-xs)] bg-[var(--color-paper)] border border-[var(--color-paper-warm)] focus:border-[var(--color-gold)] focus:outline-none text-base font-normal text-[var(--color-ink)] normal-case"
+              />
+            </label>
+            <label class="flex flex-col gap-2 text-xs uppercase tracking-[0.12em] text-[var(--color-mute)] font-semibold">
+              Email
+              <input
+                type="email"
+                name="email"
+                required
+                class="mt-1 px-4 py-3 rounded-[var(--radius-xs)] bg-[var(--color-paper)] border border-[var(--color-paper-warm)] focus:border-[var(--color-gold)] focus:outline-none text-base font-normal text-[var(--color-ink)] normal-case"
+              />
+            </label>
+            <label class="flex flex-col gap-2 text-xs uppercase tracking-[0.12em] text-[var(--color-mute)] font-semibold">
+              Teléfono
+              <input
+                type="tel"
+                name="telefono"
+                inputmode="tel"
+                class="mt-1 px-4 py-3 rounded-[var(--radius-xs)] bg-[var(--color-paper)] border border-[var(--color-paper-warm)] focus:border-[var(--color-gold)] focus:outline-none text-base font-normal text-[var(--color-ink)] normal-case"
+              />
+            </label>
+            <label class="flex flex-col gap-2 text-xs uppercase tracking-[0.12em] text-[var(--color-mute)] font-semibold">
+              Qué área te interesa
+              <select
+                name="area"
+                class="mt-1 px-4 py-3 rounded-[var(--radius-xs)] bg-[var(--color-paper)] border border-[var(--color-paper-warm)] focus:border-[var(--color-gold)] focus:outline-none text-base font-normal text-[var(--color-ink)] normal-case"
+              >
+                {especialidades.map((e) => <option value={e}>{e}</option>)}
+              </select>
+            </label>
+          </div>
+          <label class="flex flex-col gap-2 text-xs uppercase tracking-[0.12em] text-[var(--color-mute)] font-semibold">
+            Mensaje · cuéntanos brevemente tu caso (opcional)
+            <textarea
+              name="mensaje"
+              rows="4"
+              class="mt-1 px-4 py-3 rounded-[var(--radius-xs)] bg-[var(--color-paper)] border border-[var(--color-paper-warm)] focus:border-[var(--color-gold)] focus:outline-none text-base font-normal text-[var(--color-ink)] normal-case resize-y"
+            ></textarea>
+          </label>
+
+          <fieldset class="mt-2">
+            <legend class="text-xs uppercase tracking-[0.12em] text-[var(--color-mute)] font-semibold mb-3">
+              Preferencia de contacto
+            </legend>
+            <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-[var(--color-ink)]">
+              <label class="inline-flex items-center gap-2">
+                <input type="radio" name="preferencia" value="telefono" checked class="accent-[var(--color-gold)]" />
+                Por teléfono
+              </label>
+              <label class="inline-flex items-center gap-2">
+                <input type="radio" name="preferencia" value="email" class="accent-[var(--color-gold)]" />
+                Por email
+              </label>
+              <label class="inline-flex items-center gap-2">
+                <input type="radio" name="preferencia" value="whatsapp" class="accent-[var(--color-gold)]" />
+                Por WhatsApp
+              </label>
+            </div>
+          </fieldset>
+
+          <label class="flex flex-col gap-2 text-xs uppercase tracking-[0.12em] text-[var(--color-mute)] font-semibold sm:max-w-xs">
+            Fecha preferente para la cita
+            <input
+              type="date"
+              name="fecha"
+              class="mt-1 px-4 py-3 rounded-[var(--radius-xs)] bg-[var(--color-paper)] border border-[var(--color-paper-warm)] focus:border-[var(--color-gold)] focus:outline-none text-base font-normal text-[var(--color-ink)] normal-case"
+            />
+          </label>
+
+          <Button type="submit" variant="primary" size="lg" class="mt-4 self-start">
+            Enviar solicitud de cita →
+          </Button>
+          <p class="text-xs text-[var(--color-mute)]/80">
+            * Nos pondremos en contacto contigo en menos de 24 horas laborables
+            para confirmar tu cita y responder a tus dudas.
+          </p>
+          {/* TODO Fase 9 — wire a Astro Action contact.submit con Zod + Resend + Turnstile */}
+        </form>
+
+        <!-- Canales directos -->
+        <div class="mt-12 grid sm:grid-cols-3 gap-3">
+          <Button href={`tel:${siteConfig.contact.phone}`} variant="outline" size="md">
+            Llamar
+          </Button>
+          <Button
+            href={`https://wa.me/${waNumber}`}
+            variant="outline"
+            size="md"
+            target="_blank"
+          >
+            WhatsApp
+          </Button>
+          <Button href={siteConfig.contact.instagram} variant="ghost" size="md" target="_blank">
+            Instagram
+          </Button>
+        </div>
+      </div>
     </Section>
   </main>
 </Layout>
