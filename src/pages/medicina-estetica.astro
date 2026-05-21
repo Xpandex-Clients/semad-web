@@ -120,6 +120,65 @@ const programas = [
       </ul>
     </Section>
 
+    <!-- TRATAMIENTOS FACIALES (Figma 09-10) ========================= -->
+    <Section tone="paper-soft" spacing="loose">
+      <div class="max-w-3xl mb-10">
+        <h2 class="font-[family-name:var(--font-display)] text-[clamp(2.5rem,5vw,4rem)] text-[var(--color-ink)] leading-[1.05]">
+          <span class="block">Tratamientos</span>
+          <em class="block not-italic italic text-[var(--color-gold)]">Faciales</em>
+        </h2>
+        <div class="mt-4 w-[100px] h-[2px] bg-[var(--color-gold)]"></div>
+      </div>
+      <dl class="space-y-0 list-none p-0 max-w-5xl">
+        {[
+          { name: "Peelings Médicos", body: "Renovación celular profunda para manchas, textura irregular y luminosidad. Desde peelings suaves a medios según necesidad." },
+          { name: "Mesoterapia Facial", body: "Microinyecciones de vitaminas, ácido hialurónico y antioxidantes para hidratación profunda y vitalidad." },
+          { name: "Láser / IPL", body: "Eliminación de manchas, rojeces, vasos y textura. Tecnología de última generación para resultados precisos." },
+          { name: "Microneedling Médico", body: "Estimulación de colágeno mediante microperforaciones controladas. Combinado con PRP o factores de crecimiento para potenciar resultados." },
+          { name: "Ácido Hialurónico", body: "Devuelve volumen y armonía respetando la proporción áurea. Rellenos faciales, perfilado de labios y rejuvenecimiento de manos." },
+          { name: "Neuromoduladores", body: "Suavizan arrugas dinámicas conservando expresividad. Aplicación de precisión por la doctora." },
+          { name: "Hilos Tensores PDO", body: "Lifting natural sin cirugía. Tensado y bioestimulación combinados para óvalo y línea mandibular." },
+          { name: "Bioestimuladores de Colágeno", body: "Sculptra®, Radiesse® y derivados de PLA. Estimulan colágeno propio para firmeza y calidad de piel a medio plazo." },
+        ].map((t) => (
+          <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 md:gap-10 py-5 border-t border-[var(--color-paper-warm)]">
+            <dt class="font-[family-name:var(--font-display)] italic text-[var(--color-ink)] text-lg leading-tight">
+              {t.name}
+            </dt>
+            <dd class="text-sm text-[var(--color-mute)] leading-relaxed">{t.body}</dd>
+          </div>
+        ))}
+      </dl>
+    </Section>
+
+    <!-- TRATAMIENTOS CORPORAL (Figma 10-11) ========================= -->
+    <Section tone="paper" spacing="loose">
+      <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-start">
+        <div>
+          <h2 class="font-[family-name:var(--font-display)] text-[clamp(2.5rem,5vw,4rem)] text-[var(--color-ink)] leading-[1.05]">
+            <em class="block not-italic italic text-[var(--color-gold)]">Corporal</em>
+          </h2>
+          <div class="mt-4 w-[100px] h-[2px] bg-[var(--color-gold)]"></div>
+          <p class="mt-6 text-[var(--color-mute)] leading-relaxed max-w-[58ch]">
+            Trabajamos el cuerpo con la misma filosofía Kintsugi: nada de
+            estandarizar, nada de promesas vacías. Diagnóstico, plan y
+            seguimiento para resultados sostenibles.
+          </p>
+        </div>
+        <div class="bg-[var(--color-gold)]/95 rounded-[var(--radius-sm)] p-7 lg:p-8 text-[var(--color-ink)] shadow-[var(--shadow-card)]">
+          <p class="font-[family-name:var(--font-display)] italic text-[var(--color-paper)] text-base">
+            Líneas que dominamos
+          </p>
+          <ul class="mt-4 space-y-3 list-none p-0 text-sm text-[var(--color-paper)]/95">
+            <li>· Remodelación corporal con tecnología no invasiva (INDIBA®, criolipólisis controlada).</li>
+            <li>· Bioestimulación corporal para flacidez post-parto y post-pérdida de peso.</li>
+            <li>· Tratamiento de estrías recientes y antiguas con láser fraccionado + PRP.</li>
+            <li>· Manchas corporales y poiquilodermia con láser de pigmento.</li>
+            <li>· Drenaje linfático médico y protocolos post-cirugía estética.</li>
+          </ul>
+        </div>
+      </div>
+    </Section>
+
     <!-- CTA -->
     <Section tone="ink" spacing="loose">
       <div class="text-center max-w-2xl mx-auto text-[var(--color-paper)]">

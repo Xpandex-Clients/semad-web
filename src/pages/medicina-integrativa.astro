@@ -36,6 +36,82 @@ const triada = [
     img: diag3,
   },
 ];
+
+const decadas = [
+  {
+    label: "La Década de la Excelencia",
+    range: "40-50 años",
+    filosofia:
+      "Optimización de la salud en su mejor momento: previene el desgaste, mantiene el rendimiento físico y mental, sostiene la vitalidad.",
+    planes: [
+      { name: 'Plan "Esencia 40"', body: "Diagnóstico funcional anual, sueroterapia trimestral, equilibrio hormonal preventivo y protocolos nutricionales antiinflamatorios." },
+      { name: 'Plan "Plenitud 40"', body: "Todo lo de Esencia + INDIBA® para regeneración celular + acompañamiento nutricional personalizado + medicina del rendimiento." },
+      { name: 'Plan "Singular 40"', body: "Medicina personalizada con máximo acompañamiento: revisiones bimestrales, MTC, fitoterapia y planes terapéuticos a medida." },
+    ],
+  },
+  {
+    label: "La Década de la Maestría",
+    range: "50-60 años",
+    filosofia:
+      "Transición consciente y vitalidad sostenida en una etapa de cambios fisiológicos importantes. Acompañamiento médico cercano.",
+    planes: [
+      { name: 'Plan "Esencia 50"', body: "Diagnóstico hormonal completo, gestión de transición menopáusica/andropausia, sueroterapia mensual y protocolos cardiovascular y óseo." },
+      { name: 'Plan "Plenitud 50"', body: "Esencia 50 + tecnología INDIBA® + acompañamiento emocional + protocolos del sueño y cognitivos." },
+      { name: 'Plan "Singular 50"', body: "Plan terapéutico dual (occidental + MTC), revisiones bimestrales y plan de longevidad integral." },
+    ],
+  },
+  {
+    label: "La Década de la Vitalidad",
+    range: "60-70 años",
+    filosofia:
+      "Programa de estabilización metabólica y hormonal. Mantener autonomía, energía y claridad mental para una vida plena.",
+    planes: [
+      { name: 'Plan "Esencia 60"', body: "Diagnóstico funcional completo (Oligoscan + Biopsia Digital + analíticas), equilibrio hormonal, protocolos nutricionales antiinflamatorios, sueroterapia mensual y seguimiento trimestral." },
+      { name: 'Plan "Plenitud 60"', body: "Esencia 60 + INDIBA® + Medicina Tradicional China + protocolos de movilidad articular." },
+      { name: 'Plan "Singular 60"', body: "Medicina personalizada con máximo acompañamiento: revisiones bimestrales y plan terapéutico dual." },
+    ],
+  },
+  {
+    label: "La Década de la Sapiencia",
+    range: "70-80 años",
+    filosofia:
+      "Preservación de autonomía, vitalidad cognitiva y bienestar profundo.",
+    planes: [
+      { name: 'Plan "Esencia 70"', body: "Programa de mantenimiento de funciones vitales. Diagnóstico funcional y ajuste de tratamientos, sueroterapia de mantenimiento, protocolos para salud cardiovascular y cognitiva, seguimiento trimestral." },
+      { name: 'Plan "Plenitud 70"', body: "Programa de regeneración profunda con fusión de tecnologías. Esencia 70 + INDIBA® (radiofrecuencia para regeneración celular y reducción de dolor articular) + Medicina Tradicional China + protocolos de movilidad." },
+      { name: 'Plan "Singular 70"', body: "Programa de medicina personalizada con máximo acompañamiento." },
+    ],
+  },
+  {
+    label: "La Década del Legado",
+    range: "80+ años",
+    filosofia:
+      "Confort, dignidad y calidad de vida en la etapa más sabia.",
+    planes: [
+      { name: 'Plan "Esencia 80+"', body: "Programa de bienestar y manejo de molestias. Tratamientos para dolor articular y movilidad, sueroterapia de vitalidad, acompañamiento médico mensual." },
+      { name: 'Plan "Plenitud 80+"', body: "Esencia 80+ + soporte cognitivo y emocional + tecnología INDIBA® adaptada + plan nutricional para conservar masa muscular." },
+      { name: 'Plan "Singular 80+"', body: "Acompañamiento médico domiciliario opcional y plan integral diseñado contigo y tus cuidadores." },
+    ],
+  },
+];
+
+const programasMujer = [
+  {
+    title: "Programa Equilibrio Premenopáusico",
+    range: "40-50 años",
+    body: "Balance hormonal natural, manejo de síntomas premenopáusicos, preservación de densidad ósea y vitalidad.",
+  },
+  {
+    title: "Programa Transición Menopáusica",
+    range: "50-60 años",
+    body: "Gestión de síntomas de menopausia (sofocos, insomnio, cambios de ánimo), terapia hormonal bioidéntica cuando corresponde, protección cardiovascular y ósea.",
+  },
+  {
+    title: "Programa Plenitud Post-Menopáusica",
+    range: "60+ años",
+    body: "Mantenimiento de vitalidad, salud cognitiva, movilidad y bienestar emocional tras la menopausia.",
+  },
+];
 ---
 
 <Layout
@@ -112,7 +188,7 @@ const triada = [
       </ul>
     </Section>
 
-    <!-- PROGRAMA LEGADO Y PLENITUD -->
+    <!-- PROGRAMA LEGADO Y PLENITUD: intro -->
     <Section tone="paper-soft" spacing="loose">
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <div class="aspect-[4/5] overflow-hidden rounded-[var(--radius-sm)]">
@@ -137,6 +213,77 @@ const triada = [
           </p>
         </div>
       </div>
+    </Section>
+
+    <!-- 5 DÉCADAS (Figma 06-09) ===================================== -->
+    <Section tone="paper" spacing="loose">
+      <div class="max-w-3xl mb-12">
+        <h2 class="font-[family-name:var(--font-display)] text-[clamp(2rem,4vw,3rem)] text-[var(--color-ink)] leading-[1.05]">
+          <span class="block">Longevidad por etapa vital:</span>
+          <em class="block not-italic italic text-[var(--color-gold)]">Vitalidad sostenida en cada década</em>
+        </h2>
+        <div class="mt-4 w-[100px] h-[2px] bg-[var(--color-gold)]"></div>
+      </div>
+      <ol class="space-y-16 list-none p-0 m-0">
+        {decadas.map((d) => (
+          <li class="border-t border-[var(--color-paper-warm)] pt-10">
+            <div class="grid lg:grid-cols-[1fr_2fr] gap-10 lg:gap-16">
+              <div>
+                <p class="font-[family-name:var(--font-display)] italic text-[var(--color-gold)] text-lg">
+                  {d.range}
+                </p>
+                <h3 class="mt-2 font-[family-name:var(--font-display)] text-[clamp(1.75rem,3vw,2.5rem)] text-[var(--color-ink)] leading-[1.1] font-normal">
+                  {d.label}
+                </h3>
+                <p class="mt-5 text-xs uppercase tracking-[0.18em] text-[var(--color-gold-dark)] font-semibold">
+                  Filosofía
+                </p>
+                <p class="mt-2 text-sm text-[var(--color-mute)] leading-relaxed">
+                  {d.filosofia}
+                </p>
+              </div>
+              <ul class="grid md:grid-cols-3 gap-4 list-none p-0">
+                {d.planes.map((p) => (
+                  <li class="bg-[var(--color-paper-soft)] p-5 rounded-[var(--radius-sm)] border border-[var(--color-paper-warm)]">
+                    <p class="font-[family-name:var(--font-display)] italic text-[var(--color-ink)] text-base leading-tight">
+                      {p.name}
+                    </p>
+                    <p class="mt-3 text-[13px] text-[var(--color-mute)] leading-relaxed">
+                      {p.body}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </Section>
+
+    <!-- PROGRAMAS MUJER (Figma 09-10) ============================== -->
+    <Section tone="paper-soft" spacing="loose">
+      <div class="max-w-3xl mb-10">
+        <h2 class="font-[family-name:var(--font-display)] text-[clamp(2rem,4vw,3rem)] text-[var(--color-ink)] leading-[1.05]">
+          <span class="block">Salud hormonal femenina,</span>
+          <em class="block not-italic italic text-[var(--color-gold)]">en cada etapa</em>
+        </h2>
+        <div class="mt-4 w-[100px] h-[2px] bg-[var(--color-gold)]"></div>
+      </div>
+      <ul class="grid md:grid-cols-3 gap-6 list-none p-0">
+        {programasMujer.map((p) => (
+          <li class="bg-[var(--color-paper)] p-7 rounded-[var(--radius-sm)] border border-[var(--color-paper-warm)] shadow-[var(--shadow-card)]">
+            <p class="font-[family-name:var(--font-display)] italic text-[var(--color-gold-dark)] text-sm">
+              {p.range}
+            </p>
+            <h3 class="mt-2 font-[family-name:var(--font-display)] text-[1.25rem] text-[var(--color-ink)] leading-tight">
+              {p.title}
+            </h3>
+            <p class="mt-4 text-sm text-[var(--color-mute)] leading-relaxed">
+              {p.body}
+            </p>
+          </li>
+        ))}
+      </ul>
     </Section>
 
     <!-- CTA -->

@@ -18,6 +18,8 @@ const fases = [
     img: method1,
     body:
       "Identificamos las causas reales detrás de lo que ves en el espejo: clínicas, emocionales y estructurales. Solo cuando entendemos el origen podemos diseñar un plan que tenga sentido.",
+    resultado:
+      "Un mapa completo de qué está causando la pérdida de armonía en tu imagen y por qué los tratamientos previos no funcionaron.",
   },
   {
     n: 2,
@@ -26,6 +28,8 @@ const fases = [
     img: method2,
     body:
       "Con el diagnóstico completo, diseñamos una estrategia de restauración 100% personalizada: tratamientos regenerativos (mesoterapia, bioestimulación, PRP), protocolos farmacológicos dirigidos, cirugía de alta definición cuando es necesaria. Cada intervención respeta tu identidad y busca resultados naturales, visibles y armónicos.",
+    resultado:
+      "Resultados naturales, visibles y armónicos. Sin transformación: revelación de tu mejor versión.",
   },
   {
     n: 3,
@@ -34,6 +38,8 @@ const fases = [
     img: method3,
     body:
       "Establecemos protocolos estratégicos que previenen recaídas y te ayudan a mantener el control de tu proceso en el tiempo. Cuidados, hábitos, mantenimiento médico — todo coordinado.",
+    resultado:
+      "Una hoja de ruta para mantener tu nueva imagen estable, sostenible y bajo tu control.",
   },
   {
     n: 4,
@@ -42,6 +48,8 @@ const fases = [
     img: method4,
     body:
       "La fase final es la más importante: que vuelvas a reconocerte con orgullo. Reintegrar es cuando tu imagen externa se alinea con tu identidad interna.",
+    resultado:
+      "Una imagen externa que refleja quién eres en esencia. Confianza, coherencia, presencia.",
   },
 ];
 ---
@@ -113,9 +121,19 @@ const fases = [
             <p class="font-[family-name:var(--font-display)] italic text-[var(--color-gold)] text-[clamp(1.5rem,2.6vw,2.25rem)] leading-snug">
               {f.headline}
             </p>
-            <p class="text-[var(--color-mute)] leading-relaxed text-[1.0625rem]">
-              {f.body}
-            </p>
+            <div>
+              <p class="text-[var(--color-mute)] leading-relaxed text-[1.0625rem]">
+                {f.body}
+              </p>
+              <div class="mt-8 bg-[var(--color-gold)]/95 text-[var(--color-ink)] p-6 lg:p-7 rounded-[var(--radius-sm)] shadow-[var(--shadow-card)]">
+                <p class="font-[family-name:var(--font-display)] italic text-[var(--color-paper)] text-base">
+                  El Resultado
+                </p>
+                <p class="mt-3 text-sm text-[var(--color-paper)]/95 leading-relaxed">
+                  {f.resultado}
+                </p>
+              </div>
+            </div>
           </div>
         </Section>
       </Fragment>
