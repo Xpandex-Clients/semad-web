@@ -126,12 +126,27 @@ const isActive = (href: string) =>
 </div>
 
 <style>
-  .site-header { color: var(--color-ink); }
+  /* Transparente sobre hero, texto blanco. La página de inicio (que tiene
+     hero con bg image dark/medium) carga este estado por defecto. */
+  .site-header {
+    color: var(--color-paper);
+    background-color: transparent;
+  }
+  /* Tras scroll: fondo paper sólido + texto ink + regla dorada inferior. */
   .site-header[data-bg="solid"] {
+    color: var(--color-ink);
     background-color: color-mix(in oklch, var(--color-paper) 96%, transparent);
     border-bottom: 1px solid color-mix(in oklch, var(--color-gold) 30%, transparent);
     box-shadow: 0 2px 0 0 color-mix(in oklch, var(--color-gold) 14%, transparent),
                 0 8px 24px -16px color-mix(in oklch, var(--color-ink) 24%, transparent);
+  }
+  /* En páginas interiores con hero claro, opt-in mediante data-tone="ink". */
+  .site-header[data-tone="ink"] { color: var(--color-ink); }
+  /* El logo dorado se mantiene; el resto del texto hereda color via currentColor. */
+  .site-header .menu-trigger,
+  .site-header [class*="text-[11px]"],
+  .site-header [class*="uppercase"] {
+    color: inherit;
   }
   .site-scroll-progress {
     transform: scaleX(var(--scroll-progress, 0));

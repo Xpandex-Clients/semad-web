@@ -42,7 +42,7 @@
    *           emblema como "Restauración", no Corinthia). Corinthia queda como fallback.
    * --------------------------------------------- */
   --font-display:  "Playfair Display", "Fraunces", "Erstoria", Georgia, serif;
-  --font-body:     "Sarabun", "Gotham", system-ui, -apple-system, sans-serif;
+  --font-body:     "Inter Variable", "Inter", "Gotham", system-ui, -apple-system, sans-serif;
   --font-script:   "Playfair Display", "Corinthia", cursive;
 
   /* ----------------- Escala tipográfica (modular 1.250) ----------------- */
