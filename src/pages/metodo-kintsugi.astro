@@ -123,11 +123,11 @@ const fases = [
         </section>
         <Section tone={i % 2 === 0 ? "paper" : "paper-soft"} spacing="default">
           <div class="grid lg:grid-cols-[0.45fr_1fr] gap-10 lg:gap-16 max-w-5xl mx-auto">
-            <div class="bg-[var(--color-gold)]/95 text-[var(--color-ink)] p-7 rounded-[var(--radius-sm)] shadow-[var(--shadow-card)] self-start">
-              <p class="font-[family-name:var(--font-display)] italic text-[var(--color-paper)] text-base">
+            <div class="bg-[var(--color-cream)]/40 border-l-4 border-[var(--color-gold)] p-7 lg:p-8 self-start">
+              <p class="text-[0.7rem] tracking-[0.18em] uppercase text-[var(--color-gold-dark)] font-medium">
                 El Resultado
               </p>
-              <p class="mt-3 text-sm text-[var(--color-paper)]/95 leading-relaxed">
+              <p class="mt-3 font-[family-name:var(--font-display)] italic text-[clamp(1.05rem,1.6vw,1.25rem)] text-[var(--color-ink)] leading-snug">
                 {f.resultado}
               </p>
             </div>

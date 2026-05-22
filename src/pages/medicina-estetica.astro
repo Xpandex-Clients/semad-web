@@ -146,25 +146,37 @@ const programas = [
         </h2>
         <div class="mt-4 w-[100px] h-[2px] bg-[var(--color-gold)]"></div>
       </div>
-      <dl class="space-y-0 list-none p-0 max-w-5xl">
+      <ul class="grid md:grid-cols-2 gap-5 list-none p-0 max-w-6xl">
         {[
-          { name: "Peelings Médicos", body: "Renovación celular profunda para manchas, textura irregular y luminosidad. Desde peelings suaves a medios según necesidad." },
-          { name: "Mesoterapia Facial", body: "Microinyecciones de vitaminas, ácido hialurónico y antioxidantes para hidratación profunda y vitalidad." },
-          { name: "Láser / IPL", body: "Eliminación de manchas, rojeces, vasos y textura. Tecnología de última generación para resultados precisos." },
-          { name: "Microneedling Médico", body: "Estimulación de colágeno mediante microperforaciones controladas. Combinado con PRP o factores de crecimiento para potenciar resultados." },
-          { name: "Ácido Hialurónico", body: "Devuelve volumen y armonía respetando la proporción áurea. Rellenos faciales, perfilado de labios y rejuvenecimiento de manos." },
-          { name: "Neuromoduladores", body: "Suavizan arrugas dinámicas conservando expresividad. Aplicación de precisión por la doctora." },
-          { name: "Hilos Tensores PDO", body: "Lifting natural sin cirugía. Tensado y bioestimulación combinados para óvalo y línea mandibular." },
-          { name: "Bioestimuladores de Colágeno", body: "Sculptra®, Radiesse® y derivados de PLA. Estimulan colágeno propio para firmeza y calidad de piel a medio plazo." },
-        ].map((t) => (
-          <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 md:gap-10 py-5 border-t border-[var(--color-paper-warm)]">
-            <dt class="font-[family-name:var(--font-display)] italic text-[var(--color-ink)] text-lg leading-tight">
+          { eyebrow: "Renovación celular", name: "Peelings Médicos", body: "Renovación celular profunda para manchas, textura irregular y luminosidad. Desde peelings suaves a medios según necesidad." },
+          { eyebrow: "Hidratación profunda", name: "Mesoterapia Facial", body: "Microinyecciones de vitaminas, ácido hialurónico y antioxidantes para hidratación profunda y vitalidad." },
+          { eyebrow: "Precisión tecnológica", name: "Láser / IPL", body: "Eliminación de manchas, rojeces, vasos y textura. Tecnología de última generación para resultados precisos." },
+          { eyebrow: "Estímulo de colágeno", name: "Microneedling Médico", body: "Estimulación de colágeno mediante microperforaciones controladas. Combinado con PRP o factores de crecimiento para potenciar resultados." },
+          { eyebrow: "Volumen y armonía", name: "Ácido Hialurónico", body: "Devuelve volumen y armonía respetando la proporción áurea. Rellenos faciales, perfilado de labios y rejuvenecimiento de manos." },
+          { eyebrow: "Expresividad preservada", name: "Neuromoduladores", body: "Suavizan arrugas dinámicas conservando expresividad. Aplicación de precisión por la doctora." },
+          { eyebrow: "Lifting sin cirugía", name: "Hilos Tensores PDO", body: "Lifting natural sin cirugía. Tensado y bioestimulación combinados para óvalo y línea mandibular." },
+          { eyebrow: "Firmeza a medio plazo", name: "Bioestimuladores de Colágeno", body: "Sculptra®, Radiesse® y derivados de PLA. Estimulan colágeno propio para firmeza y calidad de piel a medio plazo." },
+        ].map((t, i) => (
+          <li
+            class:list={[
+              "border-l-4 border-[var(--color-gold)] p-7 lg:p-8",
+              i % 2 === 0
+                ? "bg-[var(--color-paper)]"
+                : "bg-[var(--color-cream)]/35",
+            ]}
+          >
+            <p class="text-[0.7rem] tracking-[0.18em] uppercase text-[var(--color-gold-dark)] font-medium">
+              {t.eyebrow}
+            </p>
+            <h3 class="mt-3 font-[family-name:var(--font-display)] italic text-[clamp(1.35rem,2.2vw,1.75rem)] text-[var(--color-ink)] leading-tight">
               {t.name}
-            </dt>
-            <dd class="text-sm text-[var(--color-mute)] leading-relaxed">{t.body}</dd>
-          </div>
+            </h3>
+            <p class="mt-3 text-[0.95rem] text-[var(--color-mute)] leading-relaxed">
+              {t.body}
+            </p>
+          </li>
         ))}
-      </dl>
+      </ul>
     </Section>
 
     <!-- TRATAMIENTOS CORPORAL (Figma 10-11) ========================= -->
