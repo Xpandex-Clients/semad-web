@@ -27,12 +27,13 @@ const {
   class: className = "",
 } = Astro.props;
 
+// Logo SVG reconstruido desde las 31 path geometries del nodo 221:782 del Figma
+// (sans-serif geométrica + diamante en la C + tagline AESTHETIC ANTI-AGING CLINIC).
+// Color base = negro #000. tone=white usa la variante invertida.
 const src =
-  tone === "white" ? "/brand/cemad-logo-white.png" : "/brand/cemad-logo.png";
+  tone === "white" ? "/brand/cemad-logo-white.svg" : "/brand/cemad-logo.svg";
 
-// Para tone="ink" aplicamos brightness(0) sobre la versión gold.
-const filter =
-  tone === "ink" ? "filter:brightness(0)" : undefined;
+const filter = undefined;
 
 const styleAttr = [
   `width:${width}px`,
