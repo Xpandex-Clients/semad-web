@@ -41,9 +41,14 @@
    * Script:   Playfair Display Italic peso 300 (Figma usa Playfair italic para palabras
    *           emblema como "Restauración", no Corinthia). Corinthia queda como fallback.
    * --------------------------------------------- */
-  --font-display:  "Playfair Display", "Fraunces", "Erstoria", Georgia, serif;
-  --font-body:     "Inter Variable", "Inter", "Gotham", system-ui, -apple-system, sans-serif;
-  --font-script:   "Playfair Display", "Corinthia", cursive;
+  /* Tipografía exacta del Figma (CLINICA CEMAD).
+     Display: Playfair (Adobe Fonts); usamos Playfair Display de Google como
+              sustituto técnicamente idéntico en métricas.
+     Body:    Gotham (comercial, no libre). Figma lo sustituye automáticamente
+              con Sarabun al renderizar — usamos Sarabun para igualar visualmente. */
+  --font-display:  "Playfair Display", "Playfair", Georgia, serif;
+  --font-body:     "Sarabun", "Gotham", system-ui, -apple-system, sans-serif;
+  --font-script:   "Playfair Display", cursive;
 
   /* ----------------- Escala tipográfica (modular 1.250) ----------------- */
   --text-xs:   0.75rem;   /* 12 */

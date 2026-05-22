@@ -60,3 +60,5 @@ client-input/figma/assets/
 # Secretos sueltos
 .figma-token
 **/figma-token*
+Clinica CEMAD*.fig
+pnpm-lock.yaml

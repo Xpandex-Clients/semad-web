@@ -1,100 +1,52 @@
 ---
 /**
- * Logo CEMAD — versiones (manual de identidad p. 27).
+ * Logo CEMAD — fuente única de verdad.
  *
- * Por ahora usa PNGs interim extraídos del PDF. Cuando la cliente
- * aporte SVG vectorial, sustituir por <svg> inline (ver TODO en
- * design-system.md y CONTEXT-project.md).
+ * Renderizado vectorial del frame `logo` (node 7:4) del Figma CLINICA CEMAD.
+ * 465×138 con monogram CEMAD® serif + tagline "AESTHETIC ANTI-AGING CLINIC".
+ *
+ * Color por defecto: dorado de marca #BD9B5F.
+ * tone="white" invierte a blanco (mediante filter) para fondos oscuros.
  */
-
-type Variant =
-  | "principal"           // A: logotipo principal con tagline (lockup horizontal)
-  | "vertical"            // versión vertical (legacy interim)
-  | "isotipo"             // H: sólo isotipo (monograma circular)
-  | "sello"               // sello redondo decorativo (legacy interim)
-  | "lockup-isotipo";     // F: isotipo + logotipo horizontal (manual p. 27 var. F)
 type Tone = "color" | "white" | "ink";
 
 interface Props {
-  variant?: Variant;
   tone?: Tone;
-  /** Anchos mínimos del manual (p.28): principal 140px, vertical 165px, isotipo 35px. */
+  /** Ancho en px (default 150). El alto se calcula proporcionalmente. */
   width?: number;
-  /** Hace que el ancho sea fluido hasta el max width. */
   fluid?: boolean;
-  /** Texto del alt accesible (default: nombre completo). */
   alt?: string;
   class?: string;
 }
 
 const {
-  variant = "principal",
   tone = "color",
-  width,
+  width = 150,
   fluid = false,
   alt = "CEMAD — Aesthetic Anti-Aging Clinic",
   class: className = "",
 } = Astro.props;
 
-// El PNG `cemad-logo-principal.png` lleva el lockup blanco sobre placa dorada
-// (versión sobre fondo dorado del manual). Para uso sobre fondos claros/oscuros
-// elegimos directamente el archivo correcto en lugar de aplicar filtros sobre
-// el PNG con fondo de color.
-const principalByTone: Record<Tone, string> = {
-  color: "/brand/cemad-logo-gold.png",   // logotipo dorado sobre transparente
-  white: "/brand/cemad-logo-white.png",  // logotipo blanco sobre transparente
-  ink: "/brand/cemad-logo-ink.png",      // logotipo tinta sobre transparente
-};
+const src =
+  tone === "white" ? "/brand/cemad-logo-white.png" : "/brand/cemad-logo.png";
 
-const fileMap: Record<Variant, string> =
-  variant === "principal"
-    ? {
-        principal: principalByTone[tone],
-        vertical: "/brand/cemad-logo-vertical.png",
-        isotipo: "/brand/cemad-isotipo.png",
-        sello: "/brand/cemad-isotipo-sello.png",
-        "lockup-isotipo": "/brand/cemad-lockup-isotipo.png",
-      }
-    : {
-        principal: "/brand/cemad-logo-gold.png",
-        vertical: "/brand/cemad-logo-vertical.png",
-        isotipo: "/brand/cemad-isotipo.png",
-        sello: "/brand/cemad-isotipo-sello.png",
-        "lockup-isotipo": "/brand/cemad-lockup-isotipo.png",
-      };
-
-const minWidth: Record<Variant, number> = {
-  principal: 140,
-  vertical: 165,
-  isotipo: 35,
-  sello: 80,
-  "lockup-isotipo": 180,
-};
-
-const w = width ?? minWidth[variant] * 1.6;
-
-// Para los assets sobre transparente (isotipo, sello, lockup-isotipo) aplicamos
-// filter para tonos invertidos. El principal usa archivo por tono.
-const toneFilter: Record<Tone, string | undefined> = {
-  color: undefined,
-  white: variant === "principal" ? undefined : "brightness(0) invert(1)",
-  ink: variant === "principal" ? undefined : "brightness(0)",
-};
+// Para tone="ink" aplicamos brightness(0) sobre la versión gold.
+const filter =
+  tone === "ink" ? "filter:brightness(0)" : undefined;
 
 const styleAttr = [
-  `width:${w}px`,
+  `width:${width}px`,
   fluid ? "max-width:100%;height:auto" : "",
-  toneFilter[tone] ? `filter:${toneFilter[tone]}` : "",
+  filter,
 ]
   .filter(Boolean)
   .join(";");
 ---
 
 <img
-  src={fileMap[variant]}
+  src={src}
   alt={alt}
-  width={w}
-  height="auto"
+  width={width}
   loading="eager"
   decoding="async"
   style={styleAttr}

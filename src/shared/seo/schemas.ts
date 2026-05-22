@@ -57,7 +57,7 @@ export function medicalClinicSchema() {
       longitude: siteConfig.address.geo.lng,
     },
     image: `${SITE}/og/default.jpg`,
-    logo: `${SITE}/brand/cemad-logo-gold.png`,
+    logo: `${SITE}/brand/cemad-logo.png`,
     priceRange: "€€€",
     currenciesAccepted: "EUR",
     medicalSpecialty: ["Dermatology", "PlasticSurgery"],

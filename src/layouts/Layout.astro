@@ -1,6 +1,10 @@
 ---
 import "../shared/styles/globals.css";
-import "@fontsource-variable/inter/index.css";
+// Body: Sarabun (Figma render real — sustituye a Gotham que es comercial)
+import "@fontsource/sarabun/300.css";
+import "@fontsource/sarabun/400.css";
+import "@fontsource/sarabun/500.css";
+import "@fontsource/sarabun/700.css";
 import "@fontsource/playfair-display/400.css";
 import "@fontsource/playfair-display/500.css";
 import "@fontsource/playfair-display/600.css";
@@ -120,32 +124,36 @@ const twitterHandle: string | null = null;
       }
       .cemad-splash[hidden] { display: none; }
       .cemad-splash__mark {
-        width: 96px;
-        height: 96px;
+        width: clamp(220px, 28vw, 360px);
+        height: auto;
         opacity: 0;
         transform: scale(0.96);
-        animation: splash-in 280ms var(--ease-out) forwards;
+        animation: splash-in 320ms var(--ease-out) forwards;
       }
       @keyframes splash-in {
         to { opacity: 1; transform: scale(1); }
       }
-      .cemad-splash__ring {
+      /* Spinner sutil: barra dorada al pie del wordmark */
+      .cemad-splash__bar {
         position: absolute;
-        width: 140px;
-        height: 140px;
-        border-radius: 50%;
-        border: 1px solid color-mix(in oklch, var(--color-gold) 65%, transparent);
-        clip-path: inset(0 50% 0 0);
-        animation: splash-ring 700ms 200ms var(--ease-out) forwards;
+        bottom: calc(50% - clamp(110px, 14vw, 180px));
+        width: clamp(80px, 10vw, 140px);
+        height: 1px;
+        background: color-mix(in oklch, var(--color-gold) 70%, transparent);
         opacity: 0;
+        transform-origin: left center;
+        transform: scaleX(0);
+        animation: splash-bar 900ms 220ms var(--ease-in-out) forwards;
       }
-      @keyframes splash-ring {
-        from { clip-path: inset(0 50% 0 0); opacity: 0; transform: rotate(0deg); }
-        to   { clip-path: inset(0 0 0 0);  opacity: 1; transform: rotate(360deg); }
+      @keyframes splash-bar {
+        0%   { opacity: 0; transform: scaleX(0); }
+        40%  { opacity: 1; transform: scaleX(1); transform-origin: left center; }
+        60%  { opacity: 1; transform: scaleX(1); transform-origin: right center; }
+        100% { opacity: 0; transform: scaleX(0); transform-origin: right center; }
       }
       @media (prefers-reduced-motion: reduce) {
         .cemad-splash__mark { animation: none; opacity: 1; transform: none; }
-        .cemad-splash__ring { display: none; }
+        .cemad-splash__bar { display: none; }
       }
     </style>
 
@@ -155,14 +163,14 @@ const twitterHandle: string | null = null;
     <!-- Splash screen first-paint. JS lo desmonta cuando el doc está listo. -->
     {!bare && (
       <div id="cemad-splash" class="cemad-splash" aria-hidden="true">
-        <span class="cemad-splash__ring"></span>
         <img
-          src="/brand/cemad-isotipo.png"
+          src="/brand/cemad-logo.png"
           alt=""
-          width="96"
-          height="96"
+          width="465"
+          height="138"
           class="cemad-splash__mark"
         />
+        <span class="cemad-splash__bar" aria-hidden="true"></span>
       </div>
     )}
 
