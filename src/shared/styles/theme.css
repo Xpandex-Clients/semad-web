@@ -46,8 +46,12 @@
               sustituto técnicamente idéntico en métricas.
      Body:    Gotham (comercial, no libre). Figma lo sustituye automáticamente
               con Sarabun al renderizar — usamos Sarabun para igualar visualmente. */
+  /* Tipografía Figma:
+     - Display: Playfair (404/300 — Playfair Display sustituto)
+     - Body:    Gotham (proprietario Hoefler & Co). Mona Sans es la sustituta
+                libre con métricas/proporciones equivalentes. */
   --font-display:  "Playfair Display", "Playfair", Georgia, serif;
-  --font-body:     "Sarabun", "Gotham", system-ui, -apple-system, sans-serif;
+  --font-body:     "Mona Sans Variable", "Mona Sans", "Gotham", system-ui, -apple-system, sans-serif;
   --font-script:   "Playfair Display", cursive;
 
   /* ----------------- Escala tipográfica (modular 1.250) ----------------- */
