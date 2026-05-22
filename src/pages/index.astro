@@ -116,34 +116,34 @@ const services = [
 
   <main id="main">
     <!-- HERO full-bleed (Figma 160:576). El header sticky se monta sobre la
-         imagen gracias al margen negativo. Aspect ratio respeta el manual del
-         Figma (~1440/750) para mostrar la cara completa de la modelo. -->
-    <section class="relative isolate -mt-[88px] overflow-hidden bg-[var(--color-paper)]">
-      <div class="relative aspect-[3/4] sm:aspect-[4/3] lg:aspect-[2/1] xl:aspect-[16/7.4] w-full overflow-hidden">
-        <Picture
-          src={heroPortrait}
-          alt="Retrato editorial CEMAD — mujer iluminada por un haz dorado"
-          widths={[768, 1024, 1440, 1920]}
-          sizes="100vw"
-          formats={["avif", "webp"]}
-          quality={86}
-          loading="eager"
-          fetchpriority="high"
-          class="absolute inset-0 h-full w-full object-cover object-[center_15%]"
-        />
-      </div>
-      <!-- Título overlay sobre fondo paper (debajo del image bleed) -->
-      <div class="mx-auto max-w-[var(--container-wide)] px-[clamp(1rem,4vw,2rem)] pt-8 pb-2">
-        <h1 class="font-[family-name:var(--font-display)] font-light leading-[0.95] text-[var(--color-ink)]">
-          <span class="block text-[clamp(1.75rem,3.6vw,3rem)]">
-            No transformamos tu imagen.
-          </span>
-          <em class="block not-italic italic text-[clamp(3.5rem,8.5vw,7.5rem)] font-normal mt-1 -indent-[0.1em]">
-            <span class="inline-block w-[clamp(2rem,4vw,3rem)] h-[2px] bg-[var(--color-gold)] align-middle mr-3 mb-3"></span>La revelamos.
-          </em>
-        </h1>
-      </div>
+         imagen vía margin-top negativo equivalente a la altura del header. -->
+    <section
+      class="hero-bleed relative isolate overflow-hidden bg-[var(--color-paper)] h-[min(95vh,720px)] sm:h-[min(85vh,780px)] lg:h-[min(90vh,820px)]"
+      style="margin-top:-88px"
+    >
+      <Picture
+        src={heroPortrait}
+        alt="Retrato editorial CEMAD — mujer iluminada por un haz dorado"
+        widths={[768, 1024, 1440, 1920]}
+        sizes="100vw"
+        formats={["avif", "webp"]}
+        quality={86}
+        loading="eager"
+        fetchpriority="high"
+        class="absolute inset-0 h-full w-full object-cover object-[center_18%]"
+      />
     </section>
+    <!-- Título grande bajo el bleed sobre fondo paper -->
+    <div class="mx-auto max-w-[var(--container-wide)] px-[clamp(1rem,4vw,2rem)] pt-8 pb-2">
+      <h1 class="font-[family-name:var(--font-display)] font-light leading-[0.95] text-[var(--color-ink)]">
+        <span class="block text-[clamp(1.75rem,3.6vw,3rem)]">
+          No transformamos tu imagen.
+        </span>
+        <em class="block not-italic italic text-[clamp(3.5rem,8.5vw,7.5rem)] font-normal mt-1 -indent-[0.1em]">
+          <span class="inline-block w-[clamp(3rem,5.5vw,5rem)] h-[2px] bg-[var(--color-gold)] align-middle mr-3 mb-3"></span>La revelamos.
+        </em>
+      </h1>
+    </div>
 
     <!-- Hero copy block (Figma 02): 2-col split bajo el hero -->
     <Section tone="paper" spacing="default">
