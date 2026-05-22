@@ -102,6 +102,49 @@ const pilares = [
           <p class="text-[var(--color-mute)] leading-relaxed text-[1.0625rem] max-w-[68ch] mx-auto">
             {p.body}
           </p>
+          {p.n === 2 && (
+            <Fragment>
+              <!-- Arsenal terapéutico 2x2 (Figma 06-07) -->
+              <ul class="mt-12 grid md:grid-cols-2 gap-5 list-none p-0 max-w-5xl mx-auto">
+                <li class="bg-[var(--color-paper)] p-7 rounded-[var(--radius-sm)] border-l-4 border-[var(--color-gold)]">
+                  <p class="font-[family-name:var(--font-display)] italic text-[var(--color-gold-dark)] text-sm uppercase tracking-[0.18em]">Mesoterapia</p>
+                  <p class="mt-2 font-[family-name:var(--font-display)] text-[1.25rem] text-[var(--color-ink)] leading-tight">Activos directos al folículo</p>
+                  <p class="mt-3 text-sm text-[var(--color-mute)] leading-relaxed">Microinyecciones de vitaminas, aminoácidos y factores tricoespecíficos para nutrir el cuero cabelludo y estimular el ciclo capilar.</p>
+                </li>
+                <li class="bg-[var(--color-cream)]/35 p-7 rounded-[var(--radius-sm)] border-l-4 border-[var(--color-gold)]">
+                  <p class="font-[family-name:var(--font-display)] italic text-[var(--color-gold-dark)] text-sm uppercase tracking-[0.18em]">PRP capilar</p>
+                  <p class="mt-2 font-[family-name:var(--font-display)] text-[1.25rem] text-[var(--color-ink)] leading-tight">Plasma rico en plaquetas</p>
+                  <p class="mt-3 text-sm text-[var(--color-mute)] leading-relaxed">Bioestimulación con tu propio plasma. Frena la caída y reactiva folículos miniaturizados sin sustancias externas.</p>
+                </li>
+                <li class="bg-[var(--color-cream)]/35 p-7 rounded-[var(--radius-sm)] border-l-4 border-[var(--color-gold)]">
+                  <p class="font-[family-name:var(--font-display)] italic text-[var(--color-gold-dark)] text-sm uppercase tracking-[0.18em]">Farmacológicos</p>
+                  <p class="mt-2 font-[family-name:var(--font-display)] text-[1.25rem] text-[var(--color-ink)] leading-tight">Protocolos dirigidos</p>
+                  <p class="mt-3 text-sm text-[var(--color-mute)] leading-relaxed">Minoxidil, antiandrógenos, finasterida tópica y otros activos según diagnóstico. Pauta médica supervisada.</p>
+                </li>
+                <li class="bg-[var(--color-paper)] p-7 rounded-[var(--radius-sm)] border-l-4 border-[var(--color-gold)]">
+                  <p class="font-[family-name:var(--font-display)] italic text-[var(--color-gold-dark)] text-sm uppercase tracking-[0.18em]">Bioestimulación</p>
+                  <p class="mt-2 font-[family-name:var(--font-display)] text-[1.25rem] text-[var(--color-ink)] leading-tight">Factores de crecimiento</p>
+                  <p class="mt-3 text-sm text-[var(--color-mute)] leading-relaxed">Exosomas, péptidos biomiméticos y bioactivadores capilares para regeneración profunda.</p>
+                </li>
+              </ul>
+              <!-- Programas específicos (Figma 08) -->
+              <dl class="mt-14 max-w-5xl mx-auto space-y-0">
+                {[
+                  { name: "Programa Dra. AbiCapilar (Mujeres)", body: "Diseñado para alopecia femenina por causa hormonal o estrés. Combina diagnóstico hormonal completo + mesoterapia personalizada + acompañamiento durante 12 meses." },
+                  { name: "Programa Control Androgenético", body: "Para alopecia androgenética en hombres y mujeres. Protocolo farmacológico + bioestimulación + revisión trimestral." },
+                  { name: "Programa Reparación Capilar", body: "Para alopecia areata, cicatriciales y por tracción. Tratamiento médico + plan de regeneración + apoyo emocional cuando hace falta." },
+                  { name: "Programa Mantenimiento", body: "Postinjerto o post-tratamiento. Revisión cada 3-6 meses + bioestimulación de refuerzo + ajustes médicos según evolución." },
+                ].map((prog) => (
+                  <div class="grid md:grid-cols-[280px_1fr] gap-4 md:gap-10 py-6 border-t border-[var(--color-paper-warm)]">
+                    <dt class="font-[family-name:var(--font-display)] italic text-[var(--color-ink)] text-[1.05rem] leading-tight">
+                      {prog.name}
+                    </dt>
+                    <dd class="text-sm text-[var(--color-mute)] leading-relaxed">{prog.body}</dd>
+                  </div>
+                ))}
+              </dl>
+            </Fragment>
+          )}
         </Section>
       </Fragment>
     ))}
