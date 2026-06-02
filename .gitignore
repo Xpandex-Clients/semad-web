@@ -61,4 +61,6 @@ client-input/figma/assets/
 .figma-token
 **/figma-token*
 Clinica CEMAD*.fig
+client-input/figma/Clinica-CEMAD.fig
+client-input/figma/captures/
 pnpm-lock.yaml
