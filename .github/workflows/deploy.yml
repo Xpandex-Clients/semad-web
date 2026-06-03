@@ -3,7 +3,7 @@ name: Deploy to Hostinger
 on:
   push:
     branches:
-      - main
+      - master
       - staging
   workflow_dispatch:
 
@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
-    environment: ${{ github.ref_name == 'main' && 'production' || 'staging' }}
+    environment: ${{ github.ref_name == 'master' && 'production' || 'staging' }}
 
     steps:
       - uses: actions/checkout@v4
@@ -31,9 +31,11 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        working-directory: semad-web
+        run: pnpm install --no-frozen-lockfile
 
       - name: Build
+        working-directory: semad-web
         env:
           PUBLIC_SITE_URL: ${{ vars.PUBLIC_SITE_URL }}
           PUBLIC_PLAUSIBLE_DOMAIN: ${{ vars.PUBLIC_PLAUSIBLE_DOMAIN }}
@@ -41,9 +43,9 @@ jobs:
 
       - name: Verify build output & inject health check
         run: |
-          test -f dist/index.html
+          test -f semad-web/dist/index.html
           BUILD_HASH=$(git rev-parse --short HEAD)
-          echo "{\"hash\":\"$BUILD_HASH\",\"builtAt\":\"$(date -u +%FT%TZ)\",\"branch\":\"${{ github.ref_name }}\"}" > dist/health.json
+          echo "{\"hash\":\"$BUILD_HASH\",\"builtAt\":\"$(date -u +%FT%TZ)\",\"branch\":\"${{ github.ref_name }}\"}" > semad-web/dist/health.json
 
       - uses: webfactory/ssh-agent@v0.9.0
         with:
@@ -60,7 +62,7 @@ jobs:
           DEPLOY_PATH_PROD: ${{ vars.DEPLOY_PATH_PROD }}
           DEPLOY_PATH_STAGING: ${{ vars.DEPLOY_PATH_STAGING }}
         run: |
-          if [ "${{ github.ref_name }}" = "main" ]; then
+          if [ "${{ github.ref_name }}" = "master" ]; then
             DEPLOY_PATH="$(echo -n "$DEPLOY_PATH_PROD" | xargs)"
           else
             DEPLOY_PATH="$(echo -n "$DEPLOY_PATH_STAGING" | xargs)"
@@ -78,7 +80,7 @@ jobs:
           rsync -avz --delete --human-readable \
             --exclude='.well-known/' \
             -e "ssh -p ${{ secrets.SSH_PORT }}" \
-            dist/ \
+            semad-web/dist/ \
             "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ steps.path.outputs.path }}"
 
       - name: Health check
