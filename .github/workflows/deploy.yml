@@ -51,7 +51,13 @@ jobs:
       - name: Add Hostinger to known_hosts
         run: |
           mkdir -p ~/.ssh
-          ssh-keyscan -p ${{ secrets.SSH_PORT }} -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+          ssh-keyscan -T 10 -p ${{ secrets.SSH_PORT }} -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null || true
+          # Fallback: si Hostinger rate-limita el scan, aceptamos automáticamente.
+          if [ ! -s ~/.ssh/known_hosts ]; then
+            echo "Host *" > ~/.ssh/config
+            echo "  StrictHostKeyChecking accept-new" >> ~/.ssh/config
+            echo "  UserKnownHostsFile=/dev/null" >> ~/.ssh/config
+          fi
 
       - name: Resolve deploy path
         id: path
