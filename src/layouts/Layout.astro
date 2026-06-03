@@ -44,7 +44,6 @@ const {
 const canonical = new URL(Astro.url.pathname, siteConfig.url).toString();
 const ogImageUrl = ogImage ?? `${siteConfig.url}/og/default.jpg`;
 const ogImageAltText = ogImageAlt ?? `${siteConfig.name} — ${siteConfig.tagline}`;
-const twitterHandle: string | null = null;
 ---
 
 <!doctype html>
@@ -77,7 +76,6 @@ const twitterHandle: string | null = null;
 
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
-    {twitterHandle && <meta name="twitter:site" content={twitterHandle} />}
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />

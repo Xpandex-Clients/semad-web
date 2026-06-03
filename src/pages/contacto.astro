@@ -117,8 +117,9 @@ const especialidades = [
 
         <form
           class="mt-10 grid gap-5"
-          action="#"
+          action={`mailto:${siteConfig.contact.email}?subject=Solicitud%20de%20cita%20CEMAD`}
           method="post"
+          enctype="text/plain"
           aria-label="Reservar cita en CEMAD"
         >
           <div class="grid sm:grid-cols-2 gap-5">
