@@ -22,53 +22,55 @@ const isActive = (href: string) =>
     class="site-scroll-progress absolute inset-x-0 top-0 h-[2px] origin-left bg-[var(--color-gold)]/70 scale-x-0"
   ></span>
 
-  <div class="mx-auto max-w-[var(--container-wide)] px-[clamp(1rem,4vw,2rem)] py-5 flex items-center gap-[clamp(1.25rem,3vw,2.5rem)]">
-    <!-- MENU trigger -->
-    <button
-      type="button"
-      class="menu-trigger inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.28em] font-light focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-gold-dark)] rounded-[var(--radius-xs)] px-1 py-1"
-      aria-haspopup="dialog"
-      aria-controls="site-menu-overlay"
-      aria-expanded="false"
-      data-menu-open
-    >
-      <span class="size-[16px] inline-flex flex-col justify-between" aria-hidden="true">
-        <span class="block w-full h-px bg-current"></span>
-        <span class="block w-full h-px bg-current"></span>
-      </span>
-      Menu
-    </button>
+  <div class="relative mx-auto max-w-[var(--container-wide)] px-[clamp(1rem,4vw,2rem)]">
+    <!-- Fila superior: MENU + phones (arriba de la línea) -->
+    <div class="flex items-center justify-between py-7">
+      <button
+        type="button"
+        class="menu-trigger inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.28em] font-light focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-gold-dark)] rounded-[var(--radius-xs)] px-1 py-1"
+        aria-haspopup="dialog"
+        aria-controls="site-menu-overlay"
+        aria-expanded="false"
+        data-menu-open
+      >
+        <span class="size-[16px] inline-flex flex-col justify-between" aria-hidden="true">
+          <span class="block w-full h-px bg-current"></span>
+          <span class="block w-full h-px bg-current"></span>
+        </span>
+        Menu
+      </button>
 
-    <!-- Divider left (línea entrecortada que llega al logo) -->
-    <span aria-hidden="true" class="hairline flex-1 h-px"></span>
+      <div class="hidden md:flex items-center gap-[clamp(1rem,2vw,1.75rem)] text-[11px] uppercase tracking-[0.18em] font-light">
+        <a
+          href={`tel:${siteConfig.contact.phoneSecondary}`}
+          class="hover:text-[var(--color-gold-dark)] whitespace-nowrap"
+        >
+          {siteConfig.contact.phoneSecondaryDisplay}
+        </a>
+        <a
+          href={`tel:${siteConfig.contact.phone}`}
+          class="hover:text-[var(--color-gold-dark)] whitespace-nowrap"
+        >
+          {siteConfig.contact.phoneDisplay}
+        </a>
+      </div>
+    </div>
 
-    <!-- Wordmark central -->
+    <!-- Línea divisoria al fondo del navbar, interrumpida alrededor del logo -->
+    <div aria-hidden="true" class="absolute inset-x-[clamp(1rem,4vw,2rem)] bottom-0 flex items-center">
+      <span class="hairline flex-1 h-px"></span>
+      <span class="w-[clamp(170px,16vw,210px)] shrink-0"></span>
+      <span class="hairline flex-1 h-px"></span>
+    </div>
+
+    <!-- Logo elevado sobre la línea -->
     <a
       href="/"
-      class="brand-mark shrink-0 inline-flex items-center focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-gold-dark)] rounded-[var(--radius-xs)]"
+      class="brand-mark absolute left-1/2 bottom-[10px] -translate-x-1/2 inline-flex items-center focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-gold-dark)] rounded-[var(--radius-xs)]"
       aria-label={`${siteConfig.name} — inicio`}
     >
       <Logo width={140} />
     </a>
-
-    <!-- Divider right -->
-    <span aria-hidden="true" class="hairline flex-1 h-px"></span>
-
-    <!-- Phones (sin botón) -->
-    <div class="hidden md:flex items-center gap-[clamp(1rem,2vw,1.75rem)] text-[11px] uppercase tracking-[0.18em] font-light">
-      <a
-        href={`tel:${siteConfig.contact.phoneSecondary}`}
-        class="hover:text-[var(--color-gold-dark)] whitespace-nowrap"
-      >
-        {siteConfig.contact.phoneSecondaryDisplay}
-      </a>
-      <a
-        href={`tel:${siteConfig.contact.phone}`}
-        class="hover:text-[var(--color-gold-dark)] whitespace-nowrap"
-      >
-        {siteConfig.contact.phoneDisplay}
-      </a>
-    </div>
   </div>
 </header>
 
@@ -137,38 +139,21 @@ const isActive = (href: string) =>
 </div>
 
 <style>
-  /* Transparente sobre hero, texto blanco. La página de inicio (que tiene
-     hero con bg image dark/medium) carga este estado por defecto. */
+  /* Navbar: transparente sobre hero, texto y líneas siempre ink (negro).
+     Tras scroll, fondo paper sólido. */
   .site-header {
-    color: var(--color-paper);
+    color: var(--color-ink);
     background-color: transparent;
   }
-  /* Tras scroll: fondo paper sólido + texto ink + regla dorada inferior. */
   .site-header[data-bg="solid"] {
-    color: var(--color-ink);
-    background-color: color-mix(in oklch, var(--color-paper) 96%, transparent);
-    border-bottom: 1px solid color-mix(in oklch, var(--color-gold) 30%, transparent);
-    box-shadow: 0 2px 0 0 color-mix(in oklch, var(--color-gold) 14%, transparent),
-                0 8px 24px -16px color-mix(in oklch, var(--color-ink) 24%, transparent);
+    background-color: color-mix(in oklch, var(--color-paper) 62%, transparent);
+    backdrop-filter: blur(10px) saturate(140%);
+    -webkit-backdrop-filter: blur(10px) saturate(140%);
+    box-shadow: 0 8px 24px -16px color-mix(in oklch, var(--color-ink) 18%, transparent);
   }
-  /* En páginas interiores con hero claro, opt-in mediante data-tone="ink". */
-  .site-header[data-tone="ink"] { color: var(--color-ink); }
-  /* El logo dorado se mantiene; el resto del texto hereda color via currentColor. */
-  .site-header .menu-trigger,
-  .site-header [class*="text-[11px]"],
-  .site-header [class*="uppercase"] {
-    color: inherit;
-  }
-  /* Hairline divider entre MENU↔logo↔teléfonos.
-     Sobre hero (transparente): currentColor a 60% opacidad.
-     Sobre fondo paper: ink a 22%. */
+  /* Hairline divider — siempre negro sólido. */
   .site-header .hairline {
-    background: currentColor;
-    opacity: 0.45;
-  }
-  .site-header[data-bg="solid"] .hairline {
     background: var(--color-ink);
-    opacity: 0.18;
   }
   .site-scroll-progress {
     transform: scaleX(var(--scroll-progress, 0));

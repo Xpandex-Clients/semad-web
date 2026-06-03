@@ -44,7 +44,7 @@ const graph = jsonLdGraph(
     <!-- DRA. ABIGAIL (Figma invierte: texto izq, foto der) =========== -->
     <Section tone="paper" spacing="loose">
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start lg:[&>*:first-child]:order-2">
-        <div class="aspect-[3/4] overflow-hidden rounded-[var(--radius-sm)] shadow-[var(--shadow-card)]">
+        <div class="aspect-[3/4] overflow-hidden rounded-none shadow-[var(--shadow-card)]">
           <Picture
             src={doctora2}
             alt="Dra. Abigail Cevallos en consulta"
@@ -82,7 +82,7 @@ const graph = jsonLdGraph(
     <Section tone="paper-soft" spacing="loose">
       <div class="max-w-4xl mx-auto space-y-12">
         <div class="grid md:grid-cols-[0.6fr_1fr] gap-8 items-start">
-          <div class="aspect-[3/4] overflow-hidden rounded-[var(--radius-sm)]">
+          <div class="aspect-[3/4] overflow-hidden rounded-none">
             <Picture src={doctora3} alt="Dra. Abigail" widths={[400, 600]} sizes="(min-width: 768px) 320px, 92vw" formats={["avif","webp"]} quality={80} class="h-full w-full object-cover" />
           </div>
           <div>
@@ -127,7 +127,7 @@ const graph = jsonLdGraph(
               del paciente.
             </p>
           </div>
-          <div class="aspect-[3/4] overflow-hidden rounded-[var(--radius-sm)]">
+          <div class="aspect-[3/4] overflow-hidden rounded-none">
             <Picture src={doctora4} alt="Dra. Abigail consultando" widths={[400, 600]} sizes="(min-width: 768px) 320px, 92vw" formats={["avif","webp"]} quality={80} class="h-full w-full object-cover" />
           </div>
         </div>
@@ -137,7 +137,7 @@ const graph = jsonLdGraph(
     <!-- FACETA PERSONAL -->
     <Section tone="paper" spacing="loose">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
-        <div class="aspect-[3/4] overflow-hidden rounded-[var(--radius-sm)]">
+        <div class="aspect-[3/4] overflow-hidden rounded-none">
           <Picture src={doctoraFaceta} alt="Faceta personal de la doctora" widths={[480, 768, 1024]} sizes="(min-width: 1024px) 540px, 92vw" formats={["avif","webp"]} quality={80} class="h-full w-full object-cover" />
         </div>
         <div>
@@ -159,7 +159,7 @@ const graph = jsonLdGraph(
     <!-- EQUIPO -->
     <Section tone="paper-soft" spacing="loose">
       <div class="max-w-4xl mx-auto">
-        <div class="aspect-[21/9] overflow-hidden rounded-[var(--radius-sm)] mb-10">
+        <div class="aspect-[21/9] overflow-hidden rounded-none mb-10">
           <Picture src={equipoImg} alt="Equipo CEMAD" widths={[768, 1024, 1440]} sizes="(min-width: 1024px) 1024px, 92vw" formats={["avif","webp"]} quality={78} class="h-full w-full object-cover" />
         </div>
         <h2 class="font-[family-name:var(--font-display)] text-[clamp(2.5rem,5vw,4rem)]">

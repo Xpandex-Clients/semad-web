@@ -123,45 +123,48 @@ const services = [
   </Fragment>
 
   <main id="main">
-    <!-- HERO full-bleed (Figma 160:576). El header sticky se monta sobre la
-         imagen vía margin-top negativo equivalente a la altura del header. -->
+    <!-- HERO full-bleed (Figma 160:576). El título cruza el borde inferior del hero:
+         "No transformamos" queda sobre la imagen; "La revelamos" a caballo del borde. -->
     <section
-      class="hero-bleed relative isolate overflow-hidden bg-[var(--color-paper)] h-[min(95vh,720px)] sm:h-[min(85vh,780px)] lg:h-[min(90vh,820px)]"
+      class="hero-bleed relative isolate bg-[var(--color-paper)] pb-[clamp(1.75rem,4vw,3.6rem)]"
       style="margin-top:-88px"
     >
-      <Picture
-        src={heroPortrait}
-        alt="Retrato editorial CEMAD — mujer iluminada por un haz dorado"
-        widths={[768, 1024, 1440, 1920]}
-        sizes="100vw"
-        formats={["avif", "webp"]}
-        quality={86}
-        loading="eager"
-        fetchpriority="high"
-        class="absolute inset-0 h-full w-full object-cover object-[center_18%]"
-      />
+      <!-- Imagen recortada (overflow-hidden la contiene, sin clipar el título) -->
+      <div class="relative overflow-hidden h-[min(95vh,720px)] sm:h-[min(85vh,780px)] lg:h-[min(90vh,820px)]">
+        <Picture
+          src={heroPortrait}
+          alt="Retrato editorial CEMAD — mujer iluminada por un haz dorado"
+          widths={[768, 1024, 1440, 1920]}
+          sizes="100vw"
+          formats={["avif", "webp"]}
+          quality={86}
+          loading="eager"
+          fetchpriority="high"
+          class="absolute inset-0 h-full w-full object-cover object-[center_18%]"
+        />
+      </div>
+      <!-- Título: anclado al borde inferior de la imagen. El guión y el centro de
+           "La revelamos" caen sobre el borde; su mitad inferior baja al paper. -->
+      <div class="absolute inset-x-0 bottom-[clamp(1.75rem,4vw,3.6rem)] z-10 mx-auto max-w-[var(--container-wide)] px-[clamp(1rem,4vw,2rem)]">
+        <h1 class="font-[family-name:var(--font-display)] font-light leading-[0.95] text-[var(--color-ink)]">
+          <span class="block text-[clamp(1.75rem,3.6vw,3rem)]">
+            No transformamos tu imagen.
+          </span>
+          <em class="flex items-center not-italic italic text-[clamp(2.75rem,8.5vw,7.5rem)] font-normal mt-1 translate-y-1/2">
+            <span class="shrink-0 w-[clamp(2rem,5.5vw,5rem)] h-[2px] bg-[var(--color-ink)] mr-3"></span>La revelamos.
+          </em>
+        </h1>
+      </div>
     </section>
-    <!-- Título grande bajo el bleed sobre fondo paper -->
-    <div class="mx-auto max-w-[var(--container-wide)] px-[clamp(1rem,4vw,2rem)] pt-8 pb-2">
-      <h1 class="font-[family-name:var(--font-display)] font-light leading-[0.95] text-[var(--color-ink)]">
-        <span class="block text-[clamp(1.75rem,3.6vw,3rem)]">
-          No transformamos tu imagen.
-        </span>
-        <em class="block not-italic italic text-[clamp(3.5rem,8.5vw,7.5rem)] font-normal mt-1 -indent-[0.1em]">
-          <span class="inline-block w-[clamp(3rem,5.5vw,5rem)] h-[2px] bg-[var(--color-gold)] align-middle mr-3 mb-3"></span>La revelamos.
-        </em>
-      </h1>
-    </div>
 
     <!-- Hero copy block (Figma 02): 2-col split bajo el hero -->
     <Section tone="paper" spacing="default">
       <div class="grid lg:grid-cols-[0.85fr_1fr] gap-10 lg:gap-16 items-start">
-        <p class="text-sm text-[var(--color-mute)] leading-relaxed max-w-[40ch]">
-          <strong class="text-[var(--color-ink)] font-medium">Medicina de Precisión con Alma:</strong>
-          recupera el control estratégico de tu imagen, con resultados
-          naturales y un acompañamiento médico profundo.
+        <p class="text-[var(--color-ink-soft)] leading-relaxed text-[1.0625rem] max-w-[40ch]">
+          Medicina de Precisión con Alma: recupera el control estratégico de tu
+          imagen, con resultados naturales y un acompañamiento médico profundo.
         </p>
-        <div>
+        <div class="lg:pt-32 xl:pt-40">
           <p class="text-[var(--color-ink-soft)] leading-relaxed text-[1.0625rem] max-w-[52ch]">
             Convierte tu imagen en tu activo más estratégico. Con el Método
             Kintsugi, restauramos tu identidad con rigor médico, precisión
@@ -176,24 +179,40 @@ const services = [
 
     <!-- SOMOS (Figma 03): collage 3 fotos GRANDES + título lateral ==== -->
     <Section tone="paper-soft" spacing="loose">
-      <div class="space-y-12">
-        <!-- banda horizontal de 3 fotos grandes (Figma 1588/1645/1793) -->
-        <ul class="grid grid-cols-3 gap-3 lg:gap-5 list-none p-0">
-          <li class="aspect-[3/4] overflow-hidden rounded-[var(--radius-sm)] shadow-[var(--shadow-card)]">
-            <Picture src={somos1Img} alt="" widths={[360, 540, 720]} sizes="(min-width: 1024px) 32vw, 33vw" formats={["avif","webp"]} quality={80} loading="lazy" class="h-full w-full object-cover" />
-          </li>
-          <li class="aspect-[3/4] overflow-hidden rounded-[var(--radius-sm)] shadow-[var(--shadow-card)] mt-12">
-            <Picture src={somos2Img} alt="" widths={[360, 540, 720]} sizes="(min-width: 1024px) 32vw, 33vw" formats={["avif","webp"]} quality={80} loading="lazy" class="h-full w-full object-cover" />
-          </li>
-          <li class="aspect-[3/4] overflow-hidden rounded-[var(--radius-sm)] shadow-[var(--shadow-card)]">
-            <Picture src={somos3Img} alt="" widths={[360, 540, 720]} sizes="(min-width: 1024px) 32vw, 33vw" formats={["avif","webp"]} quality={80} loading="lazy" class="h-full w-full object-cover" />
-          </li>
-        </ul>
-        <div class="grid lg:grid-cols-[0.45fr_1fr] gap-10 lg:gap-16 items-start">
-          <h2 class="font-[family-name:var(--font-display)] text-[var(--color-ink)] font-light text-[clamp(4rem,9vw,8rem)] leading-[0.9]">
-            Somos
-            <span class="block mt-3 w-[100px] h-[2px] bg-[var(--color-gold)]"></span>
+      <div class="space-y-10 lg:space-y-24">
+        <!-- collage editorial con título "Quiénes Somos" superpuesto (Figma) -->
+        <div class="relative">
+          <!-- título superpuesto. En lg+ el contenedor (inset-0) coincide con los bordes
+               de la foto CENTRAL (la más alta, top-aligned): "Quiénes" se ancla al borde
+               superior y sube hasta que solo el rabito de la Q entra; "Somos" se ancla al
+               borde inferior y baja hasta que solo "mos" asoma dentro. Apilado en móvil. -->
+          <h2 class="z-10 mb-6 font-[family-name:var(--font-display)] font-light leading-[0.82] lg:pointer-events-none lg:absolute lg:inset-0 lg:mb-0">
+            <span class="block text-[clamp(3rem,9vw,7.5rem)] text-[var(--color-gold)] lg:absolute lg:left-1/2 lg:top-0 lg:-translate-x-1/2 lg:-translate-y-[84%]">Quiénes</span>
+            <span class="block text-[clamp(3rem,9vw,7.5rem)] text-[var(--color-ink)] lg:absolute lg:bottom-0 lg:left-[23%] lg:translate-y-[74%]">Somos</span>
           </h2>
+          <!-- banda editorial: centro vertical y arriba, laterales horizontales y escalonados (Figma 1588/1645/1793) -->
+          <ul class="grid grid-cols-3 gap-3 lg:gap-5 list-none p-0 items-start">
+            <!-- izquierda: horizontal, escalón medio -->
+            <li class="self-start">
+              <div class="mt-[18%] aspect-[5/4] overflow-hidden rounded-none shadow-[var(--shadow-card)]">
+                <Picture src={somos1Img} alt="" widths={[360, 540, 720]} sizes="(min-width: 1024px) 32vw, 33vw" formats={["avif","webp"]} quality={80} loading="lazy" class="h-full w-full object-cover" />
+              </div>
+            </li>
+            <!-- centro: vertical, la más alta -->
+            <li class="self-start">
+              <div class="aspect-[3/4] overflow-hidden rounded-none shadow-[var(--shadow-card)]">
+                <Picture src={somos2Img} alt="" widths={[360, 540, 720]} sizes="(min-width: 1024px) 32vw, 33vw" formats={["avif","webp"]} quality={80} loading="lazy" class="h-full w-full object-cover" />
+              </div>
+            </li>
+            <!-- derecha: horizontal, la más baja -->
+            <li class="self-start">
+              <div class="mt-[42%] aspect-[5/4] overflow-hidden rounded-none shadow-[var(--shadow-card)]">
+                <Picture src={somos3Img} alt="" widths={[360, 540, 720]} sizes="(min-width: 1024px) 32vw, 33vw" formats={["avif","webp"]} quality={80} loading="lazy" class="h-full w-full object-cover" />
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="lg:pl-[14%]">
           <p class="text-[var(--color-mute)] leading-relaxed text-[1.0625rem] max-w-[58ch]">
             CEMAD es la clínica liderada por la <strong class="text-[var(--color-ink)] font-medium">Dra. Abigail Cevallos</strong>,
             pionera en la <em class="italic">Medicina de Precisión con Alma</em> y
@@ -233,7 +252,7 @@ const services = [
     <!-- PILAR: Método Kintsugi narrativo (Figma y=4072 IMG 4904a727) ===== -->
     <Section tone="paper" spacing="loose">
       <div class="grid lg:grid-cols-2 gap-16 items-center">
-        <div class="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-md)] shadow-[var(--shadow-card)] order-2 lg:order-1">
+        <div class="relative aspect-[4/3] overflow-hidden rounded-none shadow-[var(--shadow-card)] order-2 lg:order-1">
           <Picture
             src={honraImg}
             alt="El método que honra tu historia — composición editorial"
@@ -278,7 +297,7 @@ const services = [
       <ul class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 list-none p-0 m-0">
         {methodPhases.map((p) => (
           <li>
-            <div class="aspect-[3/4] overflow-hidden rounded-[var(--radius-sm)] mb-5">
+            <div class="aspect-[3/4] overflow-hidden rounded-none mb-5">
               <Picture
                 src={p.img}
                 alt={`Fase ${p.n}: ${p.title}`}
@@ -321,7 +340,7 @@ const services = [
           <li>
             <a
               href={s.href}
-              class="group relative block aspect-[3/4] overflow-hidden rounded-[var(--radius-sm)] shadow-[var(--shadow-card)]"
+              class="group relative block aspect-[3/4] overflow-hidden rounded-none shadow-[var(--shadow-card)]"
             >
               <Picture
                 src={s.img}
@@ -435,7 +454,7 @@ const services = [
             </span>
           </li>
         </ul>
-        <div class="aspect-[4/5] overflow-hidden rounded-[var(--radius-sm)] shadow-[var(--shadow-card)]">
+        <div class="aspect-[4/5] overflow-hidden rounded-none shadow-[var(--shadow-card)]">
           <Picture
             src={bulletsBgImg}
             alt="Retrato editorial CEMAD — confianza y diagnóstico"
@@ -452,7 +471,7 @@ const services = [
     <!-- FAQ =================================================== -->
     <Section tone="paper" spacing="loose">
       <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-12 lg:gap-20 items-start">
-        <div class="aspect-[4/5] overflow-hidden rounded-[var(--radius-sm)] shadow-[var(--shadow-card)]">
+        <div class="aspect-[4/5] overflow-hidden rounded-none shadow-[var(--shadow-card)]">
           <Picture
             src={faqImg}
             alt="Tratamiento médico-estético en cabina CEMAD"

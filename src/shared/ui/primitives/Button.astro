@@ -38,7 +38,7 @@ const isLink = !!href;
 const Tag = isLink ? "a" : "button";
 
 const baseClasses =
-  "btn-base relative overflow-hidden inline-flex items-center justify-center gap-2 font-[family-name:var(--font-body)] font-medium rounded-[var(--radius-sm)] transition-[background,color,border-color,transform,box-shadow] duration-[var(--duration-fast)] ease-[var(--ease-out)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-gold-dark)] disabled:opacity-50 disabled:cursor-not-allowed";
+  "btn-base relative overflow-hidden inline-flex items-center justify-center gap-2 font-[family-name:var(--font-body)] font-bold rounded-none transition-[background,color,border-color,transform,box-shadow] duration-[var(--duration-fast)] ease-[var(--ease-out)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-gold-dark)] disabled:opacity-50 disabled:cursor-not-allowed";
 
 const sizeMap: Record<Size, string> = {
   sm: "min-h-[36px] px-4 text-[var(--text-sm)]",

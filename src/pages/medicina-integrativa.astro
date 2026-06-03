@@ -170,7 +170,7 @@ const programasMujer = [
       <ul class="grid md:grid-cols-3 gap-8 list-none p-0">
         {triada.map((t) => (
           <li class="group">
-            <div class="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-sm)] mb-6">
+            <div class="relative aspect-[4/5] overflow-hidden rounded-none mb-6">
               <Picture src={t.img} alt={t.title} widths={[320, 480]} sizes="(min-width: 768px) 33vw, 92vw" formats={["avif","webp"]} quality={80} class="h-full w-full object-cover transition-transform duration-[var(--duration-slow)] ease-[var(--ease-out)] group-hover:scale-[1.03]" />
               <span class="absolute top-4 left-4 font-[family-name:var(--font-display)] italic text-[var(--color-paper)] text-[2.5rem] leading-none drop-shadow-[0_2px_6px_rgba(0,0,0,0.4)]">
                 {t.n}
@@ -201,7 +201,7 @@ const programasMujer = [
     <!-- PROGRAMA LEGADO Y PLENITUD: intro -->
     <Section tone="paper-soft" spacing="loose">
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-        <div class="aspect-[4/5] overflow-hidden rounded-[var(--radius-sm)]">
+        <div class="aspect-[4/5] overflow-hidden rounded-none">
           <Picture src={legadoImg} alt="Programa Legado y Plenitud" widths={[480, 768, 1024]} sizes="(min-width: 1024px) 540px, 92vw" formats={["avif","webp"]} quality={80} class="h-full w-full object-cover" />
         </div>
         <div>
