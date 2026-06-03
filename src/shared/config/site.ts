@@ -16,6 +16,8 @@ export const siteConfig = {
   contact: {
     phone: "+34672300591",
     phoneDisplay: "+34 672 30 05 91",
+    phoneSecondary: "+34617260818",
+    phoneSecondaryDisplay: "+34 617 26 08 18",
     whatsapp: "+34672300591",
     email: "info@cemadclinic.com", // [TODO: confirmar con cliente]
     instagram: "https://instagram.com/cemadclinic",

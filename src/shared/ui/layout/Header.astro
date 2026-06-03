@@ -1,6 +1,5 @@
 ---
 import Logo from "@shared/ui/brand/Logo.astro";
-import Button from "@shared/ui/primitives/Button.astro";
 import { primaryNav } from "@shared/config/navigation";
 import { siteConfig } from "@shared/config/site";
 
@@ -23,43 +22,52 @@ const isActive = (href: string) =>
     class="site-scroll-progress absolute inset-x-0 top-0 h-[2px] origin-left bg-[var(--color-gold)]/70 scale-x-0"
   ></span>
 
-  <div class="mx-auto max-w-[var(--container-wide)] px-[clamp(1rem,4vw,2rem)] py-4 grid grid-cols-[1fr_auto_1fr] items-center gap-6">
+  <div class="mx-auto max-w-[var(--container-wide)] px-[clamp(1rem,4vw,2rem)] py-5 flex items-center gap-[clamp(1.25rem,3vw,2.5rem)]">
     <!-- MENU trigger -->
     <button
       type="button"
-      class="menu-trigger justify-self-start inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] font-semibold focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-gold-dark)] rounded-[var(--radius-xs)] px-2 py-1"
+      class="menu-trigger inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.28em] font-light focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-gold-dark)] rounded-[var(--radius-xs)] px-1 py-1"
       aria-haspopup="dialog"
       aria-controls="site-menu-overlay"
       aria-expanded="false"
       data-menu-open
     >
-      <span class="size-[14px] inline-flex flex-col justify-between" aria-hidden="true">
+      <span class="size-[16px] inline-flex flex-col justify-between" aria-hidden="true">
         <span class="block w-full h-px bg-current"></span>
         <span class="block w-full h-px bg-current"></span>
       </span>
       Menu
     </button>
 
+    <!-- Divider left (línea entrecortada que llega al logo) -->
+    <span aria-hidden="true" class="hairline flex-1 h-px"></span>
+
     <!-- Wordmark central -->
     <a
       href="/"
-      class="brand-mark justify-self-center inline-flex items-center focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-gold-dark)] rounded-[var(--radius-xs)]"
+      class="brand-mark shrink-0 inline-flex items-center focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-gold-dark)] rounded-[var(--radius-xs)]"
       aria-label={`${siteConfig.name} — inicio`}
     >
-      <Logo width={130} />
+      <Logo width={140} />
     </a>
 
-    <!-- Phone + CTA -->
-    <div class="justify-self-end hidden md:flex items-center gap-4">
+    <!-- Divider right -->
+    <span aria-hidden="true" class="hairline flex-1 h-px"></span>
+
+    <!-- Phones (sin botón) -->
+    <div class="hidden md:flex items-center gap-[clamp(1rem,2vw,1.75rem)] text-[11px] uppercase tracking-[0.18em] font-light">
+      <a
+        href={`tel:${siteConfig.contact.phoneSecondary}`}
+        class="hover:text-[var(--color-gold-dark)] whitespace-nowrap"
+      >
+        {siteConfig.contact.phoneSecondaryDisplay}
+      </a>
       <a
         href={`tel:${siteConfig.contact.phone}`}
-        class="text-[11px] uppercase tracking-[0.18em] font-semibold hover:text-[var(--color-gold-dark)]"
+        class="hover:text-[var(--color-gold-dark)] whitespace-nowrap"
       >
         {siteConfig.contact.phoneDisplay}
       </a>
-      <Button href="/contacto" variant="outline" size="sm">
-        Reserva tu cita →
-      </Button>
     </div>
   </div>
 </header>
@@ -116,9 +124,12 @@ const isActive = (href: string) =>
           </li>
         ))}
         <li>
-          <Button href="/contacto" variant="outline" size="sm" class="uppercase tracking-[0.18em] text-[11px]">
+          <a
+            href="/contacto"
+            class="block font-[family-name:var(--font-display)] italic text-[clamp(0.95rem,1.1vw,1.1rem)] text-[var(--color-gold-dark)] hover:text-[var(--color-gold)] focus-visible:outline-2 focus-visible:outline-offset-[6px] focus-visible:outline-[var(--color-gold-dark)] rounded-[var(--radius-xs)]"
+          >
             Reserva tu cita →
-          </Button>
+          </a>
         </li>
       </ul>
     </nav>
@@ -147,6 +158,17 @@ const isActive = (href: string) =>
   .site-header [class*="text-[11px]"],
   .site-header [class*="uppercase"] {
     color: inherit;
+  }
+  /* Hairline divider entre MENU↔logo↔teléfonos.
+     Sobre hero (transparente): currentColor a 60% opacidad.
+     Sobre fondo paper: ink a 22%. */
+  .site-header .hairline {
+    background: currentColor;
+    opacity: 0.45;
+  }
+  .site-header[data-bg="solid"] .hairline {
+    background: var(--color-ink);
+    opacity: 0.18;
   }
   .site-scroll-progress {
     transform: scaleX(var(--scroll-progress, 0));
