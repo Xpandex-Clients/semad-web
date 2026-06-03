@@ -22,6 +22,9 @@ export const siteConfig = {
     email: "info@cemadclinic.com", // [TODO: confirmar con cliente]
     instagram: "https://instagram.com/cemadclinic",
     instagramHandle: "@cemadclinic",
+    facebook: "https://facebook.com/cemadclinic",     // [TODO: confirmar con cliente]
+    linkedin: "https://linkedin.com/company/cemadclinic", // [TODO: confirmar con cliente]
+    youtube: "https://youtube.com/@cemadclinic",      // [TODO: confirmar con cliente]
   },
 
   address: {

@@ -5,6 +5,7 @@ import Section from "@shared/ui/primitives/Section.astro";
 import Button from "@shared/ui/primitives/Button.astro";
 import FaqAccordion from "@shared/ui/islands/FaqAccordion.tsx";
 import JsonLd from "@shared/ui/seo/JsonLd.astro";
+import { Icon } from "astro-icon/components";
 import {
   jsonLdGraph,
   medicalClinicSchema,
@@ -17,7 +18,8 @@ import somos1Img from "@assets/images/home-somos-1.png";                 // acac
 import somos2Img from "@assets/images/home-somos-2.png";                 // f6c095f9 centro
 import somos3Img from "@assets/images/home-somos-3.png";                 // faaddf06 der
 import draTeaserImg from "@assets/images/home-dra-teaser.png";           // aeaeb867 closeup
-import honraImg from "@assets/images/home-mirror-honra.png";             // 4904a727 mirror
+import kintsugiMarble from "@assets/images/home-kintsugi-marble.png";    // fondo mármol Método Kintsugi
+import honraImg from "@assets/images/home-mirror-honra.png";             // 4904a727 espejo editorial
 import fase1Img from "@assets/images/home-fase-1-revelar.png";           // 3e62b3bd
 import fase2Img from "@assets/images/home-fase-2-restaurar.png";         // d3ad9fbe
 import fase3Img from "@assets/images/home-fase-3-reprogramar.png";       // 8a7b48ef
@@ -27,6 +29,7 @@ import serv2Img from "@assets/images/home-servicio-2.png";               // 82c5
 import serv3Img from "@assets/images/home-servicio-3.png";               // fb6db514
 import servFeatureImg from "@assets/images/home-servicio-feature.png";   // fb64d1f3
 import trustBgImg from "@assets/images/home-trust-bg.png";               // c96404aa
+import antesDespuesImg from "@assets/images/home-trust-antes-despues.png"; // antes/después capilar (cliente)
 import bulletsBgImg from "@assets/images/home-bullets-bg.png";           // 7fd7933d
 import faqImg from "@assets/images/cemad-faq-portrait.png";              // cb8423b0
 import ctaBg from "@assets/images/cemad-cta-bg.png";                     // cbd68e1c
@@ -90,21 +93,21 @@ const services = [
     title: "Medicina Capilar Avanzada",
     summary: "Diagnóstico tricológico, terapias regenerativas y cirugía capilar de precisión.",
     href: "/centro-capilar",
-    img: serv1Img,
+    img: serv2Img, // pelo
     eyebrow: "Centro Capilar",
   },
   {
     title: "Medicina Antiaging",
     summary: "Diagnóstico hormonal y nutricional. Sueroterapia, longevidad por décadas.",
     href: "/medicina-integrativa",
-    img: serv2Img,
+    img: serv3Img, // cremas
     eyebrow: "Medicina Integrativa",
   },
   {
     title: "Medicina Estética de Precisión",
     summary: "Armonización facial, lifting sin cirugía, calidad de piel y rejuvenecimiento.",
     href: "/medicina-estetica",
-    img: serv3Img,
+    img: serv1Img, // espejo/rostro
     eyebrow: "Medicina Estética",
   },
   {
@@ -188,7 +191,7 @@ const services = [
                borde inferior y baja hasta que solo "mos" asoma dentro. Apilado en móvil. -->
           <h2 class="z-10 mb-6 font-[family-name:var(--font-display)] font-light leading-[0.82] lg:pointer-events-none lg:absolute lg:inset-0 lg:mb-0">
             <span class="block text-[clamp(3rem,9vw,7.5rem)] text-[var(--color-gold)] lg:absolute lg:left-1/2 lg:top-0 lg:-translate-x-1/2 lg:-translate-y-[84%]">Quiénes</span>
-            <span class="block text-[clamp(3rem,9vw,7.5rem)] text-[var(--color-ink)] lg:absolute lg:bottom-0 lg:left-[23%] lg:translate-y-[74%]">Somos</span>
+            <span class="block text-[clamp(3rem,9vw,7.5rem)] text-[var(--color-ink)] lg:absolute lg:bottom-0 lg:left-[19%] lg:translate-y-[54%]">Somos</span>
           </h2>
           <!-- banda editorial: centro vertical y arriba, laterales horizontales y escalonados (Figma 1588/1645/1793) -->
           <ul class="grid grid-cols-3 gap-3 lg:gap-5 list-none p-0 items-start">
@@ -212,8 +215,8 @@ const services = [
             </li>
           </ul>
         </div>
-        <div class="lg:pl-[14%]">
-          <p class="text-[var(--color-mute)] leading-relaxed text-[1.0625rem] max-w-[58ch]">
+        <div>
+          <p class="text-[var(--color-mute)] leading-[1.45] text-[clamp(1.125rem,1.9vw,1.625rem)]">
             CEMAD es la clínica liderada por la <strong class="text-[var(--color-ink)] font-medium">Dra. Abigail Cevallos</strong>,
             pionera en la <em class="italic">Medicina de Precisión con Alma</em> y
             creadora del <strong class="text-[var(--color-ink)] font-medium">Método Kintsugi</strong>.
@@ -238,89 +241,119 @@ const services = [
           loading="lazy"
           class="absolute inset-0 h-full w-full object-cover object-[center_30%]"
         />
-        <div class="absolute inset-0 bg-gradient-to-r from-[var(--color-ink)]/55 via-[var(--color-ink)]/35 to-transparent"></div>
-        <div class="absolute inset-0 flex items-center">
-          <div class="mx-auto max-w-[var(--container-wide)] w-full px-[clamp(1rem,4vw,2rem)]">
-            <Button href="/dra-abigail-y-equipo" variant="outline" size="md" class="text-[var(--color-paper)] border-[var(--color-paper)]/80 hover:bg-white/10 hover:border-[var(--color-paper)] uppercase tracking-[0.18em] text-[11px]">
+        <div class="absolute inset-0 bg-gradient-to-tr from-[var(--color-ink)]/65 via-[var(--color-ink)]/35 to-transparent"></div>
+        <div class="absolute inset-x-0 bottom-0 flex items-end">
+          <div class="mx-auto max-w-[var(--container-wide)] w-full px-[clamp(1rem,4vw,2rem)] pb-[clamp(1.25rem,3vw,2.25rem)]">
+            <a
+              href="/dra-abigail-y-equipo"
+              class="inline-flex items-center gap-2 px-6 py-3 border border-[var(--color-paper)] text-[var(--color-paper)] uppercase tracking-[0.18em] text-[11px] font-bold hover:bg-[var(--color-paper)]/10 transition-colors duration-[var(--duration-fast)] ease-[var(--ease-out)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-paper)]"
+            >
               Conoce a la Dra. Cevallos →
-            </Button>
+            </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- PILAR: Método Kintsugi narrativo (Figma y=4072 IMG 4904a727) ===== -->
-    <Section tone="paper" spacing="loose">
-      <div class="grid lg:grid-cols-2 gap-16 items-center">
-        <div class="relative aspect-[4/3] overflow-hidden rounded-none shadow-[var(--shadow-card)] order-2 lg:order-1">
-          <Picture
-            src={honraImg}
-            alt="El método que honra tu historia — composición editorial"
-            widths={[480, 768, 1024]}
-            sizes="(min-width: 1024px) 600px, 92vw"
-            formats={["avif", "webp"]}
-            quality={80}
-            class="absolute inset-0 h-full w-full object-cover"
-          />
-        </div>
-        <div class="order-1 lg:order-2">
-          <h2 class="font-[family-name:var(--font-display)] font-light leading-[1.04] text-[clamp(3rem,6vw,5.5rem)]">
+    <!-- PILAR: Método Kintsugi sobre mármol de veta dorada (Figma) ===== -->
+    <section class="relative isolate overflow-hidden bg-[var(--color-paper)]">
+      <Picture
+        src={kintsugiMarble}
+        alt=""
+        widths={[768, 1024, 1440, 1920]}
+        sizes="100vw"
+        formats={["avif", "webp"]}
+        quality={82}
+        loading="lazy"
+        class="absolute inset-0 h-full w-full object-cover object-[center_35%]"
+      />
+      <div class="relative mx-auto max-w-[var(--container-wide)] px-[clamp(1rem,4vw,2rem)] py-[clamp(4.5rem,11vw,9rem)]">
+        <div class="mx-auto max-w-[42rem]">
+          <h2 class="font-[family-name:var(--font-display)] font-light leading-[1.0] text-[clamp(3rem,7vw,6.25rem)]">
             <span class="block text-[var(--color-ink)]">Método</span>
-            <span class="block text-[var(--color-gold)] italic font-normal">Kintsugi</span>
+            <span class="mt-1 flex items-center text-[var(--color-gold)] font-normal">
+              <span aria-hidden="true" class="shrink-0 w-[clamp(2.5rem,5vw,4.5rem)] h-[2px] bg-[var(--color-gold)] mr-4"></span>Kintsugi
+            </span>
           </h2>
-          <div class="mt-4 w-[100px] h-[2px] bg-[var(--color-gold)]"></div>
-          <p class="mt-6 max-w-[56ch] text-[var(--color-mute)] leading-relaxed text-[1.0625rem]">
+          <p class="mt-7 max-w-[52ch] text-[var(--color-mute)] leading-relaxed text-[1.0625rem]">
             Nos inspiramos en el arte japonés de restaurar con oro lo que ha
             sido dañado. Así es nuestro enfoque médico-estético: en cuatro
             fases — <strong class="text-[var(--color-ink)] font-medium">Revelar, Restaurar, Reprogramar y Reintegrar</strong> —
             construimos contigo un camino único que devuelve fuerza, naturalidad
             y autenticidad a tu imagen.
           </p>
-          <Button href="/metodo-kintsugi" variant="ghost" size="md" class="mt-8 -ml-3">
-            Descubre el Método completo →
-          </Button>
+          <div class="mt-12 flex flex-wrap items-center justify-between gap-6">
+            <img src="/brand/cemad-sparkle.png" alt="" aria-hidden="true" width="36" height="36" class="size-9 shrink-0" />
+            <Button href="/metodo-kintsugi" variant="outline" size="md" class="uppercase tracking-[0.18em] text-[11px]">
+              Descubre el Método Kintsugi →
+            </Button>
+          </div>
         </div>
       </div>
-    </Section>
+    </section>
 
-    <!-- FRASE PILAR =============================================== -->
-    <Section tone="paper-soft" spacing="default">
-      <div class="text-center max-w-3xl mx-auto">
-        <h2 class="font-[family-name:var(--font-display)] font-light italic text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.15] text-[var(--color-ink)]">
-          El método que honra tu historia y revela tu esencia.
-        </h2>
+    <!-- EL MÉTODO QUE HONRA TU HISTORIA (Figma): título derecha + imagen
+         editorial espejo full-bleed + 4 fases escalonadas + sparkle ===== -->
+    <section class="relative isolate overflow-hidden bg-[var(--color-paper)] pt-[clamp(2.5rem,6vw,4.5rem)] pb-[clamp(3rem,7vw,5.5rem)]">
+      <!-- Título alineado a la derecha -->
+      <div class="mx-auto max-w-[var(--container-wide)] px-[clamp(1rem,4vw,2rem)]">
+        <div class="ml-auto max-w-[52rem] text-right">
+          <h2 class="font-[family-name:var(--font-display)] font-normal text-[var(--color-ink)] leading-[0.95] tracking-[-0.01em] text-[clamp(3rem,8vw,7.5rem)]">
+            El método
+          </h2>
+          <p class="mt-3 font-[family-name:var(--font-display)] font-normal text-[var(--color-ink)] leading-[1.15] text-[clamp(1.25rem,2.55vw,2.25rem)] text-balance">
+            que honra tu historia y revela tu esencia
+          </p>
+        </div>
       </div>
-    </Section>
 
-    <!-- 4 FASES DEL MÉTODO ======================================== -->
-    <Section tone="paper" spacing="loose">
-      <ul class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 list-none p-0 m-0">
-        {methodPhases.map((p) => (
-          <li>
-            <div class="aspect-[3/4] overflow-hidden rounded-none mb-5">
-              <Picture
-                src={p.img}
-                alt={`Fase ${p.n}: ${p.title}`}
-                widths={[320, 480, 768]}
-                sizes="(min-width: 1024px) 280px, (min-width: 640px) 45vw, 92vw"
-                formats={["avif", "webp"]}
-                quality={78}
-                class="h-full w-full object-cover transition-transform duration-700 ease-[var(--ease-out)] hover:scale-[1.03]"
-              />
-            </div>
-            <span class="text-[11px] uppercase tracking-[0.18em] text-[var(--color-gold-dark)] font-semibold">
-              Fase {p.n}
-            </span>
-            <h3 class="mt-2 font-[family-name:var(--font-display)] font-normal text-[clamp(1.5rem,2.5vw,2rem)] text-[var(--color-ink)] leading-tight">
-              {p.title}
-            </h3>
-            <p class="mt-3 text-sm text-[var(--color-mute)] leading-relaxed">
-              {p.body}
-            </p>
-          </li>
-        ))}
-      </ul>
-    </Section>
+      <!-- Imagen editorial del espejo, full-bleed. Top difuminado a transparente
+           para fundirse con el blanco del mármol superior. -->
+      <div class="mt-[clamp(1.5rem,4vw,3rem)] w-full overflow-hidden">
+        <Picture
+          src={honraImg}
+          alt="El método que honra tu historia — reflejo en espejo"
+          widths={[768, 1024, 1440, 1920]}
+          sizes="100vw"
+          formats={["avif", "webp"]}
+          quality={82}
+          loading="lazy"
+          class="w-full h-[clamp(18rem,48vw,40rem)] object-cover object-[center_38%] [mask-image:linear-gradient(to_bottom,transparent_0%,#000_26%,#000_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,#000_26%,#000_100%)]"
+        />
+      </div>
+
+      <!-- 4 fases escalonadas, subiendo sobre el borde inferior de la imagen -->
+      <div class="relative mx-auto max-w-[var(--container-wide)] px-[clamp(1rem,4vw,2rem)] -mt-[clamp(2.5rem,9vw,8rem)]">
+        <ul class="grid grid-cols-2 lg:grid-cols-4 gap-x-4 lg:gap-x-6 gap-y-10 list-none p-0 m-0 items-start">
+          {methodPhases.map((p, i) => (
+            <li class={i % 2 === 1 ? "lg:mt-16" : ""}>
+              <div class="aspect-[3/4] overflow-hidden rounded-none mb-5 shadow-[var(--shadow-card)]">
+                <Picture
+                  src={p.img}
+                  alt={p.title}
+                  widths={[320, 480, 768]}
+                  sizes="(min-width: 1024px) 280px, (min-width: 640px) 45vw, 92vw"
+                  formats={["avif", "webp"]}
+                  quality={78}
+                  class="h-full w-full object-cover transition-transform duration-700 ease-[var(--ease-out)] hover:scale-[1.03]"
+                />
+              </div>
+              <h3 class="font-[family-name:var(--font-display)] font-normal text-[clamp(1.5rem,2.2vw,1.875rem)] text-[var(--color-ink)] leading-tight">
+                {p.title}
+              </h3>
+              <p class="mt-3 text-sm text-[var(--color-mute)] leading-relaxed">
+                {p.body}
+              </p>
+            </li>
+          ))}
+        </ul>
+
+        <!-- sparkle de marca centrado -->
+        <div class="mt-[clamp(2rem,5vw,4rem)] flex justify-center">
+          <img src="/brand/cemad-sparkle.png" alt="" aria-hidden="true" width="30" height="30" class="size-[30px]" />
+        </div>
+      </div>
+    </section>
 
     <!-- SERVICIOS PRINCIPALES (Figma 08): mosaico image + overlay text ==== -->
     <Section tone="paper" spacing="loose">
@@ -335,92 +368,132 @@ const services = [
           Explora nuestros servicios →
         </a>
       </div>
-      <ul class="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 list-none p-0">
-        {services.map((s) => (
-          <li>
-            <a
-              href={s.href}
-              class="group relative block aspect-[3/4] overflow-hidden rounded-none shadow-[var(--shadow-card)]"
-            >
-              <Picture
-                src={s.img}
-                alt={s.title}
-                widths={[300, 480, 640]}
-                sizes="(min-width: 1024px) 320px, 45vw"
-                formats={["avif", "webp"]}
-                quality={78}
-                loading="lazy"
-                class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.04]"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-ink)]/85 via-[var(--color-ink)]/30 to-transparent transition-opacity duration-300"></div>
-              <div class="absolute inset-x-0 bottom-0 p-5 lg:p-6 text-[var(--color-paper)]">
-                <span class="text-[10px] uppercase tracking-[0.22em] font-semibold text-[var(--color-gold)]">
-                  {s.eyebrow}
-                </span>
-                <h3 class="mt-1 font-[family-name:var(--font-display)] text-[1.25rem] lg:text-[1.4rem] leading-tight">
-                  {s.title}
-                </h3>
-                <p class="mt-2 text-xs text-[var(--color-paper)]/85 leading-relaxed hidden lg:block">
-                  {s.summary}
-                </p>
-                <span class="mt-3 inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] font-semibold">
-                  Leer más
-                  <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
-                    <path d="M3 7h8M8 3l3 4-3 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </span>
-              </div>
-            </a>
-          </li>
-        ))}
+      <!-- Mosaico Figma: vertical alta (col1 ×2 filas) · card oscura feature (col2) ·
+           imagen clara (col3) · horizontal ancha (col2-3 fila2). Apilado en móvil. -->
+      <ul class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:grid-rows-2 lg:gap-6 lg:h-[clamp(40rem,60vw,56rem)] list-none p-0">
+        {/* Medicina Estética de Precisión — vertical alta */}
+        <li class="aspect-[3/4] lg:aspect-auto lg:col-start-1 lg:row-start-1 lg:row-span-2">
+          <a href={services[2].href} class="group relative block h-full overflow-hidden rounded-none shadow-[var(--shadow-card)]">
+            <Picture src={services[2].img} alt={services[2].title} widths={[400, 600, 800]} sizes="(min-width: 1024px) 33vw, 100vw" formats={["avif", "webp"]} quality={80} loading="lazy" class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.04]" />
+            <h3 class="absolute inset-x-0 bottom-0 p-5 lg:p-6 font-[family-name:var(--font-display)] text-[clamp(1.25rem,1.6vw,1.6rem)] leading-tight text-[var(--color-ink)]">
+              {services[2].title}
+            </h3>
+          </a>
+        </li>
+
+        {/* Medicina Capilar Avanzada — card oscura feature con copy + botón */}
+        <li class="aspect-[3/4] lg:aspect-auto lg:col-start-2 lg:row-start-1">
+          <a href={services[0].href} class="group relative flex h-full flex-col justify-between overflow-hidden rounded-none bg-[var(--color-ink)] p-5 lg:p-7 text-[var(--color-paper)] shadow-[var(--shadow-card)]">
+            <Picture src={services[0].img} alt="" widths={[300, 480, 640]} sizes="(min-width: 1024px) 33vw, 100vw" formats={["avif", "webp"]} quality={70} loading="lazy" class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.04]" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-ink)]/85 via-[var(--color-ink)]/20 to-[var(--color-ink)]/55"></div>
+            <div class="relative">
+              <h3 class="font-[family-name:var(--font-display)] text-[clamp(1.3rem,1.7vw,1.7rem)] leading-tight text-[var(--color-paper)] [text-shadow:0_1px_14px_rgba(0,0,0,0.6)]">
+                {services[0].title}
+              </h3>
+              <p class="mt-3 max-w-[34ch] text-sm leading-relaxed text-[var(--color-paper)]/80">
+                {services[0].summary}
+              </p>
+            </div>
+            <div class="relative mt-6 flex items-center gap-4">
+              <span class="inline-flex items-center gap-2 border border-[var(--color-paper)]/70 px-5 py-2.5 text-[11px] uppercase tracking-[0.22em] font-bold transition-colors group-hover:bg-[var(--color-paper)] group-hover:text-[var(--color-ink)]">
+                Leer más
+                <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+                  <path d="M3 7h8M8 3l3 4-3 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </span>
+            </div>
+          </a>
+        </li>
+
+        {/* Medicina Antiaging — imagen clara */}
+        <li class="aspect-[3/4] lg:aspect-auto lg:col-start-3 lg:row-start-1">
+          <a href={services[1].href} class="group relative block h-full overflow-hidden rounded-none shadow-[var(--shadow-card)]">
+            <Picture src={services[1].img} alt={services[1].title} widths={[300, 480, 640]} sizes="(min-width: 1024px) 33vw, 100vw" formats={["avif", "webp"]} quality={80} loading="lazy" class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.04]" />
+            <h3 class="absolute inset-x-0 bottom-0 p-5 lg:p-6 font-[family-name:var(--font-display)] text-[clamp(1.25rem,1.6vw,1.6rem)] leading-tight text-[var(--color-ink)]">
+              {services[1].title}
+            </h3>
+          </a>
+        </li>
+
+        {/* Laserterapia — horizontal ancha (col2-3) */}
+        <li class="aspect-[4/3] lg:aspect-auto lg:col-start-2 lg:col-span-2 lg:row-start-2">
+          <a href={services[3].href} class="group relative block h-full overflow-hidden rounded-none shadow-[var(--shadow-card)]">
+            <Picture src={services[3].img} alt={services[3].title} widths={[600, 900, 1200]} sizes="(min-width: 1024px) 66vw, 100vw" formats={["avif", "webp"]} quality={80} loading="lazy" class="absolute inset-0 h-full w-full object-cover object-[center_38%] transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.04]" />
+            <h3 class="absolute inset-x-0 bottom-0 p-5 lg:p-6 font-[family-name:var(--font-display)] text-[clamp(1.25rem,1.6vw,1.6rem)] leading-tight text-[var(--color-ink)]">
+              {services[3].title}
+            </h3>
+          </a>
+        </li>
       </ul>
     </Section>
 
     <!-- TRUST: 120 pacientes + testimonio 5-star (Figma 09-10) ====== -->
     <Section tone="ink" spacing="loose" class="relative overflow-hidden">
       <!-- Trust bg (Figma y=7096 IMG c96404aa) -->
-      <div class="absolute inset-y-0 right-0 w-full lg:w-1/2 -z-0">
+      <div class="absolute inset-y-0 right-0 -z-0 w-full lg:w-3/5">
         <Picture
           src={trustBgImg}
           alt=""
           widths={[768, 1024, 1440]}
-          sizes="(min-width: 1024px) 50vw, 100vw"
+          sizes="(min-width: 1024px) 60vw, 100vw"
           formats={["avif", "webp"]}
           quality={78}
           loading="lazy"
           class="h-full w-full object-cover opacity-90"
         />
-        <div class="absolute inset-0 bg-gradient-to-l from-transparent via-[var(--color-ink)]/30 to-[var(--color-ink)] lg:from-transparent lg:via-[var(--color-ink)]/10 lg:to-[var(--color-ink)]"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-[var(--color-ink)] via-[var(--color-ink)]/70 to-[var(--color-ink)]/20"></div>
       </div>
-      <div class="relative z-10 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center text-[var(--color-paper)]">
-        <div>
-          <h2 class="font-[family-name:var(--font-display)] text-[clamp(2.5rem,5vw,4rem)] leading-[1.05]">
-            <span class="block">Más de 120 pacientes</span>
-            <em class="block not-italic italic text-[var(--color-gold)] font-normal">
-              <span class="inline-block w-[clamp(2rem,4vw,3rem)] h-[2px] bg-[var(--color-gold)] align-middle mr-3 mb-2"></span>nos avalan
-            </em>
-          </h2>
-          <ul class="mt-8 space-y-2 list-none p-0 text-sm text-[var(--color-paper)]/85">
-            <li>+1.000 cirugías capilares</li>
-            <li>+10 años de experiencia clínica</li>
-            <li>6 másteres universitarios</li>
-            <li>Reseñas con 5 estrellas en múltiples plataformas</li>
-          </ul>
-        </div>
-        <figure class="bg-[var(--color-gold)]/95 text-[var(--color-ink)] p-8 lg:p-10 rounded-[var(--radius-sm)] shadow-[var(--shadow-card)]">
-          <div aria-label="Valoración 5 estrellas" class="flex items-center gap-1 text-[var(--color-ink)]">
-            {Array.from({ length: 5 }).map(() => (
-              <svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor" aria-hidden="true">
-                <path d="M10 1.5l2.6 5.3 5.9.9-4.3 4.2 1 5.9L10 15l-5.2 2.8 1-5.9L1.5 7.7l5.9-.9L10 1.5z" />
-              </svg>
-            ))}
+      <div class="relative z-10 text-[var(--color-paper)]">
+        <div class="flex flex-wrap items-end justify-between gap-6">
+          <div class="max-w-xl">
+            <h2 class="font-[family-name:var(--font-display)] font-light leading-[1.05] text-[clamp(2.5rem,5.5vw,4.5rem)]">
+              <span class="block">Más de 120 pacientes</span>
+              <span class="block">
+                <span class="mr-3 inline-block h-[2px] w-[clamp(2rem,4vw,3rem)] align-middle bg-[var(--color-paper)]"></span>nos avalan
+              </span>
+            </h2>
+            <p class="mt-6 max-w-[48ch] text-sm leading-relaxed text-[var(--color-paper)]/80">
+              +1.000 cirugías capilares · +10 años de experiencia clínica · 6 másteres universitarios · Reseñas con 5 estrellas en múltiples plataformas.
+            </p>
           </div>
-          <blockquote class="mt-4 font-[family-name:var(--font-display)] italic text-[1.0625rem] leading-relaxed">
-            "No me borraron, me devolvieron. Hoy mi imagen refleja quién soy de verdad."
-          </blockquote>
-          <figcaption class="mt-4 text-xs uppercase tracking-[0.18em] text-[var(--color-ink-soft)] font-semibold">
-            — Cliente CEMAD
-          </figcaption>
+          <!-- control carrusel (estático por ahora) -->
+          <div class="flex gap-2 text-[10px] uppercase tracking-[0.22em] font-semibold">
+            <button type="button" class="border border-[var(--color-paper)]/40 px-4 py-2 text-[var(--color-paper)]/80 transition-colors hover:border-[var(--color-paper)] hover:text-[var(--color-paper)]">Anterior</button>
+            <button type="button" class="border border-[var(--color-paper)]/40 px-4 py-2 text-[var(--color-paper)]/80 transition-colors hover:border-[var(--color-paper)] hover:text-[var(--color-paper)]">Siguiente</button>
+          </div>
+        </div>
+
+        <!-- testimonio: izq antes/después · der valoración + cita -->
+        <figure class="mt-10 grid overflow-hidden bg-[var(--color-gold)] text-[var(--color-ink)] shadow-[var(--shadow-modal)] sm:grid-cols-2 lg:max-w-5xl lg:grid-cols-[1.05fr_1fr]">
+          {/* Antes/Después real del cliente (Fondo y Borde ya integrados) */}
+          <div class="relative bg-[var(--color-gold)]">
+            <Picture
+              src={antesDespuesImg}
+              alt="Resultado antes y después de un tratamiento capilar en CEMAD"
+              widths={[400, 580, 760]}
+              sizes="(min-width: 1024px) 34vw, 90vw"
+              formats={["avif", "webp"]}
+              quality={86}
+              loading="lazy"
+              class="h-full w-full object-cover"
+            />
+          </div>
+          <div class="relative flex flex-col justify-center p-8 lg:p-10">
+            <div aria-label="Valoración 5 estrellas" class="flex items-center gap-1 text-[var(--color-paper)]">
+              {Array.from({ length: 5 }).map(() => (
+                <svg viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true">
+                  <path d="M10 1.5l2.6 5.3 5.9.9-4.3 4.2 1 5.9L10 15l-5.2 2.8 1-5.9L1.5 7.7l5.9-.9L10 1.5z" />
+                </svg>
+              ))}
+            </div>
+            <blockquote class="mt-5 max-w-[34ch] font-[family-name:var(--font-display)] text-[clamp(1.0625rem,1.4vw,1.35rem)] italic leading-relaxed">
+              No me borraron, me devolvieron. Hoy mi imagen refleja quién soy de verdad.
+            </blockquote>
+            <figcaption class="mt-5 text-xs uppercase tracking-[0.18em] font-semibold text-[var(--color-ink-soft)]">
+              Cliente CEMAD
+            </figcaption>
+            <span aria-hidden="true" class="pointer-events-none absolute bottom-3 right-6 font-[family-name:var(--font-display)] text-[5rem] leading-none text-[var(--color-paper)]">”</span>
+          </div>
         </figure>
       </div>
     </Section>
@@ -496,7 +569,7 @@ const services = [
     </Section>
 
     <!-- CTA CIERRE EDITORIAL (Figma 13) ======================== -->
-    <Section tone="ink" spacing="loose" class="relative overflow-hidden">
+    <section class="relative isolate overflow-hidden bg-[var(--color-ink)] min-h-[min(100vh,900px)] flex items-center">
       <div class="absolute inset-0 -z-0">
         <Picture
           src={ctaBg}
@@ -504,31 +577,26 @@ const services = [
           widths={[1024, 1440, 1920]}
           sizes="100vw"
           formats={["avif", "webp"]}
-          quality={70}
+          quality={78}
           loading="lazy"
-          class="h-full w-full object-cover opacity-45"
+          class="h-full w-full object-cover"
         />
-        <div class="absolute inset-0 bg-[var(--color-ink)]/50"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-ink)]/35 via-[var(--color-ink)]/25 to-[var(--color-ink)]/45"></div>
       </div>
-      <div class="relative z-10 text-center max-w-3xl mx-auto text-[var(--color-paper)]">
-        <h2 class="font-[family-name:var(--font-display)] font-normal italic text-[clamp(2.25rem,4.5vw,3.5rem)] leading-[1.15]">
+      <div class="relative z-10 w-full max-w-4xl mx-auto px-[clamp(1rem,4vw,2rem)] text-center text-[var(--color-paper)]">
+        <h2 class="font-[family-name:var(--font-display)] font-normal text-[clamp(2.25rem,4.8vw,3.75rem)] leading-[1.2] text-[var(--color-gold)]">
           Tu imagen merece respeto,<br />
-          <span class="text-[var(--color-gold)]">precisión y estrategia</span>
+          precisión y estrategia
         </h2>
-        <div class="mt-10 flex gap-3 justify-center flex-wrap">
-          <Button
+        <div class="mt-10 flex justify-center">
+          <a
             href="/contacto"
-            variant="outline"
-            size="lg"
-            class="text-[var(--color-paper)] border-[var(--color-paper)]/70 hover:bg-white/10 hover:border-[var(--color-paper)] uppercase tracking-[0.18em] text-[11px]"
+            class="inline-flex items-center gap-2 px-7 py-4 border border-[var(--color-paper)] text-[var(--color-paper)] uppercase tracking-[0.18em] text-[11px] font-bold hover:bg-[var(--color-paper)]/10 transition-colors duration-[var(--duration-fast)] ease-[var(--ease-out)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--color-paper)]"
           >
             Reserva tu Auditoría de Imagen →
-          </Button>
-          <Button href="/musas-cemad" variant="outline" size="lg" class="text-[var(--color-paper)] border-[var(--color-paper)]/70 hover:bg-white/10 hover:border-[var(--color-paper)]">
-            Ver Musas CEMAD
-          </Button>
+          </a>
         </div>
       </div>
-    </Section>
+    </section>
   </main>
 </Layout>
