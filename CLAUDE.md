@@ -68,7 +68,7 @@ npm run preview        # preview del build
 
 ## Estado del proyecto
 
-Ver `docs/implementation-checklist.md` (16 fases). Ver `docs/CONTEXT-project.md` para decisiones acumuladas. Ver `docs/risks.md` para riesgos abiertos.
+Ver `context/implementation-checklist.md` (16 fases). Ver `context/CONTEXT-project.md` para decisiones acumuladas. Ver `context/risks.md` para riesgos abiertos.
 
 ## Hostinger
 
